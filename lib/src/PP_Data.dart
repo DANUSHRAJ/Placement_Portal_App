@@ -218,27 +218,34 @@ class _PpDataState extends State<PpData> {
       ),
     );
   }
-
   Widget _title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-          text: 'PERSONAL',
-          style: GoogleFonts.portLligatSans(
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-          children: [
-            TextSpan(
-              text: '  DATA',
-              style: GoogleFonts.adventPro(
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.topLeft,
+        child: _backButton(),
+        ),
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+              text: 'PERSONAL',
+              style: GoogleFonts.portLligatSans(
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
-                color: Colors.black,
+                color: Colors.white,
               ),
-            ),
-          ]),
+              children: [
+                TextSpan(
+                  text: '  DATA',
+                  style: GoogleFonts.adventPro(
+                    fontSize: 30,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black,
+                  ),
+                ),
+              ]),
+        ),
+      ],
     );
   }
 
@@ -272,9 +279,23 @@ class _PpDataState extends State<PpData> {
                   SizedBox(height: height * .1),
                   _title(),
                   SizedBox(height: height * .1),
-                  _entryFieldalphabets('NAME', 'ENTER NAME'),
-                  _entryFieldnumbers('REGISTRATION NUMBER', 'ENTER REG NO'),
+
+                  _entryFieldnumbers('UNIVERSITY REG NO.', '312419205041'),
+                  //Roll no
+                  // title(Mr/Ms)
+                  _entryFieldalphabets('NAME OF THE CANDIDATE', 'enter the name with inital'),
+                  _entryFieldalphabets('FIRST NAME', ' first name'),
+                  _entryFieldalphabets('LAST NAME', 'last name'),
                   _entryFieldDob("D.O.B", "DD-MM-YYYY"),
+                  _entryFieldDob("D.O.B", "MM-DD-YYYY"),
+                  _entryFieldDob("D.O.B", "YYYY-MM-DD"),
+
+
+
+
+                  // _entryFieldalphabets('NAME', 'ENTER NAME'),
+                  // _entryFieldnumbers('REGISTRATION NUMBER', 'ENTER REG NO'),
+                  // _entryFieldDob("D.O.B", "DD-MM-YYYY"),
                   SizedBox(height: height * .01),
                   Align(
                     alignment: Alignment.topLeft,
@@ -293,7 +314,7 @@ class _PpDataState extends State<PpData> {
               ),
             ),
           ),
-          Positioned(top: 40, left: 0, child: _backButton()),
+          //Positioned(top: 40, left: 0, child: _backButton()),
         ]),
       ),
     );
