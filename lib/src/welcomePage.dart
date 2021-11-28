@@ -60,11 +60,11 @@ class _WelcomePageState extends State<WelcomePage> {
             context, MaterialPageRoute(builder: (context) => SignUpPage()));
       },
       child: Container(
-        width: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.symmetric(vertical: 14),
+        width: MediaQuery.of(context).size.width * .7,
+        padding: EdgeInsets.symmetric(vertical: 14,),
         alignment: Alignment.center,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(15)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
           border: Border.all(color: Colors.white, width: 4),
         ),
         child: Text(
@@ -81,26 +81,28 @@ class _WelcomePageState extends State<WelcomePage> {
   }
 
   Widget _title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-          text: 'SJIT',
-          style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.display1,
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-          children: [
-            TextSpan(
-              text: ' PLACEMENT ',
-              style: TextStyle(color: Colors.limeAccent, fontSize: 30),
+    return Center(
+      child: RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(
+            text: 'SJIT',
+            style: GoogleFonts.portLligatSans(
+              textStyle: Theme.of(context).textTheme.display1,
+              fontSize: 30,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
             ),
-            TextSpan(
-              text: 'PORTAL',
-              style: TextStyle(color: Colors.white, fontSize: 30),
-            ),
-          ]),
+            children: [
+              TextSpan(
+                text: ' PLACEMENT ',
+                style: TextStyle(color: Colors.limeAccent, fontSize: 30),
+              ),
+              TextSpan(
+                text: 'PORTAL',
+                style: TextStyle(color: Colors.white, fontSize: 30),
+              ),
+            ]),
+      ),
     );
   }
 
