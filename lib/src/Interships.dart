@@ -42,7 +42,7 @@ class _IntershipsState extends State<Interships> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'INTERN',
+          text: 'INTERNS',
           style: GoogleFonts.portLligatSans(
             fontSize: 30,
             fontWeight: FontWeight.w700,
