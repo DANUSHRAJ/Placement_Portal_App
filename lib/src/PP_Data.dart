@@ -265,76 +265,6 @@ class _PpDataState extends State<PpData> {
     );
   }
 
-  Widget _Department() => Container(
-        width: 500,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: Colors.white,
-          //border: Border.all(color: Colors.deepOrange, width: 4),
-        ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton<NewObject>(
-            value: value, // currently selected item
-            items: department
-                .map((item) => DropdownMenuItem<NewObject>(
-                      child: Row(
-                        children: [
-                          Icon(item.icon),
-                          const SizedBox(width: 8),
-                          Text(
-                            item.title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                      value: item,
-                    ))
-                .toList(),
-            onChanged: (value) => setState(() {
-              this.value = value;
-            }),
-          ),
-        ),
-      );
-  Widget _Title() => Container(
-        width: 500,
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12),
-          color: Colors.white,
-          //border: Border.all(color: Colors.deepOrange, width: 4),
-        ),
-        child: DropdownButtonHideUnderline(
-          child: DropdownButton<NewObject>(
-            value: title1, // currently selected item
-            items: title
-                .map((item) => DropdownMenuItem<NewObject>(
-                      child: Row(
-                        children: [
-                          Icon(item.icon),
-                          const SizedBox(width: 8),
-                          Text(
-                            item.title,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                      value: item,
-                    ))
-                .toList(),
-            onChanged: (value) => setState(() {
-              this.title1 = value;
-            }),
-          ),
-        ),
-      );
   Widget _entryFieldnumbers(String title, String hint,
       {bool isPassword = false}) {
     return Container(
@@ -571,18 +501,7 @@ class _PpDataState extends State<PpData> {
                   // _entryFieldnumbers('REGISTRATION NUMBER', 'ENTER REG NO'),
                   // _entryFieldDob("D.O.B", "DD-MM-YYYY"),
                   SizedBox(height: 10),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      "TITLE",
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.portLligatSans(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.limeAccent,
-                      ),
-                    ),
-                  ),
+
                   SizedBox(height: 10),
                   Column(
                     children: [
