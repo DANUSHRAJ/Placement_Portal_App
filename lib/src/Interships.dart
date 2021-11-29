@@ -1,4 +1,3 @@
-import 'package:SJIT_PLACEMENT_PORTAL/src/Intership_home.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Intership_upload.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
