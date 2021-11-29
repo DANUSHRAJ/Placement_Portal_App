@@ -28,28 +28,28 @@ class NewObject {
 
 class _PpDataState extends State<PpData> {
   get _chosenValue => null;
+  static const IconData male_rounded =
+      IconData(0xf89d, fontFamily: 'MaterialIcons');
+  static const IconData female_rounded =
+      IconData(0xf73d, fontFamily: 'MaterialIcons');
 
-  
-  
   static final List<NewObject> title = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
-    NewObject('Mr', Icons.radar_outlined),
-    NewObject('Ms', Icons.radar),
+    NewObject('Mr', Icons.person),
+    NewObject('Ms', Icons.person),
   ];
-  NewObject title1=title.first;
-  static final List<NewObject> gender=<NewObject>[
+  NewObject title1 = title.first;
+  static final List<NewObject> gender = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
-    NewObject('MALE', Icons.male_rounded),
-    NewObject('FEMALE', Icons.female_rounded),
+    NewObject('MALE', male_rounded),
+    NewObject('FEMALE', female_rounded),
   ];
 
-  static final List<NewObject> college=<NewObject>[
+  static final List<NewObject> college = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
     NewObject('St.Joseph\'s Institute of Technology', Icons.arrow_back_ios),
-    NewObject('St.Joseph\'s College of Engineering', Icons.arrow_back_ios_new),
+    NewObject('St.Joseph\'s College of Engineering', Icons.arrow_back_ios),
   ];
-
-  
 
   static final List<NewObject> department = <NewObject>[
     NewObject('SELECT DEPARTMENT', Icons.description),
@@ -61,46 +61,46 @@ class _PpDataState extends State<PpData> {
     NewObject('B.E CIVIL', Icons.apartment_outlined),
   ];
 
-  static final List<NewObject> section=<NewObject>[
+  static final List<NewObject> section = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
     NewObject('A', Icons.arrow_back_ios),
-    NewObject('B', Icons.arrow_back_ios_new),
-    NewObject('C', Icons.arrow_back_ios_new),
+    NewObject('B', Icons.arrow_back_ios),
+    NewObject('C', Icons.arrow_back_ios),
   ];
 
-  static final List<NewObject> yesorno=<NewObject>[
+  static final List<NewObject> yesorno = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
     NewObject('YES', Icons.arrow_back_ios),
-    NewObject('NO', Icons.arrow_back_ios_new),
+    NewObject('NO', Icons.arrow_back_ios),
   ];
 
-  static final List<NewObject> becgrade=<NewObject>[
+  static final List<NewObject> becgrade = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
-    NewObject('PRELIMINARY', Icons.arrow_back_ios_new),
+    NewObject('PRELIMINARY', Icons.arrow_back_ios),
     NewObject('VANTAGE', Icons.arrow_back_ios),
     NewObject('HIGHER', Icons.arrow_back_ios),
   ];
 
-  static final List<NewObject> hord=<NewObject>[
+  static final List<NewObject> hord = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
     NewObject('HOSTEL', Icons.arrow_back_ios),
-    NewObject('DAY SCHOLAR', Icons.arrow_back_ios_new),
+    NewObject('DAY SCHOLAR', Icons.view_day_outlined),
   ];
-  
+
   NewObject value = department.first;
-  static final List<NewObject> dropbox=<NewObject>[
-    title.first,         //0
-    gender.first,        //1
-    college.first,       //2
-    department.first,    //3
-    section.first,       //4
-    yesorno.first,       //5
-    yesorno.first,       //6
-    yesorno.first,       //7
-    becgrade.first,      //8
-    yesorno.first,       //9
-    yesorno.first,       //10
-    hord.first,          //11
+  static final List<NewObject> dropbox = <NewObject>[
+    title.first, //0
+    gender.first, //1
+    college.first, //2
+    department.first, //3
+    section.first, //4
+    yesorno.first, //5
+    yesorno.first, //6
+    yesorno.first, //7
+    becgrade.first, //8
+    yesorno.first, //9
+    yesorno.first, //10
+    hord.first, //11
   ];
   //DropBox a=key.num;
 
@@ -207,7 +207,7 @@ class _PpDataState extends State<PpData> {
     );
   }
 
-  Widget _DropBox(String title,List<NewObject> key,int i){
+  Widget _DropBox(String title, List<NewObject> key, int i) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       width: 500,
@@ -238,24 +238,24 @@ class _PpDataState extends State<PpData> {
                 value: dropbox.elementAt(i), // currently selected item
                 items: key
                     .map((item) => DropdownMenuItem<NewObject>(
-                  child: Row(
-                    children: [
-                      Icon(item.icon),
-                      const SizedBox(width: 8),
-                      Text(
-                        item.title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  value: item,
-                ))
+                          child: Row(
+                            children: [
+                              Icon(item.icon),
+                              const SizedBox(width: 8),
+                              Text(
+                                item.title,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                          value: item,
+                        ))
                     .toList(),
                 onChanged: (value) => setState(() {
-                  dropbox[i]=value;
+                  dropbox[i] = value;
                 }),
               ),
             ),
@@ -301,40 +301,40 @@ class _PpDataState extends State<PpData> {
         ),
       );
   Widget _Title() => Container(
-    width: 500,
-    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(12),
-      color: Colors.white,
-      //border: Border.all(color: Colors.deepOrange, width: 4),
-    ),
-    child: DropdownButtonHideUnderline(
-      child: DropdownButton<NewObject>(
-        value: title1, // currently selected item
-        items: title
-            .map((item) => DropdownMenuItem<NewObject>(
-          child: Row(
-            children: [
-              Icon(item.icon),
-              const SizedBox(width: 8),
-              Text(
-                item.title,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
-              ),
-            ],
+        width: 500,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Colors.white,
+          //border: Border.all(color: Colors.deepOrange, width: 4),
+        ),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton<NewObject>(
+            value: title1, // currently selected item
+            items: title
+                .map((item) => DropdownMenuItem<NewObject>(
+                      child: Row(
+                        children: [
+                          Icon(item.icon),
+                          const SizedBox(width: 8),
+                          Text(
+                            item.title,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                        ],
+                      ),
+                      value: item,
+                    ))
+                .toList(),
+            onChanged: (value) => setState(() {
+              this.title1 = value;
+            }),
           ),
-          value: item,
-        ))
-            .toList(),
-        onChanged: (value) => setState(() {
-          this.title1 = value;
-        }),
-      ),
-    ),
-  );
+        ),
+      );
   Widget _entryFieldnumbers(String title, String hint,
       {bool isPassword = false}) {
     return Container(
@@ -375,12 +375,13 @@ class _PpDataState extends State<PpData> {
       ),
     );
   }
+
   Widget _title() {
     return Column(
       children: [
         Align(
           alignment: Alignment.topLeft,
-        child: _backButton(),
+          child: _backButton(),
         ),
         RichText(
           textAlign: TextAlign.center,
@@ -440,8 +441,9 @@ class _PpDataState extends State<PpData> {
                   _entryFieldnumbers('UNIVERSITY REG NO.', 'Eg:312419205041'),
                   _entryFieldalphabets('ROLL NO', 'Eg:19IT1242'),
 
-                  _DropBox("TITLE",title,0),
-                  _entryFieldalphabets('NAME OF THE CANDIDATE', 'enter the name with inital'),
+                  _DropBox("TITLE", title, 0),
+                  _entryFieldalphabets(
+                      'NAME OF THE CANDIDATE', 'enter the name with inital'),
                   _entryFieldalphabets('FIRST NAME', 'first name'),
                   _entryFieldalphabets('LAST NAME', 'last name'),
                   //Gender dropdown
@@ -453,7 +455,7 @@ class _PpDataState extends State<PpData> {
                   //College dropdown
                   _DropBox("COLLEGE", college, 2),
 
-                  _DropBox("DEPARTMENT",department,3),
+                  _DropBox("DEPARTMENT", department, 3),
                   //Section
                   _DropBox("SECTION", section, 4),
 
@@ -470,10 +472,12 @@ class _PpDataState extends State<PpData> {
                   _entryFieldnumbers('12th YEAR OF PASSING', 'Eg:2017'),
                   _entryFieldalphabets('NAME OF SCHOOL', 'name of school'),
                   _entryFieldalphabets('GRADUATING STATE', 'state name'),
-                  _entryFieldalphabets('DIPLOMA - SPECIALIZATION/BRANCH', 'state name'),
+                  _entryFieldalphabets(
+                      'DIPLOMA - SPECIALIZATION/BRANCH', 'state name'),
                   _entryFieldnumbers('DIPLOMA Percentage', 'Eg:79.9'),
                   _entryFieldnumbers('DIPLOMA YEAR OF PASSING', 'Eg:2017'),
-                  _entryFieldalphabets('NAME OF INSTITUTE', 'name of institute'),
+                  _entryFieldalphabets(
+                      'NAME OF INSTITUTE', 'name of institute'),
                   _entryFieldalphabets('GRADUATING STATE', 'state name'),
                   _entryFieldnumbers('SEM1 GPA', 'Eg:7.12'),
                   _entryFieldnumbers('SEM2 GPA', 'Eg:7.12'),
@@ -484,25 +488,42 @@ class _PpDataState extends State<PpData> {
                   _entryFieldnumbers('SEM7 GPA', 'Eg:7.12'),
                   _entryFieldnumbers('SEM8 GPA', 'Eg:7.12'),
                   _entryFieldnumbers('OVERALL GPA', 'Eg:7.12'),
-                  _entryFieldnumbers('NO OF ARREARS SEM 1', 'if there is no arrears enter 0'),
-                  _entryFieldnumbers('NO OF ARREARS SEM 2', 'if there is no arrears enter 0'),
-                  _entryFieldnumbers('NO OF ARREARS SEM 3', 'if there is no arrears enter 0'),
-                  _entryFieldnumbers('NO OF ARREARS SEM 4', 'if there is no arrears enter 0'),
-                  _entryFieldnumbers('NO OF ARREARS SEM 5', 'if there is no arrears enter 0'),
-                  _entryFieldnumbers('NO OF ARREARS SEM 6', 'if there is no arrears enter 0'),
-                  _entryFieldnumbers('NO OF ARREARS SEM 7', 'if there is no arrears enter 0'),
-                  _entryFieldnumbers('NO OF ARREARS SEM 8', 'if there is no arrears enter 0'),
-                  _entryFieldnumbers('TOTAL NO OF STANDING ARREARS', 'if there is no arrears enter 0'),
+                  _entryFieldnumbers(
+                      'NO OF ARREARS SEM 1', 'if there is no arrears enter 0'),
+                  _entryFieldnumbers(
+                      'NO OF ARREARS SEM 2', 'if there is no arrears enter 0'),
+                  _entryFieldnumbers(
+                      'NO OF ARREARS SEM 3', 'if there is no arrears enter 0'),
+                  _entryFieldnumbers(
+                      'NO OF ARREARS SEM 4', 'if there is no arrears enter 0'),
+                  _entryFieldnumbers(
+                      'NO OF ARREARS SEM 5', 'if there is no arrears enter 0'),
+                  _entryFieldnumbers(
+                      'NO OF ARREARS SEM 6', 'if there is no arrears enter 0'),
+                  _entryFieldnumbers(
+                      'NO OF ARREARS SEM 7', 'if there is no arrears enter 0'),
+                  _entryFieldnumbers(
+                      'NO OF ARREARS SEM 8', 'if there is no arrears enter 0'),
+                  _entryFieldnumbers('TOTAL NO OF STANDING ARREARS',
+                      'if there is no arrears enter 0'),
                   //History of arrears Y/N
                   _DropBox("HISTORY OF ARREARS [Y/N]", yesorno, 5),
-                  _entryFieldnumbers('IF YES, HOW MANY?', 'if there is no arrears enter 0'),
-                  _entryFieldalphabets('UG DEGREE (FOR PG STUDENTS) ', 'Eg:B.tech'),
-                  _entryFieldalphabets('UG BRANCH (FOR PG STUDENTS) ', 'Eg:Computer Science'),
-                  _entryFieldnumbers('UG PERCENTAGE (FOR PG STUDENTS)', 'Eg:95.5'),
+                  _entryFieldnumbers(
+                      'IF YES, HOW MANY?', 'if there is no arrears enter 0'),
+                  _entryFieldalphabets(
+                      'UG DEGREE (FOR PG STUDENTS) ', 'Eg:B.tech'),
+                  _entryFieldalphabets(
+                      'UG BRANCH (FOR PG STUDENTS) ', 'Eg:Computer Science'),
+                  _entryFieldnumbers(
+                      'UG PERCENTAGE (FOR PG STUDENTS)', 'Eg:95.5'),
                   _entryFieldnumbers('UG CGPA (FOR PG STUDENTS)', 'Eg:9.2'),
-                  _entryFieldnumbers('UG YEAR OF PASSING (FOR PG STUDENTS)', 'Eg:2023'),
-                  _entryFieldalphabets('UG - COLLEGE OF STUDIES (FOR PG STUDENTS)) ', 'Eg:St.joseph\'s'),
-                  _entryFieldalphabets('UG - GRADUATING UNIVERSITY) ', 'Eg:Anna University'),
+                  _entryFieldnumbers(
+                      'UG YEAR OF PASSING (FOR PG STUDENTS)', 'Eg:2023'),
+                  _entryFieldalphabets(
+                      'UG - COLLEGE OF STUDIES (FOR PG STUDENTS)) ',
+                      'Eg:St.joseph\'s'),
+                  _entryFieldalphabets(
+                      'UG - GRADUATING UNIVERSITY) ', 'Eg:Anna University'),
                   _entryFieldalphabets('GRADUATING STATE', 'Eg:Tamil Nadu'),
                   _entryFieldnumbers('LAND LINE NUMBER', ''),
                   _entryFieldnumbers('PRIMARY MOBILE NO', ''),
@@ -515,12 +536,18 @@ class _PpDataState extends State<PpData> {
                   _DropBox("BEC EXAM STATUS", yesorno, 7),
                   // BEC EXAM GRADE
                   _DropBox("BEC EXAM GRADE", becgrade, 8),
-                  _entryFieldalphabets('LANGUAGES KNOWN', 'Tamil English Hindi'),
-                  _entryFieldnumbers('GAP IN EDUCATION (in Years) - If Any', 'if there is no gap enter 0'),
+                  _entryFieldalphabets(
+                      'LANGUAGES KNOWN', 'Tamil English Hindi'),
+                  _entryFieldnumbers('GAP IN EDUCATION (in Years) - If Any',
+                      'if there is no gap enter 0'),
                   // ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]
-                  _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]", yesorno, 9),
+                  _DropBox(
+                      "ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]", yesorno, 9),
                   // IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL
-                  _DropBox("IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL", yesorno, 10),
+                  _DropBox(
+                      "IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL",
+                      yesorno,
+                      10),
                   // DURATION OF THE COURSE
                   // CERTIFICATION VENDOR/AUTHORITY/AGENCY NAME
                   _entryFieldalphabets('PAN CARD NUMBER', ''),
@@ -539,8 +566,6 @@ class _PpDataState extends State<PpData> {
                   _entryFieldnumbers('POSTAL CODE', ''),
                   //HOSTEL / DAYSCHOLAR
                   _DropBox("HOSTEL / DAY SCHOLAR", hord, 11),
-
-
 
                   // _entryFieldalphabets('NAME', 'ENTER NAME'),
                   // _entryFieldnumbers('REGISTRATION NUMBER', 'ENTER REG NO'),
@@ -562,24 +587,24 @@ class _PpDataState extends State<PpData> {
                   Column(
                     children: [
                       RaisedButton(
-                          color:Colors.deepPurpleAccent,
+                          color: Colors.deepPurpleAccent,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)
-                          ),
+                              borderRadius: BorderRadius.circular(15)),
                           padding: const EdgeInsets.all(17.0),
                           splashColor: Colors.purple,
                           textColor: Colors.white,
-                          child: Text('SUBMIT',
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),),
-                          onPressed: (){})
+                          child: Text(
+                            'SUBMIT',
+                            style: TextStyle(
+                              fontSize: 20,
+                            ),
+                          ),
+                          onPressed: () {})
                     ],
                   ),
-                  SizedBox(height: 25),//For department
+                  SizedBox(height: 25), //For department
                 ],
               ),
-
             ),
           ),
           //Positioned(top: 40, left: 0, child: _backButton()),
