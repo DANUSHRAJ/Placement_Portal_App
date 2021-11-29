@@ -116,11 +116,25 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  static const colorizeColors1 = [
+    Colors.limeAccent,
+    Colors.red,
+    Colors.yellow,
+    Colors.blue,
+    Colors.amber,
+
+    //Colors.black,
+  ];
   static const colorizeColors = [
-    Colors.black,
+    Colors.limeAccent,
     Colors.blue,
     Colors.yellow,
     Colors.red,
+    Colors.black,
+    // Colors.red,
+    // Colors.yellow,
+    // Colors.blue,
+    // Colors.limeAccent,
   ];
 
   static const colorizeTextStyle = TextStyle(
@@ -148,7 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                 )
               ],
               isRepeatingAnimation: true,
-              totalRepeatCount: 100,
+              totalRepeatCount: 10000,
               // pause: const Duration(milliseconds: 1000),
               // onTap: () {
               //   print("Tap Event");
@@ -203,8 +217,8 @@ class _LoginPageState extends State<LoginPage> {
                 )
               ],
               isRepeatingAnimation: true,
-              totalRepeatCount: 100,
-              pause: const Duration(milliseconds: 1000),
+              totalRepeatCount: 10000,
+              //pause: const Duration(milliseconds: 1000),
               // onTap: () {
               //   print("Tap Event");
               // },
@@ -235,36 +249,51 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _submitButton() {
     return InkWell(
-        onTap: () {
-          _findAccount(etRegisterNo.text, etPassword.text);
-          // Navigator.pop(
-          //     context, MaterialPageRoute(builder: (context) => ()));
-        },
-        child: Container(
-          width: MediaQuery.of(context).size.width * .5,
-          padding: EdgeInsets.symmetric(vertical: 9),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                    color: Colors.purple.shade200,
-                    offset: Offset(2, 4),
-                    blurRadius: 5,
-                    spreadRadius: 1)
-              ],
-              gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [Colors.black87, Colors.black87])),
-          child: Text(
-            'Login',
-            style: GoogleFonts.adventPro(
-                fontSize: 30,
-                color: Colors.cyanAccent,
-                fontWeight: FontWeight.bold),
-          ),
-        ));
+      onTap: () {
+        _findAccount(etRegisterNo.text, etPassword.text);
+        // Navigator.pop(
+        //     context, MaterialPageRoute(builder: (context) => ()));
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width * .5,
+        padding: EdgeInsets.symmetric(vertical: 9),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.purple.shade200,
+                  offset: Offset(2, 4),
+                  blurRadius: 5,
+                  spreadRadius: 1)
+            ],
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.black87, Colors.black87])),
+        child: Text(
+          'Login',
+          style: GoogleFonts.adventPro(
+              fontSize: 30,
+              color: Colors.cyanAccent,
+              fontWeight: FontWeight.bold),
+        ),
+        // child: AnimatedTextKit(
+        //   animatedTexts: [
+        //     ColorizeAnimatedText(
+        //       "LOGIN",
+        //       textStyle: colorizeTextStyle,
+        //       colors: colorizeColors1,
+        //     )
+        //   ],
+        //   isRepeatingAnimation: true,
+        //   totalRepeatCount: 100,
+        //   pause: const Duration(milliseconds: 1000),
+        // onTap: () {
+        //   print("Tap Event");
+        // },
+      ),
+    );
   }
 
   Widget _divider() {
@@ -322,7 +351,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               'Not yet Joined ?',
               style: TextStyle(
-                  color: Colors.white70,
+                  color: Colors.white,
                   fontSize: 15,
                   fontWeight: FontWeight.w900),
             ),
@@ -332,7 +361,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               'Register',
               style: TextStyle(
-                  color: Colors.black87,
+                  color: Colors.limeAccent,
                   fontSize: 15,
                   fontWeight: FontWeight.w900),
             ),
@@ -351,16 +380,16 @@ class _LoginPageState extends State<LoginPage> {
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),
         padding: EdgeInsets.all(15),
-        alignment: Alignment.bottomCenter,
+        alignment: Alignment.bottomRight,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Container(
               padding: EdgeInsets.symmetric(vertical: 10),
               alignment: Alignment.bottomRight,
               child: Text('Forgot Password ?',
                   style: TextStyle(
-                      color: Colors.black87,
+                      color: Colors.limeAccent,
                       fontSize: 14,
                       fontWeight: FontWeight.bold)),
             ),
@@ -379,7 +408,7 @@ class _LoginPageState extends State<LoginPage> {
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
-            color: Colors.green,
+            color: Colors.black,
           ),
           children: [
             TextSpan(
@@ -388,7 +417,7 @@ class _LoginPageState extends State<LoginPage> {
                 textStyle: Theme.of(context).textTheme.display1,
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
-                color: Colors.deepPurpleAccent,
+                color: Colors.orangeAccent,
               ),
             ),
             TextSpan(
@@ -397,7 +426,7 @@ class _LoginPageState extends State<LoginPage> {
                 textStyle: Theme.of(context).textTheme.display1,
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
-                color: Colors.orangeAccent,
+                color: Colors.white,
               ),
             ),
           ]),
@@ -438,44 +467,36 @@ class _LoginPageState extends State<LoginPage> {
               ])),
       child: Stack(
         children: <Widget>[
-          // Container(
-          //     height: double.infinity,
-          //     width: double.infinity,
-          //     child: Image.asset(
-          //       'assets/images/NoontoDusk.png',
-          //       fit: BoxFit.fitHeight,
-          //     )),
-          // Positioned(
-          //     top: -height * .45,
-          //     right: -MediaQuery.of(context).size.width * .4,
-          //     child: BezierContainer()),
+          Container(
+              height: double.infinity,
+              width: double.infinity,
+              child: Image.asset(
+                'assets/images/inner_bg.gif',
+                fit: BoxFit.fitHeight,
+              )),
+          Positioned(
+              top: -height * .45,
+              right: -MediaQuery.of(context).size.width * .4,
+              child: BezierContainer()),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: height * .05),
-                  // Align(
-                  //alignment: Alignment.topLeft,
-                  Positioned(left: 10, child: _backButton()),
-                  // ),
-                  SizedBox(height: height * .02),
-
-                  _title(),
-                  SizedBox(height: 80),
-                  _emailPasswordWidget(),
-                  SizedBox(height: 20, width: 5),
-                  _submitButton(),
-                  Align(
-                      alignment: Alignment.bottomRight,
-                      child: _createAccountLabel1()),
-                  _divider(),
-                  //SizedBox(height: height * .055),
-                  _createAccountLabel(),
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Positioned(left: 10, child: _backButton()),
+                SizedBox(height: height * .02),
+                _title(),
+                SizedBox(height: 80),
+                _emailPasswordWidget(),
+                SizedBox(height: 20, width: 5),
+                _submitButton(),
+                Align(
+                    alignment: Alignment.bottomRight,
+                    child: _createAccountLabel1()),
+                _divider(),
+                _createAccountLabel(),
+              ],
             ),
           ),
         ],
