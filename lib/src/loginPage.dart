@@ -105,10 +105,7 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             Container(
               //padding: EdgeInsets.only(top: 10), //, bottom: 10),
-              child: Icon(
-                Icons.home_outlined,
-                color: Colors.black87,
-              ),
+              child: Icon(Icons.home_outlined, color: Colors.white),
             ),
           ],
         ),
@@ -275,7 +272,7 @@ class _LoginPageState extends State<LoginPage> {
           'Login',
           style: GoogleFonts.adventPro(
               fontSize: 30,
-              color: Colors.cyanAccent,
+              color: Colors.limeAccent,
               fontWeight: FontWeight.bold),
         ),
         // child: AnimatedTextKit(
@@ -478,13 +475,13 @@ class _LoginPageState extends State<LoginPage> {
               top: -height * .45,
               right: -MediaQuery.of(context).size.width * .4,
               child: BezierContainer()),
+          Positioned(top: 40, left: 0, child: _backButton()),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Positioned(left: 10, child: _backButton()),
                 SizedBox(height: height * .02),
                 _title(),
                 SizedBox(height: 80),

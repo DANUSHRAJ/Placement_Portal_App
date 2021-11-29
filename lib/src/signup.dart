@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -31,6 +31,19 @@ class _SignUpPageState extends State<SignUpPage> {
   // int RegisterNo;
   // String mailId = "";
   // String Password = "";
+
+  static const colorizeColors = [
+    Colors.limeAccent,
+    Colors.blue,
+    Colors.yellow,
+    Colors.red,
+    Colors.black,
+  ];
+
+  static const colorizeTextStyle = TextStyle(
+    fontSize: 20.0,
+    fontFamily: 'Horizon',
+  );
 
   void _addAccount(String name, String regno, String un, String pwd) async {
 //    log('$name-$regno-$un-$pwd');
@@ -80,13 +93,26 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              textStyle: Theme.of(context).textTheme.display1,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
+          DefaultTextStyle(
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20.0,
+                fontFamily: 'Horizon',
+                fontWeight: FontWeight.bold),
+            child: AnimatedTextKit(
+              animatedTexts: [
+                ColorizeAnimatedText(
+                  title,
+                  textStyle: colorizeTextStyle,
+                  colors: colorizeColors,
+                )
+              ],
+              isRepeatingAnimation: true,
+              totalRepeatCount: 10000,
+              //pause: const Duration(milliseconds: 1000),
+              // onTap: () {
+              //   print("Tap Event");
+              // },
             ),
           ),
           SizedBox(
@@ -130,13 +156,26 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              textStyle: Theme.of(context).textTheme.display1,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
+          DefaultTextStyle(
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20.0,
+                fontFamily: 'Horizon',
+                fontWeight: FontWeight.bold),
+            child: AnimatedTextKit(
+              animatedTexts: [
+                ColorizeAnimatedText(
+                  title,
+                  textStyle: colorizeTextStyle,
+                  colors: colorizeColors,
+                )
+              ],
+              isRepeatingAnimation: true,
+              totalRepeatCount: 10000,
+              //pause: const Duration(milliseconds: 1000),
+              // onTap: () {
+              //   print("Tap Event");
+              // },
             ),
           ),
           SizedBox(
@@ -174,13 +213,26 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              textStyle: Theme.of(context).textTheme.display1,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
+          DefaultTextStyle(
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20.0,
+                fontFamily: 'Horizon',
+                fontWeight: FontWeight.bold),
+            child: AnimatedTextKit(
+              animatedTexts: [
+                ColorizeAnimatedText(
+                  title,
+                  textStyle: colorizeTextStyle,
+                  colors: colorizeColors,
+                )
+              ],
+              isRepeatingAnimation: true,
+              totalRepeatCount: 10000,
+              //pause: const Duration(milliseconds: 1000),
+              // onTap: () {
+              //   print("Tap Event");
+              // },
             ),
           ),
           SizedBox(
@@ -213,13 +265,26 @@ class _SignUpPageState extends State<SignUpPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              textStyle: Theme.of(context).textTheme.display1,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
+          DefaultTextStyle(
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20.0,
+                fontFamily: 'Horizon',
+                fontWeight: FontWeight.bold),
+            child: AnimatedTextKit(
+              animatedTexts: [
+                ColorizeAnimatedText(
+                  title,
+                  textStyle: colorizeTextStyle,
+                  colors: colorizeColors,
+                )
+              ],
+              isRepeatingAnimation: true,
+              totalRepeatCount: 10000,
+              //pause: const Duration(milliseconds: 1000),
+              // onTap: () {
+              //   print("Tap Event");
+              // },
             ),
           ),
           SizedBox(
@@ -321,7 +386,7 @@ class _SignUpPageState extends State<SignUpPage> {
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: Colors.black,
           ),
           children: [
             TextSpan(
@@ -330,7 +395,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 textStyle: Theme.of(context).textTheme.display1,
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
-                color: Colors.black,
+                color: Colors.orangeAccent,
               ),
             ),
             TextSpan(
@@ -349,10 +414,10 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        _entryField11("Name"),
+        _entryField11("Name          "),
         _entryField1("Register Number"),
-        _entryField2("Email id"),
-        _entryField3("Password", isPassword: true),
+        _entryField2("Email id       "),
+        _entryField3("Password       ", isPassword: true),
       ],
     );
   }
@@ -394,6 +459,11 @@ class _SignUpPageState extends State<SignUpPage> {
               right: -MediaQuery.of(context).size.width * .4,
               child: BezierContainer(),
             ),
+            Positioned(
+              top: 100,
+              left: 156,
+              child: _title(),
+            ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
@@ -402,7 +472,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: height * .2),
-                    _title(),
+
                     SizedBox(
                       height: 50,
                     ),
