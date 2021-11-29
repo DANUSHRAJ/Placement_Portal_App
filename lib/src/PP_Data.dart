@@ -40,15 +40,15 @@ class _PpDataState extends State<PpData> {
   ];
   NewObject title1 = title.first;
   static final List<NewObject> gender = <NewObject>[
-    NewObject('SELECT TITLE', Icons.description),
+    NewObject('SELECT GENDER', Icons.person),
     NewObject('MALE', male_rounded),
     NewObject('FEMALE', female_rounded),
   ];
 
   static final List<NewObject> college = <NewObject>[
-    NewObject('SELECT TITLE', Icons.description),
-    NewObject('St.Joseph\'s Institute of Technology', Icons.arrow_back_ios),
-    NewObject('St.Joseph\'s College of Engineering', Icons.arrow_back_ios),
+    NewObject('SELECT COLLEGE', Icons.description),
+    NewObject('SJIT', Icons.home_outlined),
+    NewObject('SJCE', Icons.home_outlined),
   ];
 
   static final List<NewObject> department = <NewObject>[
@@ -84,7 +84,7 @@ class _PpDataState extends State<PpData> {
   static final List<NewObject> hord = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
     NewObject('HOSTEL', Icons.arrow_back_ios),
-    NewObject('DAY SCHOLAR', Icons.view_day_outlined),
+    NewObject('DAY SCHOLAR', Icons.arrow_back_ios),
   ];
 
   NewObject value = department.first;
