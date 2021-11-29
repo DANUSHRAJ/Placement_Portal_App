@@ -116,6 +116,17 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  static const colorizeColors = [
+    Colors.black,
+    Colors.blue,
+    Colors.yellow,
+    Colors.red,
+  ];
+
+  static const colorizeTextStyle = TextStyle(
+    fontSize: 20.0,
+    fontFamily: 'Horizon',
+  );
   Widget _entryField(String title, {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -130,11 +141,15 @@ class _LoginPageState extends State<LoginPage> {
                 fontWeight: FontWeight.bold),
             child: AnimatedTextKit(
               animatedTexts: [
-                WavyAnimatedText(title),
+                ColorizeAnimatedText(
+                  title,
+                  textStyle: colorizeTextStyle,
+                  colors: colorizeColors,
+                )
               ],
               isRepeatingAnimation: true,
-              totalRepeatCount: 10,
-              pause: const Duration(milliseconds: 1000),
+              totalRepeatCount: 100,
+              // pause: const Duration(milliseconds: 1000),
               // onTap: () {
               //   print("Tap Event");
               // },
@@ -181,10 +196,14 @@ class _LoginPageState extends State<LoginPage> {
                 fontWeight: FontWeight.bold),
             child: AnimatedTextKit(
               animatedTexts: [
-                WavyAnimatedText(title),
+                ColorizeAnimatedText(
+                  title,
+                  textStyle: colorizeTextStyle,
+                  colors: colorizeColors,
+                )
               ],
               isRepeatingAnimation: true,
-              totalRepeatCount: 10,
+              totalRepeatCount: 100,
               pause: const Duration(milliseconds: 1000),
               // onTap: () {
               //   print("Tap Event");
@@ -360,7 +379,7 @@ class _LoginPageState extends State<LoginPage> {
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
-            color: Colors.blueGrey,
+            color: Colors.green,
           ),
           children: [
             TextSpan(
