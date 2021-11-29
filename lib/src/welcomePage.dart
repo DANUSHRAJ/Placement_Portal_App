@@ -115,13 +115,13 @@ class _WelcomePageState extends State<WelcomePage> {
                 height: double.infinity,
                 width: double.infinity,
                 child: Image.asset(
-                  'assets/images/inner_bg.gif',
+                  'assets/images/wp.gif',
                   fit: BoxFit.fitHeight,
                 )),
-            Positioned(
-                top: -height * .47,
-                right: -MediaQuery.of(context).size.width * .4,
-                child: BezierContainer()),
+            // Positioned(
+            //     top: -height * .47,
+            //     right: -MediaQuery.of(context).size.width * .4,
+            //     child: BezierContainer()),
             Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,

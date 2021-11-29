@@ -91,7 +91,7 @@ class _IntershipsState extends State<Interships> {
                   children: <Widget>[
                     SizedBox(height: height * .1),
                     Align(alignment: Alignment.center, child: _title()),
-                    //SizedBox(height: height * .2),
+                    SizedBox(height: height * .05),
                     Align(
                       alignment: Alignment.topLeft,
                       child: InkWell(
@@ -120,7 +120,39 @@ class _IntershipsState extends State<Interships> {
                         //           child: PpData()));
                         // },
                       ),
-                    )
+                    ),
+                    SizedBox(height: height * .4),
+//VIEW YOUR COMPLETED INTERSHIPS
+                    Positioned(
+                        child: Align(
+                      alignment: Alignment.topLeft,
+                      child: InkWell(
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          elevation: 4,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                ' COMPLETED INTERSHIPS ',
+                                style: GoogleFonts.adventPro(
+                                    fontSize: 15,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          ),
+                        ),
+                        // onTap: () {
+                        //   Navigator.push(
+                        //       context,
+                        //       PageTransition(
+                        //           type: PageTransitionType.bottomToTop,
+                        //           child: PpData()));
+                        // },
+                      ),
+                    ))
                   ],
                 ),
               ),

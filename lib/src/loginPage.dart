@@ -3,6 +3,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 import '../main.dart';
 import 'Account.dart';
@@ -103,10 +104,10 @@ class _LoginPageState extends State<LoginPage> {
         child: Row(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: 0, top: 20, bottom: 10),
+              //padding: EdgeInsets.only(top: 10), //, bottom: 10),
               child: Icon(
                 Icons.home_outlined,
-                color: Colors.white,
+                color: Colors.black87,
               ),
             ),
           ],
@@ -121,13 +122,22 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              textStyle: Theme.of(context).textTheme.display1,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
+          DefaultTextStyle(
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20.0,
+                fontFamily: 'Horizon',
+                fontWeight: FontWeight.bold),
+            child: AnimatedTextKit(
+              animatedTexts: [
+                WavyAnimatedText(title),
+              ],
+              isRepeatingAnimation: true,
+              totalRepeatCount: 10,
+              pause: const Duration(milliseconds: 1000),
+              // onTap: () {
+              //   print("Tap Event");
+              // },
             ),
           ),
           SizedBox(
@@ -163,13 +173,22 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              textStyle: Theme.of(context).textTheme.display1,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
+          DefaultTextStyle(
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 20.0,
+                fontFamily: 'Horizon',
+                fontWeight: FontWeight.bold),
+            child: AnimatedTextKit(
+              animatedTexts: [
+                WavyAnimatedText(title),
+              ],
+              isRepeatingAnimation: true,
+              totalRepeatCount: 10,
+              pause: const Duration(milliseconds: 1000),
+              // onTap: () {
+              //   print("Tap Event");
+              // },
             ),
           ),
           SizedBox(
@@ -223,7 +242,7 @@ class _LoginPageState extends State<LoginPage> {
             'Login',
             style: GoogleFonts.adventPro(
                 fontSize: 30,
-                color: Colors.limeAccent,
+                color: Colors.cyanAccent,
                 fontWeight: FontWeight.bold),
           ),
         ));
@@ -282,9 +301,9 @@ class _LoginPageState extends State<LoginPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'Don\'t have an account ?',
+              'Not yet Joined ?',
               style: TextStyle(
-                  color: Colors.limeAccent,
+                  color: Colors.white70,
                   fontSize: 15,
                   fontWeight: FontWeight.w900),
             ),
@@ -294,7 +313,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               'Register',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black87,
                   fontSize: 15,
                   fontWeight: FontWeight.w900),
             ),
@@ -322,9 +341,9 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.bottomRight,
               child: Text('Forgot Password ?',
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black87,
                       fontSize: 14,
-                      fontWeight: FontWeight.w900)),
+                      fontWeight: FontWeight.bold)),
             ),
           ],
         ),
@@ -341,7 +360,7 @@ class _LoginPageState extends State<LoginPage> {
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
-            color: Colors.white,
+            color: Colors.blueGrey,
           ),
           children: [
             TextSpan(
@@ -350,7 +369,7 @@ class _LoginPageState extends State<LoginPage> {
                 textStyle: Theme.of(context).textTheme.display1,
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
-                color: Colors.limeAccent,
+                color: Colors.deepPurpleAccent,
               ),
             ),
             TextSpan(
@@ -359,7 +378,7 @@ class _LoginPageState extends State<LoginPage> {
                 textStyle: Theme.of(context).textTheme.display1,
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
-                color: Colors.white,
+                color: Colors.orangeAccent,
               ),
             ),
           ]),
@@ -391,26 +410,26 @@ class _LoginPageState extends State<LoginPage> {
                 spreadRadius: 2)
           ],
           gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [
-                Color(0xffffa000),
-                Color(0xff7b1fa2),
+                Color(0xFF93DDE5),
+                Color(0xFFE9BFE0),
                 Color(0xfffb7172)
               ])),
       child: Stack(
         children: <Widget>[
-          Container(
-              height: double.infinity,
-              width: double.infinity,
-              child: Image.asset(
-                'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
-              )),
-          Positioned(
-              top: -height * .45,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer()),
+          // Container(
+          //     height: double.infinity,
+          //     width: double.infinity,
+          //     child: Image.asset(
+          //       'assets/images/NoontoDusk.png',
+          //       fit: BoxFit.fitHeight,
+          //     )),
+          // Positioned(
+          //     top: -height * .45,
+          //     right: -MediaQuery.of(context).size.width * .4,
+          //     child: BezierContainer()),
           Container(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: SingleChildScrollView(
@@ -418,7 +437,12 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: height * .2),
+                  SizedBox(height: height * .05),
+                  // Align(
+                  //alignment: Alignment.topLeft,
+                  Positioned(left: 10, child: _backButton()),
+                  // ),
+                  SizedBox(height: height * .02),
 
                   _title(),
                   SizedBox(height: 80),
@@ -435,7 +459,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Positioned(top: 10, left: 0, child: _backButton()),
         ],
       ),
     ));
