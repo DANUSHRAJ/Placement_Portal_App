@@ -6,7 +6,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/signupviewdata.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
+
 // import 'api.dart';
 // import 'check.dart';
 // import 'home_screen.dart';
@@ -28,7 +28,30 @@ class NewObject {
 
 class _PpDataState extends State<PpData> {
   get _chosenValue => null;
-  static final List<NewObject> items = <NewObject>[
+
+  
+  
+  static final List<NewObject> title = <NewObject>[
+    NewObject('SELECT TITLE', Icons.description),
+    NewObject('Mr', Icons.radar_outlined),
+    NewObject('Ms', Icons.radar),
+  ];
+  NewObject title1=title.first;
+  static final List<NewObject> gender=<NewObject>[
+    NewObject('SELECT TITLE', Icons.description),
+    NewObject('MALE', Icons.male_rounded),
+    NewObject('FEMALE', Icons.female_rounded),
+  ];
+
+  static final List<NewObject> college=<NewObject>[
+    NewObject('SELECT TITLE', Icons.description),
+    NewObject('St.Joseph\'s Institute of Technology', Icons.arrow_back_ios),
+    NewObject('St.Joseph\'s College of Engineering', Icons.arrow_back_ios_new),
+  ];
+
+  
+
+  static final List<NewObject> department = <NewObject>[
     NewObject('SELECT DEPARTMENT', Icons.description),
     NewObject('B.Tech IT', Icons.mobile_friendly_rounded),
     NewObject('B.E CSE', Icons.computer_rounded),
@@ -37,7 +60,49 @@ class _PpDataState extends State<PpData> {
     NewObject('B.E MECH', Icons.settings_applications_rounded),
     NewObject('B.E CIVIL', Icons.apartment_outlined),
   ];
-  NewObject value = items.first;
+
+  static final List<NewObject> section=<NewObject>[
+    NewObject('SELECT TITLE', Icons.description),
+    NewObject('A', Icons.arrow_back_ios),
+    NewObject('B', Icons.arrow_back_ios_new),
+    NewObject('C', Icons.arrow_back_ios_new),
+  ];
+
+  static final List<NewObject> yesorno=<NewObject>[
+    NewObject('SELECT TITLE', Icons.description),
+    NewObject('YES', Icons.arrow_back_ios),
+    NewObject('NO', Icons.arrow_back_ios_new),
+  ];
+
+  static final List<NewObject> becgrade=<NewObject>[
+    NewObject('SELECT TITLE', Icons.description),
+    NewObject('PRELIMINARY', Icons.arrow_back_ios_new),
+    NewObject('VANTAGE', Icons.arrow_back_ios),
+    NewObject('HIGHER', Icons.arrow_back_ios),
+  ];
+
+  static final List<NewObject> hord=<NewObject>[
+    NewObject('SELECT TITLE', Icons.description),
+    NewObject('HOSTEL', Icons.arrow_back_ios),
+    NewObject('DAY SCHOLAR', Icons.arrow_back_ios_new),
+  ];
+  
+  NewObject value = department.first;
+  static final List<NewObject> dropbox=<NewObject>[
+    title.first,         //0
+    gender.first,        //1
+    college.first,       //2
+    department.first,    //3
+    section.first,       //4
+    yesorno.first,       //5
+    yesorno.first,       //6
+    yesorno.first,       //7
+    becgrade.first,      //8
+    yesorno.first,       //9
+    yesorno.first,       //10
+    hord.first,          //11
+  ];
+  //DropBox a=key.num;
 
 //BACK BUTTON
   Widget _backButton() {
@@ -142,6 +207,64 @@ class _PpDataState extends State<PpData> {
     );
   }
 
+  Widget _DropBox(String title,List<NewObject> key,int i){
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Container(
+            width: 500,
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Colors.white,
+              //border: Border.all(color: Colors.deepOrange, width: 4),
+            ),
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<NewObject>(
+                value: dropbox.elementAt(i), // currently selected item
+                items: key
+                    .map((item) => DropdownMenuItem<NewObject>(
+                  child: Row(
+                    children: [
+                      Icon(item.icon),
+                      const SizedBox(width: 8),
+                      Text(
+                        item.title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  value: item,
+                ))
+                    .toList(),
+                onChanged: (value) => setState(() {
+                  dropbox[i]=value;
+                }),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _Department() => Container(
         width: 500,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -153,7 +276,7 @@ class _PpDataState extends State<PpData> {
         child: DropdownButtonHideUnderline(
           child: DropdownButton<NewObject>(
             value: value, // currently selected item
-            items: items
+            items: department
                 .map((item) => DropdownMenuItem<NewObject>(
                       child: Row(
                         children: [
@@ -177,7 +300,41 @@ class _PpDataState extends State<PpData> {
           ),
         ),
       );
-
+  Widget _Title() => Container(
+    width: 500,
+    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(12),
+      color: Colors.white,
+      //border: Border.all(color: Colors.deepOrange, width: 4),
+    ),
+    child: DropdownButtonHideUnderline(
+      child: DropdownButton<NewObject>(
+        value: title1, // currently selected item
+        items: title
+            .map((item) => DropdownMenuItem<NewObject>(
+          child: Row(
+            children: [
+              Icon(item.icon),
+              const SizedBox(width: 8),
+              Text(
+                item.title,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
+            ],
+          ),
+          value: item,
+        ))
+            .toList(),
+        onChanged: (value) => setState(() {
+          this.title1 = value;
+        }),
+      ),
+    ),
+  );
   Widget _entryFieldnumbers(String title, String hint,
       {bool isPassword = false}) {
     return Container(
@@ -282,30 +439,24 @@ class _PpDataState extends State<PpData> {
 
                   _entryFieldnumbers('UNIVERSITY REG NO.', 'Eg:312419205041'),
                   _entryFieldalphabets('ROLL NO', 'Eg:19IT1242'),
-                  // title(Mr/Ms) dropdown
+
+                  _DropBox("TITLE",title,0),
                   _entryFieldalphabets('NAME OF THE CANDIDATE', 'enter the name with inital'),
                   _entryFieldalphabets('FIRST NAME', 'first name'),
                   _entryFieldalphabets('LAST NAME', 'last name'),
                   //Gender dropdown
+                  _DropBox("GENDER", gender, 1),
+
                   _entryFieldDob("D.O.B", "DD-MM-YYYY"),
                   _entryFieldDob("D.O.B", "MM-DD-YYYY"),
                   _entryFieldDob("D.O.B", "YYYY-MM-DD"),
                   //College dropdown
-                  // *degree and branch
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      "DEPARTMENT",
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.portLligatSans(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.limeAccent,
-                      ),
-                    ),
-                  ),
-                  _Department(),
+                  _DropBox("COLLEGE", college, 2),
+
+                  _DropBox("DEPARTMENT",department,3),
                   //Section
+                  _DropBox("SECTION", section, 4),
+
                   _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019'),
                   _entryFieldnumbers('10th Percentage', 'Eg:92.6'),
                   // board of study
@@ -343,6 +494,7 @@ class _PpDataState extends State<PpData> {
                   _entryFieldnumbers('NO OF ARREARS SEM 8', 'if there is no arrears enter 0'),
                   _entryFieldnumbers('TOTAL NO OF STANDING ARREARS', 'if there is no arrears enter 0'),
                   //History of arrears Y/N
+                  _DropBox("HISTORY OF ARREARS [Y/N]", yesorno, 5),
                   _entryFieldnumbers('IF YES, HOW MANY?', 'if there is no arrears enter 0'),
                   _entryFieldalphabets('UG DEGREE (FOR PG STUDENTS) ', 'Eg:B.tech'),
                   _entryFieldalphabets('UG BRANCH (FOR PG STUDENTS) ', 'Eg:Computer Science'),
@@ -358,15 +510,20 @@ class _PpDataState extends State<PpData> {
                   _entryFieldalphabets('PRIMARY EMAIL ID', 'abc@gmail.com'),
                   _entryFieldalphabets('ALTERNATE EMAIL ID', 'abc@gmail.com'),
                   //SPORTS QUOTA
+                  _DropBox("SPORTS QUOTA", yesorno, 6),
                   //BEC EXAM STATUS
+                  _DropBox("BEC EXAM STATUS", yesorno, 7),
                   // BEC EXAM GRADE
+                  _DropBox("BEC EXAM GRADE", becgrade, 8),
                   _entryFieldalphabets('LANGUAGES KNOWN', 'Tamil English Hindi'),
                   _entryFieldnumbers('GAP IN EDUCATION (in Years) - If Any', 'if there is no gap enter 0'),
                   // ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]
+                  _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]", yesorno, 9),
                   // IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL
+                  _DropBox("IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL", yesorno, 10),
                   // DURATION OF THE COURSE
                   // CERTIFICATION VENDOR/AUTHORITY/AGENCY NAME
-                  _entryFieldalphabets('PANCARD NUMBER', ''),
+                  _entryFieldalphabets('PAN CARD NUMBER', ''),
                   _entryFieldalphabets('NATIONALITY', ''),
                   _entryFieldalphabets('INDIAN PASSPORT NUMBER', ''),
                   _entryFieldnumbers('AADHAAR NUMBER', ''),
@@ -381,12 +538,26 @@ class _PpDataState extends State<PpData> {
                   _entryFieldalphabets('STATE', 'Tamil Nadu'),
                   _entryFieldnumbers('POSTAL CODE', ''),
                   //HOSTEL / DAYSCHOLAR
+                  _DropBox("HOSTEL / DAY SCHOLAR", hord, 11),
 
 
 
                   // _entryFieldalphabets('NAME', 'ENTER NAME'),
                   // _entryFieldnumbers('REGISTRATION NUMBER', 'ENTER REG NO'),
                   // _entryFieldDob("D.O.B", "DD-MM-YYYY"),
+                  SizedBox(height: 10),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "TITLE",
+                      textAlign: TextAlign.left,
+                      style: GoogleFonts.portLligatSans(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.limeAccent,
+                      ),
+                    ),
+                  ),
                   SizedBox(height: 10),
                   Column(
                     children: [
