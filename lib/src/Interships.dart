@@ -1,4 +1,5 @@
 import 'package:SJIT_PLACEMENT_PORTAL/src/Intership_home.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/Intership_upload.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
@@ -55,6 +56,22 @@ class _IntershipsState extends State<Interships> {
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
                 color: Colors.black,
+              ),
+            ),
+            TextSpan(
+              text: '\nHO',
+              style: GoogleFonts.adventPro(
+                fontSize: 30,
+                fontWeight: FontWeight.w700,
+                color: Colors.orangeAccent,
+              ),
+            ),
+            TextSpan(
+              text: 'ME',
+              style: GoogleFonts.adventPro(
+                fontSize: 30,
+                fontWeight: FontWeight.w700,
+                color: Colors.lightGreenAccent,
               ),
             ),
           ]),
@@ -172,23 +189,23 @@ class _IntershipsState extends State<Interships> {
     return BottomNavigationBar(
       backgroundColor: Colors.transparent,
       type: BottomNavigationBarType.fixed,
-      currentIndex: _selectedIndex,
+      //currentIndex: _selectedIndex,
       onTap: (value) {
         if (value == 1) {
           Navigator.push(
               context,
               PageTransition(
                   type: PageTransitionType.leftToRightWithFade,
-                  child: IntershipHome()));
+                  child: IntershipUpload()));
         } else {
           Navigator.push(
               context,
               PageTransition(
-                  type: PageTransitionType.fade, child: HomeScreen()));
+                  type: PageTransitionType.fade, child: Interships()));
         }
-        setState(() {
-          _selectedIndex = value;
-        });
+        // setState(() {
+        //   _selectedIndex = value;
+        // });
       },
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.limeAccent,

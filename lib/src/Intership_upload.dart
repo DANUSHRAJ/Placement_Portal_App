@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
-class IntershipHome extends StatefulWidget {
-  const IntershipHome({Key key}) : super(key: key);
+class IntershipUpload extends StatefulWidget {
+  const IntershipUpload({Key key}) : super(key: key);
 
   @override
-  _IntershipHomeState createState() => _IntershipHomeState();
+  _IntershipUploadState createState() => _IntershipUploadState();
 }
 
-class _IntershipHomeState extends State<IntershipHome> {
+class _IntershipUploadState extends State<IntershipUpload> {
   int _selectedIndex = 0;
 
   Widget _backButton() {
@@ -57,7 +57,7 @@ class _IntershipHomeState extends State<IntershipHome> {
             ),
           ),
           TextSpan(
-            text: '\nHO',
+            text: '\nUPL',
             style: GoogleFonts.adventPro(
               fontSize: 30,
               fontWeight: FontWeight.w700,
@@ -65,7 +65,7 @@ class _IntershipHomeState extends State<IntershipHome> {
             ),
           ),
           TextSpan(
-            text: 'ME',
+            text: 'OAD',
             style: GoogleFonts.adventPro(
               fontSize: 30,
               fontWeight: FontWeight.w700,
@@ -110,6 +110,7 @@ class _IntershipHomeState extends State<IntershipHome> {
                     SizedBox(height: height * .2),
                     InkWell(
                       child: Card(
+                        color: Colors.amberAccent,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
                         elevation: 8,
@@ -117,12 +118,12 @@ class _IntershipHomeState extends State<IntershipHome> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              '\n   INTERNSHIP HOME PAGE  \n',
+                              '\n     UPLOAD HERE    \n',
                               style: GoogleFonts.adventPro(
                                   fontSize: 15,
                                   color: Colors.black,
                                   fontWeight: FontWeight.bold),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -136,6 +137,15 @@ class _IntershipHomeState extends State<IntershipHome> {
                     ),
                   ],
                 ),
+              ),
+            ),
+            Align(
+              child: Text(
+                "\n\n*ONLY .PDF FORMAT IS ACCEPTED.\n\n*FILE SIZE MUST BE LESS THAN 2 mb.",
+                style: GoogleFonts.adventPro(
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
             ),
             SizedBox(height: height * .67),
@@ -159,13 +169,12 @@ class _IntershipHomeState extends State<IntershipHome> {
           Navigator.push(
               context,
               PageTransition(
-                  type: PageTransitionType.leftToRightWithFade,
-                  child: HomeScreen()));
+                  type: PageTransitionType.fade, child: Interships()));
         } else {
           Navigator.push(
               context,
               PageTransition(
-                  type: PageTransitionType.fade, child: HomeScreen()));
+                  type: PageTransitionType.fade, child: IntershipUpload()));
         }
         setState(() {
           _selectedIndex = value;
@@ -174,9 +183,9 @@ class _IntershipHomeState extends State<IntershipHome> {
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.limeAccent,
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "HOME"),
         BottomNavigationBarItem(
             icon: Icon(Icons.upload_file), label: "UPLOAD CERTIFICATES"),
+        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "HOME"),
       ],
     );
   }
