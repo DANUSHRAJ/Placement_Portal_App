@@ -5,7 +5,7 @@ import 'package:contacts_app_server/wsserver.dart' as ws_server;
 
 void main(List<String> arguments) {
   server.start();
-  c_server.start();
-  i_server.start();
-  ws_server.start();
+  // c_server.start();
+  // i_server.start();
+  // ws_server.start();
 }
