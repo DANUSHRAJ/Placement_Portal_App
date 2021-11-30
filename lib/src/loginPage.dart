@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(
                 builder: (context) => HomeScreen(
-                      regnovar: regnovar,
+                      regnovar: map[i].regno,
                       usernamevar: map[i].name,
                     )));
         check = 0;

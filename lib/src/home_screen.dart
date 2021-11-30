@@ -26,7 +26,7 @@ class HomeScreen extends StatelessWidget {
     return InkWell(
       onTap: () {
         Navigator.pop(
-            context, MaterialPageRoute(builder: (context) => WelcomePage()));
+            context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar, usernamevar: usernamevar,)));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -94,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              "regnovar",
+                              "$regnovar",
                               style: GoogleFonts.adventPro(
                                   fontSize: 20,
                                   color: Colors.white,
