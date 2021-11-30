@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'Account.dart';
 
 class AccountsApi {
-  static String apiUrl = 'http://127.0.0.1:1';
+  static String apiUrl = 'http://127.0.0.1:8081';
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
   Future<List<Account>> getAccounts() async {

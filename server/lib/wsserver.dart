@@ -11,17 +11,17 @@ void start() async {
   final db = await Db.create(
       'mongodb+srv://123:U97SEpqwM6odClph@cluster0.njoe3.mongodb.net/Cluster0?retryWrites=true&w=majority');
   await db.open();
-  final coll = db.collection('accounts');
-//  final coll = db.collection('interns');
+//  final coll = db.collection('accounts');
+  final coll = db.collection('workshop');
 
   // Create server
-  const port = 8081;
+  const port = 8083;
   final serv = Sevr();
 
   final corsPaths = ['/', '/:id'];
   for (var route in corsPaths) {
     serv.options(route, [
-      (req, res) {
+          (req, res) {
         setCors(req, res);
         return res.status(200);
       }
@@ -30,19 +30,19 @@ void start() async {
 
   serv.get('/', [
     setCors,
-    (ServRequest req, ServResponse res) async {
-      final accounts = await coll.find().toList();
-      return res.status(200).json({'accounts': accounts});
+        (ServRequest req, ServResponse res) async {
+      final ws = await coll.find().toList();
+      return res.status(200).json({'workshop': ws});
     }
   ]);
 
   serv.post('/', [
     setCors,
-    (ServRequest req, ServResponse res) async {
+        (ServRequest req, ServResponse res) async {
       await coll.save(req.body);
 //      log('$req.body');
       return res.json(
-        await coll.findOne(where.eq('username', req.body['username'])),
+        await coll.findOne(where.eq('title', req.body['title'])),
       );
     }
   ]);

@@ -93,7 +93,7 @@ class HomeScreen extends StatelessWidget {
                                   fontWeight: FontWeight.bold),
                             ),
                             Text(
-                              "$regnovar",
+                              "regnovar",
                               style: GoogleFonts.adventPro(
                                   fontSize: 20,
                                   color: Colors.white,

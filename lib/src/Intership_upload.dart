@@ -6,9 +6,17 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'api.dart';
+
+import 'check.dart';
+import 'internapi.dart';
+import 'loginPage.dart';
 
 class IntershipUpload extends StatefulWidget {
-  const IntershipUpload({Key key}) : super(key: key);
+  IntershipUpload({Key key}) : super(key: key);
+
+//  final AccountsApi api = AccountsApi();
+  final InternsApi api = InternsApi();
 
   @override
   _IntershipUploadState createState() => _IntershipUploadState();
@@ -16,6 +24,35 @@ class IntershipUpload extends StatefulWidget {
 
 class _IntershipUploadState extends State<IntershipUpload> {
   int _selectedIndex = 0;
+// variable names = i_title  i_name  i_sd i_ed  i_clink i_plink i_flink
+  final i_title = new TextEditingController();
+  final i_name = new TextEditingController();
+  final i_sd = new TextEditingController();
+  final i_ed = new TextEditingController();
+  final i_clink = new TextEditingController();
+  final i_plink = new TextEditingController();
+  final i_flink = new TextEditingController();
+
+  void _addInternDetails(String if_title, String if_name, String if_sd, String if_ed, String if_clink, String if_plink, String if_flink) async {
+//    log('$name-$regno-$un-$pwd');
+    if_flink="";
+    final upload_intern = await widget.api.uploadIntern(if_title,if_name,if_sd,if_ed,if_clink,if_plink,if_flink);
+    int check = 1;
+    setState(() {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => IntershipUpload()));
+      check = 0;
+    });
+    if (check == 1) {
+      Navigator.push(
+        // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
+          context,
+          MaterialPageRoute(
+              builder: (context) => CheckData(
+                message: "FAILURE",
+              )));
+    }
+  }
 
   Widget _backButton() {
     return InkWell(
@@ -57,6 +94,121 @@ class _IntershipUploadState extends State<IntershipUpload> {
             height: 10,
           ),
           TextFormField(
+            controller: i_title,
+            decoration: InputDecoration(
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _entryFieldalphabets2(String title, String hint,
+      {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            controller: i_name,
+            decoration: InputDecoration(
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _entryFieldalphabets3(String title, String hint,
+      {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            controller: i_clink,
+            decoration: InputDecoration(
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _entryFieldalphabets4(String title, String hint,
+      {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            controller: i_plink,
             decoration: InputDecoration(
                 hintText: hint,
                 border: OutlineInputBorder(
@@ -90,6 +242,47 @@ class _IntershipUploadState extends State<IntershipUpload> {
             ),
           ),
           TextFormField(
+            controller: i_sd,
+            decoration: InputDecoration(
+                prefixIcon: Icon(Icons.calendar_today),
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+            keyboardType: TextInputType.number,
+            // keyboardType: TextInputType.number,
+            // inputFormatters: <TextInputFormatter>[
+            //   FilteringTextInputFormatter.digitsOnly
+            // ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _entryFieldDob2(String title, String hint, {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          TextFormField(
+            controller: i_ed,
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.calendar_today),
                 hintText: hint,
@@ -116,6 +309,9 @@ class _IntershipUploadState extends State<IntershipUpload> {
   Widget _submitButton(String title) {
     return InkWell(
       onTap: () {
+// variable names = i_title  i_name  i_sd i_ed  i_clink i_plink i_flink
+        _addInternDetails(
+            i_title.text, i_name.text, i_sd.text, i_ed.text, i_clink.text, i_plink.text, i_flink.text);
         //_findAccount(etRegisterNo.text, etPassword.text);
         // Navigator.pop(
         //     context, MaterialPageRoute(builder: (context) => ()));
@@ -211,7 +407,8 @@ class _IntershipUploadState extends State<IntershipUpload> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
-                child: Column(
+                child:
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -220,13 +417,13 @@ class _IntershipUploadState extends State<IntershipUpload> {
                     SizedBox(height: height * .05),
                     _entryFieldalphabets("TITLE OF THE INTERN",
                         "eg:ML,Cyber Security,Full Stack"),
-                    _entryFieldalphabets(
+                    _entryFieldalphabets2(
                         "ORGANIZATION NAME", "eg:Amazon,Microsoft,Zoho"),
                     _entryFieldDob("START DATE", "DD-MM-YYYY"),
-                    _entryFieldDob("END DATE", "DD-MM-YYYY"),
-                    _entryFieldalphabets("CERTIFICATE VERIFICATION",
+                    _entryFieldDob2("END DATE", "DD-MM-YYYY"),
+                    _entryFieldalphabets3("CERTIFICATE VERIFICATION",
                         "Enter link Or Certificate Id"),
-                    _entryFieldalphabets("PROJECT RELATED LINKS",
+                    _entryFieldalphabets4("PROJECT RELATED LINKS",
                         "Github links or website links or Docker Links"),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),

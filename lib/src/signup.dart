@@ -49,11 +49,11 @@ class _SignUpPageState extends State<SignUpPage> {
 //    log('$name-$regno-$un-$pwd');
     final createdAccount = await widget.api.createAccount(name, regno, un, pwd);
     int check = 1;
-    // setState(() {
-    //   Navigator.push(
-    //       context, MaterialPageRoute(builder: (context) => Interships()));
-    //   check = 0;
-    // });
+     setState(() {
+       Navigator.push(
+           context, MaterialPageRoute(builder: (context) => LoginPage()));
+       check = 0;
+     });
     if (check == 1) {
       Navigator.push(
           // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
