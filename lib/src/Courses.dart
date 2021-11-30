@@ -1,3 +1,4 @@
+import 'package:SJIT_PLACEMENT_PORTAL/src/Courses_upload.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Workshop_upload.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Workshops.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _CoursesState extends State<Courses> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'WORK',
+          text: 'COU',
           style: GoogleFonts.portLligatSans(
             fontSize: 30,
             fontWeight: FontWeight.w700,
@@ -50,7 +51,7 @@ class _CoursesState extends State<Courses> {
           ),
           children: [
             TextSpan(
-              text: 'SHOP',
+              text: 'RSES',
               style: GoogleFonts.adventPro(
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
@@ -119,7 +120,7 @@ class _CoursesState extends State<Courses> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                ' UPCOMING WORKSHOPS ',
+                                ' UPCOMING COURSES ',
                                 style: GoogleFonts.adventPro(
                                     fontSize: 15,
                                     color: Colors.black,
@@ -130,7 +131,7 @@ class _CoursesState extends State<Courses> {
                         ),
                       ),
                     ),
-                    SizedBox(height: height * .4),
+                    SizedBox(height: height * .3),
 //VIEW YOUR COMPLETED INTERSHIPS
                     Positioned(
                         child: Align(
@@ -144,7 +145,7 @@ class _CoursesState extends State<Courses> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               Text(
-                                ' COMPLETED WORKSHOPS ',
+                                ' COMPLETED COURSES ',
                                 style: GoogleFonts.adventPro(
                                     fontSize: 15,
                                     color: Colors.black,
@@ -181,12 +182,10 @@ class _CoursesState extends State<Courses> {
               context,
               PageTransition(
                   type: PageTransitionType.leftToRightWithFade,
-                  child: WorkshopUpload()));
+                  child: CoursesUpload()));
         } else {
-          Navigator.push(
-              context,
-              PageTransition(
-                  type: PageTransitionType.fade, child: Workshops()));
+          Navigator.push(context,
+              PageTransition(type: PageTransitionType.fade, child: Courses()));
         }
       },
       unselectedItemColor: Colors.white,
