@@ -45,8 +45,6 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-
-
   void _findAccount(String regnovar, String passvar) {
     Map<int, Account> map = accounts.asMap();
     int check = 1;
@@ -64,7 +62,6 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
     if (check == 1) {
-
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -73,11 +70,11 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _loadAccounts();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadAccounts();
+  // }
 
   // Widget _showAlerts() {
   //   if (che == 1) {
@@ -475,7 +472,6 @@ class _LoginPageState extends State<LoginPage> {
               top: -height * .45,
               right: -MediaQuery.of(context).size.width * .4,
               child: BezierContainer()),
-
           SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
