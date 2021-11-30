@@ -46,8 +46,9 @@ class _SignUpPageState extends State<SignUpPage> {
   );
 
   void _addAccount(String name, String regno, String un, String pwd) async {
-//    log('$name-$regno-$un-$pwd');
+    log('$name-$regno-$un-$pwd');
     final createdAccount = await widget.api.createAccount(name, regno, un, pwd);
+
     int check = 1;
      setState(() {
        Navigator.push(
