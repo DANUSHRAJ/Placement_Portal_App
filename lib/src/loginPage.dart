@@ -66,18 +66,18 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
     if (check == 1) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => HomeScreen(
-//                regnovar: regnovar,
-//                usernamevar: map[i].name,
-              )));
 //      Navigator.push(
 //          context,
 //          MaterialPageRoute(
-//              builder: (context) => CheckData(message: "FAILED",)
-//              ));
+//              builder: (context) => HomeScreen(
+////                regnovar: regnovar,
+////                usernamevar: map[i].name,
+//              )));
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CheckData(message: "FAILED",)
+              ));
     }
   }
 

@@ -12,14 +12,31 @@ import 'check.dart';
 import 'wsapi.dart';
 
 class WorkshopUpload extends StatefulWidget {
-  WorkshopUpload({Key key}) : super(key: key);
+
+  final String regnovar;
+  final String usernamevar;
+
+  WorkshopUpload({
+    Key key,
+    this.regnovar,
+    this.usernamevar
+  }) : super(key: key);
   final WorkshopApi api = WorkshopApi();
 
   @override
-  _WorkshopUploadState createState() => _WorkshopUploadState();
+  _WorkshopUploadState createState() => _WorkshopUploadState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class _WorkshopUploadState extends State<WorkshopUpload> {
+
+  final String regnovar;
+  final String usernamevar;
+
+  _WorkshopUploadState({
+    this.regnovar,
+    this.usernamevar
+  });
+
   int _selectedIndex = 0;
 
 //  variable names = i_title  i_name  i_sd i_ed  i_clink i_plink i_flink
@@ -34,7 +51,7 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
   void _addWorkshopDetails(String wf_title, String wf_name, String wf_sd, String wf_ed, String wf_clink, String wf_plink, String wf_flink) async {
 //    log('$name-$regno-$un-$pwd');
     wf_flink="";
-    final upload_workshop = await widget.api.uploadWorkshop(wf_title,wf_name,wf_sd,wf_ed,wf_clink,wf_plink,wf_flink);
+    final upload_workshop = await widget.api.uploadWorkshop(regnovar, usernamevar, wf_title,wf_name,wf_sd,wf_ed,wf_clink,wf_plink,wf_flink);
     int check = 1;
     setState(() {
       Navigator.push(

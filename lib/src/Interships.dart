@@ -8,14 +8,34 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
+String rn;
+String un;
+
 class Interships extends StatefulWidget {
-  const Interships({Key key}) : super(key: key);
+
+  final String regnovar;
+  final String usernamevar;
+
+  const Interships({
+    Key key,
+    this.regnovar,
+    this.usernamevar
+  }) : super(key: key);
 
   @override
-  _IntershipsState createState() => _IntershipsState();
+  _IntershipsState createState() => _IntershipsState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class _IntershipsState extends State<Interships> {
+
+  final String regnovar;
+  final String usernamevar;
+
+  _IntershipsState({
+    this.regnovar,
+    this.usernamevar
+  });
+
   int _selectedIndex = 0;
 
   Widget _backButton() {
@@ -195,7 +215,7 @@ class _IntershipsState extends State<Interships> {
               context,
               PageTransition(
                   type: PageTransitionType.leftToRightWithFade,
-                  child: IntershipUpload()));
+                  child: IntershipUpload(regnovar: regnovar, usernamevar: usernamevar)));
         } else {
           Navigator.push(
               context,

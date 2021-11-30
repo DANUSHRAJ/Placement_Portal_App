@@ -11,6 +11,7 @@ import 'package:page_transition/page_transition.dart';
 import 'Widget/bezierContainer.dart';
 import 'welcomePage.dart';
 
+
 class HomeScreen extends StatelessWidget {
   final String regnovar;
   final String usernamevar;
@@ -202,7 +203,7 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: Interships()));
+                                    child: Interships(regnovar: regnovar, usernamevar: usernamevar)));
                           },
                         ),
 
@@ -235,7 +236,7 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: Workshops()));
+                                    child: Workshops(regnovar: regnovar, usernamevar: usernamevar)));
                           },
                         ),
 

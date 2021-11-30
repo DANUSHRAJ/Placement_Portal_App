@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
@@ -13,16 +15,33 @@ import 'internapi.dart';
 import 'loginPage.dart';
 
 class IntershipUpload extends StatefulWidget {
-  IntershipUpload({Key key}) : super(key: key);
+
+  final String regnovar;
+  final String usernamevar;
+
+  IntershipUpload({
+    Key key,
+    this.regnovar,
+    this.usernamevar
+  }) : super(key: key);
 
 //  final AccountsApi api = AccountsApi();
   final InternsApi api = InternsApi();
 
   @override
-  _IntershipUploadState createState() => _IntershipUploadState();
+  _IntershipUploadState createState() => _IntershipUploadState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class _IntershipUploadState extends State<IntershipUpload> {
+
+  final String regnovar;
+  final String usernamevar;
+
+  _IntershipUploadState({
+    this.regnovar,
+    this.usernamevar
+  });
+
   int _selectedIndex = 0;
 // variable names = i_title  i_name  i_sd i_ed  i_clink i_plink i_flink
   final i_title = new TextEditingController();
@@ -35,8 +54,9 @@ class _IntershipUploadState extends State<IntershipUpload> {
 
   void _addInternDetails(String if_title, String if_name, String if_sd, String if_ed, String if_clink, String if_plink, String if_flink) async {
 //    log('$name-$regno-$un-$pwd');
+    log('$regnovar-$usernamevar');
     if_flink="";
-    final upload_intern = await widget.api.uploadIntern(if_title,if_name,if_sd,if_ed,if_clink,if_plink,if_flink);
+    final upload_intern = await widget.api.uploadIntern(regnovar, usernamevar, if_title,if_name,if_sd,if_ed,if_clink,if_plink,if_flink);
     int check = 1;
     setState(() {
       Navigator.push(

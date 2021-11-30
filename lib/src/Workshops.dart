@@ -10,13 +10,29 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Workshops extends StatefulWidget {
-  const Workshops({Key key}) : super(key: key);
+
+  final String regnovar;
+  final String usernamevar;
+
+  const Workshops({
+    Key key,
+    this.regnovar,
+    this.usernamevar
+  }) : super(key: key);
 
   @override
-  _WorkshopsState createState() => _WorkshopsState();
+  _WorkshopsState createState() => _WorkshopsState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class _WorkshopsState extends State<Workshops> {
+  final String regnovar;
+  final String usernamevar;
+
+  _WorkshopsState({
+    this.regnovar,
+    this.usernamevar
+  });
+
   int _selectedIndex = 0;
 
   Widget _backButton() {
@@ -182,7 +198,7 @@ class _WorkshopsState extends State<Workshops> {
               context,
               PageTransition(
                   type: PageTransitionType.leftToRightWithFade,
-                  child: WorkshopUpload()));
+                  child: WorkshopUpload(regnovar: regnovar, usernamevar: usernamevar)));
         } else {
           Navigator.push(
               context,

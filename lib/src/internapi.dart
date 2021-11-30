@@ -16,8 +16,10 @@ class InternsApi {
 //  }
 
   Future<IWCDetails> uploadIntern(
-      String title, String name, String sd, String ed, String clink, String plink, String flink) async {
+      String regno, String username, String title, String name, String sd, String ed, String clink, String plink, String flink) async {
     final response = await _dio.post('', data: {
+      'regno' : regno,
+      'username' : username,
       'title': title,
       'name': name,
       'sd': sd,
