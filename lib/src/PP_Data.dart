@@ -38,7 +38,6 @@ class _PpDataState extends State<PpData> {
     NewObject('Mr', Icons.person),
     NewObject('Ms', Icons.person),
   ];
-  NewObject title1 = title.first;
   static final List<NewObject> gender = <NewObject>[
     NewObject('SELECT GENDER', Icons.person),
     NewObject('MALE', male_rounded),
@@ -87,7 +86,6 @@ class _PpDataState extends State<PpData> {
     NewObject('DAY SCHOLAR', Icons.arrow_back_ios),
   ];
 
-  NewObject value = department.first;
   static final List<NewObject> dropbox = <NewObject>[
     title.first, //0
     gender.first, //1

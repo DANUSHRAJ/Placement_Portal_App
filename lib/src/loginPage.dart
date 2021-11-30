@@ -445,23 +445,23 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
         body: Container(
       height: height,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(5)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: Colors.orange.shade700,
-                offset: Offset(2, 4),
-                blurRadius: 5,
-                spreadRadius: 2)
-          ],
-          gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF93DDE5),
-                Color(0xFFE9BFE0),
-                Color(0xfffb7172)
-              ])),
+      // decoration: BoxDecoration(
+      //     borderRadius: BorderRadius.all(Radius.circular(5)),
+      //     boxShadow: <BoxShadow>[
+      //       BoxShadow(
+      //           color: Colors.orange.shade700,
+      //           offset: Offset(2, 4),
+      //           blurRadius: 5,
+      //           spreadRadius: 2)
+      //     ],
+      //     gradient: LinearGradient(
+      //         begin: Alignment.topCenter,
+      //         end: Alignment.bottomCenter,
+      //         colors: [
+      //           Color(0xFF93DDE5),
+      //           Color(0xFFE9BFE0),
+      //           Color(0xfffb7172)
+      //         ])),
       child: Stack(
         children: <Widget>[
           Container(
@@ -475,25 +475,28 @@ class _LoginPageState extends State<LoginPage> {
               top: -height * .45,
               right: -MediaQuery.of(context).size.width * .4,
               child: BezierContainer()),
-          Positioned(top: 40, left: 0, child: _backButton()),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: height * .02),
-                _title(),
-                SizedBox(height: 80),
-                _emailPasswordWidget(),
-                SizedBox(height: 20, width: 5),
-                _submitButton(),
-                Align(
-                    alignment: Alignment.bottomRight,
-                    child: _createAccountLabel1()),
-                _divider(),
-                _createAccountLabel(),
-              ],
+
+          SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Positioned(top: 40, left: 0, child: _backButton()),
+                  SizedBox(height: height * .02),
+                  _title(),
+                  SizedBox(height: 80),
+                  _emailPasswordWidget(),
+                  SizedBox(height: 20, width: 5),
+                  _submitButton(),
+                  Align(
+                      alignment: Alignment.bottomRight,
+                      child: _createAccountLabel1()),
+                  _divider(),
+                  _createAccountLabel(),
+                ],
+              ),
             ),
           ),
         ],
