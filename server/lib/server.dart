@@ -51,7 +51,7 @@ void start() async {
 
   serv.get('/getintern', [
     setCors,
-        (ServRequest req, ServResponse res) async {
+    (ServRequest req, ServResponse res) async {
       final coll = db.collection('interns');
       final interns = await coll.find().toList();
       return res.status(200).json({'interns': interns});
@@ -60,7 +60,7 @@ void start() async {
 
   serv.post('/uploadintern', [
     setCors,
-        (ServRequest req, ServResponse res) async {
+    (ServRequest req, ServResponse res) async {
       final coll = db.collection('interns');
       await coll.save(req.body);
 //      log('$req.body');
@@ -72,7 +72,7 @@ void start() async {
 
   serv.get('/getworkshop', [
     setCors,
-        (ServRequest req, ServResponse res) async {
+    (ServRequest req, ServResponse res) async {
       final coll = db.collection('workshop');
       final workshop = await coll.find().toList();
       return res.status(200).json({'workshop': workshop});
@@ -81,7 +81,7 @@ void start() async {
 
   serv.post('/uploadworkshop', [
     setCors,
-        (ServRequest req, ServResponse res) async {
+    (ServRequest req, ServResponse res) async {
       final coll = db.collection('workshop');
       await coll.save(req.body);
 //      log('$req.body');
