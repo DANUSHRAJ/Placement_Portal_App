@@ -45,8 +45,6 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  int che = 1;
-
   void _findAccount(String regnovar, String passvar) {
     Map<int, Account> map = accounts.asMap();
     int check = 1;
@@ -64,7 +62,6 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
     if (check == 1) {
-      che = 1;
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -73,25 +70,25 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    _loadAccounts();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _loadAccounts();
+  // }
 
-  Widget _showAlerts() {
-    if (che == 1) {
-      return Container(
-          color: Colors.limeAccent,
-          width: double.infinity,
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            children: <Widget>[
-              Icon(Icons.error_outline),
-            ],
-          ));
-    }
-  }
+  // Widget _showAlerts() {
+  //   if (che == 1) {
+  //     return Container(
+  //         color: Colors.limeAccent,
+  //         width: double.infinity,
+  //         padding: EdgeInsets.all(8.0),
+  //         child: Row(
+  //           children: <Widget>[
+  //             Icon(Icons.error_outline),
+  //           ],
+  //         ));
+  //   }
+  // }
 
   Widget _backButton() {
     return InkWell(
@@ -475,7 +472,6 @@ class _LoginPageState extends State<LoginPage> {
               top: -height * .45,
               right: -MediaQuery.of(context).size.width * .4,
               child: BezierContainer()),
-
           SingleChildScrollView(
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
