@@ -147,7 +147,7 @@ class _WorkshopsState extends State<Workshops> {
                         ),
                       ),
                     ),
-                    SizedBox(height: height * .4),
+                    SizedBox(height: height * .3),
 //VIEW YOUR COMPLETED INTERSHIPS
                     Positioned(
                         child: Align(
