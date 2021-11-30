@@ -37,26 +37,6 @@ class _IntershipUploadState extends State<IntershipUpload> {
     );
   }
 
-  Widget _TITLE(String title) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      width: 500,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _entryFieldalphabets(String title, String hint,
       {bool isPassword = false}) {
     return Container(
@@ -88,10 +68,6 @@ class _IntershipUploadState extends State<IntershipUpload> {
                 ),
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
-            // keyboardType: TextInputType.number,
-            // inputFormatters: <TextInputFormatter>[
-            //   FilteringTextInputFormatter.digitsOnly
-            // ],
           )
         ],
       ),
@@ -133,6 +109,41 @@ class _IntershipUploadState extends State<IntershipUpload> {
             // ],
           )
         ],
+      ),
+    );
+  }
+
+  Widget _submitButton(String title) {
+    return InkWell(
+      onTap: () {
+        //_findAccount(etRegisterNo.text, etPassword.text);
+        // Navigator.pop(
+        //     context, MaterialPageRoute(builder: (context) => ()));
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width * .5,
+        padding: EdgeInsets.symmetric(vertical: 9),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            // boxShadow: <BoxShadow>[
+            //   BoxShadow(
+            //       color: Colors.purple.shade200,
+            //       offset: Offset(2, 4),
+            //       blurRadius: 5,
+            //       spreadRadius: 1)
+            // ],
+            gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: [Colors.black87, Colors.black87])),
+        child: Text(
+          title,
+          style: GoogleFonts.adventPro(
+              fontSize: 30,
+              color: Colors.limeAccent,
+              fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }
@@ -217,7 +228,6 @@ class _IntershipUploadState extends State<IntershipUpload> {
                         "Enter link Or Certificate Id"),
                     _entryFieldalphabets("PROJECT RELATED LINKS",
                         "Github links or website links or Docker Links"),
-                    _TITLE("CERTIFICATE UPLOAD"),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
@@ -256,13 +266,15 @@ class _IntershipUploadState extends State<IntershipUpload> {
                     ),
                     Align(
                       child: Text(
-                        "\n\n*ONLY .PDF FORMAT IS ACCEPTED.\n\n*FILE SIZE MUST BE LESS THAN 2 mb.\n\n\n\n\n\n",
+                        "\n\n*ONLY .PDF FORMAT IS ACCEPTED.\n\n*FILE SIZE MUST BE LESS THAN 2 mb.\n\n",
                         style: GoogleFonts.adventPro(
                             fontSize: 15,
                             color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
+                    _submitButton("SUBMIT"),
+                    SizedBox(height: height * .15),
                   ],
                 ),
               ),
