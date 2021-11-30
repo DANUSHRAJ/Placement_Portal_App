@@ -1,4 +1,3 @@
-import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Workshops.dart';
@@ -8,8 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'Intership_upload.dart';
+import 'check.dart';
+import 'wsapi.dart';
+
 class WorkshopUpload extends StatefulWidget {
-  const WorkshopUpload({Key key}) : super(key: key);
+  WorkshopUpload({Key key}) : super(key: key);
+  final WorkshopApi api = WorkshopApi();
 
   @override
   _WorkshopUploadState createState() => _WorkshopUploadState();
@@ -17,6 +21,36 @@ class WorkshopUpload extends StatefulWidget {
 
 class _WorkshopUploadState extends State<WorkshopUpload> {
   int _selectedIndex = 0;
+
+//  variable names = i_title  i_name  i_sd i_ed  i_clink i_plink i_flink
+  final w_title = new TextEditingController();
+  final w_name = new TextEditingController();
+  final w_sd = new TextEditingController();
+  final w_ed = new TextEditingController();
+  final w_clink = new TextEditingController();
+  final w_plink = new TextEditingController();
+  final w_flink = new TextEditingController();
+
+  void _addWorkshopDetails(String wf_title, String wf_name, String wf_sd, String wf_ed, String wf_clink, String wf_plink, String wf_flink) async {
+//    log('$name-$regno-$un-$pwd');
+    wf_flink="";
+    final upload_workshop = await widget.api.uploadWorkshop(wf_title,wf_name,wf_sd,wf_ed,wf_clink,wf_plink,wf_flink);
+    int check = 1;
+    setState(() {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => WorkshopUpload()));
+      check = 0;
+    });
+    if (check == 1) {
+      Navigator.push(
+        // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
+          context,
+          MaterialPageRoute(
+              builder: (context) => CheckData(
+                message: "FAILURE",
+              )));
+    }
+  }
 
   Widget _backButton() {
     return InkWell(
@@ -58,6 +92,121 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
             height: 10,
           ),
           TextFormField(
+            controller: w_title,
+            decoration: InputDecoration(
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _entryFieldalphabets2(String title, String hint,
+      {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            controller: w_name,
+            decoration: InputDecoration(
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _entryFieldalphabets3(String title, String hint,
+      {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            controller: w_clink,
+            decoration: InputDecoration(
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _entryFieldalphabets4(String title, String hint,
+      {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            controller: w_plink,
             decoration: InputDecoration(
                 hintText: hint,
                 border: OutlineInputBorder(
@@ -91,6 +240,47 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
             ),
           ),
           TextFormField(
+            controller: w_sd,
+            decoration: InputDecoration(
+                prefixIcon: Icon(Icons.calendar_today),
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+            keyboardType: TextInputType.number,
+            // keyboardType: TextInputType.number,
+            // inputFormatters: <TextInputFormatter>[
+            //   FilteringTextInputFormatter.digitsOnly
+            // ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _entryFieldDob2(String title, String hint, {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          TextFormField(
+            controller: w_ed,
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.calendar_today),
                 hintText: hint,
@@ -117,6 +307,7 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
   Widget _submitButton(String title) {
     return InkWell(
       onTap: () {
+        _addWorkshopDetails(w_title.text, w_name.text, w_sd.text, w_ed.text, w_clink.text, w_plink.text, w_flink.text);
         //_findAccount(etRegisterNo.text, etPassword.text);
         // Navigator.pop(
         //     context, MaterialPageRoute(builder: (context) => ()));
@@ -221,13 +412,13 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
                     SizedBox(height: height * .05),
                     _entryFieldalphabets("TITLE OF THE WORKSHOP",
                         "eg:ML,Cyber Security,Full Stack"),
-                    _entryFieldalphabets(
+                    _entryFieldalphabets2(
                         "ORGANIZATION NAME", "eg:Amazon,Microsoft,Zoho"),
                     _entryFieldDob("START DATE", "DD-MM-YYYY"),
-                    _entryFieldDob("END DATE", "DD-MM-YYYY"),
-                    _entryFieldalphabets("CERTIFICATE VERIFICATION",
+                    _entryFieldDob2("END DATE", "DD-MM-YYYY"),
+                    _entryFieldalphabets3("CERTIFICATE VERIFICATION",
                         "Enter link Or Certificate Id"),
-                    _entryFieldalphabets("PROJECT RELATED LINKS",
+                    _entryFieldalphabets4("PROJECT RELATED LINKS",
                         "Github links or website links or Docker Links"),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),

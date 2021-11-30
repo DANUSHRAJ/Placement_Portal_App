@@ -6,6 +6,7 @@ import 'Account.dart';
 
 class AccountsApi {
   static String apiUrl = 'http://127.0.0.1:1';
+
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
   Future<List<Account>> getAccounts() async {

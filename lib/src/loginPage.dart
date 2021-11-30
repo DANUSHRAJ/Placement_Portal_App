@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/signup.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +48,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _findAccount(String regnovar, String passvar) {
+//    _loadAccounts();
+//    log(accounts.toString());
     Map<int, Account> map = accounts.asMap();
     int check = 1;
     for (int i = 0; i < map.length; i++) {
@@ -65,16 +69,23 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => HomeScreen() //CheckData(message: "FAILED",)
-              ));
+              builder: (context) => HomeScreen(
+//                regnovar: regnovar,
+//                usernamevar: map[i].name,
+              )));
+//      Navigator.push(
+//          context,
+//          MaterialPageRoute(
+//              builder: (context) => CheckData(message: "FAILED",)
+//              ));
     }
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _loadAccounts();
-  // }
+   @override
+   void initState() {
+     super.initState();
+     _loadAccounts();
+   }
 
   // Widget _showAlerts() {
   //   if (che == 1) {
