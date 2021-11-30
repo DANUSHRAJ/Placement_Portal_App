@@ -37,6 +37,106 @@ class _IntershipUploadState extends State<IntershipUpload> {
     );
   }
 
+  Widget _TITLE(String title) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _entryFieldalphabets(String title, String hint,
+      {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+            // keyboardType: TextInputType.number,
+            // inputFormatters: <TextInputFormatter>[
+            //   FilteringTextInputFormatter.digitsOnly
+            // ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _entryFieldDob(String title, String hint, {bool isPassword = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+                prefixIcon: Icon(Icons.calendar_today),
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.solid,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+            keyboardType: TextInputType.number,
+            // keyboardType: TextInputType.number,
+            // inputFormatters: <TextInputFormatter>[
+            //   FilteringTextInputFormatter.digitsOnly
+            // ],
+          )
+        ],
+      ),
+    );
+  }
+
   Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
@@ -97,7 +197,6 @@ class _IntershipUploadState extends State<IntershipUpload> {
               right: -MediaQuery.of(context).size.width * .4,
               child: BezierContainer(),
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
@@ -106,49 +205,70 @@ class _IntershipUploadState extends State<IntershipUpload> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: height * .1),
-                    Align(alignment: Alignment.center, child: _title()),
-                    SizedBox(height: height * .2),
-                    InkWell(
-                      child: Card(
-                        color: Colors.amberAccent,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10)),
-                        elevation: 8,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Text(
-                              '\n     UPLOAD HERE    \n',
-                              style: GoogleFonts.adventPro(
-                                  fontSize: 15,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold),
+                    _title(),
+                    SizedBox(height: height * .05),
+                    _entryFieldalphabets("TITLE OF THE INTERN",
+                        "eg:ML,Cyber Security,Full Stack"),
+                    _entryFieldalphabets(
+                        "ORGANIZATION NAME", "eg:Amazon,Microsoft,Zoho"),
+                    _entryFieldDob("START DATE", "DD-MM-YYYY"),
+                    _entryFieldDob("END DATE", "DD-MM-YYYY"),
+                    _entryFieldalphabets("CERTIFICATE VERIFICATION",
+                        "Enter link Or Certificate Id"),
+                    _entryFieldalphabets("PROJECT RELATED LINKS",
+                        "Github links or website links or Docker Links"),
+                    _TITLE("CERTIFICATE UPLOAD"),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          InkWell(
+                            child: Card(
+                              color: Colors.amberAccent,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10)),
+                              elevation: 8,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    '\n     UPLOAD HERE    \n',
+                                    style: GoogleFonts.adventPro(
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.bottomToTop,
+                                      child: PpData()));
+                            },
+                          ),
+                        ],
                       ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.bottomToTop,
-                                child: PpData()));
-                      },
+                    ),
+                    Align(
+                      child: Text(
+                        "\n\n*ONLY .PDF FORMAT IS ACCEPTED.\n\n*FILE SIZE MUST BE LESS THAN 2 mb.\n\n\n\n\n\n",
+                        style: GoogleFonts.adventPro(
+                            fontSize: 15,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ],
                 ),
               ),
             ),
-            Align(
-              child: Text(
-                "\n\n*ONLY .PDF FORMAT IS ACCEPTED.\n\n*FILE SIZE MUST BE LESS THAN 2 mb.",
-                style: GoogleFonts.adventPro(
-                    fontSize: 15,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-            SizedBox(height: height * .67),
+            Positioned(top: 40, left: 0, child: _backButton()),
+            //SizedBox(height: height * .67),
             Align(
               alignment: Alignment.bottomCenter,
               child: buildBottomNavigationBar(),

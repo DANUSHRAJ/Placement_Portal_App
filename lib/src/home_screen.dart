@@ -1,5 +1,8 @@
+import 'package:SJIT_PLACEMENT_PORTAL/src/Courses.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/Placements.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/Workshops.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -228,11 +231,11 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            Navigator.pop(
+                            Navigator.push(
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: WelcomePage()));
+                                    child: Workshops()));
                           },
                         ),
 
@@ -259,11 +262,11 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            Navigator.pop(
+                            Navigator.push(
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: WelcomePage()));
+                                    child: Courses()));
                           },
                         ),
 
@@ -290,11 +293,11 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            Navigator.pop(
+                            Navigator.push(
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: WelcomePage()));
+                                    child: Placements()));
                           },
                         ),
                       ],
