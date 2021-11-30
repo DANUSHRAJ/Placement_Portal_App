@@ -114,7 +114,8 @@ class _PpDataState extends State<PpData> {
     'null','null','null','null','null','null','null','null','null','null',
     'null','null','null','null','null','null','null','null','null','null',
     'null','null','null','null','null','null','null','null','null','null',
-    'null','null','null','null','null','null','null','null','null',
+    'null','null','null','null','null','null','null','null','null','null',
+    'null','null','null','null',
 
     // title.first, //0
     // gender.first, //1
@@ -406,7 +407,7 @@ class _PpDataState extends State<PpData> {
 
                   _DropBox("TITLE", title, 0),
                   _entryFieldalphabets(
-                      'NAME OF THE CANDIDATE', 'enter the name with inital',2),
+                      'NAME OF THE CANDIDATE', 'enter the name with initial',2),
                   _entryFieldalphabets('FIRST NAME', 'first name',3),
                   _entryFieldalphabets('LAST NAME', 'last name',4),
                   //Gender dropdown

@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  int che = 1;
+
 
   void _findAccount(String regnovar, String passvar) {
     Map<int, Account> map = accounts.asMap();
@@ -64,7 +64,7 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
     if (check == 1) {
-      che = 1;
+
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -79,19 +79,19 @@ class _LoginPageState extends State<LoginPage> {
     _loadAccounts();
   }
 
-  Widget _showAlerts() {
-    if (che == 1) {
-      return Container(
-          color: Colors.limeAccent,
-          width: double.infinity,
-          padding: EdgeInsets.all(8.0),
-          child: Row(
-            children: <Widget>[
-              Icon(Icons.error_outline),
-            ],
-          ));
-    }
-  }
+  // Widget _showAlerts() {
+  //   if (che == 1) {
+  //     return Container(
+  //         color: Colors.limeAccent,
+  //         width: double.infinity,
+  //         padding: EdgeInsets.all(8.0),
+  //         child: Row(
+  //           children: <Widget>[
+  //             Icon(Icons.error_outline),
+  //           ],
+  //         ));
+  //   }
+  // }
 
   Widget _backButton() {
     return InkWell(
