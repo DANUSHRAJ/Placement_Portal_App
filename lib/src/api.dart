@@ -10,7 +10,7 @@ class AccountsApi {
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
   Future<List<Account>> getAccounts() async {
-    final response = await _dio.get('');
+    final response = await _dio.get('/getaccounts');
     return (response.data['accounts'] as List)
         .map<Account>((json) => Account.fromJson(json))
         .toList();
@@ -18,7 +18,7 @@ class AccountsApi {
 
   Future<Account> createAccount(
       String name, String regno, String username, String password) async {
-    final response = await _dio.post('', data: {
+    final response = await _dio.post('/createaccount', data: {
       'name': name,
       'regno': regno,
       'username': username,

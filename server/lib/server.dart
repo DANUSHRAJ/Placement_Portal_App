@@ -11,7 +11,7 @@ void start() async {
   final db = await Db.create(
       'mongodb+srv://123:U97SEpqwM6odClph@cluster0.njoe3.mongodb.net/Cluster0?retryWrites=true&w=majority');
   await db.open();
-  final coll = db.collection('accounts');
+//  final coll = db.collection('accounts');
 //  final coll = db.collection('interns');
 
   // Create server
@@ -28,17 +28,61 @@ void start() async {
     ]);
   }
 
-  serv.get('/', [
+  serv.get('/getaccounts', [
     setCors,
     (ServRequest req, ServResponse res) async {
+      final coll = db.collection('accounts');
       final accounts = await coll.find().toList();
       return res.status(200).json({'accounts': accounts});
     }
   ]);
 
-  serv.post('/', [
+  serv.post('/createaccount', [
     setCors,
     (ServRequest req, ServResponse res) async {
+      final coll = db.collection('accounts');
+      await coll.save(req.body);
+//      log('$req.body');
+      return res.json(
+        await coll.findOne(where.eq('username', req.body['username'])),
+      );
+    }
+  ]);
+
+  serv.get('/getintern', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('interns');
+      final interns = await coll.find().toList();
+      return res.status(200).json({'interns': interns});
+    }
+  ]);
+
+  serv.post('/uploadintern', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('interns');
+      await coll.save(req.body);
+//      log('$req.body');
+      return res.json(
+        await coll.findOne(where.eq('username', req.body['username'])),
+      );
+    }
+  ]);
+
+  serv.get('/getworkshop', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('workshop');
+      final workshop = await coll.find().toList();
+      return res.status(200).json({'workshop': workshop});
+    }
+  ]);
+
+  serv.post('/uploadworkshop', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('workshop');
       await coll.save(req.body);
 //      log('$req.body');
       return res.json(
