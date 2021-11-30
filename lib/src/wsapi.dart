@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'IWCDetails.dart';
 
 class WorkshopApi {
-  static String apiUrl = 'http://127.0.0.1:8083';
+  static String apiUrl = 'http://127.0.0.1:8081';
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
   Future<List<IWCDetails>> getAccounts() async {
