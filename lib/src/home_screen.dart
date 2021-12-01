@@ -78,13 +78,14 @@ class HomeScreen extends StatelessWidget {
                     margin: EdgeInsets.only(bottom: 20),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         SizedBox(
                           width: 26,
                         ),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
                             Text(
                               "Hi, $usernamevar",

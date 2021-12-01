@@ -42,7 +42,7 @@ class _IntershipsState extends State<Interships> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WelcomePage()));
+            context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar,usernamevar: usernamevar,)));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -104,6 +104,7 @@ class _IntershipsState extends State<Interships> {
       body: Container(
         child: Stack(
           children: <Widget>[
+
             Container(
               height: double.infinity,
               width: double.infinity,
@@ -112,11 +113,33 @@ class _IntershipsState extends State<Interships> {
                 fit: BoxFit.fitHeight,
               ),
             ),
+            Column(
+
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  "Hi, usernamevar",
+                  style: GoogleFonts.adventPro(
+                      fontSize: 30,
+                      color: Colors.limeAccent,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "regnovar",
+                  style: GoogleFonts.adventPro(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
+            ),
             Positioned(
               top: -MediaQuery.of(context).size.height * .45,
               right: -MediaQuery.of(context).size.width * .4,
               child: BezierContainer(),
             ),
+
             Positioned(top: 40, left: 0, child: _backButton()),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
