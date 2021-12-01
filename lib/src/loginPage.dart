@@ -459,10 +459,8 @@ class _LoginPageState extends State<LoginPage> {
           Container(
               height: double.infinity,
               width: double.infinity,
-              child: Image.asset(
-                'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
-              )),
+              child:
+                  Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover)),
           Positioned(
               top: -height * .45,
               right: -MediaQuery.of(context).size.width * .4,
