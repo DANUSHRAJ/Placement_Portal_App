@@ -37,6 +37,16 @@ void start() async {
     }
   ]);
 
+  serv.post('/getoneaccount', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('accounts');
+//      return res.json(await coll.findOne(where.eq('regno', req.body['regno'])));
+      final accounts = await coll.findOne(where.eq('regno', req.body['regno']));
+      return res.json(accounts);
+    }
+  ]);
+
   serv.post('/createaccount', [
     setCors,
     (ServRequest req, ServResponse res) async {

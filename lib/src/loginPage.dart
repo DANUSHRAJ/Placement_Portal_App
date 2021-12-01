@@ -32,38 +32,33 @@ class _LoginPageState extends State<LoginPage> {
   List<Account> accounts = [];
   bool loading = true;
 
-  void _loadAccounts([bool showSpinner = false]) {
-    if (showSpinner) {
-      setState(() {
-        loading = true;
-      });
-    }
+//  void _loadAccounts([bool showSpinner = false], String regno) {
+//    if (showSpinner) {
+//      setState(() {
+//        loading = true;
+//      });
+//    }
+//
+//    widget.api.getOneAccount(regno).then((data) {
+//      setState(() {
+//        accounts = data;
+//        loading = false;
+//      });
+//    });
+//  }
 
-    widget.api.getAccounts().then((data) {
-      setState(() {
-        accounts = data;
-        loading = false;
-      });
-    });
-  }
-
-  void _findAccount(String regnovar, String passvar) {
-//    _loadAccounts();
-//    log(accounts.toString());
-    Map<int, Account> map = accounts.asMap();
+  void _findAccount(String regnovar, String passvar) async {
     int check = 1;
-    for (int i = 0; i < map.length; i++) {
-      if (map[i].regno == regnovar && map[i].password == passvar) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen(
-                      regnovar: map[i].regno,
-                      usernamevar: map[i].name,
-                    )));
-        check = 0;
-        break;
-      }
+    final fetchAcc = await widget.api.getOneAccount(regnovar);
+    if(fetchAcc.regno==regnovar&&fetchAcc.password==passvar){
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomeScreen(
+                regnovar: fetchAcc.regno,
+                usernamevar: fetchAcc.name,
+              )));
+      check = 0;
     }
     if (check == 1) {
 //      Navigator.push(
@@ -84,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
    @override
    void initState() {
      super.initState();
-     _loadAccounts();
+//     _loadAccounts();
    }
 
   // Widget _showAlerts() {

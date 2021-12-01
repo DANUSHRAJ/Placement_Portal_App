@@ -1,3 +1,4 @@
+import 'dart:core';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -7,7 +8,6 @@ import 'Account.dart';
 class AccountsApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io';
   static String apiUrl = 'http://127.0.0.1:8081';
-  //static String apiUrl = 'https://7838-27-5-97-69.ngrok.io';
 
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
@@ -18,6 +18,13 @@ class AccountsApi {
         .toList();
   }
 
+  Future<Account> getOneAccount(String regno) async {
+    final response = await _dio.post('/getoneaccount', data: {
+      'regno': regno,
+    });
+    return Account.fromJson(response.data);
+  }
+
   Future<Account> createAccount(
       String name, String regno, String username, String password) async {
     final response = await _dio.post('/createaccount', data: {
@@ -26,7 +33,7 @@ class AccountsApi {
       'username': username,
       'password': password
     });
-    log('$name-$regno-$username-$password');
+//    log('$name-$regno-$username-$password');
     return Account.fromJson(response.data);
   }
 }
