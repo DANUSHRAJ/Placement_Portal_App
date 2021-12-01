@@ -21,12 +21,33 @@ class HomeScreen extends StatelessWidget {
     this.regnovar,
     this.usernamevar,
   }) : super(key: key);
+  Future showdialog(BuildContext context,String message) async{
+    return showDialog(
+        context: context,
+        builder: (context)=>new AlertDialog(
+          title: new Text(message),
+          actions: [
+            new FlatButton(onPressed: (){
+              Navigator.of(context).pop();
+            }, child: new Text("Cancel")),
+            new RaisedButton(onPressed: (){
+                  Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => WelcomePage()));
+                  },
+                child: new Text("Confirm")),
+
+
+          ],
+        )
+    );
+  }
 
   Widget _backButton(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pop(
-            context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar, usernamevar: usernamevar,)));
+        showdialog(context, "Click confirm to Log Out");
+        // Navigator.pop(
+        //     context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar, usernamevar: usernamevar,)));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),

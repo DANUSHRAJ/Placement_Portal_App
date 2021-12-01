@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'IWCDetails.dart';
 
 class CourseApi {
-  static String apiUrl = 'http://127.0.0.1:8084';
+  static String apiUrl = 'https://7838-27-5-97-69.ngrok.io';
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
 //  Future<List<IWCDetails>> getAccounts() async {
