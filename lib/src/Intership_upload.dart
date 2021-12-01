@@ -60,7 +60,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
     int check = 1;
     setState(() {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => IntershipUpload()));
+          context, MaterialPageRoute(builder: (context) => IntershipUpload(regnovar: regnovar, usernamevar: usernamevar,)));
       check = 0;
     });
     if (check == 1) {

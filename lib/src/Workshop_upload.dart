@@ -55,7 +55,7 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
     int check = 1;
     setState(() {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => WorkshopUpload()));
+          context, MaterialPageRoute(builder: (context) => WorkshopUpload(regnovar: regnovar, usernamevar: usernamevar,)));
       check = 0;
     });
     if (check == 1) {
@@ -73,7 +73,7 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WelcomePage()));
+            context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar, usernamevar: usernamevar,)));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),

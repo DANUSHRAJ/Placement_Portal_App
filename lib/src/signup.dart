@@ -8,6 +8,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/signupviewdata.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
+import 'Account.dart';
 import 'api.dart';
 import 'check.dart';
 import 'home_screen.dart';
@@ -45,25 +46,93 @@ class _SignUpPageState extends State<SignUpPage> {
     fontFamily: 'Horizon',
   );
 
-  void _addAccount(String name, String regno, String un, String pwd) async {
-//    log('$name-$regno-$un-$pwd');
-    final createdAccount = await widget.api.createAccount(name, regno, un, pwd);
+  List<Account> accounts = [];
+  bool loading = true;
 
-    int check = 1;
-     setState(() {
-       Navigator.push(
-           context, MaterialPageRoute(builder: (context) => LoginPage()));
-       check = 0;
-     });
-    if (check == 1) {
-//      Navigator.push(context, MaterialPageRoute(builder: (context)=> Trail()));
-      Navigator.push(
-          // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
-          context,
-          MaterialPageRoute(
-              builder: (context) => CheckData(
-                    message: "FAILURE",
-                  )));
+  void _loadAccounts([bool showSpinner = false]) {
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+
+    widget.api.getAccounts().then((data) {
+      setState(() {
+        accounts = data;
+        loading = false;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAccounts();
+  }
+
+  void _addAccount(String name, String regno, String un, String pwd) async {
+  int check=1;
+    if(name.isEmpty || regno.isEmpty || un.isEmpty || pwd.isEmpty)
+    {
+      check=0;
+    }
+    if(!RegExp(r'^3124\d{8}$').hasMatch(regno))
+    {
+      check=0;
+    }
+    if(!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(un))
+    {
+      check=0;
+    }
+    if(!RegExp(r'[a-zA-Z0-9!@#$&()\\-`.+,/\"]{8,16}').hasMatch(pwd))
+    {
+      check=0;
+    }
+    if(check==1) {
+      Map<int, Account> map = accounts.asMap();
+      check = 1;
+      for (int i = 0; i < map.length; i++) {
+        if ((map[i].regno == regno && map[i].username.toLowerCase() == un.toLowerCase()) &&
+            map[i].password == pwd) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      HomeScreen(
+                        regnovar: map[i].regno,
+                        usernamevar: map[i].name,
+                      )));
+          check = 2;
+          break;
+        }
+        else if(map[i].regno==regno||map[i].username==un){
+          check=0;
+        }
+      }
+      if (check == 1) {
+        final createdAccount = await widget.api.createAccount(
+            name, regno, un, pwd);
+        check = 1;
+        setState(() {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LoginPage()));
+          check = 0;
+        });
+        if (check == 1) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      CheckData(
+                        message: "FAILURE",
+                      )));
+        }
+      }else if(check==0){
+        log('Try to Login with correct credentials!');
+      }
+    }
+    else{
+      log('Unsuccessfull coz incorrect values!');
     }
   }
 

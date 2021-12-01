@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'IWCDetails.dart';
 
 class InternsApi {
+//  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io';
   static String apiUrl = 'http://127.0.0.1:8081';
   // static String apiUrl = 'https://7838-27-5-97-69.ngrok.io';
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
