@@ -15,32 +15,24 @@ import 'internapi.dart';
 import 'loginPage.dart';
 
 class IntershipUpload extends StatefulWidget {
-
   final String regnovar;
   final String usernamevar;
 
-  IntershipUpload({
-    Key key,
-    this.regnovar,
-    this.usernamevar
-  }) : super(key: key);
+  IntershipUpload({Key key, this.regnovar, this.usernamevar}) : super(key: key);
 
 //  final AccountsApi api = AccountsApi();
   final InternsApi api = InternsApi();
 
   @override
-  _IntershipUploadState createState() => _IntershipUploadState(regnovar: regnovar, usernamevar: usernamevar);
+  _IntershipUploadState createState() =>
+      _IntershipUploadState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class _IntershipUploadState extends State<IntershipUpload> {
-
   final String regnovar;
   final String usernamevar;
 
-  _IntershipUploadState({
-    this.regnovar,
-    this.usernamevar
-  });
+  _IntershipUploadState({this.regnovar, this.usernamevar});
 
   int _selectedIndex = 0;
 // variable names = i_title  i_name  i_sd i_ed  i_clink i_plink i_flink
@@ -52,25 +44,32 @@ class _IntershipUploadState extends State<IntershipUpload> {
   final i_plink = new TextEditingController();
   final i_flink = new TextEditingController();
 
-  void _addInternDetails(String if_title, String if_name, String if_sd, String if_ed, String if_clink, String if_plink, String if_flink) async {
+  void _addInternDetails(String if_title, String if_name, String if_sd,
+      String if_ed, String if_clink, String if_plink, String if_flink) async {
 //    log('$name-$regno-$un-$pwd');
     log('$regnovar-$usernamevar');
-    if_flink="";
-    final upload_intern = await widget.api.uploadIntern(regnovar, usernamevar, if_title,if_name,if_sd,if_ed,if_clink,if_plink,if_flink);
+    if_flink = "";
+    final upload_intern = await widget.api.uploadIntern(regnovar, usernamevar,
+        if_title, if_name, if_sd, if_ed, if_clink, if_plink, if_flink);
     int check = 1;
     setState(() {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => IntershipUpload(regnovar: regnovar, usernamevar: usernamevar,)));
+          context,
+          MaterialPageRoute(
+              builder: (context) => IntershipUpload(
+                    regnovar: regnovar,
+                    usernamevar: usernamevar,
+                  )));
       check = 0;
     });
     if (check == 1) {
       Navigator.push(
-        // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
+          // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
           context,
           MaterialPageRoute(
               builder: (context) => CheckData(
-                message: "FAILURE",
-              )));
+                    message: "FAILURE",
+                  )));
     }
   }
 
@@ -78,7 +77,12 @@ class _IntershipUploadState extends State<IntershipUpload> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar, usernamevar: usernamevar,)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                      regnovar: regnovar,
+                      usernamevar: usernamevar,
+                    )));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -330,8 +334,8 @@ class _IntershipUploadState extends State<IntershipUpload> {
     return InkWell(
       onTap: () {
 // variable names = i_title  i_name  i_sd i_ed  i_clink i_plink i_flink
-        _addInternDetails(
-            i_title.text, i_name.text, i_sd.text, i_ed.text, i_clink.text, i_plink.text, i_flink.text);
+        _addInternDetails(i_title.text, i_name.text, i_sd.text, i_ed.text,
+            i_clink.text, i_plink.text, i_flink.text);
         //_findAccount(etRegisterNo.text, etPassword.text);
         // Navigator.pop(
         //     context, MaterialPageRoute(builder: (context) => ()));
@@ -416,7 +420,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
               width: double.infinity,
               child: Image.asset(
                 'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               ),
             ),
             Positioned(
@@ -427,8 +431,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
-                child:
-                Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

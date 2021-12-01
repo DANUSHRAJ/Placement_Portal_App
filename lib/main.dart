@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 width: double.infinity,
                 child: Image.asset(
                   'assets/images/inner_bg.gif',
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.cover,
                 )),
             Positioned(
                 top: -height * .47,

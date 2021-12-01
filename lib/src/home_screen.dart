@@ -11,7 +11,6 @@ import 'package:page_transition/page_transition.dart';
 import 'Widget/bezierContainer.dart';
 import 'welcomePage.dart';
 
-
 class HomeScreen extends StatelessWidget {
   final String regnovar;
   final String usernamevar;
@@ -21,25 +20,27 @@ class HomeScreen extends StatelessWidget {
     this.regnovar,
     this.usernamevar,
   }) : super(key: key);
-  Future showdialog(BuildContext context,String message) async{
+  Future showdialog(BuildContext context, String message) async {
     return showDialog(
         context: context,
-        builder: (context)=>new AlertDialog(
-          title: new Text(message),
-          actions: [
-            new FlatButton(onPressed: (){
-              Navigator.of(context).pop();
-            }, child: new Text("Cancel")),
-            new RaisedButton(onPressed: (){
-                  Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => WelcomePage()));
-                  },
-                child: new Text("Confirm")),
-
-
-          ],
-        )
-    );
+        builder: (context) => new AlertDialog(
+              title: new Text(message),
+              actions: [
+                new FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: new Text("Cancel")),
+                new RaisedButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WelcomePage()));
+                    },
+                    child: new Text("Confirm")),
+              ],
+            ));
   }
 
   Widget _backButton(BuildContext context) {
@@ -81,10 +82,8 @@ class HomeScreen extends StatelessWidget {
           Container(
               height: double.infinity,
               width: double.infinity,
-              child: Image.asset(
-                'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
-              )),
+              child:
+                  Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover)),
           Positioned(
               top: -height * .45,
               right: -MediaQuery.of(context).size.width * .4,
@@ -225,7 +224,9 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: Interships(regnovar: regnovar, usernamevar: usernamevar)));
+                                    child: Interships(
+                                        regnovar: regnovar,
+                                        usernamevar: usernamevar)));
                           },
                         ),
 
@@ -258,7 +259,9 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: Workshops(regnovar: regnovar, usernamevar: usernamevar)));
+                                    child: Workshops(
+                                        regnovar: regnovar,
+                                        usernamevar: usernamevar)));
                           },
                         ),
 

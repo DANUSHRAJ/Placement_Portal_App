@@ -61,7 +61,9 @@ class _WelcomePageState extends State<WelcomePage> {
       },
       child: Container(
         width: MediaQuery.of(context).size.width * .7,
-        padding: EdgeInsets.symmetric(vertical: 14,),
+        padding: EdgeInsets.symmetric(
+          vertical: 14,
+        ),
         alignment: Alignment.center,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -118,18 +120,18 @@ class _WelcomePageState extends State<WelcomePage> {
                 width: double.infinity,
                 child: Image.asset(
                   'assets/images/wp.gif',
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.cover,
                 )),
-            // Positioned(
-            //     top: -height * .47,
-            //     right: -MediaQuery.of(context).size.width * .4,
-            //     child: BezierContainer()),
+            Positioned(
+                top: -height * .47,
+                right: -MediaQuery.of(context).size.width * .4,
+                child: BezierContainer()),
             Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  _title(),
+                  Align(alignment: Alignment.center, child: _title()),
                   SizedBox(
                     height: 90,
                   ),
@@ -138,7 +140,6 @@ class _WelcomePageState extends State<WelcomePage> {
                     height: 50,
                   ),
                   _signUpButton(),
-                  // SizedBox(
                 ],
               ),
             ),

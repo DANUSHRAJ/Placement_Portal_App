@@ -201,10 +201,8 @@ class _CoursesUploadState extends State<CoursesUpload> {
             Container(
               height: double.infinity,
               width: double.infinity,
-              child: Image.asset(
-                'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
-              ),
+              child:
+                  Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover),
             ),
             Positioned(
               top: -MediaQuery.of(context).size.height * .45,

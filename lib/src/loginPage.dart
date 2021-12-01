@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer1.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,33 +33,38 @@ class _LoginPageState extends State<LoginPage> {
   List<Account> accounts = [];
   bool loading = true;
 
-//  void _loadAccounts([bool showSpinner = false], String regno) {
-//    if (showSpinner) {
-//      setState(() {
-//        loading = true;
-//      });
-//    }
-//
-//    widget.api.getOneAccount(regno).then((data) {
-//      setState(() {
-//        accounts = data;
-//        loading = false;
-//      });
-//    });
-//  }
+  void _loadAccounts([bool showSpinner = false]) {
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
 
-  void _findAccount(String regnovar, String passvar) async {
+    widget.api.getAccounts().then((data) {
+      setState(() {
+        accounts = data;
+        loading = false;
+      });
+    });
+  }
+
+  void _findAccount(String regnovar, String passvar) {
+//    _loadAccounts();
+//    log(accounts.toString());
+    Map<int, Account> map = accounts.asMap();
     int check = 1;
-    final fetchAcc = await widget.api.getOneAccount(regnovar);
-    if(fetchAcc.regno==regnovar&&fetchAcc.password==passvar){
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => HomeScreen(
-                regnovar: fetchAcc.regno,
-                usernamevar: fetchAcc.name,
-              )));
-      check = 0;
+    for (int i = 0; i < map.length; i++) {
+      if (map[i].regno == regnovar && map[i].password == passvar) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                      regnovar: map[i].regno,
+                      usernamevar: map[i].name,
+                    )));
+        check = 0;
+        break;
+      }
     }
     if (check == 1) {
 //      Navigator.push(
@@ -71,16 +77,17 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => CheckData(message: "FAILED",)
-              ));
+              builder: (context) => CheckData(
+                    message: "FAILED",
+                  )));
     }
   }
 
-   @override
-   void initState() {
-     super.initState();
-//     _loadAccounts();
-   }
+  @override
+  void initState() {
+    super.initState();
+    _loadAccounts();
+  }
 
   // Widget _showAlerts() {
   //   if (che == 1) {
@@ -447,24 +454,6 @@ class _LoginPageState extends State<LoginPage> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
-      height: height,
-      // decoration: BoxDecoration(
-      //     borderRadius: BorderRadius.all(Radius.circular(5)),
-      //     boxShadow: <BoxShadow>[
-      //       BoxShadow(
-      //           color: Colors.orange.shade700,
-      //           offset: Offset(2, 4),
-      //           blurRadius: 5,
-      //           spreadRadius: 2)
-      //     ],
-      //     gradient: LinearGradient(
-      //         begin: Alignment.topCenter,
-      //         end: Alignment.bottomCenter,
-      //         colors: [
-      //           Color(0xFF93DDE5),
-      //           Color(0xFFE9BFE0),
-      //           Color(0xfffb7172)
-      //         ])),
       child: Stack(
         children: <Widget>[
           Container(
@@ -485,9 +474,10 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  SizedBox(height: height * .08),
                   Positioned(top: 40, left: 0, child: _backButton()),
                   SizedBox(height: height * .02),
-                  _title(),
+                  Align(alignment: Alignment.center, child: _title()),
                   SizedBox(height: 80),
                   _emailPasswordWidget(),
                   SizedBox(height: 20, width: 5),

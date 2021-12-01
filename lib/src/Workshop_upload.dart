@@ -12,30 +12,22 @@ import 'check.dart';
 import 'wsapi.dart';
 
 class WorkshopUpload extends StatefulWidget {
-
   final String regnovar;
   final String usernamevar;
 
-  WorkshopUpload({
-    Key key,
-    this.regnovar,
-    this.usernamevar
-  }) : super(key: key);
+  WorkshopUpload({Key key, this.regnovar, this.usernamevar}) : super(key: key);
   final WorkshopApi api = WorkshopApi();
 
   @override
-  _WorkshopUploadState createState() => _WorkshopUploadState(regnovar: regnovar, usernamevar: usernamevar);
+  _WorkshopUploadState createState() =>
+      _WorkshopUploadState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class _WorkshopUploadState extends State<WorkshopUpload> {
-
   final String regnovar;
   final String usernamevar;
 
-  _WorkshopUploadState({
-    this.regnovar,
-    this.usernamevar
-  });
+  _WorkshopUploadState({this.regnovar, this.usernamevar});
 
   int _selectedIndex = 0;
 
@@ -48,24 +40,39 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
   final w_plink = new TextEditingController();
   final w_flink = new TextEditingController();
 
-  void _addWorkshopDetails(String wf_title, String wf_name, String wf_sd, String wf_ed, String wf_clink, String wf_plink, String wf_flink) async {
+  void _addWorkshopDetails(String wf_title, String wf_name, String wf_sd,
+      String wf_ed, String wf_clink, String wf_plink, String wf_flink) async {
 //    log('$name-$regno-$un-$pwd');
-    wf_flink="";
-    final upload_workshop = await widget.api.uploadWorkshop(regnovar, usernamevar, wf_title,wf_name,wf_sd,wf_ed,wf_clink,wf_plink,wf_flink);
+    wf_flink = "";
+    final upload_workshop = await widget.api.uploadWorkshop(
+        regnovar,
+        usernamevar,
+        wf_title,
+        wf_name,
+        wf_sd,
+        wf_ed,
+        wf_clink,
+        wf_plink,
+        wf_flink);
     int check = 1;
     setState(() {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => WorkshopUpload(regnovar: regnovar, usernamevar: usernamevar,)));
+          context,
+          MaterialPageRoute(
+              builder: (context) => WorkshopUpload(
+                    regnovar: regnovar,
+                    usernamevar: usernamevar,
+                  )));
       check = 0;
     });
     if (check == 1) {
       Navigator.push(
-        // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
+          // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
           context,
           MaterialPageRoute(
               builder: (context) => CheckData(
-                message: "FAILURE",
-              )));
+                    message: "FAILURE",
+                  )));
     }
   }
 
@@ -73,7 +80,12 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar, usernamevar: usernamevar,)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                      regnovar: regnovar,
+                      usernamevar: usernamevar,
+                    )));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -324,7 +336,8 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
   Widget _submitButton(String title) {
     return InkWell(
       onTap: () {
-        _addWorkshopDetails(w_title.text, w_name.text, w_sd.text, w_ed.text, w_clink.text, w_plink.text, w_flink.text);
+        _addWorkshopDetails(w_title.text, w_name.text, w_sd.text, w_ed.text,
+            w_clink.text, w_plink.text, w_flink.text);
         //_findAccount(etRegisterNo.text, etPassword.text);
         // Navigator.pop(
         //     context, MaterialPageRoute(builder: (context) => ()));
@@ -409,7 +422,7 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
               width: double.infinity,
               child: Image.asset(
                 'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               ),
             ),
             Positioned(

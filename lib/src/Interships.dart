@@ -12,29 +12,22 @@ String rn;
 String un;
 
 class Interships extends StatefulWidget {
-
   final String regnovar;
   final String usernamevar;
 
-  const Interships({
-    Key key,
-    this.regnovar,
-    this.usernamevar
-  }) : super(key: key);
+  const Interships({Key key, this.regnovar, this.usernamevar})
+      : super(key: key);
 
   @override
-  _IntershipsState createState() => _IntershipsState(regnovar: regnovar, usernamevar: usernamevar);
+  _IntershipsState createState() =>
+      _IntershipsState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class _IntershipsState extends State<Interships> {
-
   final String regnovar;
   final String usernamevar;
 
-  _IntershipsState({
-    this.regnovar,
-    this.usernamevar
-  });
+  _IntershipsState({this.regnovar, this.usernamevar});
 
   int _selectedIndex = 0;
 
@@ -42,7 +35,12 @@ class _IntershipsState extends State<Interships> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar,usernamevar: usernamevar,)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                      regnovar: regnovar,
+                      usernamevar: usernamevar,
+                    )));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -104,17 +102,13 @@ class _IntershipsState extends State<Interships> {
       body: Container(
         child: Stack(
           children: <Widget>[
-
             Container(
               height: double.infinity,
               width: double.infinity,
-              child: Image.asset(
-                'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
-              ),
+              child:
+                  Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover),
             ),
             Column(
-
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -139,7 +133,6 @@ class _IntershipsState extends State<Interships> {
               right: -MediaQuery.of(context).size.width * .4,
               child: BezierContainer(),
             ),
-
             Positioned(top: 40, left: 0, child: _backButton()),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -238,7 +231,8 @@ class _IntershipsState extends State<Interships> {
               context,
               PageTransition(
                   type: PageTransitionType.leftToRightWithFade,
-                  child: IntershipUpload(regnovar: regnovar, usernamevar: usernamevar)));
+                  child: IntershipUpload(
+                      regnovar: regnovar, usernamevar: usernamevar)));
         } else {
           Navigator.push(
               context,

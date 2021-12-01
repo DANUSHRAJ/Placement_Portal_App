@@ -90,7 +90,7 @@ class _CoursesState extends State<Courses> {
               width: double.infinity,
               child: Image.asset(
                 'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               ),
             ),
             Positioned(

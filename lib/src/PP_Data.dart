@@ -19,7 +19,7 @@ class PpData extends StatefulWidget {
   _PpDataState createState() => _PpDataState();
 }
 
-class Data{
+class Data {
   final String data;
 
   Data(this.data);
@@ -108,14 +108,21 @@ class _PpDataState extends State<PpData> {
   ];
 
   static final List<String> pp = <String>[
-    'null','null','null','null','null','null','null','null','null','null',
-    'null','null','null','null','null','null','null','null','null','null',
-    'null','null','null','null','null','null','null','null','null','null',
-    'null','null','null','null','null','null','null','null','null','null',
-    'null','null','null','null','null','null','null','null','null','null',
-    'null','null','null','null','null','null','null','null','null','null',
-    'null','null','null','null','null','null','null','null','null','null',
-    'null','null','null','null',
+    'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null',
+    'null',
+    'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null',
+    'null',
+    'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null',
+    'null',
+    'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null',
+    'null',
+    'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null',
+    'null',
+    'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null',
+    'null',
+    'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null', 'null',
+    'null',
+    'null', 'null', 'null', 'null',
 
     // title.first, //0
     // gender.first, //1
@@ -156,7 +163,7 @@ class _PpDataState extends State<PpData> {
     );
   }
 
-  Widget _entryFieldalphabets(String title, String hint,int i,
+  Widget _entryFieldalphabets(String title, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -191,14 +198,15 @@ class _PpDataState extends State<PpData> {
             // inputFormatters: <TextInputFormatter>[
             //   FilteringTextInputFormatter.digitsOnly
             // ],
-            onChanged: (value)=>setState(()=>pp[i]=value),
+            onChanged: (value) => setState(() => pp[i] = value),
           )
         ],
       ),
     );
   }
 
-  Widget _entryFieldDob(String title, String hint,int i, {bool isPassword = false}) {
+  Widget _entryFieldDob(String title, String hint, int i,
+      {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       width: 500,
@@ -227,7 +235,7 @@ class _PpDataState extends State<PpData> {
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
             keyboardType: TextInputType.number,
-            onChanged: (value)=>setState(()=>pp[i]=value),
+            onChanged: (value) => setState(() => pp[i] = value),
             // keyboardType: TextInputType.number,
             // inputFormatters: <TextInputFormatter>[
             //   FilteringTextInputFormatter.digitsOnly
@@ -296,7 +304,7 @@ class _PpDataState extends State<PpData> {
     );
   }
 
-  Widget _entryFieldnumbers(String title, String hint,int i,
+  Widget _entryFieldnumbers(String title, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -329,7 +337,7 @@ class _PpDataState extends State<PpData> {
                 filled: true),
             keyboardType: TextInputType.number,
 
-            onChanged: (value)=>setState(()=>pp[i]=value),
+            onChanged: (value) => setState(() => pp[i] = value),
 
             // inputFormatters: <TextInputFormatter>[
             //   FilteringTextInputFormatter.digitsOnly
@@ -382,10 +390,8 @@ class _PpDataState extends State<PpData> {
           Container(
               height: double.infinity,
               width: double.infinity,
-              child: Image.asset(
-                'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
-              )),
+              child:
+                  Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover)),
           Positioned(
             top: -MediaQuery.of(context).size.height * .45,
             right: -MediaQuery.of(context).size.width * .4,
@@ -399,23 +405,24 @@ class _PpDataState extends State<PpData> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   SizedBox(height: height * .1),
-                  _title(),
+                  Align(alignment: Alignment.center, child: _title()),
                   SizedBox(height: height * .1),
 
-                  _entryFieldnumbers('UNIVERSITY REG NO.', 'Eg:312419205041',0),
-                  _entryFieldalphabets('ROLL NO', 'Eg:19IT1242',1),
+                  _entryFieldnumbers(
+                      'UNIVERSITY REG NO.', 'Eg:312419205041', 0),
+                  _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
 
                   _DropBox("TITLE", title, 0),
-                  _entryFieldalphabets(
-                      'NAME OF THE CANDIDATE', 'enter the name with initial',2),
-                  _entryFieldalphabets('FIRST NAME', 'first name',3),
-                  _entryFieldalphabets('LAST NAME', 'last name',4),
+                  _entryFieldalphabets('NAME OF THE CANDIDATE',
+                      'enter the name with initial', 2),
+                  _entryFieldalphabets('FIRST NAME', 'first name', 3),
+                  _entryFieldalphabets('LAST NAME', 'last name', 4),
                   //Gender dropdown
                   _DropBox("GENDER", gender, 1),
 
-                  _entryFieldDob("D.O.B", "DD-MM-YYYY",5),
-                  _entryFieldDob("D.O.B", "MM-DD-YYYY",6),
-                  _entryFieldDob("D.O.B", "YYYY-MM-DD",7),
+                  _entryFieldDob("D.O.B", "DD-MM-YYYY", 5),
+                  _entryFieldDob("D.O.B", "MM-DD-YYYY", 6),
+                  _entryFieldDob("D.O.B", "YYYY-MM-DD", 7),
                   //College dropdown
                   _DropBox("COLLEGE", college, 2),
 
@@ -423,81 +430,87 @@ class _PpDataState extends State<PpData> {
                   //Section
                   _DropBox("SECTION", section, 4),
 
-                  _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019',8),
-                  _entryFieldnumbers('10th Percentage', 'Eg:92.6',9),
+                  _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019', 8),
+                  _entryFieldnumbers('10th Percentage', 'Eg:92.6', 9),
                   // board of study
-                  _entryFieldalphabets('10TH BOARD OF STUDY', 'Eg:State Board',11),
+                  _entryFieldalphabets(
+                      '10TH BOARD OF STUDY', 'Eg:State Board', 11),
                   // board of medium
-                  _entryFieldalphabets('10TH MEDIUM OF STUDY', 'Eg:English',12),
-                  _entryFieldnumbers('10th YEAR OF PASSING', 'Eg:2017',13),
-                  _entryFieldalphabets('NAME OF SCHOOL', 'name of school',14),
-                  _entryFieldalphabets('GRADUATING STATE', 'state name',15),
-                  _entryFieldnumbers('12th Percentage', 'Eg:79.9',16),
+                  _entryFieldalphabets(
+                      '10TH MEDIUM OF STUDY', 'Eg:English', 12),
+                  _entryFieldnumbers('10th YEAR OF PASSING', 'Eg:2017', 13),
+                  _entryFieldalphabets('NAME OF SCHOOL', 'name of school', 14),
+                  _entryFieldalphabets('GRADUATING STATE', 'state name', 15),
+                  _entryFieldnumbers('12th Percentage', 'Eg:79.9', 16),
                   // board of study
-                  _entryFieldalphabets('12th BOARD OF STUDY', 'Eg:STATE BOARD',17),
+                  _entryFieldalphabets(
+                      '12th BOARD OF STUDY', 'Eg:STATE BOARD', 17),
                   // board of medium
-                  _entryFieldalphabets('12th MEDIUM OF STUDY', 'Eg:English',18),
-                  _entryFieldnumbers('12th YEAR OF PASSING', 'Eg:2017',19),
-                  _entryFieldalphabets('NAME OF SCHOOL', 'name of school',20),
-                  _entryFieldalphabets('GRADUATING STATE', 'state name',21),
                   _entryFieldalphabets(
-                      'DIPLOMA - SPECIALIZATION/BRANCH', 'state name',22),
-                  _entryFieldnumbers('DIPLOMA Percentage', 'Eg:79.9',23),
-                  _entryFieldnumbers('DIPLOMA YEAR OF PASSING', 'Eg:2017',24),
+                      '12th MEDIUM OF STUDY', 'Eg:English', 18),
+                  _entryFieldnumbers('12th YEAR OF PASSING', 'Eg:2017', 19),
+                  _entryFieldalphabets('NAME OF SCHOOL', 'name of school', 20),
+                  _entryFieldalphabets('GRADUATING STATE', 'state name', 21),
                   _entryFieldalphabets(
-                      'NAME OF INSTITUTE', 'name of institute',25),
-                  _entryFieldalphabets('GRADUATING STATE', 'state name',26),
-                  _entryFieldnumbers('SEM1 GPA', 'Eg:7.12',27),
-                  _entryFieldnumbers('SEM2 GPA', 'Eg:7.12',28),
-                  _entryFieldnumbers('SEM3 GPA', 'Eg:7.12',29),
-                  _entryFieldnumbers('SEM4 GPA', 'Eg:7.12',30),
-                  _entryFieldnumbers('SEM5 GPA', 'Eg:7.12',31),
-                  _entryFieldnumbers('SEM6 GPA', 'Eg:7.12',32),
-                  _entryFieldnumbers('SEM7 GPA', 'Eg:7.12',33),
-                  _entryFieldnumbers('SEM8 GPA', 'Eg:7.12',34),
-                  _entryFieldnumbers('OVERALL GPA', 'Eg:7.12',35),
-                  _entryFieldnumbers(
-                      'NO OF ARREARS SEM 1', 'if there is no arrears enter 0',36),
-                  _entryFieldnumbers(
-                      'NO OF ARREARS SEM 2', 'if there is no arrears enter 0',37),
-                  _entryFieldnumbers(
-                      'NO OF ARREARS SEM 3', 'if there is no arrears enter 0',38),
-                  _entryFieldnumbers(
-                      'NO OF ARREARS SEM 4', 'if there is no arrears enter 0',39),
-                  _entryFieldnumbers(
-                      'NO OF ARREARS SEM 5', 'if there is no arrears enter 0',40),
-                  _entryFieldnumbers(
-                      'NO OF ARREARS SEM 6', 'if there is no arrears enter 0',41),
-                  _entryFieldnumbers(
-                      'NO OF ARREARS SEM 7', 'if there is no arrears enter 0',42),
-                  _entryFieldnumbers(
-                      'NO OF ARREARS SEM 8', 'if there is no arrears enter 0',43),
+                      'DIPLOMA - SPECIALIZATION/BRANCH', 'state name', 22),
+                  _entryFieldnumbers('DIPLOMA Percentage', 'Eg:79.9', 23),
+                  _entryFieldnumbers('DIPLOMA YEAR OF PASSING', 'Eg:2017', 24),
+                  _entryFieldalphabets(
+                      'NAME OF INSTITUTE', 'name of institute', 25),
+                  _entryFieldalphabets('GRADUATING STATE', 'state name', 26),
+                  _entryFieldnumbers('SEM1 GPA', 'Eg:7.12', 27),
+                  _entryFieldnumbers('SEM2 GPA', 'Eg:7.12', 28),
+                  _entryFieldnumbers('SEM3 GPA', 'Eg:7.12', 29),
+                  _entryFieldnumbers('SEM4 GPA', 'Eg:7.12', 30),
+                  _entryFieldnumbers('SEM5 GPA', 'Eg:7.12', 31),
+                  _entryFieldnumbers('SEM6 GPA', 'Eg:7.12', 32),
+                  _entryFieldnumbers('SEM7 GPA', 'Eg:7.12', 33),
+                  _entryFieldnumbers('SEM8 GPA', 'Eg:7.12', 34),
+                  _entryFieldnumbers('OVERALL GPA', 'Eg:7.12', 35),
+                  _entryFieldnumbers('NO OF ARREARS SEM 1',
+                      'if there is no arrears enter 0', 36),
+                  _entryFieldnumbers('NO OF ARREARS SEM 2',
+                      'if there is no arrears enter 0', 37),
+                  _entryFieldnumbers('NO OF ARREARS SEM 3',
+                      'if there is no arrears enter 0', 38),
+                  _entryFieldnumbers('NO OF ARREARS SEM 4',
+                      'if there is no arrears enter 0', 39),
+                  _entryFieldnumbers('NO OF ARREARS SEM 5',
+                      'if there is no arrears enter 0', 40),
+                  _entryFieldnumbers('NO OF ARREARS SEM 6',
+                      'if there is no arrears enter 0', 41),
+                  _entryFieldnumbers('NO OF ARREARS SEM 7',
+                      'if there is no arrears enter 0', 42),
+                  _entryFieldnumbers('NO OF ARREARS SEM 8',
+                      'if there is no arrears enter 0', 43),
                   _entryFieldnumbers('TOTAL NO OF STANDING ARREARS',
-                      'if there is no arrears enter 0',44),
+                      'if there is no arrears enter 0', 44),
                   //History of arrears Y/N
                   _DropBox("HISTORY OF ARREARS [Y/N]", yesorno, 5),
-                  _entryFieldnumbers(
-                      'IF YES, HOW MANY?', 'if there is no arrears enter 0',45),
+                  _entryFieldnumbers('IF YES, HOW MANY?',
+                      'if there is no arrears enter 0', 45),
                   _entryFieldalphabets(
-                      'UG DEGREE (FOR PG STUDENTS) ', 'Eg:B.tech',46),
-                  _entryFieldalphabets(
-                      'UG BRANCH (FOR PG STUDENTS) ', 'Eg:Computer Science',47),
+                      'UG DEGREE (FOR PG STUDENTS) ', 'Eg:B.tech', 46),
+                  _entryFieldalphabets('UG BRANCH (FOR PG STUDENTS) ',
+                      'Eg:Computer Science', 47),
                   _entryFieldnumbers(
-                      'UG PERCENTAGE (FOR PG STUDENTS)', 'Eg:95.5',48),
-                  _entryFieldnumbers('UG CGPA (FOR PG STUDENTS)', 'Eg:9.2',49),
+                      'UG PERCENTAGE (FOR PG STUDENTS)', 'Eg:95.5', 48),
+                  _entryFieldnumbers('UG CGPA (FOR PG STUDENTS)', 'Eg:9.2', 49),
                   _entryFieldnumbers(
-                      'UG YEAR OF PASSING (FOR PG STUDENTS)', 'Eg:2023',50),
+                      'UG YEAR OF PASSING (FOR PG STUDENTS)', 'Eg:2023', 50),
                   _entryFieldalphabets(
                       'UG - COLLEGE OF STUDIES (FOR PG STUDENTS)) ',
-                      'Eg:St.joseph\'s',51),
+                      'Eg:St.joseph\'s',
+                      51),
                   _entryFieldalphabets(
-                      'UG - GRADUATING UNIVERSITY) ', 'Eg:Anna University',52),
-                  _entryFieldalphabets('GRADUATING STATE', 'Eg:Tamil Nadu',53),
-                  _entryFieldnumbers('LAND LINE NUMBER', '',54),
-                  _entryFieldnumbers('PRIMARY MOBILE NO', '',55),
-                  _entryFieldnumbers('EMERGENCY CONTACT NO', '',56),
-                  _entryFieldalphabets('PRIMARY EMAIL ID', 'abc@gmail.com',57),
-                  _entryFieldalphabets('ALTERNATE EMAIL ID', 'abc@gmail.com',58),
+                      'UG - GRADUATING UNIVERSITY) ', 'Eg:Anna University', 52),
+                  _entryFieldalphabets('GRADUATING STATE', 'Eg:Tamil Nadu', 53),
+                  _entryFieldnumbers('LAND LINE NUMBER', '', 54),
+                  _entryFieldnumbers('PRIMARY MOBILE NO', '', 55),
+                  _entryFieldnumbers('EMERGENCY CONTACT NO', '', 56),
+                  _entryFieldalphabets('PRIMARY EMAIL ID', 'abc@gmail.com', 57),
+                  _entryFieldalphabets(
+                      'ALTERNATE EMAIL ID', 'abc@gmail.com', 58),
                   //SPORTS QUOTA
                   _DropBox("SPORTS QUOTA", yesorno, 6),
                   //BEC EXAM STATUS
@@ -505,9 +518,9 @@ class _PpDataState extends State<PpData> {
                   // BEC EXAM GRADE
                   _DropBox("BEC EXAM GRADE", becgrade, 8),
                   _entryFieldalphabets(
-                      'LANGUAGES KNOWN', 'Tamil,English,Hindi',59),
+                      'LANGUAGES KNOWN', 'Tamil,English,Hindi', 59),
                   _entryFieldnumbers('GAP IN EDUCATION (in Years) - If Any',
-                      'if there is no gap enter 0',60),
+                      'if there is no gap enter 0', 60),
                   // ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]
                   _DropBox(
                       "ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]", yesorno, 9),
@@ -518,20 +531,21 @@ class _PpDataState extends State<PpData> {
                       10),
                   // DURATION OF THE COURSE
                   // CERTIFICATION VENDOR/AUTHORITY/AGENCY NAME
-                  _entryFieldalphabets('PAN CARD NUMBER', '',61),
-                  _entryFieldalphabets('NATIONALITY', '',62),
-                  _entryFieldalphabets('INDIAN PASSPORT NUMBER', '',63),
-                  _entryFieldnumbers('AADHAAR NUMBER', '',64),
-                  _entryFieldalphabets('MOTHER NAME', '',65),
-                  _entryFieldalphabets('DESIGNATION & ORGANISATION', '',66),
-                  _entryFieldnumbers('MOTHER MOBILE NUMBER', '',67),
-                  _entryFieldalphabets('MOTHER EMAIL ID', '',68),
-                  _entryFieldalphabets('PERMANENT ADDRESS WITH PINCODE', '',69),
-                  _entryFieldalphabets('PERMANENT ADDRESS LINE 1', '',70),
-                  _entryFieldalphabets('PERMANENT ADDRESS LINE 2', '',71),
-                  _entryFieldalphabets('PERMANENT CITY', '',72),
-                  _entryFieldalphabets('STATE', 'Tamil Nadu',73),
-                  _entryFieldnumbers('POSTAL CODE', '',74),
+                  _entryFieldalphabets('PAN CARD NUMBER', '', 61),
+                  _entryFieldalphabets('NATIONALITY', '', 62),
+                  _entryFieldalphabets('INDIAN PASSPORT NUMBER', '', 63),
+                  _entryFieldnumbers('AADHAAR NUMBER', '', 64),
+                  _entryFieldalphabets('MOTHER NAME', '', 65),
+                  _entryFieldalphabets('DESIGNATION & ORGANISATION', '', 66),
+                  _entryFieldnumbers('MOTHER MOBILE NUMBER', '', 67),
+                  _entryFieldalphabets('MOTHER EMAIL ID', '', 68),
+                  _entryFieldalphabets(
+                      'PERMANENT ADDRESS WITH PINCODE', '', 69),
+                  _entryFieldalphabets('PERMANENT ADDRESS LINE 1', '', 70),
+                  _entryFieldalphabets('PERMANENT ADDRESS LINE 2', '', 71),
+                  _entryFieldalphabets('PERMANENT CITY', '', 72),
+                  _entryFieldalphabets('STATE', 'Tamil Nadu', 73),
+                  _entryFieldnumbers('POSTAL CODE', '', 74),
                   //HOSTEL / DAYSCHOLAR
                   _DropBox("HOSTEL / DAY SCHOLAR", hord, 11),
 
@@ -556,7 +570,7 @@ class _PpDataState extends State<PpData> {
                             ),
                           ),
                           onPressed: () {
-                            for(int i=0;i<pp.length;i++){
+                            for (int i = 0; i < pp.length; i++) {
                               print(pp[i].toString());
                             }
                           })

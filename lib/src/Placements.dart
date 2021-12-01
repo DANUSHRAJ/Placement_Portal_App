@@ -22,7 +22,9 @@ class _PlacementsState extends State<Placements> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WelcomePage()));
+            //add regnovar and usernamevar in home screen
+            context,
+            MaterialPageRoute(builder: (context) => HomeScreen()));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -89,7 +91,7 @@ class _PlacementsState extends State<Placements> {
               width: double.infinity,
               child: Image.asset(
                 'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               ),
             ),
             Positioned(

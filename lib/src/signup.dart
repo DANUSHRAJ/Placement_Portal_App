@@ -28,10 +28,6 @@ class _SignUpPageState extends State<SignUpPage> {
   final etRegisterNo = new TextEditingController();
   final etmailId = new TextEditingController();
   final etPassword = new TextEditingController();
-  // String Name="";
-  // int RegisterNo;
-  // String mailId = "";
-  // String Password = "";
 
   static const colorizeColors = [
     Colors.limeAccent,
@@ -71,47 +67,42 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _addAccount(String name, String regno, String un, String pwd) async {
-  int check=1;
-    if(name.isEmpty || regno.isEmpty || un.isEmpty || pwd.isEmpty)
-    {
-      check=0;
+    int check = 1;
+    if (name.isEmpty || regno.isEmpty || un.isEmpty || pwd.isEmpty) {
+      check = 0;
     }
-    if(!RegExp(r'^3124\d{8}$').hasMatch(regno))
-    {
-      check=0;
+    if (!RegExp(r'^3124\d{8}$').hasMatch(regno)) {
+      check = 0;
     }
-    if(!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(un))
-    {
-      check=0;
+    if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(un)) {
+      check = 0;
     }
-    if(!RegExp(r'[a-zA-Z0-9!@#$&()\\-`.+,/\"]{8,16}').hasMatch(pwd))
-    {
-      check=0;
+    if (!RegExp(r'[a-zA-Z0-9!@#$&()\\-`.+,/\"]{8,16}').hasMatch(pwd)) {
+      check = 0;
     }
-    if(check==1) {
+    if (check == 1) {
       Map<int, Account> map = accounts.asMap();
       check = 1;
       for (int i = 0; i < map.length; i++) {
-        if ((map[i].regno == regno && map[i].username.toLowerCase() == un.toLowerCase()) &&
+        if ((map[i].regno == regno &&
+                map[i].username.toLowerCase() == un.toLowerCase()) &&
             map[i].password == pwd) {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      HomeScreen(
+                  builder: (context) => HomeScreen(
                         regnovar: map[i].regno,
                         usernamevar: map[i].name,
                       )));
           check = 2;
           break;
-        }
-        else if(map[i].regno==regno||map[i].username==un){
-          check=0;
+        } else if (map[i].regno == regno || map[i].username == un) {
+          check = 0;
         }
       }
       if (check == 1) {
-        final createdAccount = await widget.api.createAccount(
-            name, regno, un, pwd);
+        final createdAccount =
+            await widget.api.createAccount(name, regno, un, pwd);
         check = 1;
         setState(() {
           Navigator.push(
@@ -122,16 +113,14 @@ class _SignUpPageState extends State<SignUpPage> {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      CheckData(
+                  builder: (context) => CheckData(
                         message: "FAILURE",
                       )));
         }
-      }else if(check==0){
+      } else if (check == 0) {
         log('Try to Login with correct credentials!');
       }
-    }
-    else{
+    } else {
       log('Unsuccessfull coz incorrect values!');
     }
   }
@@ -180,10 +169,6 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
               isRepeatingAnimation: true,
               totalRepeatCount: 10000,
-              //pause: const Duration(milliseconds: 1000),
-              // onTap: () {
-              //   print("Tap Event");
-              // },
             ),
           ),
           SizedBox(
@@ -243,10 +228,6 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
               isRepeatingAnimation: true,
               totalRepeatCount: 10000,
-              //pause: const Duration(milliseconds: 1000),
-              // onTap: () {
-              //   print("Tap Event");
-              // },
             ),
           ),
           SizedBox(
@@ -499,23 +480,6 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       body: Container(
         height: height,
-        // decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.all(Radius.circular(5)),
-        //     boxShadow: <BoxShadow>[
-        //       BoxShadow(
-        //           color: Colors.pink.shade700,
-        //           offset: Offset(2, 4),
-        //           blurRadius: 5,
-        //           spreadRadius: 2)
-        //     ],
-        //     gradient: LinearGradient(
-        //         begin: Alignment.topCenter,
-        //         end: Alignment.bottomCenter,
-        //         colors: [
-        //           Color(0xffffa000).withAlpha(200),
-        //           Color(0xff7b1fa2).withAlpha(200),
-        //           Color(0xfffb7172).withAlpha(300)
-        //         ])),
         child: Stack(
           children: <Widget>[
             Container(
@@ -523,17 +487,12 @@ class _SignUpPageState extends State<SignUpPage> {
                 width: double.infinity,
                 child: Image.asset(
                   'assets/images/inner_bg.gif',
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.cover,
                 )),
             Positioned(
               top: -MediaQuery.of(context).size.height * .45,
               right: -MediaQuery.of(context).size.width * .4,
               child: BezierContainer(),
-            ),
-            Positioned(
-              top: 100,
-              left: 156,
-              child: _title(),
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
@@ -542,8 +501,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(height: height * .2),
-
+                    SizedBox(height: height * .1),
+                    Align(alignment: Alignment.center, child: _title()),
                     SizedBox(
                       height: 50,
                     ),
@@ -552,7 +511,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: 20,
                     ),
                     _submitButton(),
-                    //   SizedBox(height: height * .14),
                     _loginAccountLabel(),
                   ],
                 ),
