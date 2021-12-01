@@ -42,28 +42,9 @@ class _SignUpPageState extends State<SignUpPage> {
     fontFamily: 'Horizon',
   );
 
-  List<Account> accounts = [];
-  bool loading = true;
-
-  void _loadAccounts([bool showSpinner = false]) {
-    if (showSpinner) {
-      setState(() {
-        loading = true;
-      });
-    }
-
-    widget.api.getAccounts().then((data) {
-      setState(() {
-        accounts = data;
-        loading = false;
-      });
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    _loadAccounts();
   }
 
   void _addAccount(String name, String regno, String un, String pwd) async {
@@ -81,47 +62,46 @@ class _SignUpPageState extends State<SignUpPage> {
       check = 0;
     }
     if (check == 1) {
-      Map<int, Account> map = accounts.asMap();
       check = 1;
-      for (int i = 0; i < map.length; i++) {
-        if ((map[i].regno == regno &&
-                map[i].username.toLowerCase() == un.toLowerCase()) &&
-            map[i].password == pwd) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => HomeScreen(
-                        regnovar: map[i].regno,
-                        usernamevar: map[i].name,
-                      )));
-          check = 2;
-          break;
-        } else if (map[i].regno == regno || map[i].username == un) {
-          check = 0;
-        }
+      final result = await widget.api.getOneAccount(regno);
+      if (result.regno == regno && result.username == un &&
+          result.password == pwd) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    HomeScreen(
+                      regnovar: result.regno,
+                      usernamevar: result.name,
+                    )));
+        check = 2;
       }
-      if (check == 1) {
-        final createdAccount =
-            await widget.api.createAccount(name, regno, un, pwd);
-        check = 1;
-        setState(() {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LoginPage()));
-          check = 0;
-        });
-        if (check == 1) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => CheckData(
-                        message: "FAILURE",
-                      )));
-        }
-      } else if (check == 0) {
+      else if (result.regno == regno || result.username == un) {
         log('Try to Login with correct credentials!');
+        check = 0;
       }
-    } else {
+    }
+    else {
       log('Unsuccessfull coz incorrect values!');
+    }
+    if (check == 1) {
+      final createdAccount =
+      await widget.api.createAccount(name, regno, un, pwd);
+      check = 1;
+      setState(() {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
+        check = 0;
+      });
+      if (check == 1) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    CheckData(
+                      message: "FAILURE",
+                    )));
+      }
     }
   }
 

@@ -30,50 +30,20 @@ class _LoginPageState extends State<LoginPage> {
   final etRegisterNo = new TextEditingController();
   final account = new AccountsApi();
 
-  List<Account> accounts = [];
-  bool loading = true;
-
-  void _loadAccounts([bool showSpinner = false]) {
-    if (showSpinner) {
-      setState(() {
-        loading = true;
-      });
-    }
-
-    widget.api.getAccounts().then((data) {
-      setState(() {
-        accounts = data;
-        loading = false;
-      });
-    });
-  }
-
-  void _findAccount(String regnovar, String passvar) {
-//    _loadAccounts();
-//    log(accounts.toString());
-    Map<int, Account> map = accounts.asMap();
+  void _findAccount(String regnovar, String passvar) async{
     int check = 1;
-    for (int i = 0; i < map.length; i++) {
-      if (map[i].regno == regnovar && map[i].password == passvar) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen(
-                      regnovar: map[i].regno,
-                      usernamevar: map[i].name,
-                    )));
-        check = 0;
-        break;
-      }
+    final result = await widget.api.getOneAccount(regnovar);
+    if(result.regno==regnovar&&result.password==passvar){
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomeScreen(
+                regnovar: result.regno,
+                usernamevar: result.name,
+              )));
+      check = 0;
     }
     if (check == 1) {
-//      Navigator.push(
-//          context,
-//          MaterialPageRoute(
-//              builder: (context) => HomeScreen(
-////                regnovar: regnovar,
-////                usernamevar: map[i].name,
-//              )));
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -86,22 +56,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _loadAccounts();
   }
-
-  // Widget _showAlerts() {
-  //   if (che == 1) {
-  //     return Container(
-  //         color: Colors.limeAccent,
-  //         width: double.infinity,
-  //         padding: EdgeInsets.all(8.0),
-  //         child: Row(
-  //           children: <Widget>[
-  //             Icon(Icons.error_outline),
-  //           ],
-  //         ));
-  //   }
-  // }
 
   Widget _backButton() {
     return InkWell(
@@ -461,7 +416,7 @@ class _LoginPageState extends State<LoginPage> {
               width: double.infinity,
               child: Image.asset(
                 'assets/images/inner_bg.gif',
-                fit: BoxFit.fitHeight,
+                fit: BoxFit.cover,
               )),
           Positioned(
               top: -height * .45,

@@ -32,7 +32,7 @@ class _WorkshopsState extends State<Workshops> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WelcomePage()));
+            context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar, usernamevar: usernamevar,)));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),

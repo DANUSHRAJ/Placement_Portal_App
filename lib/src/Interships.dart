@@ -113,14 +113,14 @@ class _IntershipsState extends State<Interships> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  "Hi, usernamevar",
+                  "Hi, $usernamevar",
                   style: GoogleFonts.adventPro(
                       fontSize: 30,
                       color: Colors.limeAccent,
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "regnovar",
+                  "$regnovar",
                   style: GoogleFonts.adventPro(
                       fontSize: 20,
                       color: Colors.white,
