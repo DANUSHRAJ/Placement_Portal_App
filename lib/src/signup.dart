@@ -8,6 +8,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/signupviewdata.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
+import 'Account.dart';
 import 'api.dart';
 import 'check.dart';
 import 'home_screen.dart';
@@ -45,25 +46,72 @@ class _SignUpPageState extends State<SignUpPage> {
     fontFamily: 'Horizon',
   );
 
+  List<Account> accounts = [];
+  bool loading = true;
+
+  void _loadAccounts([bool showSpinner = false]) {
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+
+    widget.api.getAccounts().then((data) {
+      setState(() {
+        accounts = data;
+        loading = false;
+      });
+    });
+  }
+
+  void _findAccount(String regnovar, String passvar) {
+//    _loadAccounts();
+//    log(accounts.toString());
+
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadAccounts();
+  }
+
   void _addAccount(String name, String regno, String un, String pwd) async {
 //    log('$name-$regno-$un-$pwd');
-    final createdAccount = await widget.api.createAccount(name, regno, un, pwd);
-
+    Map<int, Account> map = accounts.asMap();
     int check = 1;
-     setState(() {
-       Navigator.push(
-           context, MaterialPageRoute(builder: (context) => LoginPage()));
-       check = 0;
-     });
+    for (int i = 0; i < map.length; i++) {
+      if (map[i].regno == regno || map[i].username == un) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    HomeScreen(
+                      regnovar: map[i].regno,
+                      usernamevar: map[i].name,
+                    )));
+        check = 0;
+        break;
+      }
+    }
     if (check == 1) {
-//      Navigator.push(context, MaterialPageRoute(builder: (context)=> Trail()));
-      Navigator.push(
-          // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
-          context,
-          MaterialPageRoute(
-              builder: (context) => CheckData(
-                    message: "FAILURE",
-                  )));
+      final createdAccount = await widget.api.createAccount(
+          name, regno, un, pwd);
+      check = 1;
+      setState(() {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => LoginPage()));
+        check = 0;
+      });
+      if (check == 1) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    CheckData(
+                      message: "FAILURE",
+                    )));
+      }
     }
   }
 
