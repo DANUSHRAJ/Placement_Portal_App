@@ -81,7 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
     Map<int, Account> map = accounts.asMap();
     int check = 1;
     for (int i = 0; i < map.length; i++) {
-      if (map[i].regno == regno || map[i].username == un) {
+      if ((map[i].regno == regno || map[i].username == un)&&map[i].password == pwd) {
         Navigator.push(
             context,
             MaterialPageRoute(
