@@ -59,7 +59,6 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/images/job_offer.png
 
 
   fonts:
