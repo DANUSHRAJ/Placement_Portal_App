@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import '../main.dart';
 import 'Account.dart';
 import 'Widget/bezierContainer.dart';
@@ -395,6 +395,34 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  void showToast() {
+    Fluttertoast.showToast(
+        msg: 'Some text',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.CENTER,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white);
+  }
+
+  // Widget _toast() {
+  //   final key = new GlobalKey<ScaffoldState>();
+  //   return new Container(
+  //     key: key,
+  //     floatingActionButton: new Builder(builder: (BuildContext context) {
+  //       return new FloatingActionButton(
+  //         onPressed: () {
+  //           key.currentState.showSnackBar(new SnackBar(
+  //             content: new Text("Sending Message"),
+  //           ));
+  //         },
+  //         tooltip: 'Increment',
+  //         child: new Icon(Icons.add),
+  //       );
+  //     }),
+  //   );
+  // }
+
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
@@ -409,45 +437,52 @@ class _LoginPageState extends State<LoginPage> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Container(
-      child: Stack(
-        children: <Widget>[
-          Container(
-              height: double.infinity,
-              width: double.infinity,
-              child: Image.asset(
-                'assets/images/inner_bg.gif',
-                fit: BoxFit.cover,
-              )),
-          Positioned(
-              top: -height * .45,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer()),
-          SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: height * .08),
-                  Positioned(top: 40, left: 0, child: _backButton()),
-                  SizedBox(height: height * .02),
-                  Align(alignment: Alignment.center, child: _title()),
-                  SizedBox(height: 80),
-                  _emailPasswordWidget(),
-                  SizedBox(height: 20, width: 5),
-                  _submitButton(),
-                  Align(
-                      alignment: Alignment.bottomRight,
-                      child: _createAccountLabel1()),
-                  _divider(),
-                  _createAccountLabel(),
-                ],
-              ),
+            child: Stack(
+      children: <Widget>[
+        Container(
+            height: double.infinity,
+            width: double.infinity,
+            child: Image.asset(
+              'assets/images/inner_bg.gif',
+              fit: BoxFit.cover,
+            )),
+        Positioned(
+            top: -height * .45,
+            right: -MediaQuery.of(context).size.width * .4,
+            child: BezierContainer()),
+        SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: height * .08),
+                Positioned(top: 40, left: 0, child: _backButton()),
+                SizedBox(height: height * .02),
+                Align(alignment: Alignment.center, child: _title()),
+                SizedBox(height: 80),
+                _emailPasswordWidget(),
+                SizedBox(height: 20, width: 5),
+                _submitButton(),
+                Align(
+                    alignment: Alignment.bottomRight,
+                    child: _createAccountLabel1()),
+                _divider(),
+                _createAccountLabel(),
+              ],
             ),
           ),
-        ],
-      ),
-    ));
+        ),
+      ],
+    )));
+    // child: Fluttertoast.showToast(
+    //     msg: "This is Center Short Toast",
+    //     toastLength: Toast.LENGTH_SHORT,
+    //     gravity: ToastGravity.CENTER,
+    //     timeInSecForIosWeb: 1,
+    //     backgroundColor: Colors.red,
+    //     textColor: Colors.white,
+    //     fontSize: 16.0)));
   }
 }

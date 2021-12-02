@@ -38,7 +38,14 @@ class HomeScreen extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => WelcomePage()));
                     },
-                    child: new Text("Confirm")),
+                    child: new Text(
+                      'WORKSHOPS',
+                      style: GoogleFonts.adventPro(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    ))
+                //Text("Confirm", TextStyle())),
               ],
             ));
   }
@@ -108,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                              "Hi, $usernamevar",
+                              "Welcome, $usernamevar",
                               style: GoogleFonts.adventPro(
                                   fontSize: 30,
                                   color: Colors.limeAccent,
@@ -116,6 +123,13 @@ class HomeScreen extends StatelessWidget {
                             ),
                             Text(
                               "$regnovar",
+                              style: GoogleFonts.adventPro(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "Have A great day",
                               style: GoogleFonts.adventPro(
                                   fontSize: 20,
                                   color: Colors.white,
