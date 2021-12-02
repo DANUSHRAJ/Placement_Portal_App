@@ -315,7 +315,7 @@ class _PlacementUploadState extends State<PlacementUpload> {
       selectedItemColor: Colors.limeAccent,
       items: [
         BottomNavigationBarItem(
-            icon: Icon(Icons.upload_file), label: "UPLOAD CERTIFICATES"),
+            icon: Icon(Icons.upload_file), label: "UPLOAD OFFER LETTER"),
         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "HOME"),
       ],
     );

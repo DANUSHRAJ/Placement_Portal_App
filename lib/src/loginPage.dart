@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/Placements.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer1.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/signup.dart';
 import 'package:flutter/material.dart';
@@ -352,7 +353,7 @@ class _LoginPageState extends State<LoginPage> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Interships()));
+            context, MaterialPageRoute(builder: (context) => Placements()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),
