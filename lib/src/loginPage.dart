@@ -53,10 +53,34 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  FToast fToast;
+
   @override
   void initState() {
     super.initState();
+    fToast = FToast();
+    fToast.init(context);
   }
+
+  // Widget _showToast() {
+  //   return Container(
+  //     padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(25.0),
+  //       color: Colors.greenAccent,
+  //     ),
+  //     child: Row(
+  //       mainAxisSize: MainAxisSize.min,
+  //       children: [
+  //         Icon(Icons.check),
+  //         SizedBox(
+  //           width: 12.0,
+  //         ),
+  //         Text("This is a Custom Toast"),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Widget _backButton() {
     return InkWell(
@@ -78,15 +102,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  static const colorizeColors1 = [
-    Colors.limeAccent,
-    Colors.red,
-    Colors.yellow,
-    Colors.blue,
-    Colors.amber,
-
-    //Colors.black,
-  ];
   static const colorizeColors = [
     Colors.limeAccent,
     Colors.blue,
@@ -470,19 +485,12 @@ class _LoginPageState extends State<LoginPage> {
                     child: _createAccountLabel1()),
                 _divider(),
                 _createAccountLabel(),
+                //_showToast()
               ],
             ),
           ),
         ),
       ],
     )));
-    // child: Fluttertoast.showToast(
-    //     msg: "This is Center Short Toast",
-    //     toastLength: Toast.LENGTH_SHORT,
-    //     gravity: ToastGravity.CENTER,
-    //     timeInSecForIosWeb: 1,
-    //     backgroundColor: Colors.red,
-    //     textColor: Colors.white,
-    //     fontSize: 16.0)));
   }
 }
