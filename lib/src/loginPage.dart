@@ -30,17 +30,17 @@ class _LoginPageState extends State<LoginPage> {
   final etRegisterNo = new TextEditingController();
   final account = new AccountsApi();
 
-  void _findAccount(String regnovar, String passvar) async{
+  void _findAccount(String regnovar, String passvar) async {
     int check = 1;
     final result = await widget.api.getOneAccount(regnovar);
-    if(result.regno==regnovar&&result.password==passvar){
+    if (result.regno == regnovar && result.password == passvar) {
       Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => HomeScreen(
-                regnovar: result.regno,
-                usernamevar: result.name,
-              )));
+                    regnovar: result.regno,
+                    usernamevar: result.name,
+                  )));
       check = 0;
     }
     if (check == 1) {
