@@ -63,8 +63,11 @@ class _SignUpPageState extends State<SignUpPage> {
     }
     if (check == 1) {
       check = 1;
+      log('Regno: $regno');
       final result = await widget.api.getOneAccount(regno);
-      if (result.regno == regno && result.username == un &&
+//      log('Result: $result');
+      if(result==null){}
+      else if (result.regno == regno && result.username == un &&
           result.password == pwd) {
         Navigator.push(
             context,
@@ -85,8 +88,13 @@ class _SignUpPageState extends State<SignUpPage> {
       log('Unsuccessfull coz incorrect values!');
     }
     if (check == 1) {
+      //String.substring(int startIndex, [ int endIndex ])
+      var batch=int.parse(regno.substring(4,6));
+      batch+=2004;
+      var batchstr = batch.toString();
+//      log('Batch: $batch');
       final createdAccount =
-      await widget.api.createAccount(name, regno, un, pwd);
+      await widget.api.createAccount(name, regno, un, pwd, batchstr);
       check = 1;
       setState(() {
         Navigator.push(

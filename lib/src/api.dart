@@ -20,18 +20,26 @@ class AccountsApi {
 
   Future<Account> getOneAccount(String regno) async {
     final response = await _dio.post('/getoneaccount', data: {
-      'regno': regno,
+      'regno': regno
     });
-    return Account.fromJson(response.data);
+    var res = response.data;
+//    log('Response: $res');
+    if(res!=null) {
+      return Account.fromJson(response.data);
+    }
+    else{
+      return null;
+    }
   }
 
   Future<Account> createAccount(
-      String name, String regno, String username, String password) async {
+      String name, String regno, String username, String password, String batch) async {
     final response = await _dio.post('/createaccount', data: {
       'name': name,
       'regno': regno,
       'username': username,
-      'password': password
+      'password': password,
+      'batch' : batch
     });
 //    log('$name-$regno-$username-$password');
     return Account.fromJson(response.data);
