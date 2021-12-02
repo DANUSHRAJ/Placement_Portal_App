@@ -119,7 +119,7 @@ class _PlacementsState extends State<Placements> {
                         child: Card(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
+                          elevation: 40,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -144,7 +144,7 @@ class _PlacementsState extends State<Placements> {
                           color: Colors.cyanAccent,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
+                          elevation: 200,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -195,7 +195,7 @@ class _PlacementsState extends State<Placements> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           40)),
-                                              elevation: 50,
+                                              elevation: 100,
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
@@ -236,7 +236,7 @@ class _PlacementsState extends State<Placements> {
                         child: Card(
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
+                          elevation: 200,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
