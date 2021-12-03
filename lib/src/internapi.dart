@@ -16,6 +16,16 @@ class InternsApi {
         .toList();
   }
 
+  Future<List<IWCDetails>> getinternsDet(String regno) async {
+    final response = await _dio.post('/getinterndet', data: {
+      'regno':regno
+    });
+//    log('$response');
+    return (response.data['interns'] as List)
+        .map<IWCDetails>((json) => IWCDetails.fromJson(json))
+        .toList();
+  }
+
   Future<IWCDetails> uploadIntern(
       String regno, String username, String title, String name, String sd, String ed, String clink, String plink, String flink) async {
     final response = await _dio.post('/uploadintern', data: {
