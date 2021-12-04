@@ -14,7 +14,9 @@ import 'package:google_fonts/google_fonts.dart';
 // import 'home_screen.dart';
 import 'dart:developer';
 
-void profile(List<String> profile) {
+import 'profileapi.dart';
+
+void profile(List<String> profile) async {
   List<String> compareList = [
     'UNIVERSITY REG NO',
     'ROLL NO',
@@ -121,10 +123,10 @@ void profile(List<String> profile) {
   if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[68]))) {
     print("mother name");
   }
-  if(dropbox[2].title=='SELECT COLLEGE'){
-    showdialog(context, "please select the Valid COLLEGE");
-    return;
-  }
+//  if(dropbox[2].title=='SELECT COLLEGE'){
+//    showdialog(context, "please select the Valid COLLEGE");
+//    return;
+//  }
   //roll no
   if (profile[0].length != 8) {
     print("Check roll number");
@@ -234,16 +236,20 @@ void profile(List<String> profile) {
   }
 
     //postal code
-    if (!RegExp(r'^\d{6}$').hasMatch(profile[77])) {
-      //print("postal code");
-      showdialog(context, "Please Check the " + compareList[77]);
-      return;
-    }
-  }
-  catch(e){}
+//    if (!RegExp(r'^\d{6}$').hasMatch(profile[77])) {
+//      //print("postal code");
+//      showdialog(context, "Please Check the " + compareList[77]);
+//      return;
+//    }
+//  catch(e){}
 
 
   print(profile.length);
+
+  final ProfileApi api = ProfileApi();
+//  var result = jsonEncode(jsonformat);
+//  log('$result');
+  await api.uploadppdata(compareList, profile);
 }
 
 class PpData extends StatefulWidget {
@@ -834,7 +840,7 @@ class _PpDataState extends State<PpData> {
                             ),
                           ),
                           onPressed: () {
-                            profile(context,pp,dropbox);
+                            profile(pp);
                             //print(pp.length);
                             // for (int i = 0; i < pp.length; i++) {
                             //   print(pp[i].toString());
