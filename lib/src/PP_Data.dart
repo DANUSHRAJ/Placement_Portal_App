@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,7 +14,9 @@ import 'package:google_fonts/google_fonts.dart';
 // import 'home_screen.dart';
 import 'dart:developer';
 
-void profile(List<String> profile) {
+import 'profileapi.dart';
+
+void profile(List<String> profile) async {
   List<String> compareList = [
     'UNIVERSITY REG NO',
     'ROLL NO',
@@ -119,11 +123,10 @@ void profile(List<String> profile) {
   if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[68]))) {
     print("mother name");
   }
-
-  //register number
-  if (!RegExp(r'^3124\d{8}$').hasMatch(profile[0])) {
-    print("Register number was invalid");
-  }
+//  if(dropbox[2].title=='SELECT COLLEGE'){
+//    showdialog(context, "please select the Valid COLLEGE");
+//    return;
+//  }
   //roll no
   if (profile[0].length != 8) {
     print("Check roll number");
@@ -232,12 +235,21 @@ void profile(List<String> profile) {
     print("pan card");
   }
 
-  //postal code
-  if (!RegExp(r'^\d{6}$').hasMatch(profile[77])) {
-    print("postal code");
-  }
+    //postal code
+//    if (!RegExp(r'^\d{6}$').hasMatch(profile[77])) {
+//      //print("postal code");
+//      showdialog(context, "Please Check the " + compareList[77]);
+//      return;
+//    }
+//  catch(e){}
+
 
   print(profile.length);
+
+  final ProfileApi api = ProfileApi();
+//  var result = jsonEncode(jsonformat);
+//  log('$result');
+  await api.uploadppdata(compareList, profile);
 }
 
 class PpData extends StatefulWidget {
@@ -263,9 +275,9 @@ class NewObject {
 class _PpDataState extends State<PpData> {
   get _chosenValue => null;
   static const IconData male_rounded =
-      IconData(0xf89d, fontFamily: 'MaterialIcons');
+  IconData(0xf89d, fontFamily: 'MaterialIcons');
   static const IconData female_rounded =
-      IconData(0xf73d, fontFamily: 'MaterialIcons');
+  IconData(0xf73d, fontFamily: 'MaterialIcons');
 
   static final List<NewObject> title = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
@@ -295,27 +307,27 @@ class _PpDataState extends State<PpData> {
   ];
 
   static final List<NewObject> section = <NewObject>[
-    NewObject('SELECT TITLE', Icons.description),
+    NewObject('SELECT SECTION', Icons.description),
     NewObject('A', Icons.arrow_back_ios),
     NewObject('B', Icons.arrow_back_ios),
     NewObject('C', Icons.arrow_back_ios),
   ];
 
   static final List<NewObject> yesorno = <NewObject>[
-    NewObject('SELECT TITLE', Icons.description),
+    NewObject('SELECT THE OPTION', Icons.description),
     NewObject('YES', Icons.arrow_back_ios),
     NewObject('NO', Icons.arrow_back_ios),
   ];
 
   static final List<NewObject> becgrade = <NewObject>[
-    NewObject('SELECT TITLE', Icons.description),
+    NewObject('SELECT BEC GRADE', Icons.description),
     NewObject('PRELIMINARY', Icons.arrow_back_ios),
     NewObject('VANTAGE', Icons.arrow_back_ios),
     NewObject('HIGHER', Icons.arrow_back_ios),
   ];
 
   static final List<NewObject> hord = <NewObject>[
-    NewObject('SELECT TITLE', Icons.description),
+    NewObject('SELECT THE OPTION', Icons.description),
     NewObject('HOSTEL', Icons.arrow_back_ios),
     NewObject('DAY SCHOLAR', Icons.arrow_back_ios),
   ];
@@ -417,6 +429,7 @@ class _PpDataState extends State<PpData> {
   ];
 
   //DropBox a=key.num;
+
 
 //BACK BUTTON
   Widget _backButton() {
@@ -555,21 +568,21 @@ class _PpDataState extends State<PpData> {
                 value: dropbox.elementAt(i), // currently selected item
                 items: key
                     .map((item) => DropdownMenuItem<NewObject>(
-                          child: Row(
-                            children: [
-                              Icon(item.icon),
-                              const SizedBox(width: 8),
-                              Text(
-                                item.title,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                          value: item,
-                        ))
+                  child: Row(
+                    children: [
+                      Icon(item.icon),
+                      const SizedBox(width: 8),
+                      Text(
+                        item.title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  value: item,
+                ))
                     .toList(),
                 onChanged: (value) => setState(() {
                   dropbox[i] = value;
@@ -669,7 +682,7 @@ class _PpDataState extends State<PpData> {
               height: double.infinity,
               width: double.infinity,
               child:
-                  Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover)),
+              Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover)),
           Positioned(
             top: -MediaQuery.of(context).size.height * .45,
             right: -MediaQuery.of(context).size.width * .4,

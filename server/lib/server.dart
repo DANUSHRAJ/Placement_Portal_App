@@ -110,6 +110,40 @@ void start() async {
     }
   ]);
 
+  serv.post('/getoneprofile', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('profile');
+//      return res.json(await coll.findOne(where.eq('regno', req.body['regno'])));
+      final profile = await coll.findOne(where.eq('regno', req.body['regno']));
+      return res.json(profile);
+    }
+  ]);
+
+  serv.post('/uploadppdata', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('profile');
+      await coll.save(req.body);
+//      log('$req.body');
+      return res.json(
+        await coll.findOne(where.eq('regno', req.body['regno'])),
+      );
+    }
+  ]);
+
+  serv.post('/uploadppdataex', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('profile');
+      await coll.update(where.eq('regno', req.body['regno']), {'\$set': req.body});
+//      log('$req.body');
+      return res.json(
+        await coll.findOne(where.eq('regno', req.body['regno'])),
+      );
+    }
+  ]);
+
   // serv.delete('/:id', [
   //   setCors,
   //   (ServRequest req, ServResponse res) async {
