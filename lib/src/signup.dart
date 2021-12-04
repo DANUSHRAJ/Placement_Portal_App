@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/signupviewdata.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
