@@ -101,9 +101,6 @@ void profile(
   ];
   int check = -1;
 
-  final ProfileApi api = ProfileApi();
-  await api.uploadppdata(compareList, profile);
-
   Future showdialog(BuildContext context, String message) async {
     return showDialog(
         context: context,
@@ -364,6 +361,9 @@ void profile(
   } catch (e) {}
 
   print(profile.length);
+
+  final ProfileApi api = ProfileApi();
+  await api.uploadppdata(compareList, profile);
 }
 
 class PpData extends StatefulWidget {
