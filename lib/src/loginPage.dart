@@ -14,7 +14,6 @@ import '../main.dart';
 import 'Account.dart';
 import 'Widget/bezierContainer.dart';
 import 'api.dart';
-import 'check.dart';
 import 'home_screen.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,25 +33,30 @@ class _LoginPageState extends State<LoginPage> {
   final account = new AccountsApi();
 
   void _findAccount(String regnovar, String passvar) async {
-    int check = 1;
-    final result = await widget.api.getOneAccount(regnovar);
-    if (result.regno == regnovar && result.password == passvar) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => HomeScreen(
-                    regnovar: result.regno,
-                    usernamevar: result.name,
-                  )));
-      check = 0;
-    }
-    if (check == 1) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => CheckData(
-                    message: "FAILED",
-                  )));
+    if (regnovar.isEmpty) {
+      _showtoast("* Username field is empty");
+    } else if (passvar.isEmpty) {
+      _showtoast("* Password field is empty");
+    } else {
+      final result = await widget.api.getOneAccount(regnovar);
+      if (result.regno == regnovar && result.password == passvar) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                      regnovar: result.regno,
+                      usernamevar: result.name,
+                    )));
+      } else {
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => CheckData(
+        //               message: "FAILED",
+        //             )));
+        _showtoast(
+            "                 LOGIN FAILED\nUsername or Password is Incorrect");
+      }
     }
   }
 
@@ -65,32 +69,35 @@ class _LoginPageState extends State<LoginPage> {
     }
     if (check == 1) {
       final result = await widget.api.getOneAccount(regnovar);
-      if (result.regno == regnovar) {
-        var user_name = result.name;
-        var user_email = result.username;
-        var user_pass = result.password;
-        final serviceId = 'service_05h93bt';
-        final templateId = 'template_ak2pbyr';
-        final userId = 'user_I2dh7BAhEyocnuYr33mnr';
+      if (result == null) {
+      } else {
+        if (result.regno == regnovar) {
+          var user_name = result.name;
+          var user_email = result.username;
+          var user_pass = result.password;
+          final serviceId = 'service_05h93bt';
+          final templateId = 'template_ak2pbyr';
+          final userId = 'user_I2dh7BAhEyocnuYr33mnr';
 
-        final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
-        final response = await http.post(url,
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: jsonEncode({
-              'service_id': serviceId,
-              'template_id': templateId,
-              'user_id': userId,
-              'template_params': {
-                'user_name': "$user_name",
-                'user_email': "$user_email",
-                'user_subject': "Forgot Password",
-                'user_message': "$regnovar's password is: $user_pass",
-              }
-            }));
+          final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+          final response = await http.post(url,
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: jsonEncode({
+                'service_id': serviceId,
+                'template_id': templateId,
+                'user_id': userId,
+                'template_params': {
+                  'user_name': "$user_name",
+                  'user_email': "$user_email",
+                  'user_subject': "Forgot Password",
+                  'user_message': "$regnovar's password is: $user_pass",
+                }
+              }));
 
-        print(response.body);
+          print(response.body);
+        }
       }
     }
   }
@@ -101,26 +108,6 @@ class _LoginPageState extends State<LoginPage> {
     fToast = FToast();
     fToast.init(context);
   }
-
-  // Widget _showToast() {
-  //   return Container(
-  //     padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-  //     decoration: BoxDecoration(
-  //       borderRadius: BorderRadius.circular(25.0),
-  //       color: Colors.greenAccent,
-  //     ),
-  //     child: Row(
-  //       mainAxisSize: MainAxisSize.min,
-  //       children: [
-  //         Icon(Icons.check),
-  //         SizedBox(
-  //           width: 12.0,
-  //         ),
-  //         Text("This is a Custom Toast"),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   Widget _backButton() {
     return InkWell(
@@ -148,10 +135,6 @@ class _LoginPageState extends State<LoginPage> {
     Colors.yellow,
     Colors.red,
     Colors.black,
-    // Colors.red,
-    // Colors.yellow,
-    // Colors.blue,
-    // Colors.limeAccent,
   ];
 
   static const colorizeTextStyle = TextStyle(
@@ -180,10 +163,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
               isRepeatingAnimation: true,
               totalRepeatCount: 10000,
-              // pause: const Duration(milliseconds: 1000),
-              // onTap: () {
-              //   print("Tap Event");
-              // },
             ),
           ),
           SizedBox(
@@ -204,13 +183,23 @@ class _LoginPageState extends State<LoginPage> {
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
             keyboardType: TextInputType.number,
-            // inputFormatters: <TextInputFormatter>[
-            //   FilteringTextInputFormatter.digitsOnly
+
             // ],
           )
         ],
       ),
     );
+  }
+
+  void _showtoast(String value) {
+    Fluttertoast.showToast(
+        msg: value,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.limeAccent,
+        fontSize: 16.0);
   }
 
   Widget _entryField1(String title, {bool isPassword = false}) {
@@ -295,20 +284,6 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.limeAccent,
               fontWeight: FontWeight.bold),
         ),
-        // child: AnimatedTextKit(
-        //   animatedTexts: [
-        //     ColorizeAnimatedText(
-        //       "LOGIN",
-        //       textStyle: colorizeTextStyle,
-        //       colors: colorizeColors1,
-        //     )
-        //   ],
-        //   isRepeatingAnimation: true,
-        //   totalRepeatCount: 100,
-        //   pause: const Duration(milliseconds: 1000),
-        // onTap: () {
-        //   print("Tap Event");
-        // },
       ),
     );
   }
@@ -450,34 +425,6 @@ class _LoginPageState extends State<LoginPage> {
           ]),
     );
   }
-
-  void showToast() {
-    Fluttertoast.showToast(
-        msg: 'Some text',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white);
-  }
-
-  // Widget _toast() {
-  //   final key = new GlobalKey<ScaffoldState>();
-  //   return new Container(
-  //     key: key,
-  //     floatingActionButton: new Builder(builder: (BuildContext context) {
-  //       return new FloatingActionButton(
-  //         onPressed: () {
-  //           key.currentState.showSnackBar(new SnackBar(
-  //             content: new Text("Sending Message"),
-  //           ));
-  //         },
-  //         tooltip: 'Increment',
-  //         child: new Icon(Icons.add),
-  //       );
-  //     }),
-  //   );
-  // }
 
   Widget _emailPasswordWidget() {
     return Column(

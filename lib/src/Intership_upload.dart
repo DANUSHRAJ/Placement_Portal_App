@@ -11,8 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'api.dart';
-
-import 'check.dart';
 import 'internapi.dart';
 import 'loginPage.dart';
 
@@ -65,13 +63,13 @@ class _IntershipUploadState extends State<IntershipUpload> {
       check = 0;
     });
     if (check == 1) {
-      Navigator.push(
-          // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
-          context,
-          MaterialPageRoute(
-              builder: (context) => CheckData(
-                    message: "FAILURE",
-                  )));
+      // Navigator.push(
+      //     // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => CheckData(
+      //               message: "FAILURE",
+      //             )));
     }
   }
 
