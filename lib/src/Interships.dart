@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/Intership_upload.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
@@ -8,15 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
-String rn;
-String un;
+import 'IWCDetails.dart';
+import 'internapi.dart';
 
 class Interships extends StatefulWidget {
   final String regnovar;
   final String usernamevar;
 
-  const Interships({Key key, this.regnovar, this.usernamevar})
-      : super(key: key);
+  final InternsApi api = InternsApi();
+
+  Interships({Key key, this.regnovar, this.usernamevar}) : super(key: key);
 
   @override
   _IntershipsState createState() =>
@@ -29,7 +32,33 @@ class _IntershipsState extends State<Interships> {
 
   _IntershipsState({this.regnovar, this.usernamevar});
 
+  List<IWCDetails> internDet = [];
+
+  var title, name, recno;
+
+  void _loadInternDetails([bool showSpinner = false]) async {
+//    log('Regno: $regnovar');
+
+    await widget.api
+        .getinternsDet(regnovar)
+        .then((value) => {internDet = value});
+    Map<int, IWCDetails> map = internDet.asMap();
+    for (int i = 0; i < map.length; i++) {
+      title = map[i].title;
+      name = map[i].name;
+      recno = (i + 1).toString();
+      log('Record: RecNo: $recno-Title: $title-Cmp Name: $name');
+    }
+  }
+
   int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadInternDetails();
+//    log('$recno');
+  }
 
   Widget _backButton() {
     return InkWell(

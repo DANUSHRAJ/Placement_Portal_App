@@ -68,6 +68,15 @@ void start() async {
     }
   ]);
 
+  serv.post('/getinterndet', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('interns');
+      final interns = await coll.find(where.eq('regno', req.body['regno'])).toList();
+      return res.status(200).json({'interns': interns});
+    }
+  ]);
+
   serv.post('/uploadintern', [
     setCors,
     (ServRequest req, ServResponse res) async {

@@ -49,7 +49,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
   void _addInternDetails(String if_title, String if_name, String if_sd,
       String if_ed, String if_clink, String if_plink, String if_flink) async {
 //    log('$name-$regno-$un-$pwd');
-    log('$regnovar-$usernamevar');
+//    log('$regnovar-$usernamevar');
     if_flink = "";
     final upload_intern = await widget.api.uploadIntern(regnovar, usernamevar,
         if_title, if_name, if_sd, if_ed, if_clink, if_plink, if_flink);
