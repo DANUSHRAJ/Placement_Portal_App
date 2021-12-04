@@ -8,7 +8,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'Intership_upload.dart';
-import 'check.dart';
 import 'wsapi.dart';
 
 class WorkshopUpload extends StatefulWidget {
@@ -66,13 +65,13 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
       check = 0;
     });
     if (check == 1) {
-      Navigator.push(
-          // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
-          context,
-          MaterialPageRoute(
-              builder: (context) => CheckData(
-                    message: "FAILURE",
-                  )));
+      // Navigator.push(
+      //     // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => CheckData(
+      //               message: "FAILURE",
+      //             )));
     }
   }
 

@@ -30,7 +30,13 @@ class HomeScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: new Text("Cancel")),
+                    child: new Text(
+                      'Cancel',
+                      style: GoogleFonts.adventPro(
+                          fontSize: 15,
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold),
+                    )),
                 new RaisedButton(
                     onPressed: () {
                       Navigator.push(
@@ -39,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => WelcomePage()));
                     },
                     child: new Text(
-                      'WORKSHOPS',
+                      'Exit',
                       style: GoogleFonts.adventPro(
                           fontSize: 15,
                           color: Colors.black,

@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/MyHomePage.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/MyPDFList.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
@@ -9,8 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'api.dart';
-
-import 'check.dart';
 import 'internapi.dart';
 import 'loginPage.dart';
 
@@ -63,13 +63,13 @@ class _IntershipUploadState extends State<IntershipUpload> {
       check = 0;
     });
     if (check == 1) {
-      Navigator.push(
-          // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
-          context,
-          MaterialPageRoute(
-              builder: (context) => CheckData(
-                    message: "FAILURE",
-                  )));
+      // Navigator.push(
+      //     // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
+      //     context,
+      //     MaterialPageRoute(
+      //         builder: (context) => CheckData(
+      //               message: "FAILURE",
+      //             )));
     }
   }
 
@@ -478,7 +478,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
                                   context,
                                   PageTransition(
                                       type: PageTransitionType.bottomToTop,
-                                      child: PpData()));
+                                      child: MyHomePage()));
                             },
                           ),
                         ],

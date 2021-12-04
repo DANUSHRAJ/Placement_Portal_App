@@ -5,12 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/signupviewdata.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
 import 'Account.dart';
 import 'api.dart';
-import 'check.dart';
 import 'home_screen.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -50,15 +49,20 @@ class _SignUpPageState extends State<SignUpPage> {
   void _addAccount(String name, String regno, String un, String pwd) async {
     int check = 1;
     if (name.isEmpty || regno.isEmpty || un.isEmpty || pwd.isEmpty) {
+      _showtoast("* Fields are empty");
       check = 0;
     }
     if (!RegExp(r'^3124\d{8}$').hasMatch(regno)) {
+      _showtoast("* Incorrect Register Number format");
       check = 0;
     }
     if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(un)) {
+      _showtoast("* Incorrect E-mail format");
       check = 0;
     }
     if (!RegExp(r'[a-zA-Z0-9!@#$&()\\-`.+,/\"]{8,16}').hasMatch(pwd)) {
+      _showtoast(
+          "* Incorrect Password format \n-length must be 8-16 characters");
       check = 0;
     }
     if (check == 1) {
@@ -66,35 +70,35 @@ class _SignUpPageState extends State<SignUpPage> {
 //      log('Regno: $regno');
       final result = await widget.api.getOneAccount(regno);
 //      log('Result: $result');
-      if(result==null){}
-      else if (result.regno == regno && result.username == un &&
+      if (result == null) {
+      } else if (result.regno == regno &&
+          result.username == un &&
           result.password == pwd) {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    HomeScreen(
+                builder: (context) => HomeScreen(
                       regnovar: result.regno,
                       usernamevar: result.name,
                     )));
         check = 2;
-      }
-      else if (result.regno == regno || result.username == un) {
+      } else if (result.regno == regno || result.username == un) {
         log('Try to Login with correct credentials!');
+        _showtoast("Try to Login with correct credentials!");
         check = 0;
       }
-    }
-    else {
+    } else {
       log('Unsuccessfull coz incorrect values!');
+      _showtoast("* Unsuccessfull coz incorrect values!");
     }
     if (check == 1) {
       //String.substring(int startIndex, [ int endIndex ])
-      var batch=int.parse(regno.substring(4,6));
-      batch+=2004;
+      var batch = int.parse(regno.substring(4, 6));
+      batch += 2004;
       var batchstr = batch.toString();
 //      log('Batch: $batch');
       final createdAccount =
-      await widget.api.createAccount(name, regno, un, pwd, batchstr);
+          await widget.api.createAccount(name, regno, un, pwd, batchstr);
       check = 1;
       setState(() {
         Navigator.push(
@@ -102,15 +106,27 @@ class _SignUpPageState extends State<SignUpPage> {
         check = 0;
       });
       if (check == 1) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    CheckData(
-                      message: "FAILURE",
-                    )));
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) =>
+        //             CheckData(
+        //               message: "FAILURE",
+        //             )));
+        _showtoast("SIGNUP FAILED");
       }
     }
+  }
+
+  void _showtoast(String value) {
+    Fluttertoast.showToast(
+        msg: value,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.limeAccent,
+        fontSize: 16.0);
   }
 
   Widget _backButton() {

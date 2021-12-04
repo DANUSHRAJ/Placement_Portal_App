@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/Placements.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer1.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/signup.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ import '../main.dart';
 import 'Account.dart';
 import 'Widget/bezierContainer.dart';
 import 'api.dart';
-import 'check.dart';
 import 'home_screen.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,52 +34,43 @@ class _LoginPageState extends State<LoginPage> {
 
   void _findAccount(String regnovar, String passvar) async {
     if (regnovar.isEmpty) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) =>
-                  CheckData(
-                    message: "FAILED",
-                  )));}
-    else {
-      int check = 1;
+      _showtoast("* Username field is empty");
+    } else if (passvar.isEmpty) {
+      _showtoast("* Password field is empty");
+    } else {
       final result = await widget.api.getOneAccount(regnovar);
-      if (result == null) {}
-      else {
-        if (result.regno == regnovar && result.password == passvar) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      HomeScreen(
-                        regnovar: result.regno,
-                        usernamevar: result.name,
-                      )));
-          check = 0;
-        }
-      }
-      if (check == 1) {
+      if (result.regno == regnovar && result.password == passvar) {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    CheckData(
-                      message: "FAILED",
+                builder: (context) => HomeScreen(
+                      regnovar: result.regno,
+                      usernamevar: result.name,
                     )));
+      } else {
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => CheckData(
+        //               message: "FAILED",
+        //             )));
+        _showtoast(
+            "                 LOGIN FAILED\nUsername or Password is Incorrect");
       }
     }
   }
 
+  FToast fToast;
   void _findAccountforFP(String regnovar) async {
     int check = 1;
-    if(regnovar.isEmpty){
+    if (regnovar.isEmpty) {
       log('Please fill the Register Number');
-      check=0;
+      check = 0;
     }
-    if(check==1) {
+    if (check == 1) {
       final result = await widget.api.getOneAccount(regnovar);
-      if(result==null){}
-      else {
+      if (result == null) {
+      } else {
         if (result.regno == regnovar) {
           var user_name = result.name;
           var user_email = result.username;
@@ -89,8 +80,7 @@ class _LoginPageState extends State<LoginPage> {
           final userId = 'user_I2dh7BAhEyocnuYr33mnr';
 
           final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
-          final response = await http.post(
-              url,
+          final response = await http.post(url,
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -104,8 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                   'user_subject': "Forgot Password",
                   'user_message': "$regnovar's password is: $user_pass",
                 }
-              })
-          );
+              }));
 
           print(response.body);
         }
@@ -116,6 +105,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    fToast = FToast();
+    fToast.init(context);
   }
 
   Widget _backButton() {
@@ -138,25 +129,12 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  static const colorizeColors1 = [
-    Colors.limeAccent,
-    Colors.red,
-    Colors.yellow,
-    Colors.blue,
-    Colors.amber,
-
-    //Colors.black,
-  ];
   static const colorizeColors = [
     Colors.limeAccent,
     Colors.blue,
     Colors.yellow,
     Colors.red,
     Colors.black,
-    // Colors.red,
-    // Colors.yellow,
-    // Colors.blue,
-    // Colors.limeAccent,
   ];
 
   static const colorizeTextStyle = TextStyle(
@@ -185,10 +163,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
               isRepeatingAnimation: true,
               totalRepeatCount: 10000,
-              // pause: const Duration(milliseconds: 1000),
-              // onTap: () {
-              //   print("Tap Event");
-              // },
             ),
           ),
           SizedBox(
@@ -209,13 +183,23 @@ class _LoginPageState extends State<LoginPage> {
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
             keyboardType: TextInputType.number,
-            // inputFormatters: <TextInputFormatter>[
-            //   FilteringTextInputFormatter.digitsOnly
+
             // ],
           )
         ],
       ),
     );
+  }
+
+  void _showtoast(String value) {
+    Fluttertoast.showToast(
+        msg: value,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.limeAccent,
+        fontSize: 16.0);
   }
 
   Widget _entryField1(String title, {bool isPassword = false}) {
@@ -300,20 +284,6 @@ class _LoginPageState extends State<LoginPage> {
               color: Colors.limeAccent,
               fontWeight: FontWeight.bold),
         ),
-        // child: AnimatedTextKit(
-        //   animatedTexts: [
-        //     ColorizeAnimatedText(
-        //       "LOGIN",
-        //       textStyle: colorizeTextStyle,
-        //       colors: colorizeColors1,
-        //     )
-        //   ],
-        //   isRepeatingAnimation: true,
-        //   totalRepeatCount: 100,
-        //   pause: const Duration(milliseconds: 1000),
-        // onTap: () {
-        //   print("Tap Event");
-        // },
       ),
     );
   }
@@ -456,34 +426,6 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void showToast() {
-    Fluttertoast.showToast(
-        msg: 'Some text',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 1,
-        backgroundColor: Colors.red,
-        textColor: Colors.white);
-  }
-
-  // Widget _toast() {
-  //   final key = new GlobalKey<ScaffoldState>();
-  //   return new Container(
-  //     key: key,
-  //     floatingActionButton: new Builder(builder: (BuildContext context) {
-  //       return new FloatingActionButton(
-  //         onPressed: () {
-  //           key.currentState.showSnackBar(new SnackBar(
-  //             content: new Text("Sending Message"),
-  //           ));
-  //         },
-  //         tooltip: 'Increment',
-  //         child: new Icon(Icons.add),
-  //       );
-  //     }),
-  //   );
-  // }
-
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
@@ -531,19 +473,12 @@ class _LoginPageState extends State<LoginPage> {
                     child: _createAccountLabel1()),
                 _divider(),
                 _createAccountLabel(),
+                //_showToast()
               ],
             ),
           ),
         ),
       ],
     )));
-    // child: Fluttertoast.showToast(
-    //     msg: "This is Center Short Toast",
-    //     toastLength: Toast.LENGTH_SHORT,
-    //     gravity: ToastGravity.CENTER,
-    //     timeInSecForIosWeb: 1,
-    //     backgroundColor: Colors.red,
-    //     textColor: Colors.white,
-    //     fontSize: 16.0)));
   }
 }
