@@ -1,0 +1,12 @@
+title          				0
+gender				1
+college				2
+department			3
+section				4
+arrears  Y/N			5
+spors quota Y/N			6
+BEC EXAM STATUS 			7
+BEC EXAM GRADE			8
+higher studies Y/N			9
+------SKILL Cerifi			10
+HOSTEL / DAY SCHOLAR		11
