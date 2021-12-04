@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
-
+//import 'package:SJIT_PLACEMENT_PORTAL/src/signupviewdata.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // import 'api.dart';
@@ -14,9 +14,11 @@ import 'package:google_fonts/google_fonts.dart';
 // import 'home_screen.dart';
 import 'dart:developer';
 
+import 'ProfileData.dart';
 import 'profileapi.dart';
 
-void profile(List<String> profile) async {
+void profile(
+    BuildContext context, List<String> profile, List<NewObject> dropbox) async {
   List<String> compareList = [
     'UNIVERSITY REG NO',
     'ROLL NO',
@@ -98,158 +100,270 @@ void profile(List<String> profile) async {
     'POSTAL CODE'
   ];
   int check = -1;
-  for (int i = 0; i < profile.length; i++) {
-    if (profile[i] == 'null' || profile[i].isEmpty) {
-      check = i;
-      break;
-    }
-  }
-  if (check != -1) {
-    print(compareList[check] + " was left blank");
-  }
-  //name
-  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[2]))) {
-    print("candidate");
-  }
-  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[3]))) {
-    print("first name");
-  }
-  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[4]))) {
-    print("last name");
-  }
-  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[64]))) {
-    print("father name");
-  }
-  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[68]))) {
-    print("mother name");
-  }
-//  if(dropbox[2].title=='SELECT COLLEGE'){
-//    showdialog(context, "please select the Valid COLLEGE");
-//    return;
-//  }
-  //roll no
-  if (profile[0].length != 8) {
-    print("Check roll number");
-  }
-  // dob
-  // dd/mm/yyyy
-  if (!RegExp(r'^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$')
-      .hasMatch(profile[5])) {
-    print("dob was invalid");
-  }
-  // mm/dd/yyyy
-  if (!RegExp(r'^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$')
-      .hasMatch(profile[6])) {
-    print("dob was invalid");
-  }
-  // yyyy/mm/dd
-  if (!RegExp(r'^\d{4}\/(0?[1-9]|1[012])\/(0?[1-9]|[12][0-9]|3[01])$')
-      .hasMatch(profile[7])) {
-    print("dob was invalid");
-  }
-
-  //year
-  if (!RegExp(r'^\d{4}$').hasMatch(profile[8])) {
-    print("year of admission");
-  }
-  if (!RegExp(r'^\d{4}$').hasMatch(profile[12])) {
-    print("10th passing");
-  }
-  if (!RegExp(r'^\d{4}$').hasMatch(profile[18])) {
-    print("12th passing");
-  }
-  if (!RegExp(r'^\d{4}$').hasMatch(profile[23])) {
-    print("Diploma passing");
-  }
-  if (!RegExp(r'^\d{4}$').hasMatch(profile[49])) {
-    print("UG passing");
-  }
-
-  //percentage
-  if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
-      .hasMatch(profile[9])) {
-    print("10th percentage");
-  }
-  if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
-      .hasMatch(profile[15])) {
-    print("10th percentage");
-  }
-  if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
-      .hasMatch(profile[22])) {
-    print("diploma percentage");
-  }
-  if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
-      .hasMatch(profile[47])) {
-    print("UG percentage");
-  }
-  //gpa
-  for (int i = 26; i < 35; i++) {
-    if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
-        .hasMatch(profile[i])) {
-      print(compareList[i] + "was invalid");
-    }
-  }
-  //arrear
-  for (int i = 35; i < 44; i++) {
-    if (false) {}
-  }
-
-  // phone number
-  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(profile[53])) {
-    print("land line number");
-  }
-  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(profile[54])) {
-    print("primary number");
-  }
-  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(profile[55])) {
-    print("emergency number");
-  }
-  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(profile[66])) {
-    print("father's mobile number");
-  }
-  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(profile[70])) {
-    print("mother's mobile number");
-  }
-
-  //email id
-  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
-      .hasMatch(profile[56])) {
-    print("primary");
-  }
-  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
-      .hasMatch(profile[57])) {
-    print("alternate");
-  }
-  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
-      .hasMatch(profile[67])) {
-    print("father email id");
-  }
-  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
-      .hasMatch(profile[71])) {
-    print("mother email id");
-  }
-
-  //pancard
-  if (!RegExp(r'[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}$')
-      .hasMatch(profile[60])) {
-    print("pan card");
-  }
-
-    //postal code
-//    if (!RegExp(r'^\d{6}$').hasMatch(profile[77])) {
-//      //print("postal code");
-//      showdialog(context, "Please Check the " + compareList[77]);
-//      return;
-//    }
-//  catch(e){}
-
-
-  print(profile.length);
 
   final ProfileApi api = ProfileApi();
-//  var result = jsonEncode(jsonformat);
-//  log('$result');
   await api.uploadppdata(compareList, profile);
+
+  Future showdialog(BuildContext context, String message) async {
+    return showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+              title: Center(
+                child: new Text(
+                  message,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              actions: [
+                Center(
+                  child: new FlatButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.black),
+                      ),
+                      color: Colors.deepPurpleAccent,
+                      splashColor: Colors.purpleAccent,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: new Text("OK")),
+                ),
+                //Text("Confirm", TextStyle())),
+              ],
+            ));
+  }
+
+  // for(int i=0;i<dropbox.length;i++){
+  //   print(dropbox[i].title);
+  // }
+  if (dropbox[0].title == 'SELECT TITLE') {
+    showdialog(context, "please select the Valid TITLE");
+    return;
+  }
+  if (dropbox[1].title == 'SELECT GENDER') {
+    showdialog(context, "please select the Valid GENDER");
+    return;
+  }
+  if (dropbox[2].title == 'SELECT COLLEGE') {
+    showdialog(context, "please select the Valid COLLEGE");
+    return;
+  }
+  if (dropbox[3].title == 'SELECT DEPARTMENT') {
+    showdialog(context, "please select the Valid DEPARTMENT");
+    return;
+  }
+  if (dropbox[4].title == 'SELECT SECTION') {
+    showdialog(context, "please select the Valid SECTION");
+    return;
+  }
+  if (dropbox[8].title == 'SELECT BEC GRADE') {
+    showdialog(context, "please select the Valid SECTION");
+    return;
+  }
+  for (int i = 5; i < 12; i++) {
+    if (i != 8 && dropbox[i].title == 'SELECT THE OPTION') {
+      showdialog(context, "please select the Valid OPTION");
+      return;
+    }
+  }
+
+  try {
+    for (int i = 0; i < profile.length; i++) {
+      if (profile[i] == 'null' || profile[i].isEmpty) {
+        check = i;
+        break;
+      }
+    }
+    if (check != -1) {
+      showdialog(context, "please fill the " + compareList[check]);
+      //print(compareList[check]+" was left blank");
+      return;
+    }
+    //name
+    if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[2]))) {
+      showdialog(context, "Please Check the " + compareList[2]);
+      return;
+      //print("candidate");
+    }
+    if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[3]))) {
+      showdialog(context, "Please Check the " + compareList[3]);
+      return;
+      //print("first name");
+    }
+    if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[4]))) {
+      showdialog(context, "Please Check the " + compareList[4]);
+      return;
+      //print("last name");
+    }
+    if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[64]))) {
+      showdialog(context, "Please Check the " + compareList[64]);
+      return;
+      //print("father name");
+    }
+    if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[68]))) {
+      showdialog(context, "Please Check the " + compareList[68]);
+      return;
+      //print("mother name");
+    }
+
+    //register number
+    if (!RegExp(r'^3124\d{8}$').hasMatch(profile[0])) {
+      showdialog(context, "Please Check the " + compareList[0]);
+      return;
+      //print("Register number was invalid");
+    }
+    //roll no
+    if (profile[1].length != 8) {
+      showdialog(context, "Please Check the " + compareList[1]);
+      return;
+      //print("Check roll number");
+    }
+    // dob
+    // dd-mm-yyyy
+    if (!RegExp(r'^([0-2][0-9]|(3)[0-1])(\-)(((0)[0-9])|((1)[0-2]))(\-)\d{4}$')
+        .hasMatch(profile[5])) {
+      //print("dob was invalid");
+      showdialog(context, "Please Check the " + compareList[5]);
+      return;
+    }
+    // mm-dd-yyyy
+    if (!RegExp(r'^(0[1-9]|1[0-2])\-(0[1-9]|1\d|2\d|3[01])\-(19|20)\d{2}$')
+        .hasMatch(profile[6])) {
+      //print("dob was invalid");
+      showdialog(context, "Please Check the " + compareList[6]);
+      return;
+    }
+    // yyyy-mm-dd
+    if (!RegExp(r'^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$')
+        .hasMatch(profile[7])) {
+      //print("dob was invalid");
+      showdialog(context, "Please Check the " + compareList[7]);
+      return;
+    }
+
+    //year
+    if (!RegExp(r'^\d{4}$').hasMatch(profile[8])) {
+      showdialog(context, "Please Check the " + compareList[8]);
+      return;
+      //print("year of admission");
+    }
+    if (!RegExp(r'^\d{4}$').hasMatch(profile[12])) {
+      showdialog(context, "Please Check the " + compareList[12]);
+      return;
+      // print("10th passing");
+    }
+    if (!RegExp(r'^\d{4}$').hasMatch(profile[18])) {
+      //print("12th passing");
+      showdialog(context, "Please Check the " + compareList[18]);
+      return;
+    }
+
+    //percentage
+    if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+        .hasMatch(profile[9])) {
+      //print("10th percentage");
+      showdialog(context, "Please Check the " + compareList[9]);
+      return;
+    }
+    if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+        .hasMatch(profile[15])) {
+      //print("12th percentage");
+      showdialog(context, "Please Check the " + compareList[15]);
+      return;
+    }
+
+    //gpa
+    for (int i = 26; i < 35; i++) {
+      if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+          .hasMatch(profile[i])) {
+        //print(compareList[i]+" was invalid");
+        showdialog(context, "Please Check the " + compareList[i]);
+        return;
+      }
+    }
+    //arrear
+    for (int i = 35; i < 44; i++) {
+      if (!RegExp(r'^(?:[1-9]|[1-4][0-9]|50)$').hasMatch(profile[i])) {
+        //print(compareList[i]+" was invalid");
+        showdialog(context, "Please Check the " + compareList[i]);
+        return;
+      }
+    }
+
+    // phone number
+    if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(profile[53])) {
+      //print("land line number");
+      showdialog(context, "Please Check the " + compareList[53]);
+      return;
+    }
+    if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(profile[54])) {
+      //print("primary number");
+      showdialog(context, "Please Check the " + compareList[54]);
+      return;
+    }
+    if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(profile[55])) {
+      //print("emergency number");
+      showdialog(context, "Please Check the " + compareList[55]);
+      return;
+    }
+    if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(profile[66])) {
+      //print("father's mobile number");
+      showdialog(context, "Please Check the " + compareList[66]);
+      return;
+    }
+    if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(profile[70])) {
+      //print("mother's mobile number");
+      showdialog(context, "Please Check the " + compareList[70]);
+      return;
+    }
+
+    //email id
+    if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+        .hasMatch(profile[56])) {
+      //print("primary");
+      showdialog(context, "Please Check the " + compareList[56]);
+      return;
+    }
+    if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+        .hasMatch(profile[57])) {
+      //print("alternate");
+      showdialog(context, "Please Check the " + compareList[57]);
+      return;
+    }
+    if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+        .hasMatch(profile[67])) {
+      //print("father email id");
+      showdialog(context, "Please Check the " + compareList[67]);
+      return;
+    }
+    if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+        .hasMatch(profile[71])) {
+      //print("mother email id");
+      showdialog(context, "Please Check the " + compareList[71]);
+      return;
+    }
+
+    //pancard
+    if (!RegExp(r'[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}$')
+        .hasMatch(profile[60])) {
+      //print("pan card");
+      showdialog(context, "Please Check the " + compareList[60]);
+      return;
+    }
+
+    //postal code
+    if (!RegExp(r'^\d{6}$').hasMatch(profile[77])) {
+      //print("postal code");
+      showdialog(context, "Please Check the " + compareList[77]);
+      return;
+    }
+  } catch (e) {}
+
+  print(profile.length);
 }
 
 class PpData extends StatefulWidget {
@@ -275,9 +389,9 @@ class NewObject {
 class _PpDataState extends State<PpData> {
   get _chosenValue => null;
   static const IconData male_rounded =
-  IconData(0xf89d, fontFamily: 'MaterialIcons');
+      IconData(0xf89d, fontFamily: 'MaterialIcons');
   static const IconData female_rounded =
-  IconData(0xf73d, fontFamily: 'MaterialIcons');
+      IconData(0xf73d, fontFamily: 'MaterialIcons');
 
   static final List<NewObject> title = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
@@ -430,7 +544,6 @@ class _PpDataState extends State<PpData> {
 
   //DropBox a=key.num;
 
-
 //BACK BUTTON
   Widget _backButton() {
     return InkWell(
@@ -568,21 +681,21 @@ class _PpDataState extends State<PpData> {
                 value: dropbox.elementAt(i), // currently selected item
                 items: key
                     .map((item) => DropdownMenuItem<NewObject>(
-                  child: Row(
-                    children: [
-                      Icon(item.icon),
-                      const SizedBox(width: 8),
-                      Text(
-                        item.title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  value: item,
-                ))
+                          child: Row(
+                            children: [
+                              Icon(item.icon),
+                              const SizedBox(width: 8),
+                              Text(
+                                item.title,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                          value: item,
+                        ))
                     .toList(),
                 onChanged: (value) => setState(() {
                   dropbox[i] = value;
@@ -682,7 +795,7 @@ class _PpDataState extends State<PpData> {
               height: double.infinity,
               width: double.infinity,
               child:
-              Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover)),
+                  Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover)),
           Positioned(
             top: -MediaQuery.of(context).size.height * .45,
             right: -MediaQuery.of(context).size.width * .4,
@@ -840,7 +953,7 @@ class _PpDataState extends State<PpData> {
                             ),
                           ),
                           onPressed: () {
-                            profile(pp);
+                            profile(context, pp, dropbox);
                             //print(pp.length);
                             // for (int i = 0; i < pp.length; i++) {
                             //   print(pp[i].toString());
