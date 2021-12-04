@@ -33,25 +33,40 @@ class _LoginPageState extends State<LoginPage> {
   final account = new AccountsApi();
 
   void _findAccount(String regnovar, String passvar) async {
-    int check = 1;
-    final result = await widget.api.getOneAccount(regnovar);
-    if (result.regno == regnovar && result.password == passvar) {
+    if (regnovar.isEmpty) {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => HomeScreen(
-                    regnovar: result.regno,
-                    usernamevar: result.name,
-                  )));
-      check = 0;
-    }
-    if (check == 1) {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => CheckData(
+              builder: (context) =>
+                  CheckData(
                     message: "FAILED",
-                  )));
+                  )));}
+    else {
+      int check = 1;
+      final result = await widget.api.getOneAccount(regnovar);
+      if (result == null) {}
+      else {
+        if (result.regno == regnovar && result.password == passvar) {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      HomeScreen(
+                        regnovar: result.regno,
+                        usernamevar: result.name,
+                      )));
+          check = 0;
+        }
+      }
+      if (check == 1) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    CheckData(
+                      message: "FAILED",
+                    )));
+      }
     }
   }
 
@@ -63,34 +78,37 @@ class _LoginPageState extends State<LoginPage> {
     }
     if(check==1) {
       final result = await widget.api.getOneAccount(regnovar);
-      if (result.regno == regnovar) {
-        var user_name = result.name;
-        var user_email = result.username;
-        var user_pass = result.password;
-        final serviceId = 'service_05h93bt';
-        final templateId = 'template_ak2pbyr';
-        final userId = 'user_I2dh7BAhEyocnuYr33mnr';
+      if(result==null){}
+      else {
+        if (result.regno == regnovar) {
+          var user_name = result.name;
+          var user_email = result.username;
+          var user_pass = result.password;
+          final serviceId = 'service_05h93bt';
+          final templateId = 'template_ak2pbyr';
+          final userId = 'user_I2dh7BAhEyocnuYr33mnr';
 
-        final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
-        final response = await http.post(
-            url,
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: jsonEncode({
-              'service_id': serviceId,
-              'template_id': templateId,
-              'user_id': userId,
-              'template_params': {
-                'user_name': "$user_name",
-                'user_email': "$user_email",
-                'user_subject': "Forgot Password",
-                'user_message': "$regnovar's password is: $user_pass",
-              }
-            })
-        );
+          final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+          final response = await http.post(
+              url,
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: jsonEncode({
+                'service_id': serviceId,
+                'template_id': templateId,
+                'user_id': userId,
+                'template_params': {
+                  'user_name': "$user_name",
+                  'user_email': "$user_email",
+                  'user_subject': "Forgot Password",
+                  'user_message': "$regnovar's password is: $user_pass",
+                }
+              })
+          );
 
-        print(response.body);
+          print(response.body);
+        }
       }
     }
   }
