@@ -15,6 +15,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'dart:developer';
 
 import 'ProfileData.dart';
+import 'home_screen.dart';
 import 'profileapi.dart';
 
 void profile(
@@ -97,7 +98,8 @@ void profile(
     'PERMANENT ADDRESS LINE 2',
     'PERMANENT CITY',
     'STATE',
-    'POSTAL CODE'
+    'POSTAL CODE',
+    'Batch'
   ];
   int check = -1;
 
@@ -362,15 +364,25 @@ void profile(
 
   print(profile.length);
 
+  var batch = int.parse(profile[0].substring(4, 6));
+  batch += 2004;
+  profile[78] = batch.toString();
   final ProfileApi api = ProfileApi();
   await api.uploadppdata(compareList, profile);
 }
 
 class PpData extends StatefulWidget {
-  const PpData({Key key}) : super(key: key);
+  String regnovar;
+  String usernamevar;
+
+  PpData({
+    Key key,
+    this.regnovar,
+    this.usernamevar
+  }) : super(key: key);
 
   @override
-  _PpDataState createState() => _PpDataState();
+  _PpDataState createState() => _PpDataState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class Data {
@@ -387,6 +399,15 @@ class NewObject {
 }
 
 class _PpDataState extends State<PpData> {
+
+  String regnovar;
+  String usernamevar;
+
+  _PpDataState({
+    this.regnovar,
+    this.usernamevar
+  });
+
   get _chosenValue => null;
   static const IconData male_rounded =
       IconData(0xf89d, fontFamily: 'MaterialIcons');
@@ -539,6 +560,8 @@ class _PpDataState extends State<PpData> {
     'null',
     'null',
     'null',
+    'null',
+    'null',
     'null'
   ];
 
@@ -549,7 +572,12 @@ class _PpDataState extends State<PpData> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WelcomePage()));
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                  regnovar: regnovar,
+                  usernamevar: usernamevar,
+                )));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
