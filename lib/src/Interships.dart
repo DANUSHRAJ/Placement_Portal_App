@@ -98,6 +98,7 @@ class _IntershipsState extends State<Interships> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final rollno = "dan";
     return Scaffold(
         body: Center(
             child: Stack(children: <Widget>[
@@ -284,7 +285,7 @@ class _IntershipsState extends State<Interships> {
                               Align(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    "   \nTOTAL NUMBER OF INTERNS:\n",
+                                    "   \nTOTAL NUMBER OF INTERNS: $rollno\n",
                                     style: GoogleFonts.portLligatSans(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black),
