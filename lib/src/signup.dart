@@ -63,7 +63,7 @@ class _SignUpPageState extends State<SignUpPage> {
     }
     if (check == 1) {
       check = 1;
-      log('Regno: $regno');
+//      log('Regno: $regno');
       final result = await widget.api.getOneAccount(regno);
 //      log('Result: $result');
       if(result==null){}

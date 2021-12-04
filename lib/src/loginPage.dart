@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
@@ -14,6 +15,7 @@ import 'Widget/bezierContainer.dart';
 import 'api.dart';
 import 'check.dart';
 import 'home_screen.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -50,6 +52,46 @@ class _LoginPageState extends State<LoginPage> {
               builder: (context) => CheckData(
                     message: "FAILED",
                   )));
+    }
+  }
+
+  void _findAccountforFP(String regnovar) async {
+    int check = 1;
+    if(regnovar.isEmpty){
+      log('Please fill the Register Number');
+      check=0;
+    }
+    if(check==1) {
+      final result = await widget.api.getOneAccount(regnovar);
+      if (result.regno == regnovar) {
+        var user_name = result.name;
+        var user_email = result.username;
+        var user_pass = result.password;
+        final serviceId = 'service_05h93bt';
+        final templateId = 'template_ak2pbyr';
+        final userId = 'user_I2dh7BAhEyocnuYr33mnr';
+
+        final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+        final response = await http.post(
+            url,
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: jsonEncode({
+              'service_id': serviceId,
+              'template_id': templateId,
+              'user_id': userId,
+              'template_params': {
+                'user_name': "$user_name",
+                'user_email': "$user_email",
+                'user_subject': "Forgot Password",
+                'user_message': "$regnovar's password is: $user_pass",
+              }
+            })
+        );
+
+        print(response.body);
+      }
     }
   }
 
@@ -336,8 +378,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel1() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Interships()));
+        _findAccountforFP(etRegisterNo.text);
+//        Navigator.push(
+//            context, MaterialPageRoute(builder: (context) => Interships()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),

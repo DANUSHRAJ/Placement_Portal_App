@@ -37,13 +37,13 @@ class _IntershipsState extends State<Interships> {
   var title,name,recno;
 
   void _loadInternDetails([bool showSpinner = false]) async {
-    log('Regno: $regnovar');
+//    log('Regno: $regnovar');
 
     await widget.api.getinternsDet(regnovar).then((value) => {
       internDet = value
     });
     Map<int,IWCDetails> map = internDet.asMap();
-    for(int i=0;i<1;i++) {
+    for(int i=0;i<map.length;i++) {
       title = map[i].title;
       name = map[i].name;
       recno=(i+1).toString();
@@ -57,7 +57,7 @@ class _IntershipsState extends State<Interships> {
   void initState() {
     super.initState();
     _loadInternDetails();
-    log('$recno');
+//    log('$recno');
   }
 
   Widget _backButton() {
