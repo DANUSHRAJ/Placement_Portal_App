@@ -1,13 +1,14 @@
 import 'package:SJIT_PLACEMENT_PORTAL/src/Courses.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Placements.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Workshops.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+
 import 'Widget/bezierContainer.dart';
 import 'welcomePage.dart';
 
@@ -75,6 +76,17 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _showtoast(String value) {
+    Fluttertoast.showToast(
+        msg: value,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.limeAccent,
+        fontSize: 16.0);
   }
 
   @override

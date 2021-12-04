@@ -199,9 +199,6 @@ class _SignUpPageState extends State<SignUpPage> {
                 fillColor: Colors.white,
                 filled: true),
             keyboardType: TextInputType.number,
-            // inputFormatters: <TextInputFormatter>[
-            //   FilteringTextInputFormatter.digitsOnly
-            // ],
           )
         ],
       ),

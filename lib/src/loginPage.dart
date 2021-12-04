@@ -1,21 +1,18 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Placements.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer1.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/signup.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+
 import '../main.dart';
-import 'Account.dart';
 import 'Widget/bezierContainer.dart';
 import 'api.dart';
 import 'home_screen.dart';
-import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -65,6 +62,7 @@ class _LoginPageState extends State<LoginPage> {
     int check = 1;
     if (regnovar.isEmpty) {
       log('Please fill the Register Number');
+      _showtoast("* Please enter your register number");
       check = 0;
     }
     if (check == 1) {
@@ -366,8 +364,11 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel1() {
     return InkWell(
       onTap: () {
-        _findAccountforFP(etRegisterNo.text);
-//        Navigator.push(
+        if ((etRegisterNo.toString().isNotEmpty)) {
+          _findAccountforFP(etRegisterNo.text);
+          _showtoast("Kindly Check your E-mail inbox/spam box");
+        }
+//        }Navigator.push(
 //            context, MaterialPageRoute(builder: (context) => Interships()));
       },
       child: Container(

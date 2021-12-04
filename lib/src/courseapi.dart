@@ -5,7 +5,8 @@ import 'package:dio/dio.dart';
 import 'IWCDetails.dart';
 
 class CourseApi {
-  static String apiUrl = 'https://7838-27-5-97-69.ngrok.io';
+  static String apiUrl =
+      'https://1f30-2402-3a80-19a0-53c2-a1d3-989d-e5f6-5d57.ngrok.io';
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
 //  Future<List<IWCDetails>> getAccounts() async {
@@ -15,8 +16,8 @@ class CourseApi {
 //        .toList();
 //  }
 
-  Future<IWCDetails> uploadCourse(
-      String title, String name, String sd, String ed, String clink, String plink, String flink) async {
+  Future<IWCDetails> uploadCourse(String title, String name, String sd,
+      String ed, String clink, String plink, String flink) async {
     final response = await _dio.post('', data: {
       'title': title,
       'name': name,

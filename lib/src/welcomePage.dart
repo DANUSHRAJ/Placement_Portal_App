@@ -122,10 +122,10 @@ class _WelcomePageState extends State<WelcomePage> {
                   'assets/images/inner_bg.gif',
                   fit: BoxFit.cover,
                 )),
-            // Positioned(
-            //     top: -height * .47,
-            //     right: -MediaQuery.of(context).size.width * .4,
-            Align(alignment: Alignment.center, child: BezierContainer()),
+            Positioned(
+                top: -height * .47,
+                right: -MediaQuery.of(context).size.width * .4,
+                child: BezierContainer()),
             Container(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
