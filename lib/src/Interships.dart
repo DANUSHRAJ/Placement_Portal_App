@@ -11,6 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'IWCDetails.dart';
+import 'InternListing.dart';
 import 'internapi.dart';
 
 class Interships extends StatefulWidget {
@@ -33,15 +34,26 @@ class _IntershipsState extends State<Interships> {
   _IntershipsState({this.regnovar, this.usernamevar});
 
   List<IWCDetails> internDet = [];
+  bool loading=false;
 
   var title, name, recno;
 
   void _loadInternDetails([bool showSpinner = false]) async {
 //    log('Regno: $regnovar');
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
 
     await widget.api
         .getinternsDet(regnovar)
-        .then((value) => {internDet = value});
+        .then((value) {
+          setState(() {
+            internDet = value;
+            loading=false;
+          });
+        });
     Map<int, IWCDetails> map = internDet.asMap();
     for (int i = 0; i < map.length; i++) {
       title = map[i].title;
@@ -56,20 +68,21 @@ class _IntershipsState extends State<Interships> {
   @override
   void initState() {
     super.initState();
-    _loadInternDetails();
+    _loadInternDetails(true);
 //    log('$recno');
   }
 
   Widget _backButton() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen(
-                      regnovar: regnovar,
-                      usernamevar: usernamevar,
-                    )));
+        _loadInternDetails(true);
+//        Navigator.push(
+//            context,
+//            MaterialPageRoute(
+//                builder: (context) => HomeScreen(
+//                      regnovar: regnovar,
+//                      usernamevar: usernamevar,
+//                    )));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -128,287 +141,42 @@ class _IntershipsState extends State<Interships> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final rollno = "dan";
+    final List<IWCDetails> internDet1 = internDet;
     return Scaffold(
-        body: Center(
-            child: Stack(children: <Widget>[
-      Container(
-        height: double.infinity,
-        width: double.infinity,
-        child: Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover),
+      appBar: AppBar(
+        title: Text(widget.regnovar),
+        centerTitle: true,
       ),
-      Positioned(
-        top: -MediaQuery.of(context).size.height * .45,
-        right: -MediaQuery.of(context).size.width * .4,
-        child: BezierContainer(),
-      ),
-      Align(
-        alignment: Alignment.center,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 7),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: height * .03),
-                    Align(alignment: Alignment.topLeft, child: _backButton()),
-                    Align(alignment: Alignment.topCenter, child: _title()),
-
-                    SizedBox(height: height * .05),
-
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: InkWell(
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                ' UPCOMING INTERSHIPS ',
-                                style: GoogleFonts.adventPro(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    //INNER DETAILS
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: InkWell(
-                        child: Card(
-                          color: Colors.cyanAccent,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text("")),
-                              Align(
-                                // child: Container(
-                                //   padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: SingleChildScrollView(
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Align(
-                                          alignment: Alignment.topLeft,
-                                          child: InkWell(
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          40)),
-                                              elevation: 50,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text(
-                                                    ' \n 1.\n  NAME OF THE INTERN:              \n\n  ORGANIZATION NAME:                \n\n  DURATION(in months):             \n',
-                                                    style:
-                                                        GoogleFonts.adventPro(
-                                                            fontSize: 15,
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.topLeft,
-                                          child: InkWell(
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          40)),
-                                              elevation: 50,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text(
-                                                    ' \n 2.\n  NAME OF THE INTERN:              \n\n  ORGANIZATION NAME:                \n\n  DURATION(in months):             \n',
-                                                    style:
-                                                        GoogleFonts.adventPro(
-                                                            fontSize: 15,
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    scrollDirection: Axis.horizontal),
-                              ),
-                              Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text("")),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    //CONTINUE HERE
-                    //
-                    SizedBox(height: height * .1),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: InkWell(
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text(
-                                ' COMPLETED INTERSHIPS ',
-                                style: GoogleFonts.adventPro(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    //INNER DETAILS
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: InkWell(
-                        child: Card(
-                          color: Colors.orangeAccent,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    "   \nTOTAL NUMBER OF INTERNS: $rollno\n",
-                                    style: GoogleFonts.portLligatSans(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black),
-                                  )),
-                              Align(
-                                // child: Container(
-                                //   padding: EdgeInsets.symmetric(horizontal: 20),
-                                child: SingleChildScrollView(
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: <Widget>[
-                                        Align(
-                                          alignment: Alignment.topLeft,
-                                          child: InkWell(
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          40)),
-                                              elevation: 50,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text(
-                                                    ' \n 1.\n  NAME OF THE INTERN:              \n\n  ORGANIZATION NAME:                \n\n  DURATION(in months):             \n',
-                                                    style:
-                                                        GoogleFonts.adventPro(
-                                                            fontSize: 15,
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment: Alignment.topLeft,
-                                          child: InkWell(
-                                            child: Card(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          40)),
-                                              elevation: 50,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text(
-                                                    ' \n 2.\n  NAME OF THE INTERN:              \n\n  ORGANIZATION NAME:                \n\n  DURATION(in months):             \n',
-                                                    style:
-                                                        GoogleFonts.adventPro(
-                                                            fontSize: 15,
-                                                            color: Colors.black,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-//VIEW YOUR COMPLETED INTERSHIPS
-                                      ],
-                                    ),
-                                    scrollDirection: Axis.horizontal),
-                              ),
-                              Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Text("")),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: height * .03),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: buildBottomNavigationBar(),
-              ),
-            ],
+      body:  loading
+          ? Center(
+        child: CircularProgressIndicator(),
+      )
+          : InternListing(internDet: internDet,),
+      floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.leftToRightWithFade,
+                      child: IntershipUpload(
+                          regnovar: regnovar, usernamevar: usernamevar)));
+//              _loadInternDetails(true);
+            },
+            tooltip: 'Upload Internship',
+            backgroundColor: Colors.purple,
+            child: Icon(Icons.refresh),
           ),
-        ),
+          SizedBox(width: 10),
+//          Align(
+//            alignment: Alignment.bottomCenter,
+//            child: buildBottomNavigationBar(),
+//          ),
+        ],
       ),
-    ])));
+    );
   }
 
   BottomNavigationBar buildBottomNavigationBar() {
@@ -428,7 +196,7 @@ class _IntershipsState extends State<Interships> {
           Navigator.push(
               context,
               PageTransition(
-                  type: PageTransitionType.fade, child: Interships()));
+                  type: PageTransitionType.fade, child: Interships(regnovar: regnovar, usernamevar: usernamevar,)));
         }
         // setState(() {
         //   _selectedIndex = value;
