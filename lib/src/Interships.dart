@@ -1,5 +1,5 @@
 import 'dart:developer';
-
+import 'package:lottie/lottie.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Intership_upload.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
@@ -28,7 +28,7 @@ class Interships extends StatefulWidget {
       _IntershipsState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
-class _IntershipsState extends State<Interships> {
+class _IntershipsState extends State<Interships> with TickerProviderStateMixin {
   final String regnovar;
   final String usernamevar;
 
@@ -66,13 +66,26 @@ class _IntershipsState extends State<Interships> {
 
   int _selectedIndex = 0;
   FToast fToast;
-
+  AnimationController controller;
   @override
   void initState() {
     super.initState();
     _loadInternDetails(true);
     fToast = FToast();
     fToast.init(context);
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..addListener(() {
+        setState(() {});
+      });
+    controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   void _showtoast(String value) {
@@ -84,25 +97,6 @@ class _IntershipsState extends State<Interships> {
         backgroundColor: Colors.black,
         textColor: Colors.limeAccent,
         fontSize: 16.0);
-  }
-
-  Widget _backButton() {
-    return InkWell(
-      onTap: () {
-        _loadInternDetails(true);
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.home_outlined, color: Colors.white),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 
   Widget _title() {
@@ -125,7 +119,7 @@ class _IntershipsState extends State<Interships> {
               ),
             ),
             TextSpan(
-              text: '\nHO',
+              text: '\nCOMP',
               style: GoogleFonts.adventPro(
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
@@ -133,7 +127,7 @@ class _IntershipsState extends State<Interships> {
               ),
             ),
             TextSpan(
-              text: 'ME',
+              text: 'LETED',
               style: GoogleFonts.adventPro(
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
@@ -152,8 +146,12 @@ class _IntershipsState extends State<Interships> {
     return Scaffold(
       body: loading
           ? Center(
-              child: CircularProgressIndicator(),
-            )
+              child: Lottie.network(
+                  'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json')
+              // CircularProgressIndicator(
+              //   value: controller.value,
+              // ),
+              )
           : Stack(children: <Widget>[
               Container(
                 height: double.infinity,
@@ -184,12 +182,13 @@ class _IntershipsState extends State<Interships> {
                   internDet: internDet,
                 ),
               ),
+              SizedBox(height: height * 10),
               Center(
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: buildBottomNavigationBar(),
                 ),
-              )
+              ),
             ]),
     );
   }

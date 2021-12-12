@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:lottie/lottie.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/api.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
 import 'package:flutter/material.dart';
@@ -389,12 +389,11 @@ class NewObject {
   NewObject(this.title, this.icon);
 }
 
-class _PpDataState extends State<PpData> {
+class _PpDataState extends State<PpData> with TickerProviderStateMixin {
   String regnovar;
   String usernamevar;
 
   _PpDataState({this.regnovar, this.usernamevar});
-
 
   bool loading = false;
 
@@ -410,21 +409,33 @@ class _PpDataState extends State<PpData> {
 
     await widget.api.getOneAccount(regnovar).then((value) {
       setState(() {
-        vregno=value.regno;
-        vname=value.name;
-        vemail=value.username;
+        vregno = value.regno;
+        vname = value.name;
+        vemail = value.username;
 //        internDet = value;
         loading = false;
       });
     });
   }
 
+  AnimationController controller;
   @override
   void initState() {
     super.initState();
     _loadPPData(true);
-//    fToast = FToast();
-//    fToast.init(context);
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 2),
+    )..addListener(() {
+        setState(() {});
+      });
+    controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
   get _chosenValue => null;
@@ -615,43 +626,43 @@ class _PpDataState extends State<PpData> {
   }
 
   Widget _entryFieldalphabetsdisplay(String title, String hint, int i,
-  {bool isPassword = false}) {
+      {bool isPassword = false}) {
     return Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
-        width: 500,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              title,
-              style: GoogleFonts.portLligatSans(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.limeAccent,
-              ),
-              ),
-        SizedBox(
-        height: 10,
-        ),
-        TextFormField(
-          decoration: InputDecoration(
-              hintText: hint,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(12),
-                borderSide: BorderSide(
-                width: 0,
-                style: BorderStyle.none,
-                ),
+      margin: EdgeInsets.symmetric(vertical: 10),
+      width: 500,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: GoogleFonts.portLligatSans(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.limeAccent,
+            ),
           ),
-        fillColor: Color(0xfff3f3f4),
-        filled: true),
-          enabled: false,
-        onChanged: (value) => setState(() => pp[i] = value),
-        )
+          SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+                hintText: hint,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide(
+                    width: 0,
+                    style: BorderStyle.none,
+                  ),
+                ),
+                fillColor: Color(0xfff3f3f4),
+                filled: true),
+            enabled: false,
+            onChanged: (value) => setState(() => pp[i] = value),
+          )
         ],
-    ),
+      ),
     );
-}
+  }
 
   Widget _entryFieldalphabets(String title, String hint, int i,
       {bool isPassword = false}) {
@@ -870,191 +881,214 @@ class _PpDataState extends State<PpData> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: loading?
-      Center(
-        child: CircularProgressIndicator(),
-      )
-          :Container(
-        height: height,
-        child: Stack(children: <Widget>[
-          Container(
-              height: double.infinity,
-              width: double.infinity,
-              child:
-                  Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover)),
-          Positioned(
-            top: -MediaQuery.of(context).size.height * .45,
-            right: -MediaQuery.of(context).size.width * .4,
-            child: BezierContainer(),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  SizedBox(height: height * .1),
-                  Align(alignment: Alignment.center, child: _title()),
-                  SizedBox(height: height * .1),
-                  _entryFieldalphabetsdisplay(
-                      'UNIVERSITY REG NO.', '$vregno', 0),
-                  _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
-                  _DropBox("TITLE", title, 0),
-                  _entryFieldalphabetsdisplay('NAME OF THE CANDIDATE',
-                      '$vname', 2),
-                  _entryFieldalphabets('FIRST NAME', 'first name', 3),
-                  _entryFieldalphabets('LAST NAME', 'last name', 4),
-                  _DropBox("GENDER", gender, 1),
-                  _entryFieldDob("D.O.B", "DD-MM-YYYY", 5),
-                  _entryFieldDob("D.O.B", "MM-DD-YYYY", 6),
-                  _entryFieldDob("D.O.B", "YYYY-MM-DD", 7),
-                  _DropBox("COLLEGE", college, 2),
-                  _DropBox("DEPARTMENT", department, 3),
-                  _DropBox("SECTION", section, 4),
-                  _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019', 8),
-                  _entryFieldnumbers('10th Percentage', 'Eg:92.6', 9),
-                  _entryFieldalphabets(
-                      '10TH BOARD OF STUDY', 'Eg:State Board', 10),
-                  _entryFieldalphabets(
-                      '10TH MEDIUM OF STUDY', 'Eg:English', 11),
-                  _entryFieldnumbers('10th YEAR OF PASSING', 'Eg:2017', 12),
-                  _entryFieldalphabets('NAME OF SCHOOL', 'name of school', 13),
-                  _entryFieldalphabets('GRADUATING STATE', 'state name', 14),
-                  _entryFieldnumbers('12th Percentage', 'Eg:79.9', 15),
-                  _entryFieldalphabets(
-                      '12th BOARD OF STUDY', 'Eg:STATE BOARD', 16),
-                  _entryFieldalphabets(
-                      '12th MEDIUM OF STUDY', 'Eg:English', 17),
-                  _entryFieldnumbers('12th YEAR OF PASSING', 'Eg:2017', 18),
-                  _entryFieldalphabets('NAME OF SCHOOL', 'name of school', 19),
-                  _entryFieldalphabets('GRADUATING STATE', 'state name', 20),
-                  _entryFieldalphabets(
-                      'DIPLOMA - SPECIALIZATION/BRANCH', 'state name', 21),
-                  _entryFieldnumbers('DIPLOMA Percentage', 'Eg:79.9', 22),
-                  _entryFieldnumbers('DIPLOMA YEAR OF PASSING', 'Eg:2017', 23),
-                  _entryFieldalphabets(
-                      'NAME OF INSTITUTE', 'name of institute', 24),
-                  _entryFieldalphabets('GRADUATING STATE', 'state name', 25),
-                  _entryFieldnumbers('SEM1 GPA', 'Eg:7.12', 26),
-                  _entryFieldnumbers('SEM2 GPA', 'Eg:7.12', 27),
-                  _entryFieldnumbers('SEM3 GPA', 'Eg:7.12', 28),
-                  _entryFieldnumbers('SEM4 GPA', 'Eg:7.12', 29),
-                  _entryFieldnumbers('SEM5 GPA', 'Eg:7.12', 30),
-                  _entryFieldnumbers('SEM6 GPA', 'Eg:7.12', 31),
-                  _entryFieldnumbers('SEM7 GPA', 'Eg:7.12', 32),
-                  _entryFieldnumbers('SEM8 GPA', 'Eg:7.12', 33),
-                  _entryFieldnumbers('OVERALL GPA', 'Eg:7.12', 34),
-                  _entryFieldnumbers('NO OF ARREARS SEM 1',
-                      'if there is no arrears enter 0', 35),
-                  _entryFieldnumbers('NO OF ARREARS SEM 2',
-                      'if there is no arrears enter 0', 36),
-                  _entryFieldnumbers('NO OF ARREARS SEM 3',
-                      'if there is no arrears enter 0', 37),
-                  _entryFieldnumbers('NO OF ARREARS SEM 4',
-                      'if there is no arrears enter 0', 38),
-                  _entryFieldnumbers('NO OF ARREARS SEM 5',
-                      'if there is no arrears enter 0', 39),
-                  _entryFieldnumbers('NO OF ARREARS SEM 6',
-                      'if there is no arrears enter 0', 40),
-                  _entryFieldnumbers('NO OF ARREARS SEM 7',
-                      'if there is no arrears enter 0', 41),
-                  _entryFieldnumbers('NO OF ARREARS SEM 8',
-                      'if there is no arrears enter 0', 42),
-                  _entryFieldnumbers('TOTAL NO OF STANDING ARREARS',
-                      'if there is no arrears enter 0', 43),
-                  _DropBox("HISTORY OF ARREARS [Y/N]", yesorno, 5),
-                  _entryFieldnumbers('IF YES, HOW MANY?',
-                      'if there is no arrears enter 0', 44),
-                  _entryFieldalphabets(
-                      'UG DEGREE (FOR PG STUDENTS) ', 'Eg:B.tech', 45),
-                  _entryFieldalphabets('UG BRANCH (FOR PG STUDENTS) ',
-                      'Eg:Computer Science', 46),
-                  _entryFieldnumbers(
-                      'UG PERCENTAGE (FOR PG STUDENTS)', 'Eg:95.5', 47),
-                  _entryFieldnumbers('UG CGPA (FOR PG STUDENTS)', 'Eg:9.2', 48),
-                  _entryFieldnumbers(
-                      'UG YEAR OF PASSING (FOR PG STUDENTS)', 'Eg:2023', 49),
-                  _entryFieldalphabets(
-                      'UG - COLLEGE OF STUDIES (FOR PG STUDENTS)) ',
-                      'Eg:St.joseph\'s',
-                      50),
-                  _entryFieldalphabets(
-                      'UG - GRADUATING UNIVERSITY) ', 'Eg:Anna University', 51),
-                  _entryFieldalphabets('GRADUATING STATE', 'Eg:Tamil Nadu', 52),
-                  _entryFieldnumbers('LAND LINE NUMBER', '', 53),
-                  _entryFieldnumbers('PRIMARY MOBILE NO', '', 54),
-                  _entryFieldnumbers('EMERGENCY CONTACT NO', '', 55),
-                  _entryFieldalphabetsdisplay('PRIMARY EMAIL ID', '$vemail', 56),
-                  _entryFieldalphabets(
-                      'ALTERNATE EMAIL ID', 'abc@gmail.com', 57),
-                  _DropBox("SPORTS QUOTA", yesorno, 6),
-                  _DropBox("BEC EXAM STATUS", yesorno, 7),
-                  _DropBox("BEC EXAM GRADE", becgrade, 8),
-                  _entryFieldalphabets(
-                      'LANGUAGES KNOWN', 'Tamil,English,Hindi', 58),
-                  _entryFieldnumbers('GAP IN EDUCATION (in Years) - If Any',
-                      'if there is no gap enter 0', 59),
-                  _DropBox(
-                      "ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]", yesorno, 9),
-                  _DropBox(
-                      "IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL",
-                      yesorno,
-                      10),
-                  _entryFieldalphabets('PAN CARD NUMBER', '', 60),
-                  _entryFieldalphabets('NATIONALITY', '', 61),
-                  _entryFieldalphabets('INDIAN PASSPORT NUMBER', '', 62),
-                  _entryFieldnumbers('AADHAAR NUMBER', '', 63),
-                  _entryFieldalphabets('FATHER NAME', '', 64),
-                  _entryFieldalphabets('DESIGNATION & ORGANISATION', '', 65),
-                  _entryFieldnumbers('FATHER MOBILE NUMBER', '', 66),
-                  _entryFieldalphabets('FATHER EMAIL ID', '', 67),
-                  _entryFieldalphabets('MOTHER NAME', '', 68),
-                  _entryFieldalphabets('DESIGNATION & ORGANISATION', '', 69),
-                  _entryFieldnumbers('MOTHER MOBILE NUMBER', '', 70),
-                  _entryFieldalphabets('MOTHER EMAIL ID', '', 71),
-                  _entryFieldalphabets(
-                      'PERMANENT ADDRESS WITH PIN CODE', '', 72),
-                  _entryFieldalphabets('PERMANENT ADDRESS LINE 1', '', 73),
-                  _entryFieldalphabets('PERMANENT ADDRESS LINE 2', '', 74),
-                  _entryFieldalphabets('PERMANENT CITY', '', 75),
-                  _entryFieldalphabets('STATE', 'Tamil Nadu', 76),
-                  _entryFieldnumbers('POSTAL CODE', '', 77),
-                  _DropBox("HOSTEL / DAY SCHOLAR", hord, 11),
-                  SizedBox(height: 10),
-                  SizedBox(height: 10),
-                  Column(
-                    children: [
-                      RaisedButton(
-                          color: Colors.deepPurpleAccent,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15)),
-                          padding: const EdgeInsets.all(17.0),
-                          splashColor: Colors.purple,
-                          textColor: Colors.white,
-                          child: Text(
-                            'SUBMIT',
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          onPressed: () {
-                            profile(context, pp, dropbox);
-                            //print(pp.length);
-                            // for (int i = 0; i < pp.length; i++) {
-                            //   print(pp[i].toString());
-                            // }
-                          })
-                    ],
+      body: loading
+          ? Center(
+              child: Lottie.network(
+                  'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json')
+              // CircularProgressIndicator(
+              //   value: controller.value,
+              // ),
+              )
+          : Container(
+              height: height,
+              child: Stack(children: <Widget>[
+                Container(
+                    height: double.infinity,
+                    width: double.infinity,
+                    child: Image.asset('assets/images/inner_bg.gif',
+                        fit: BoxFit.cover)),
+                Positioned(
+                  top: -MediaQuery.of(context).size.height * .45,
+                  right: -MediaQuery.of(context).size.width * .4,
+                  child: BezierContainer(),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: height * .05),
+                        Align(alignment: Alignment.center, child: _title()),
+                        SizedBox(height: height * .1),
+                        _entryFieldalphabetsdisplay(
+                            'UNIVERSITY REG NO.', '$vregno', 0),
+                        _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
+                        _DropBox("TITLE", title, 0),
+                        _entryFieldalphabetsdisplay(
+                            'NAME OF THE CANDIDATE', '$vname', 2),
+                        _entryFieldalphabets('FIRST NAME', 'first name', 3),
+                        _entryFieldalphabets('LAST NAME', 'last name', 4),
+                        _DropBox("GENDER", gender, 1),
+                        _entryFieldDob("D.O.B", "DD-MM-YYYY", 5),
+                        _entryFieldDob("D.O.B", "MM-DD-YYYY", 6),
+                        _entryFieldDob("D.O.B", "YYYY-MM-DD", 7),
+                        _DropBox("COLLEGE", college, 2),
+                        _DropBox("DEPARTMENT", department, 3),
+                        _DropBox("SECTION", section, 4),
+                        _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019', 8),
+                        _entryFieldnumbers('10th Percentage', 'Eg:92.6', 9),
+                        _entryFieldalphabets(
+                            '10TH BOARD OF STUDY', 'Eg:State Board', 10),
+                        _entryFieldalphabets(
+                            '10TH MEDIUM OF STUDY', 'Eg:English', 11),
+                        _entryFieldnumbers(
+                            '10th YEAR OF PASSING', 'Eg:2017', 12),
+                        _entryFieldalphabets(
+                            'NAME OF SCHOOL', 'name of school', 13),
+                        _entryFieldalphabets(
+                            'GRADUATING STATE', 'state name', 14),
+                        _entryFieldnumbers('12th Percentage', 'Eg:79.9', 15),
+                        _entryFieldalphabets(
+                            '12th BOARD OF STUDY', 'Eg:STATE BOARD', 16),
+                        _entryFieldalphabets(
+                            '12th MEDIUM OF STUDY', 'Eg:English', 17),
+                        _entryFieldnumbers(
+                            '12th YEAR OF PASSING', 'Eg:2017', 18),
+                        _entryFieldalphabets(
+                            'NAME OF SCHOOL', 'name of school', 19),
+                        _entryFieldalphabets(
+                            'GRADUATING STATE', 'state name', 20),
+                        _entryFieldalphabets('DIPLOMA - SPECIALIZATION/BRANCH',
+                            'state name', 21),
+                        _entryFieldnumbers('DIPLOMA Percentage', 'Eg:79.9', 22),
+                        _entryFieldnumbers(
+                            'DIPLOMA YEAR OF PASSING', 'Eg:2017', 23),
+                        _entryFieldalphabets(
+                            'NAME OF INSTITUTE', 'name of institute', 24),
+                        _entryFieldalphabets(
+                            'GRADUATING STATE', 'state name', 25),
+                        _entryFieldnumbers('SEM1 GPA', 'Eg:7.12', 26),
+                        _entryFieldnumbers('SEM2 GPA', 'Eg:7.12', 27),
+                        _entryFieldnumbers('SEM3 GPA', 'Eg:7.12', 28),
+                        _entryFieldnumbers('SEM4 GPA', 'Eg:7.12', 29),
+                        _entryFieldnumbers('SEM5 GPA', 'Eg:7.12', 30),
+                        _entryFieldnumbers('SEM6 GPA', 'Eg:7.12', 31),
+                        _entryFieldnumbers('SEM7 GPA', 'Eg:7.12', 32),
+                        _entryFieldnumbers('SEM8 GPA', 'Eg:7.12', 33),
+                        _entryFieldnumbers('OVERALL GPA', 'Eg:7.12', 34),
+                        _entryFieldnumbers('NO OF ARREARS SEM 1',
+                            'if there is no arrears enter 0', 35),
+                        _entryFieldnumbers('NO OF ARREARS SEM 2',
+                            'if there is no arrears enter 0', 36),
+                        _entryFieldnumbers('NO OF ARREARS SEM 3',
+                            'if there is no arrears enter 0', 37),
+                        _entryFieldnumbers('NO OF ARREARS SEM 4',
+                            'if there is no arrears enter 0', 38),
+                        _entryFieldnumbers('NO OF ARREARS SEM 5',
+                            'if there is no arrears enter 0', 39),
+                        _entryFieldnumbers('NO OF ARREARS SEM 6',
+                            'if there is no arrears enter 0', 40),
+                        _entryFieldnumbers('NO OF ARREARS SEM 7',
+                            'if there is no arrears enter 0', 41),
+                        _entryFieldnumbers('NO OF ARREARS SEM 8',
+                            'if there is no arrears enter 0', 42),
+                        _entryFieldnumbers('TOTAL NO OF STANDING ARREARS',
+                            'if there is no arrears enter 0', 43),
+                        _DropBox("HISTORY OF ARREARS [Y/N]", yesorno, 5),
+                        _entryFieldnumbers('IF YES, HOW MANY?',
+                            'if there is no arrears enter 0', 44),
+                        _entryFieldalphabets(
+                            'UG DEGREE (FOR PG STUDENTS) ', 'Eg:B.tech', 45),
+                        _entryFieldalphabets('UG BRANCH (FOR PG STUDENTS) ',
+                            'Eg:Computer Science', 46),
+                        _entryFieldnumbers(
+                            'UG PERCENTAGE (FOR PG STUDENTS)', 'Eg:95.5', 47),
+                        _entryFieldnumbers(
+                            'UG CGPA (FOR PG STUDENTS)', 'Eg:9.2', 48),
+                        _entryFieldnumbers(
+                            'UG YEAR OF PASSING (FOR PG STUDENTS)',
+                            'Eg:2023',
+                            49),
+                        _entryFieldalphabets(
+                            'UG - COLLEGE OF STUDIES (FOR PG STUDENTS)) ',
+                            'Eg:St.joseph\'s',
+                            50),
+                        _entryFieldalphabets('UG - GRADUATING UNIVERSITY) ',
+                            'Eg:Anna University', 51),
+                        _entryFieldalphabets(
+                            'GRADUATING STATE', 'Eg:Tamil Nadu', 52),
+                        _entryFieldnumbers('LAND LINE NUMBER', '', 53),
+                        _entryFieldnumbers('PRIMARY MOBILE NO', '', 54),
+                        _entryFieldnumbers('EMERGENCY CONTACT NO', '', 55),
+                        _entryFieldalphabetsdisplay(
+                            'PRIMARY EMAIL ID', '$vemail', 56),
+                        _entryFieldalphabets(
+                            'ALTERNATE EMAIL ID', 'abc@gmail.com', 57),
+                        _DropBox("SPORTS QUOTA", yesorno, 6),
+                        _DropBox("BEC EXAM STATUS", yesorno, 7),
+                        _DropBox("BEC EXAM GRADE", becgrade, 8),
+                        _entryFieldalphabets(
+                            'LANGUAGES KNOWN', 'Tamil,English,Hindi', 58),
+                        _entryFieldnumbers(
+                            'GAP IN EDUCATION (in Years) - If Any',
+                            'if there is no gap enter 0',
+                            59),
+                        _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]",
+                            yesorno, 9),
+                        _DropBox(
+                            "IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL",
+                            yesorno,
+                            10),
+                        _entryFieldalphabets('PAN CARD NUMBER', '', 60),
+                        _entryFieldalphabets('NATIONALITY', '', 61),
+                        _entryFieldalphabets('INDIAN PASSPORT NUMBER', '', 62),
+                        _entryFieldnumbers('AADHAAR NUMBER', '', 63),
+                        _entryFieldalphabets('FATHER NAME', '', 64),
+                        _entryFieldalphabets(
+                            'DESIGNATION & ORGANISATION', '', 65),
+                        _entryFieldnumbers('FATHER MOBILE NUMBER', '', 66),
+                        _entryFieldalphabets('FATHER EMAIL ID', '', 67),
+                        _entryFieldalphabets('MOTHER NAME', '', 68),
+                        _entryFieldalphabets(
+                            'DESIGNATION & ORGANISATION', '', 69),
+                        _entryFieldnumbers('MOTHER MOBILE NUMBER', '', 70),
+                        _entryFieldalphabets('MOTHER EMAIL ID', '', 71),
+                        _entryFieldalphabets(
+                            'PERMANENT ADDRESS WITH PIN CODE', '', 72),
+                        _entryFieldalphabets(
+                            'PERMANENT ADDRESS LINE 1', '', 73),
+                        _entryFieldalphabets(
+                            'PERMANENT ADDRESS LINE 2', '', 74),
+                        _entryFieldalphabets('PERMANENT CITY', '', 75),
+                        _entryFieldalphabets('STATE', 'Tamil Nadu', 76),
+                        _entryFieldnumbers('POSTAL CODE', '', 77),
+                        _DropBox("HOSTEL / DAY SCHOLAR", hord, 11),
+                        SizedBox(height: 10),
+                        SizedBox(height: 10),
+                        Column(
+                          children: [
+                            RaisedButton(
+                                color: Colors.deepPurpleAccent,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15)),
+                                padding: const EdgeInsets.all(17.0),
+                                splashColor: Colors.purple,
+                                textColor: Colors.white,
+                                child: Text(
+                                  'SUBMIT',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                onPressed: () {
+                                  profile(context, pp, dropbox);
+                                  //print(pp.length);
+                                  // for (int i = 0; i < pp.length; i++) {
+                                  //   print(pp[i].toString());
+                                  // }
+                                })
+                          ],
+                        ),
+                        SizedBox(height: 25), //For department
+                      ],
+                    ),
                   ),
-                  SizedBox(height: 25), //For department
-                ],
-              ),
+                ),
+                //Positioned(top: 40, left: 0, child: _backButton()),
+              ]),
             ),
-          ),
-          //Positioned(top: 40, left: 0, child: _backButton()),
-        ]),
-      ),
     );
   }
 }

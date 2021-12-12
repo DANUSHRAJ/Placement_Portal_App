@@ -192,7 +192,10 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PpData(regnovar: regnovar, usernamevar: usernamevar,)));
+                                    builder: (context) => PpData(
+                                          regnovar: regnovar,
+                                          usernamevar: usernamevar,
+                                        )));
                           },
                         ),
 
@@ -219,13 +222,7 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          onTap: () {
-                            Navigator.pop(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.bottomToTop,
-                                    child: WelcomePage()));
-                          },
+                          onTap: () {},
                         ),
 
                         //INTERNS

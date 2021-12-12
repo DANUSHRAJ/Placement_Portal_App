@@ -17,7 +17,7 @@ environment:
   sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
-  mongo_dart: ^0.4.3
+  mongo_dart: ^0.4.1
   sevr: ^1.0.4
   flutter:
     sdk: flutter
@@ -37,6 +37,7 @@ dependencies:
   path_provider_ex: ^1.0.1
   flutter_file_manager: ^0.2.0
   flutter_full_pdf_viewer: ^1.0.6
+  lottie: ^0.2.1
 
 dependency_overrides:
 flutter_svg: ^0.17.4

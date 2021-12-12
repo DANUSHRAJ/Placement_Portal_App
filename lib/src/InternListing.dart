@@ -10,29 +10,30 @@ class InternListing extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(children: [
+      SizedBox(height: 150),
       ...internDet
           .map<Widget>(
             (intern) => Align(
-              alignment: Alignment.topLeft,
+              alignment: Alignment.center,
               child: InkWell(
                 child: Card(
+                  color: Colors.deepPurpleAccent,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(40)),
                   elevation: 50,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Row(
                     children: <Widget>[
                       Text(
-                        ' \n ' +
-                            intern.name +
-                            '.\n  NAME OF THE INTERN: ' +
+                        '🥳\n\t\tNAME OF THE INTERN: ' +
                             intern.title +
-                            '\n\n  ORGANIZATION NAME: ' +
+                            '\n\t\tORGANIZATION NAME: ' +
                             intern.name +
-                            '\n\n  DURATION(in months):             \n',
+                            '\n\t\t\tSTART DATE : ' +
+                            intern.sd +
+                            '\n',
                         style: GoogleFonts.adventPro(
-                            fontSize: 15,
-                            color: Colors.black,
+                            fontSize: 18,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
@@ -42,7 +43,7 @@ class InternListing extends StatelessWidget {
             ),
           )
           .toList(),
-      SizedBox(height: 70),
+      //
     ]);
   }
 }

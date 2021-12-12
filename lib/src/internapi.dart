@@ -6,8 +6,7 @@ import 'IWCDetails.dart';
 
 class InternsApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io'  'http://127.0.0.1:8081';
-  static String apiUrl =
-      'https://59b4-2402-3a80-19a0-65ed-24af-37a9-db77-e6df.ngrok.io';
+  static String apiUrl = 'http://127.0.0.1:8081';
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
   Future<List<IWCDetails>> getinterns() async {
