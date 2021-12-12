@@ -60,7 +60,7 @@ class _IntershipsState extends State<Interships> {
       title = map[i].title;
       name = map[i].name;
       recno = (i + 1).toString();
-      log('Record: RecNo: $recno-Title: $title-Cmp Name: $name');
+      //log('Record: RecNo: $recno-Title: $title-Cmp Name: $name');
     }
   }
 
@@ -150,17 +150,39 @@ class _IntershipsState extends State<Interships> {
     final rollno = "dan";
     final List<IWCDetails> internDet1 = internDet;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.regnovar),
-        centerTitle: true,
-      ),
       body: loading
           ? Center(
               child: CircularProgressIndicator(),
             )
           : Stack(children: <Widget>[
-              InternListing(
-                internDet: internDet,
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: Image.asset(
+                  'assets/images/inner_bg.gif',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                top: -MediaQuery.of(context).size.height * .45,
+                right: -MediaQuery.of(context).size.width * .4,
+                child: BezierContainer(),
+              ),
+              Container(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: SingleChildScrollView(
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                        SizedBox(height: height * .1),
+                        Align(alignment: Alignment.topCenter, child: _title()),
+                      ]))),
+              Align(
+                alignment: Alignment.topRight,
+                child: InternListing(
+                  internDet: internDet,
+                ),
               ),
               Center(
                 child: Align(

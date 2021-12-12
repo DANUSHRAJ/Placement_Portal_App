@@ -6,12 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
-//import 'package:SJIT_PLACEMENT_PORTAL/src/signupviewdata.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// import 'api.dart';
-// import 'check.dart';
-// import 'home_screen.dart';
 import 'dart:developer';
 
 import 'ProfileData.dart';
@@ -131,7 +126,6 @@ void profile(
                       },
                       child: new Text("OK")),
                 ),
-                //Text("Confirm", TextStyle())),
               ],
             ));
   }
@@ -616,10 +610,6 @@ class _PpDataState extends State<PpData> {
                 ),
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
-            // keyboardType: TextInputType.number,
-            // inputFormatters: <TextInputFormatter>[
-            //   FilteringTextInputFormatter.digitsOnly
-            // ],
             onChanged: (value) => setState(() => pp[i] = value),
           )
         ],
