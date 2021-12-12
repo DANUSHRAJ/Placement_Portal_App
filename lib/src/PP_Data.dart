@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:SJIT_PLACEMENT_PORTAL/src/api.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -372,6 +373,8 @@ class PpData extends StatefulWidget {
   String regnovar;
   String usernamevar;
 
+  final AccountsApi api = AccountsApi();
+
   PpData({Key key, this.regnovar, this.usernamevar}) : super(key: key);
 
   @override
@@ -397,6 +400,38 @@ class _PpDataState extends State<PpData> {
   String usernamevar;
 
   _PpDataState({this.regnovar, this.usernamevar});
+
+
+  bool loading = false;
+
+  var vregno, vname, vemail;
+
+  void _loadPPData([bool showSpinner = false]) async {
+//    log('Regno: $regnovar');
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+
+    await widget.api.getOneAccount(regnovar).then((value) {
+      setState(() {
+        vregno=value.regno;
+        vname=value.name;
+        vemail=value.username;
+//        internDet = value;
+        loading = false;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPPData(true);
+//    fToast = FToast();
+//    fToast.init(context);
+  }
 
   get _chosenValue => null;
   static const IconData male_rounded =
@@ -584,6 +619,45 @@ class _PpDataState extends State<PpData> {
       ),
     );
   }
+
+  Widget _entryFieldalphabetsdisplay(String title, String hint, int i,
+  {bool isPassword = false}) {
+    return Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        width: 500,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              title,
+              style: GoogleFonts.portLligatSans(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.limeAccent,
+              ),
+              ),
+        SizedBox(
+        height: 10,
+        ),
+        TextFormField(
+          decoration: InputDecoration(
+              hintText: hint,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: BorderSide(
+                width: 0,
+                style: BorderStyle.none,
+                ),
+          ),
+        fillColor: Color(0xfff3f3f4),
+        filled: true),
+          enabled: false,
+        onChanged: (value) => setState(() => pp[i] = value),
+        )
+        ],
+    ),
+    );
+}
 
   Widget _entryFieldalphabets(String title, String hint, int i,
       {bool isPassword = false}) {
@@ -806,7 +880,11 @@ class _PpDataState extends State<PpData> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Container(
+      body: loading?
+      Center(
+        child: CircularProgressIndicator(),
+      )
+          :Container(
         height: height,
         child: Stack(children: <Widget>[
           Container(
@@ -829,12 +907,12 @@ class _PpDataState extends State<PpData> {
                   SizedBox(height: height * .1),
                   Align(alignment: Alignment.center, child: _title()),
                   SizedBox(height: height * .1),
-                  _entryFieldnumbers(
-                      'UNIVERSITY REG NO.', 'Eg:312419205041', 0),
+                  _entryFieldalphabetsdisplay(
+                      'UNIVERSITY REG NO.', '$vregno', 0),
                   _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
                   _DropBox("TITLE", title, 0),
-                  _entryFieldalphabets('NAME OF THE CANDIDATE',
-                      'enter the name with initial', 2),
+                  _entryFieldalphabetsdisplay('NAME OF THE CANDIDATE',
+                      '$vname', 2),
                   _entryFieldalphabets('FIRST NAME', 'first name', 3),
                   _entryFieldalphabets('LAST NAME', 'last name', 4),
                   _DropBox("GENDER", gender, 1),
@@ -917,7 +995,7 @@ class _PpDataState extends State<PpData> {
                   _entryFieldnumbers('LAND LINE NUMBER', '', 53),
                   _entryFieldnumbers('PRIMARY MOBILE NO', '', 54),
                   _entryFieldnumbers('EMERGENCY CONTACT NO', '', 55),
-                  _entryFieldalphabets('PRIMARY EMAIL ID', 'abc@gmail.com', 56),
+                  _entryFieldalphabetsdisplay('PRIMARY EMAIL ID', '$vemail', 56),
                   _entryFieldalphabets(
                       'ALTERNATE EMAIL ID', 'abc@gmail.com', 57),
                   _DropBox("SPORTS QUOTA", yesorno, 6),
