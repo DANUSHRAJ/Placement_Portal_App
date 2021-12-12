@@ -7,6 +7,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -34,9 +35,11 @@ class _IntershipsState extends State<Interships> {
   _IntershipsState({this.regnovar, this.usernamevar});
 
   List<IWCDetails> internDet = [];
-  bool loading=false;
+  bool loading = false;
 
   var title, name, recno;
+
+  get child => null;
 
   void _loadInternDetails([bool showSpinner = false]) async {
 //    log('Regno: $regnovar');
@@ -46,14 +49,12 @@ class _IntershipsState extends State<Interships> {
       });
     }
 
-    await widget.api
-        .getinternsDet(regnovar)
-        .then((value) {
-          setState(() {
-            internDet = value;
-            loading=false;
-          });
-        });
+    await widget.api.getinternsDet(regnovar).then((value) {
+      setState(() {
+        internDet = value;
+        loading = false;
+      });
+    });
     Map<int, IWCDetails> map = internDet.asMap();
     for (int i = 0; i < map.length; i++) {
       title = map[i].title;
@@ -64,25 +65,31 @@ class _IntershipsState extends State<Interships> {
   }
 
   int _selectedIndex = 0;
+  FToast fToast;
 
   @override
   void initState() {
     super.initState();
     _loadInternDetails(true);
-//    log('$recno');
+    fToast = FToast();
+    fToast.init(context);
+  }
+
+  void _showtoast(String value) {
+    Fluttertoast.showToast(
+        msg: value,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.limeAccent,
+        fontSize: 16.0);
   }
 
   Widget _backButton() {
     return InkWell(
       onTap: () {
         _loadInternDetails(true);
-//        Navigator.push(
-//            context,
-//            MaterialPageRoute(
-//                builder: (context) => HomeScreen(
-//                      regnovar: regnovar,
-//                      usernamevar: usernamevar,
-//                    )));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
@@ -147,35 +154,21 @@ class _IntershipsState extends State<Interships> {
         title: Text(widget.regnovar),
         centerTitle: true,
       ),
-      body:  loading
+      body: loading
           ? Center(
-        child: CircularProgressIndicator(),
-      )
-          : InternListing(internDet: internDet,),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.leftToRightWithFade,
-                      child: IntershipUpload(
-                          regnovar: regnovar, usernamevar: usernamevar)));
-//              _loadInternDetails(true);
-            },
-            tooltip: 'Upload Internship',
-            backgroundColor: Colors.purple,
-            child: Icon(Icons.refresh),
-          ),
-          SizedBox(width: 10),
-//          Align(
-//            alignment: Alignment.bottomCenter,
-//            child: buildBottomNavigationBar(),
-//          ),
-        ],
-      ),
+              child: CircularProgressIndicator(),
+            )
+          : Stack(children: <Widget>[
+              InternListing(
+                internDet: internDet,
+              ),
+              Center(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: buildBottomNavigationBar(),
+                ),
+              )
+            ]),
     );
   }
 
@@ -185,18 +178,24 @@ class _IntershipsState extends State<Interships> {
       type: BottomNavigationBarType.fixed,
       //currentIndex: _selectedIndex,
       onTap: (value) {
-        if (value == 1) {
+        if (value == 2) {
           Navigator.push(
               context,
               PageTransition(
                   type: PageTransitionType.leftToRightWithFade,
                   child: IntershipUpload(
                       regnovar: regnovar, usernamevar: usernamevar)));
+        } else if (value == 1) {
+          _showtoast("NO UPCOMING INTERNS");
         } else {
           Navigator.push(
               context,
               PageTransition(
-                  type: PageTransitionType.fade, child: Interships(regnovar: regnovar, usernamevar: usernamevar,)));
+                  type: PageTransitionType.fade,
+                  child: Interships(
+                    regnovar: regnovar,
+                    usernamevar: usernamevar,
+                  )));
         }
         // setState(() {
         //   _selectedIndex = value;
@@ -205,9 +204,11 @@ class _IntershipsState extends State<Interships> {
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.limeAccent,
       items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "HOME"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.upload_file), label: "UPLOAD CERTIFICATES"),
+            icon: Icon(Icons.check_box_outlined), label: "COMPLETED"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.timelapse_rounded), label: "UPCOMING"),
+        BottomNavigationBarItem(icon: Icon(Icons.upload_file), label: "UPLOAD"),
       ],
     );
   }

@@ -1,18 +1,13 @@
-import 'dart:developer';
-
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/MyHomePage.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/MyPDFList.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'api.dart';
+
 import 'internapi.dart';
-import 'loginPage.dart';
 
 class IntershipUpload extends StatefulWidget {
   final String regnovar;
@@ -62,15 +57,6 @@ class _IntershipUploadState extends State<IntershipUpload> {
                   )));
       check = 0;
     });
-    if (check == 1) {
-      // Navigator.push(
-      //     // context, MaterialPageRoute(builder: (context) => WelcomePage(title: "",));
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (context) => CheckData(
-      //               message: "FAILURE",
-      //             )));
-    }
   }
 
   Widget _backButton() {
@@ -172,6 +158,14 @@ class _IntershipUploadState extends State<IntershipUpload> {
         ],
       ),
     );
+  }
+
+  FToast fToast;
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
   }
 
   Widget _entryFieldalphabets3(String title, String hint,
@@ -368,6 +362,17 @@ class _IntershipUploadState extends State<IntershipUpload> {
     );
   }
 
+  void _showtoast(String value) {
+    Fluttertoast.showToast(
+        msg: value,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.limeAccent,
+        fontSize: 16.0);
+  }
+
   Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
@@ -517,27 +522,34 @@ class _IntershipUploadState extends State<IntershipUpload> {
       type: BottomNavigationBarType.fixed,
       currentIndex: _selectedIndex,
       onTap: (value) {
-        if (value == 1) {
+        if (value == 0) {
           Navigator.push(
               context,
               PageTransition(
-                  type: PageTransitionType.fade, child: Interships()));
+                  type: PageTransitionType.leftToRightWithFade,
+                  child: IntershipUpload(
+                      regnovar: regnovar, usernamevar: usernamevar)));
+        } else if (value == 1) {
+          _showtoast("NO UPCOMING INTERNS");
         } else {
           Navigator.push(
               context,
               PageTransition(
-                  type: PageTransitionType.fade, child: IntershipUpload()));
+                  type: PageTransitionType.fade,
+                  child: Interships(
+                    regnovar: regnovar,
+                    usernamevar: usernamevar,
+                  )));
         }
-        setState(() {
-          _selectedIndex = value;
-        });
       },
       unselectedItemColor: Colors.white,
       selectedItemColor: Colors.limeAccent,
       items: [
+        BottomNavigationBarItem(icon: Icon(Icons.upload_file), label: "UPLOAD"),
         BottomNavigationBarItem(
-            icon: Icon(Icons.upload_file), label: "UPLOAD CERTIFICATES"),
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "HOME"),
+            icon: Icon(Icons.timelapse_rounded), label: "UPCOMING"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.check_box_outlined), label: "COMPLETED"),
       ],
     );
   }

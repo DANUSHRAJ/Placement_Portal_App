@@ -136,9 +136,6 @@ void profile(
             ));
   }
 
-  // for(int i=0;i<dropbox.length;i++){
-  //   print(dropbox[i].title);
-  // }
   if (dropbox[0].title == 'SELECT TITLE') {
     showdialog(context, "please select the Valid TITLE");
     return;
@@ -375,14 +372,11 @@ class PpData extends StatefulWidget {
   String regnovar;
   String usernamevar;
 
-  PpData({
-    Key key,
-    this.regnovar,
-    this.usernamevar
-  }) : super(key: key);
+  PpData({Key key, this.regnovar, this.usernamevar}) : super(key: key);
 
   @override
-  _PpDataState createState() => _PpDataState(regnovar: regnovar, usernamevar: usernamevar);
+  _PpDataState createState() =>
+      _PpDataState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class Data {
@@ -399,14 +393,10 @@ class NewObject {
 }
 
 class _PpDataState extends State<PpData> {
-
   String regnovar;
   String usernamevar;
 
-  _PpDataState({
-    this.regnovar,
-    this.usernamevar
-  });
+  _PpDataState({this.regnovar, this.usernamevar});
 
   get _chosenValue => null;
   static const IconData male_rounded =
@@ -575,9 +565,9 @@ class _PpDataState extends State<PpData> {
             context,
             MaterialPageRoute(
                 builder: (context) => HomeScreen(
-                  regnovar: regnovar,
-                  usernamevar: usernamevar,
-                )));
+                      regnovar: regnovar,
+                      usernamevar: usernamevar,
+                    )));
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
