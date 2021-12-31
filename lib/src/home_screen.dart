@@ -9,6 +9,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'PP_GenealD.dart';
 import 'Widget/bezierContainer.dart';
 import 'welcomePage.dart';
 
@@ -352,7 +353,7 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: Placements()));
+                                    child: PpGenealD()));
                           },
                         ),
                       ],
