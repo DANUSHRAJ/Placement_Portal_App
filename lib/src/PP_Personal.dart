@@ -23,68 +23,12 @@ class NewObject {
 
 class _PpPersonalDState extends State<PpPersonalD> {
   bool loading = false;
-
-  static final List<NewObject> title = <NewObject>[
-    NewObject('SELECT TITLE', Icons.description),
-    NewObject('Mr', Icons.person),
-    NewObject('Ms', Icons.person),
-  ];
-  static final List<NewObject> gender = <NewObject>[
-    NewObject('SELECT GENDER', Icons.person),
-    NewObject('MALE', Icons.male_rounded),
-    NewObject('FEMALE', Icons.female_rounded),
+  List<String> pp=[
+    'null','null','null','null','null','null','null','null','null','null',
+    'null','null','null','null','null','null','null','null','null','null',
+    'null','null','null'
   ];
 
-  static final List<NewObject> college = <NewObject>[
-    NewObject('SELECT COLLEGE', Icons.description),
-    NewObject('SJIT', Icons.home_outlined),
-    NewObject('SJCE', Icons.home_outlined),
-  ];
-
-  static final List<NewObject> department = <NewObject>[
-    NewObject('SELECT DEPARTMENT', Icons.description),
-    NewObject('B.Tech IT', Icons.mobile_friendly_rounded),
-    NewObject('B.E CSE', Icons.computer_rounded),
-    NewObject('B.E ECE', Icons.signal_cellular_alt_outlined),
-    NewObject('B.E EEE', Icons.lightbulb_outline_rounded),
-    NewObject('B.E MECH', Icons.settings_applications_rounded),
-    NewObject('B.E CIVIL', Icons.apartment_outlined),
-  ];
-
-  static final List<NewObject> section = <NewObject>[
-    NewObject('SELECT SECTION', Icons.description),
-    NewObject('A', Icons.arrow_back_ios),
-    NewObject('B', Icons.arrow_back_ios),
-    NewObject('C', Icons.arrow_back_ios),
-  ];
-
-  static final List<NewObject> yesorno = <NewObject>[
-    NewObject('SELECT THE OPTION', Icons.description),
-    NewObject('YES', Icons.arrow_back_ios),
-    NewObject('NO', Icons.arrow_back_ios),
-  ];
-
-  static final List<NewObject> becgrade = <NewObject>[
-    NewObject('SELECT BEC GRADE', Icons.description),
-    NewObject('PRELIMINARY', Icons.arrow_back_ios),
-    NewObject('VANTAGE', Icons.arrow_back_ios),
-    NewObject('HIGHER', Icons.arrow_back_ios),
-  ];
-
-  static final List<NewObject> dropbox = <NewObject>[
-    title.first, //0
-    gender.first, //1
-    college.first, //2
-    department.first, //3
-    section.first, //4
-    yesorno.first, //5
-    yesorno.first, //6
-    yesorno.first, //7
-    becgrade.first, //8
-    yesorno.first, //9
-    yesorno.first, //10
-    //hord.first, //114//11
-  ];
 
   Widget _backButton() {
     return InkWell(
@@ -138,7 +82,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
             enabled: false,
-            // onChanged: (value) => setState(() => pp[i] = value),
+            onChanged: (value) => setState(() => pp[i] = value),
           )
         ],
       ),
@@ -176,109 +120,13 @@ class _PpPersonalDState extends State<PpPersonalD> {
                 ),
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
-            // onChanged: (value) => setState(() => pp[i] = value),
+            onChanged: (value) => setState(() => pp[i] = value),
           )
         ],
       ),
     );
   }
 
-  Widget _entryFieldDob(String title, String hint, int i,
-      {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      width: 500,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-                prefixIcon: Icon(Icons.calendar_today),
-                hintText: hint,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    width: 0,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-                fillColor: Color(0xfff3f3f4),
-                filled: true),
-            keyboardType: TextInputType.number,
-            // onChanged: (value) => setState(() => pp[i] = value),
-            // keyboardType: TextInputType.number,
-            // inputFormatters: <TextInputFormatter>[
-            //   FilteringTextInputFormatter.digitsOnly
-            // ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _DropBox(String title, List<NewObject> key, int i) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      width: 500,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Container(
-            width: 500,
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.white,
-              //border: Border.all(color: Colors.deepOrange, width: 4),
-            ),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton<NewObject>(
-                value: dropbox.elementAt(i), // currently selected item
-                items: key
-                    .map((item) => DropdownMenuItem<NewObject>(
-                  child: Row(
-                    children: [
-                      Icon(item.icon),
-                      const SizedBox(width: 8),
-                      Text(
-                        item.title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  value: item,
-                ))
-                    .toList(),
-                //onChanged: (value) => setState(() {dropbox[i] = value;}),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
 
   Widget _entryFieldnumbers(String title, String hint, int i,
       {bool isPassword = false}) {
@@ -312,8 +160,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
             keyboardType: TextInputType.number,
-
-            //onChanged: (value) => setState(() => pp[i] = value),
+            onChanged: (value) => setState(() => pp[i] = value),
 
             // inputFormatters: <TextInputFormatter>[
             //   FilteringTextInputFormatter.digitsOnly
@@ -388,41 +235,45 @@ class _PpPersonalDState extends State<PpPersonalD> {
                         SizedBox(height: height * .05),
                         Align(alignment: Alignment.center, child: _title()),
                         SizedBox(height: height * .1),
-                        _entryFieldnumbers('LAND LINE NUMBER', '', 53),
-                        _entryFieldnumbers('PRIMARY MOBILE NO', '', 54),
-                        _entryFieldnumbers('EMERGENCY CONTACT NO', '', 55),
+                        _entryFieldnumbers('LAND LINE NUMBER', '', 0),
+                        _entryFieldnumbers('PRIMARY MOBILE NO', '', 1),
+                        _entryFieldnumbers('EMERGENCY CONTACT NO', '', 2),
                         _entryFieldalphabetsdisplay(
-                            'PRIMARY EMAIL ID', 'vemail', 56),
+                            'PRIMARY EMAIL ID', 'email', 3),
                         _entryFieldalphabets(
-                            'ALTERNATE EMAIL ID', 'abc@gmail.com', 57),
+                            'ALTERNATE EMAIL ID', 'abc@gmail.com', 4),
 
-                        _entryFieldalphabets('PAN CARD NUMBER', '', 60),
-                        _entryFieldalphabets('NATIONALITY', '', 61),
-                        _entryFieldalphabets('INDIAN PASSPORT NUMBER', '', 62),
-                        _entryFieldnumbers('AADHAAR NUMBER', '', 63),
-                        _entryFieldalphabets('FATHER NAME', '', 64),
+                        _entryFieldalphabets('PAN CARD NUMBER', '', 5),
+                        _entryFieldalphabets('NATIONALITY', '', 6),
+                        _entryFieldalphabets('INDIAN PASSPORT NUMBER', '', 7),
+                        _entryFieldnumbers('AADHAAR NUMBER', '', 8),
+                        _entryFieldalphabets('FATHER NAME', '', 9),
                         _entryFieldalphabets(
-                            'DESIGNATION & ORGANISATION', '', 65),
-                        _entryFieldnumbers('FATHER MOBILE NUMBER', '', 66),
-                        _entryFieldalphabets('FATHER EMAIL ID', '', 67),
-                        _entryFieldalphabets('MOTHER NAME', '', 68),
+                            'DESIGNATION & ORGANISATION', '', 10),
+                        _entryFieldnumbers('FATHER MOBILE NUMBER', '', 11),
+                        _entryFieldalphabets('FATHER EMAIL ID', '', 12),
+                        _entryFieldalphabets('MOTHER NAME', '', 13),
                         _entryFieldalphabets(
-                            'DESIGNATION & ORGANISATION', '', 69),
-                        _entryFieldnumbers('MOTHER MOBILE NUMBER', '', 70),
-                        _entryFieldalphabets('MOTHER EMAIL ID', '', 71),
+                            'DESIGNATION & ORGANISATION', '', 14),
+                        _entryFieldnumbers('MOTHER MOBILE NUMBER', '', 15),
+                        _entryFieldalphabets('MOTHER EMAIL ID', '', 16),
                         _entryFieldalphabets(
-                            'PERMANENT ADDRESS WITH PIN CODE', '', 72),
+                            'PERMANENT ADDRESS WITH PIN CODE', '', 17),
                         _entryFieldalphabets(
-                            'PERMANENT ADDRESS LINE 1', '', 73),
+                            'PERMANENT ADDRESS LINE 1', '', 18),
                         _entryFieldalphabets(
-                            'PERMANENT ADDRESS LINE 2', '', 74),
-                        _entryFieldalphabets('PERMANENT CITY', '', 75),
-                        _entryFieldalphabets('STATE', 'Tamil Nadu', 76),
-                        _entryFieldnumbers('POSTAL CODE', '', 77),
+                            'PERMANENT ADDRESS LINE 2', '', 19),
+                        _entryFieldalphabets('PERMANENT CITY', '', 20),
+                        _entryFieldalphabets('STATE', 'Tamil Nadu', 21),
+                        _entryFieldnumbers('POSTAL CODE', '', 22),
 
                         Align(
                           alignment: Alignment.bottomRight,
                           child: FloatingActionButton(onPressed: () {
+                            print("-----");
+                            for(int i=0;i<pp.length;i++){
+                              print(pp[i]);
+                            }
                             Navigator.push(
                                 context,
                                 PageTransition(
@@ -430,9 +281,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
                                     child: PpExtraD()));
                           },),
                         )
-
                       ],
-
                     )))
           ]),
         ));
