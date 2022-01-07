@@ -260,21 +260,21 @@ class _PpExtraDState extends State<PpExtraD> {
                 value: dropbox.elementAt(i), // currently selected item
                 items: key
                     .map((item) => DropdownMenuItem<NewObject>(
-                  child: Row(
-                    children: [
-                      Icon(item.icon),
-                      const SizedBox(width: 8),
-                      Text(
-                        item.title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  value: item,
-                ))
+                          child: Row(
+                            children: [
+                              Icon(item.icon),
+                              const SizedBox(width: 8),
+                              Text(
+                                item.title,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                          value: item,
+                        ))
                     .toList(),
                 //onChanged: (value) => setState(() {dropbox[i] = value;}),
               ),
@@ -366,59 +366,57 @@ class _PpExtraDState extends State<PpExtraD> {
     return Scaffold(
         body: loading
             ? Center(
-            child: Lottie.network(
-                'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+                child: Lottie.network(
+                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
             : Container(
-          height: height,
-          child: Stack(children: <Widget>[
-            Container(
-                height: double.infinity,
-                width: double.infinity,
-                child: Image.asset(
-                  'assets/images/inner_bg.gif',
-                  fit: BoxFit.cover,
-                )),
-            Positioned(
-              top: -MediaQuery.of(context).size.height * .45,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer(),
-            ),
-            Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(height: height * .05),
-                        Align(alignment: Alignment.center, child: _title()),
-                        SizedBox(height: height * .1),
-                        _DropBox("SPORTS QUOTA", yesorno, 6),
-                        _DropBox("BEC EXAM STATUS", yesorno, 7),
-                        _DropBox("BEC EXAM GRADE", becgrade, 8),
-                        _entryFieldalphabets(
-                            'LANGUAGES KNOWN', 'Tamil,English,Hindi', 58),
-                        _entryFieldnumbers(
-                            'GAP IN EDUCATION (in Years) - If Any',
-                            'if there is no gap enter 0',
-                            59),
-                        _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]",
-                            yesorno, 9),
-                        _DropBox(
-                            "IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL",
-                            yesorno,
-                            10),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: FloatingActionButton(
-                            onPressed: (){},
-                          )
-                        )
-
-                      ],
-
-                    )))
-          ]),
-        ));
+                height: height,
+                child: Stack(children: <Widget>[
+                  Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: Image.asset(
+                        'assets/images/inner_bg.gif',
+                        fit: BoxFit.cover,
+                      )),
+                  Positioned(
+                    top: -MediaQuery.of(context).size.height * .45,
+                    right: -MediaQuery.of(context).size.width * .4,
+                    child: BezierContainer(),
+                  ),
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: SingleChildScrollView(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(height: height * .05),
+                          Align(alignment: Alignment.center, child: _title()),
+                          SizedBox(height: height * .1),
+                          _DropBox("SPORTS QUOTA", yesorno, 6),
+                          _DropBox("BEC EXAM STATUS", yesorno, 7),
+                          _DropBox("BEC EXAM GRADE", becgrade, 8),
+                          _entryFieldalphabets(
+                              'LANGUAGES KNOWN', 'Tamil,English,Hindi', 58),
+                          _entryFieldnumbers(
+                              'GAP IN EDUCATION (in Years) - If Any',
+                              'if there is no gap enter 0',
+                              59),
+                          _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]",
+                              yesorno, 9),
+                          _DropBox(
+                              "IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL",
+                              yesorno,
+                              10),
+                          SizedBox(height: height * .1),
+                          Align(
+                              alignment: Alignment.bottomRight,
+                              child: FloatingActionButton(
+                                onPressed: () {},
+                              ))
+                        ],
+                      )))
+                ]),
+              ));
   }
 }
