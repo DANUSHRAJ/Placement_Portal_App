@@ -6,11 +6,20 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'api.dart';
+
 class PpGenealD extends StatefulWidget {
-  const PpGenealD({Key key}) : super(key: key);
+  String regnovar;
+  String usernamevar;
+
+  final AccountsApi api = AccountsApi();
+
+  PpGenealD({Key key, this.regnovar, this.usernamevar}) : super(key: key);
 
   @override
-  _PpGenealDState createState() => _PpGenealDState();
+  _PpGenealDState createState() => _PpGenealDState(
+      regnovar: regnovar, usernamevar: usernamevar
+  );
 }
 
 class NewObject {
@@ -21,20 +30,61 @@ class NewObject {
 }
 
 class _PpGenealDState extends State<PpGenealD> {
+  String regnovar;
+  String usernamevar;
+
+  _PpGenealDState({this.regnovar, this.usernamevar});
+
+
   bool loading = false;
 
-  List<String> pg = [
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null'
-  ];
+  var vregno, vname, vemail;
 
+  void _loadPPData([bool showSpinner = false]) async {
+//    log('Regno: $regnovar');
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+
+    await widget.api.getOneAccount(regnovar).then((value) {
+      setState(() {
+        vregno = value.regno;
+        vname = value.name;
+        vemail = value.username;
+//        internDet = value;
+        loading = false;
+      });
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadPPData(true);
+  }
+
+  List<String> pg=[
+    'null','null','null','null','null','null','null','null','null'
+  ];
+  //profile General Data
+  // String regno;
+  // String rollno;
+  // String title_d;
+  // String name;
+  // String fname;
+  // String lname;
+  // String gender_d;
+  // String dob_d;
+  // String dob_m;
+  // String dob_y;
+  // String college_d;
+  // String degree;
+  // String branch;
+  // String section_d;
+  // String yoa;
+  // String scholar;
   static final List<NewObject> title = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
     NewObject('Mr', Icons.person),
@@ -104,7 +154,7 @@ class _PpGenealDState extends State<PpGenealD> {
     );
   }
 
-  Widget _entryFieldalphabetsdisplay(String title, String hint, int i,
+  Widget _entryFieldalphabetsdisplay(String title, String hint,int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -135,7 +185,7 @@ class _PpGenealDState extends State<PpGenealD> {
                 ),
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
-            enabled: true,
+            enabled: false,
             onChanged: (value) => setState(() => pg[i] = value),
           )
         ],
@@ -388,11 +438,11 @@ class _PpGenealDState extends State<PpGenealD> {
                           Align(alignment: Alignment.center, child: _title()),
                           SizedBox(height: height * .1),
                           _entryFieldalphabetsdisplay(
-                              'UNIVERSITY REG NO.', 'Eg:312419205041', 0),
+                              'UNIVERSITY REG NO.', vregno,0),
                           _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
                           _DropBox("TITLE", title, 0),
                           _entryFieldalphabetsdisplay(
-                              'NAME OF THE CANDIDATE', 'name', 2),
+                              'NAME OF THE CANDIDATE', vname,2),
                           _entryFieldalphabets('FIRST NAME', 'first name', 3),
                           _entryFieldalphabets('LAST NAME', 'last name', 4),
                           _DropBox("GENDER", gender, 1),
@@ -403,26 +453,26 @@ class _PpGenealDState extends State<PpGenealD> {
                           _DropBox("DEPARTMENT", department, 3),
                           _DropBox("SECTION", section, 4),
                           _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019', 8),
-                          //_DropBox("HOSTEL / DAY SCHOLAR", hord, 5),
-                          SizedBox(height: height * .05),
+                          _DropBox("HOSTEL / DAY SCHOLAR", hord, 5),
                           Align(
                             alignment: Alignment.bottomRight,
-                            child: FloatingActionButton(
-                              elevation: 0.5,
-                              child: new Icon(Icons.arrow_right_rounded,
-                                  color: Colors.black, size: 58),
-                              backgroundColor: Colors.limeAccent,
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: PpEducationD()));
-                              },
-                            ),
-                          ),
-                          SizedBox(height: height * .05),
+                            child: FloatingActionButton(onPressed: () {
+                              for(int i=0;i<pg.length;i++){
+                                print(pg[i]);
+                              }
+                              for(int i=0;i<dropbox.length;i++){
+                                print(dropbox[i].title);
+                              }
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.bottomToTop,
+                                      child: PpEducationD()));
+                            },),
+                          )
+
                         ],
+
                       )))
                 ]),
               ));
