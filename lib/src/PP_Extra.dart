@@ -6,11 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
-class PpGenealD extends StatefulWidget {
-  const PpGenealD({Key key}) : super(key: key);
+class PpExtraD extends StatefulWidget {
+  const PpExtraD({Key key}) : super(key: key);
 
   @override
-  _PpGenealDState createState() => _PpGenealDState();
+  _PpExtraDState createState() => _PpExtraDState();
 }
 
 class NewObject {
@@ -20,7 +20,7 @@ class NewObject {
   NewObject(this.title, this.icon);
 }
 
-class _PpGenealDState extends State<PpGenealD> {
+class _PpExtraDState extends State<PpExtraD> {
   bool loading = false;
 
   static final List<NewObject> title = <NewObject>[
@@ -260,21 +260,21 @@ class _PpGenealDState extends State<PpGenealD> {
                 value: dropbox.elementAt(i), // currently selected item
                 items: key
                     .map((item) => DropdownMenuItem<NewObject>(
-                          child: Row(
-                            children: [
-                              Icon(item.icon),
-                              const SizedBox(width: 8),
-                              Text(
-                                item.title,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                          value: item,
-                        ))
+                  child: Row(
+                    children: [
+                      Icon(item.icon),
+                      const SizedBox(width: 8),
+                      Text(
+                        item.title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  value: item,
+                ))
                     .toList(),
                 //onChanged: (value) => setState(() {dropbox[i] = value;}),
               ),
@@ -339,7 +339,7 @@ class _PpGenealDState extends State<PpGenealD> {
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-              text: 'GENERAL',
+              text: 'ADDITIONAL',
               style: GoogleFonts.portLligatSans(
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
@@ -347,7 +347,7 @@ class _PpGenealDState extends State<PpGenealD> {
               ),
               children: [
                 TextSpan(
-                  text: '  DATA',
+                  text: '  INFORMATION',
                   style: GoogleFonts.adventPro(
                     fontSize: 30,
                     fontWeight: FontWeight.w700,
@@ -366,65 +366,59 @@ class _PpGenealDState extends State<PpGenealD> {
     return Scaffold(
         body: loading
             ? Center(
-                child: Lottie.network(
-                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+            child: Lottie.network(
+                'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
             : Container(
-                height: height,
-                child: Stack(children: <Widget>[
-                  Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/inner_bg.gif',
-                        fit: BoxFit.cover,
-                      )),
-                  Positioned(
-                    top: -MediaQuery.of(context).size.height * .45,
-                    right: -MediaQuery.of(context).size.width * .4,
-                    child: BezierContainer(),
-                  ),
-                  Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: SingleChildScrollView(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SizedBox(height: height * .05),
-                          Align(alignment: Alignment.center, child: _title()),
-                          SizedBox(height: height * .1),
-                          _entryFieldalphabetsdisplay(
-                              'UNIVERSITY REG NO.', 'regno', 0),
-                          _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
-                          _DropBox("TITLE", title, 0),
-                          _entryFieldalphabetsdisplay(
-                              'NAME OF THE CANDIDATE', 'name', 2),
-                          _entryFieldalphabets('FIRST NAME', 'first name', 3),
-                          _entryFieldalphabets('LAST NAME', 'last name', 4),
-                          _DropBox("GENDER", gender, 1),
-                          _entryFieldDob("D.O.B", "DD-MM-YYYY", 5),
-                          _entryFieldDob("D.O.B", "MM-DD-YYYY", 6),
-                          _entryFieldDob("D.O.B", "YYYY-MM-DD", 7),
-                          _DropBox("COLLEGE", college, 2),
-                          _DropBox("DEPARTMENT", department, 3),
-                          _DropBox("SECTION", section, 4),
-                          _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019', 8),
-                          _DropBox("HOSTEL / DAY SCHOLAR", hord, 11),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: FloatingActionButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: PpEducationD()));
-                              },
-                            ),
+          height: height,
+          child: Stack(children: <Widget>[
+            Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: Image.asset(
+                  'assets/images/inner_bg.gif',
+                  fit: BoxFit.cover,
+                )),
+            Positioned(
+              top: -MediaQuery.of(context).size.height * .45,
+              right: -MediaQuery.of(context).size.width * .4,
+              child: BezierContainer(),
+            ),
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: height * .05),
+                        Align(alignment: Alignment.center, child: _title()),
+                        SizedBox(height: height * .1),
+                        _DropBox("SPORTS QUOTA", yesorno, 6),
+                        _DropBox("BEC EXAM STATUS", yesorno, 7),
+                        _DropBox("BEC EXAM GRADE", becgrade, 8),
+                        _entryFieldalphabets(
+                            'LANGUAGES KNOWN', 'Tamil,English,Hindi', 58),
+                        _entryFieldnumbers(
+                            'GAP IN EDUCATION (in Years) - If Any',
+                            'if there is no gap enter 0',
+                            59),
+                        _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]",
+                            yesorno, 9),
+                        _DropBox(
+                            "IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL",
+                            yesorno,
+                            10),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: FloatingActionButton(
+                            onPressed: (){},
                           )
-                        ],
-                      )))
-                ]),
-              ));
+                        )
+
+                      ],
+
+                    )))
+          ]),
+        ));
   }
 }

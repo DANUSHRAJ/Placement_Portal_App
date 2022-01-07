@@ -11,7 +11,7 @@ import 'Account.dart';
 class ProfileApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io';http://127.0.0.1:8081
   static String apiUrl =
-      'https://f209-2402-3a80-19a6-9de0-5197-7826-9af0-ee78.ngrok.io';
+      'https://4008-2402-3a80-19a0-5ade-61ae-2af7-a5c4-6c95.ngrok.io';
 
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 

@@ -483,7 +483,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
                                   context,
                                   PageTransition(
                                       type: PageTransitionType.bottomToTop,
-                                      child: MyHomePage()));
+                                      child: HomeScreen()));
                             },
                           ),
                         ],

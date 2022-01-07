@@ -15,7 +15,7 @@ void start() async {
 //  final coll = db.collection('interns');
 
   // Create server
-  const port = 8081;
+  const port = 5;
   final serv = Sevr();
 
   final corsPaths = ['/', '/:id'];
@@ -39,7 +39,7 @@ void start() async {
 
   serv.post('/getoneaccount', [
     setCors,
-        (ServRequest req, ServResponse res) async {
+    (ServRequest req, ServResponse res) async {
       final coll = db.collection('accounts');
 //      return res.json(await coll.findOne(where.eq('regno', req.body['regno'])));
       final accounts = await coll.findOne(where.eq('regno', req.body['regno']));
@@ -70,9 +70,10 @@ void start() async {
 
   serv.post('/getinterndet', [
     setCors,
-        (ServRequest req, ServResponse res) async {
+    (ServRequest req, ServResponse res) async {
       final coll = db.collection('interns');
-      final interns = await coll.find(where.eq('regno', req.body['regno'])).toList();
+      final interns =
+          await coll.find(where.eq('regno', req.body['regno'])).toList();
       return res.status(200).json({'interns': interns});
     }
   ]);
@@ -112,7 +113,7 @@ void start() async {
 
   serv.post('/getoneprofile', [
     setCors,
-        (ServRequest req, ServResponse res) async {
+    (ServRequest req, ServResponse res) async {
       final coll = db.collection('profile');
 //      return res.json(await coll.findOne(where.eq('regno', req.body['regno'])));
       final profile = await coll.findOne(where.eq('regno', req.body['regno']));
@@ -122,7 +123,7 @@ void start() async {
 
   serv.post('/uploadppdata', [
     setCors,
-        (ServRequest req, ServResponse res) async {
+    (ServRequest req, ServResponse res) async {
       final coll = db.collection('profile');
       await coll.save(req.body);
 //      log('$req.body');
@@ -134,9 +135,10 @@ void start() async {
 
   serv.post('/uploadppdataex', [
     setCors,
-        (ServRequest req, ServResponse res) async {
+    (ServRequest req, ServResponse res) async {
       final coll = db.collection('profile');
-      await coll.update(where.eq('regno', req.body['regno']), {'\$set': req.body});
+      await coll
+          .update(where.eq('regno', req.body['regno']), {'\$set': req.body});
 //      log('$req.body');
       return res.json(
         await coll.findOne(where.eq('regno', req.body['regno'])),

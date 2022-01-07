@@ -1,4 +1,5 @@
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Education.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Extra.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
-class PpGenealD extends StatefulWidget {
-  const PpGenealD({Key key}) : super(key: key);
+class PpPersonalD extends StatefulWidget {
+  const PpPersonalD({Key key}) : super(key: key);
 
   @override
-  _PpGenealDState createState() => _PpGenealDState();
+  _PpPersonalDState createState() => _PpPersonalDState();
 }
 
 class NewObject {
@@ -20,7 +21,7 @@ class NewObject {
   NewObject(this.title, this.icon);
 }
 
-class _PpGenealDState extends State<PpGenealD> {
+class _PpPersonalDState extends State<PpPersonalD> {
   bool loading = false;
 
   static final List<NewObject> title = <NewObject>[
@@ -70,12 +71,6 @@ class _PpGenealDState extends State<PpGenealD> {
     NewObject('HIGHER', Icons.arrow_back_ios),
   ];
 
-  static final List<NewObject> hord = <NewObject>[
-    NewObject('SELECT THE OPTION', Icons.description),
-    NewObject('HOSTEL', Icons.arrow_back_ios),
-    NewObject('DAY SCHOLAR', Icons.arrow_back_ios),
-  ];
-
   static final List<NewObject> dropbox = <NewObject>[
     title.first, //0
     gender.first, //1
@@ -88,7 +83,7 @@ class _PpGenealDState extends State<PpGenealD> {
     becgrade.first, //8
     yesorno.first, //9
     yesorno.first, //10
-    hord.first, //11
+    //hord.first, //114//11
   ];
 
   Widget _backButton() {
@@ -260,21 +255,21 @@ class _PpGenealDState extends State<PpGenealD> {
                 value: dropbox.elementAt(i), // currently selected item
                 items: key
                     .map((item) => DropdownMenuItem<NewObject>(
-                          child: Row(
-                            children: [
-                              Icon(item.icon),
-                              const SizedBox(width: 8),
-                              Text(
-                                item.title,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                          value: item,
-                        ))
+                  child: Row(
+                    children: [
+                      Icon(item.icon),
+                      const SizedBox(width: 8),
+                      Text(
+                        item.title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  value: item,
+                ))
                     .toList(),
                 //onChanged: (value) => setState(() {dropbox[i] = value;}),
               ),
@@ -339,7 +334,7 @@ class _PpGenealDState extends State<PpGenealD> {
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-              text: 'GENERAL',
+              text: 'PERSONAL',
               style: GoogleFonts.portLligatSans(
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
@@ -366,65 +361,80 @@ class _PpGenealDState extends State<PpGenealD> {
     return Scaffold(
         body: loading
             ? Center(
-                child: Lottie.network(
-                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+            child: Lottie.network(
+                'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
             : Container(
-                height: height,
-                child: Stack(children: <Widget>[
-                  Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/inner_bg.gif',
-                        fit: BoxFit.cover,
-                      )),
-                  Positioned(
-                    top: -MediaQuery.of(context).size.height * .45,
-                    right: -MediaQuery.of(context).size.width * .4,
-                    child: BezierContainer(),
-                  ),
-                  Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: SingleChildScrollView(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SizedBox(height: height * .05),
-                          Align(alignment: Alignment.center, child: _title()),
-                          SizedBox(height: height * .1),
-                          _entryFieldalphabetsdisplay(
-                              'UNIVERSITY REG NO.', 'regno', 0),
-                          _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
-                          _DropBox("TITLE", title, 0),
-                          _entryFieldalphabetsdisplay(
-                              'NAME OF THE CANDIDATE', 'name', 2),
-                          _entryFieldalphabets('FIRST NAME', 'first name', 3),
-                          _entryFieldalphabets('LAST NAME', 'last name', 4),
-                          _DropBox("GENDER", gender, 1),
-                          _entryFieldDob("D.O.B", "DD-MM-YYYY", 5),
-                          _entryFieldDob("D.O.B", "MM-DD-YYYY", 6),
-                          _entryFieldDob("D.O.B", "YYYY-MM-DD", 7),
-                          _DropBox("COLLEGE", college, 2),
-                          _DropBox("DEPARTMENT", department, 3),
-                          _DropBox("SECTION", section, 4),
-                          _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019', 8),
-                          _DropBox("HOSTEL / DAY SCHOLAR", hord, 11),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: FloatingActionButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: PpEducationD()));
-                              },
-                            ),
-                          )
-                        ],
-                      )))
-                ]),
-              ));
+          height: height,
+          child: Stack(children: <Widget>[
+            Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: Image.asset(
+                  'assets/images/inner_bg.gif',
+                  fit: BoxFit.cover,
+                )),
+            Positioned(
+              top: -MediaQuery.of(context).size.height * .45,
+              right: -MediaQuery.of(context).size.width * .4,
+              child: BezierContainer(),
+            ),
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: height * .05),
+                        Align(alignment: Alignment.center, child: _title()),
+                        SizedBox(height: height * .1),
+                        _entryFieldnumbers('LAND LINE NUMBER', '', 53),
+                        _entryFieldnumbers('PRIMARY MOBILE NO', '', 54),
+                        _entryFieldnumbers('EMERGENCY CONTACT NO', '', 55),
+                        _entryFieldalphabetsdisplay(
+                            'PRIMARY EMAIL ID', 'vemail', 56),
+                        _entryFieldalphabets(
+                            'ALTERNATE EMAIL ID', 'abc@gmail.com', 57),
+
+                        _entryFieldalphabets('PAN CARD NUMBER', '', 60),
+                        _entryFieldalphabets('NATIONALITY', '', 61),
+                        _entryFieldalphabets('INDIAN PASSPORT NUMBER', '', 62),
+                        _entryFieldnumbers('AADHAAR NUMBER', '', 63),
+                        _entryFieldalphabets('FATHER NAME', '', 64),
+                        _entryFieldalphabets(
+                            'DESIGNATION & ORGANISATION', '', 65),
+                        _entryFieldnumbers('FATHER MOBILE NUMBER', '', 66),
+                        _entryFieldalphabets('FATHER EMAIL ID', '', 67),
+                        _entryFieldalphabets('MOTHER NAME', '', 68),
+                        _entryFieldalphabets(
+                            'DESIGNATION & ORGANISATION', '', 69),
+                        _entryFieldnumbers('MOTHER MOBILE NUMBER', '', 70),
+                        _entryFieldalphabets('MOTHER EMAIL ID', '', 71),
+                        _entryFieldalphabets(
+                            'PERMANENT ADDRESS WITH PIN CODE', '', 72),
+                        _entryFieldalphabets(
+                            'PERMANENT ADDRESS LINE 1', '', 73),
+                        _entryFieldalphabets(
+                            'PERMANENT ADDRESS LINE 2', '', 74),
+                        _entryFieldalphabets('PERMANENT CITY', '', 75),
+                        _entryFieldalphabets('STATE', 'Tamil Nadu', 76),
+                        _entryFieldnumbers('POSTAL CODE', '', 77),
+
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: FloatingActionButton(onPressed: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.bottomToTop,
+                                    child: PpExtraD()));
+                          },),
+                        )
+
+                      ],
+
+                    )))
+          ]),
+        ));
   }
 }

@@ -1,4 +1,5 @@
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Education.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Personal.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +7,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
-class PpGenealD extends StatefulWidget {
-  const PpGenealD({Key key}) : super(key: key);
+class PpCurrentD extends StatefulWidget {
+  const PpCurrentD({Key key}) : super(key: key);
 
   @override
-  _PpGenealDState createState() => _PpGenealDState();
+  _PpCurrentDState createState() => _PpCurrentDState();
 }
 
 class NewObject {
@@ -20,7 +21,7 @@ class NewObject {
   NewObject(this.title, this.icon);
 }
 
-class _PpGenealDState extends State<PpGenealD> {
+class _PpCurrentDState extends State<PpCurrentD> {
   bool loading = false;
 
   static final List<NewObject> title = <NewObject>[
@@ -56,39 +57,18 @@ class _PpGenealDState extends State<PpGenealD> {
     NewObject('B', Icons.arrow_back_ios),
     NewObject('C', Icons.arrow_back_ios),
   ];
-
   static final List<NewObject> yesorno = <NewObject>[
     NewObject('SELECT THE OPTION', Icons.description),
     NewObject('YES', Icons.arrow_back_ios),
     NewObject('NO', Icons.arrow_back_ios),
   ];
-
-  static final List<NewObject> becgrade = <NewObject>[
-    NewObject('SELECT BEC GRADE', Icons.description),
-    NewObject('PRELIMINARY', Icons.arrow_back_ios),
-    NewObject('VANTAGE', Icons.arrow_back_ios),
-    NewObject('HIGHER', Icons.arrow_back_ios),
-  ];
-
-  static final List<NewObject> hord = <NewObject>[
-    NewObject('SELECT THE OPTION', Icons.description),
-    NewObject('HOSTEL', Icons.arrow_back_ios),
-    NewObject('DAY SCHOLAR', Icons.arrow_back_ios),
-  ];
-
   static final List<NewObject> dropbox = <NewObject>[
     title.first, //0
     gender.first, //1
     college.first, //2
     department.first, //3
-    section.first, //4
-    yesorno.first, //5
-    yesorno.first, //6
-    yesorno.first, //7
-    becgrade.first, //8
-    yesorno.first, //9
-    yesorno.first, //10
-    hord.first, //11
+    section.first, //4//11
+    yesorno.first,
   ];
 
   Widget _backButton() {
@@ -260,21 +240,21 @@ class _PpGenealDState extends State<PpGenealD> {
                 value: dropbox.elementAt(i), // currently selected item
                 items: key
                     .map((item) => DropdownMenuItem<NewObject>(
-                          child: Row(
-                            children: [
-                              Icon(item.icon),
-                              const SizedBox(width: 8),
-                              Text(
-                                item.title,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
-                          value: item,
-                        ))
+                  child: Row(
+                    children: [
+                      Icon(item.icon),
+                      const SizedBox(width: 8),
+                      Text(
+                        item.title,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  value: item,
+                ))
                     .toList(),
                 //onChanged: (value) => setState(() {dropbox[i] = value;}),
               ),
@@ -339,7 +319,7 @@ class _PpGenealDState extends State<PpGenealD> {
         RichText(
           textAlign: TextAlign.center,
           text: TextSpan(
-              text: 'GENERAL',
+              text: 'CURRENT EDUCATION',
               style: GoogleFonts.portLligatSans(
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
@@ -366,65 +346,78 @@ class _PpGenealDState extends State<PpGenealD> {
     return Scaffold(
         body: loading
             ? Center(
-                child: Lottie.network(
-                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+            child: Lottie.network(
+                'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
             : Container(
-                height: height,
-                child: Stack(children: <Widget>[
-                  Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/inner_bg.gif',
-                        fit: BoxFit.cover,
-                      )),
-                  Positioned(
-                    top: -MediaQuery.of(context).size.height * .45,
-                    right: -MediaQuery.of(context).size.width * .4,
-                    child: BezierContainer(),
-                  ),
-                  Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: SingleChildScrollView(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SizedBox(height: height * .05),
-                          Align(alignment: Alignment.center, child: _title()),
-                          SizedBox(height: height * .1),
-                          _entryFieldalphabetsdisplay(
-                              'UNIVERSITY REG NO.', 'regno', 0),
-                          _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
-                          _DropBox("TITLE", title, 0),
-                          _entryFieldalphabetsdisplay(
-                              'NAME OF THE CANDIDATE', 'name', 2),
-                          _entryFieldalphabets('FIRST NAME', 'first name', 3),
-                          _entryFieldalphabets('LAST NAME', 'last name', 4),
-                          _DropBox("GENDER", gender, 1),
-                          _entryFieldDob("D.O.B", "DD-MM-YYYY", 5),
-                          _entryFieldDob("D.O.B", "MM-DD-YYYY", 6),
-                          _entryFieldDob("D.O.B", "YYYY-MM-DD", 7),
-                          _DropBox("COLLEGE", college, 2),
-                          _DropBox("DEPARTMENT", department, 3),
-                          _DropBox("SECTION", section, 4),
-                          _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019', 8),
-                          _DropBox("HOSTEL / DAY SCHOLAR", hord, 11),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: FloatingActionButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: PpEducationD()));
-                              },
-                            ),
-                          )
-                        ],
-                      )))
-                ]),
-              ));
+          height: height,
+          child: Stack(children: <Widget>[
+            Container(
+                height: double.infinity,
+                width: double.infinity,
+                child: Image.asset(
+                  'assets/images/inner_bg.gif',
+                  fit: BoxFit.cover,
+                )),
+            Positioned(
+              top: -MediaQuery.of(context).size.height * .45,
+              right: -MediaQuery.of(context).size.width * .4,
+              child: BezierContainer(),
+            ),
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        SizedBox(height: height * .05),
+                        Align(alignment: Alignment.center, child: _title()),
+                        SizedBox(height: height * .1),
+                        _entryFieldnumbers('SEM1 GPA', 'Eg:7.12', 26),
+                        _entryFieldnumbers('SEM2 GPA', 'Eg:7.12', 27),
+                        _entryFieldnumbers('SEM3 GPA', 'Eg:7.12', 28),
+                        _entryFieldnumbers('SEM4 GPA', 'Eg:7.12', 29),
+                        _entryFieldnumbers('SEM5 GPA', 'Eg:7.12', 30),
+                        _entryFieldnumbers('SEM6 GPA', 'Eg:7.12', 31),
+                        _entryFieldnumbers('SEM7 GPA', 'Eg:7.12', 32),
+                        _entryFieldnumbers('SEM8 GPA', 'Eg:7.12', 33),
+                        _entryFieldnumbers('OVERALL GPA', 'Eg:7.12', 34),
+                        _entryFieldnumbers('NO OF ARREARS SEM 1',
+                            'if there is no arrears enter 0', 35),
+                        _entryFieldnumbers('NO OF ARREARS SEM 2',
+                            'if there is no arrears enter 0', 36),
+                        _entryFieldnumbers('NO OF ARREARS SEM 3',
+                            'if there is no arrears enter 0', 37),
+                        _entryFieldnumbers('NO OF ARREARS SEM 4',
+                            'if there is no arrears enter 0', 38),
+                        _entryFieldnumbers('NO OF ARREARS SEM 5',
+                            'if there is no arrears enter 0', 39),
+                        _entryFieldnumbers('NO OF ARREARS SEM 6',
+                            'if there is no arrears enter 0', 40),
+                        _entryFieldnumbers('NO OF ARREARS SEM 7',
+                            'if there is no arrears enter 0', 41),
+                        _entryFieldnumbers('NO OF ARREARS SEM 8',
+                            'if there is no arrears enter 0', 42),
+                        _entryFieldnumbers('TOTAL NO OF STANDING ARREARS',
+                            'if there is no arrears enter 0', 43),
+                        _DropBox("HISTORY OF ARREARS [Y/N]", yesorno, 5),
+                        _entryFieldnumbers('IF YES, HOW MANY?',
+                            'if there is no arrears enter 0', 44),
+                        Align(
+                          alignment: Alignment.bottomRight,
+                          child: FloatingActionButton(onPressed: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.bottomToTop,
+                                    child: PpPersonalD()));
+                          },),
+                        )
+
+                      ],
+
+                    )))
+          ]),
+        ));
   }
 }
