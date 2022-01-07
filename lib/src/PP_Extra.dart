@@ -23,38 +23,8 @@ class NewObject {
 class _PpExtraDState extends State<PpExtraD> {
   bool loading = false;
 
-  static final List<NewObject> title = <NewObject>[
-    NewObject('SELECT TITLE', Icons.description),
-    NewObject('Mr', Icons.person),
-    NewObject('Ms', Icons.person),
-  ];
-  static final List<NewObject> gender = <NewObject>[
-    NewObject('SELECT GENDER', Icons.person),
-    NewObject('MALE', Icons.male_rounded),
-    NewObject('FEMALE', Icons.female_rounded),
-  ];
-
-  static final List<NewObject> college = <NewObject>[
-    NewObject('SELECT COLLEGE', Icons.description),
-    NewObject('SJIT', Icons.home_outlined),
-    NewObject('SJCE', Icons.home_outlined),
-  ];
-
-  static final List<NewObject> department = <NewObject>[
-    NewObject('SELECT DEPARTMENT', Icons.description),
-    NewObject('B.Tech IT', Icons.mobile_friendly_rounded),
-    NewObject('B.E CSE', Icons.computer_rounded),
-    NewObject('B.E ECE', Icons.signal_cellular_alt_outlined),
-    NewObject('B.E EEE', Icons.lightbulb_outline_rounded),
-    NewObject('B.E MECH', Icons.settings_applications_rounded),
-    NewObject('B.E CIVIL', Icons.apartment_outlined),
-  ];
-
-  static final List<NewObject> section = <NewObject>[
-    NewObject('SELECT SECTION', Icons.description),
-    NewObject('A', Icons.arrow_back_ios),
-    NewObject('B', Icons.arrow_back_ios),
-    NewObject('C', Icons.arrow_back_ios),
+  List<String> pa=[
+    'null','null'
   ];
 
   static final List<NewObject> yesorno = <NewObject>[
@@ -70,25 +40,13 @@ class _PpExtraDState extends State<PpExtraD> {
     NewObject('HIGHER', Icons.arrow_back_ios),
   ];
 
-  static final List<NewObject> hord = <NewObject>[
-    NewObject('SELECT THE OPTION', Icons.description),
-    NewObject('HOSTEL', Icons.arrow_back_ios),
-    NewObject('DAY SCHOLAR', Icons.arrow_back_ios),
-  ];
 
   static final List<NewObject> dropbox = <NewObject>[
-    title.first, //0
-    gender.first, //1
-    college.first, //2
-    department.first, //3
-    section.first, //4
-    yesorno.first, //5
-    yesorno.first, //6
-    yesorno.first, //7
-    becgrade.first, //8
-    yesorno.first, //9
-    yesorno.first, //10
-    hord.first, //11
+    yesorno.first, //0
+    yesorno.first, //1
+    becgrade.first, //2
+    yesorno.first, //3
+    yesorno.first, //4
   ];
 
   Widget _backButton() {
@@ -107,45 +65,6 @@ class _PpExtraDState extends State<PpExtraD> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _entryFieldalphabetsdisplay(String title, String hint, int i,
-      {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      width: 500,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-                hintText: hint,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
-                  ),
-                ),
-                fillColor: Color(0xfff3f3f4),
-                filled: true),
-            enabled: false,
-            // onChanged: (value) => setState(() => pp[i] = value),
-          )
-        ],
       ),
     );
   }
@@ -181,48 +100,7 @@ class _PpExtraDState extends State<PpExtraD> {
                 ),
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
-            // onChanged: (value) => setState(() => pp[i] = value),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _entryFieldDob(String title, String hint, int i,
-      {bool isPassword = false}) {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
-      width: 500,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
-          ),
-          TextFormField(
-            decoration: InputDecoration(
-                prefixIcon: Icon(Icons.calendar_today),
-                hintText: hint,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(
-                    width: 0,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-                fillColor: Color(0xfff3f3f4),
-                filled: true),
-            keyboardType: TextInputType.number,
-            // onChanged: (value) => setState(() => pp[i] = value),
-            // keyboardType: TextInputType.number,
-            // inputFormatters: <TextInputFormatter>[
-            //   FilteringTextInputFormatter.digitsOnly
-            // ],
+             onChanged: (value) => setState(() => pa[i] = value),
           )
         ],
       ),
@@ -276,7 +154,7 @@ class _PpExtraDState extends State<PpExtraD> {
                   value: item,
                 ))
                     .toList(),
-                //onChanged: (value) => setState(() {dropbox[i] = value;}),
+                onChanged: (value) => setState(() {dropbox[i] = value;}),
               ),
             ),
           )
@@ -317,8 +195,7 @@ class _PpExtraDState extends State<PpExtraD> {
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
             keyboardType: TextInputType.number,
-
-            //onChanged: (value) => setState(() => pp[i] = value),
+            onChanged: (value) => setState(() => pa[i] = value),
 
             // inputFormatters: <TextInputFormatter>[
             //   FilteringTextInputFormatter.digitsOnly
@@ -393,25 +270,30 @@ class _PpExtraDState extends State<PpExtraD> {
                         SizedBox(height: height * .05),
                         Align(alignment: Alignment.center, child: _title()),
                         SizedBox(height: height * .1),
-                        _DropBox("SPORTS QUOTA", yesorno, 6),
-                        _DropBox("BEC EXAM STATUS", yesorno, 7),
-                        _DropBox("BEC EXAM GRADE", becgrade, 8),
+                        _DropBox("SPORTS QUOTA", yesorno, 0),
+                        _DropBox("BEC EXAM STATUS", yesorno, 1),
+                        _DropBox("BEC EXAM GRADE", becgrade, 2),
                         _entryFieldalphabets(
-                            'LANGUAGES KNOWN', 'Tamil,English,Hindi', 58),
+                            'LANGUAGES KNOWN', 'Tamil,English,Hindi', 0),
                         _entryFieldnumbers(
                             'GAP IN EDUCATION (in Years) - If Any',
                             'if there is no gap enter 0',
-                            59),
+                            1),
                         _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]",
-                            yesorno, 9),
+                            yesorno, 3),
                         _DropBox(
                             "IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL",
                             yesorno,
-                            10),
+                            4),
                         Align(
                           alignment: Alignment.bottomRight,
                           child: FloatingActionButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              print("---");
+                              for(int i=0;i<dropbox.length;i++){
+                                print(dropbox[i].title);
+                              }
+                            },
                           )
                         )
 
