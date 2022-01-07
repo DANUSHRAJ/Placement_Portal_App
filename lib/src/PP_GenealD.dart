@@ -23,6 +23,26 @@ class NewObject {
 class _PpGenealDState extends State<PpGenealD> {
   bool loading = false;
 
+  List<String> pg=[
+    'null','null','null','null','null','null','null','null','null'
+  ];
+  //profile General Data
+  // String regno;
+  // String rollno;
+  // String title_d;
+  // String name;
+  // String fname;
+  // String lname;
+  // String gender_d;
+  // String dob_d;
+  // String dob_m;
+  // String dob_y;
+  // String college_d;
+  // String degree;
+  // String branch;
+  // String section_d;
+  // String yoa;
+  // String scholar;
   static final List<NewObject> title = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
     NewObject('Mr', Icons.person),
@@ -57,19 +77,6 @@ class _PpGenealDState extends State<PpGenealD> {
     NewObject('C', Icons.arrow_back_ios),
   ];
 
-  static final List<NewObject> yesorno = <NewObject>[
-    NewObject('SELECT THE OPTION', Icons.description),
-    NewObject('YES', Icons.arrow_back_ios),
-    NewObject('NO', Icons.arrow_back_ios),
-  ];
-
-  static final List<NewObject> becgrade = <NewObject>[
-    NewObject('SELECT BEC GRADE', Icons.description),
-    NewObject('PRELIMINARY', Icons.arrow_back_ios),
-    NewObject('VANTAGE', Icons.arrow_back_ios),
-    NewObject('HIGHER', Icons.arrow_back_ios),
-  ];
-
   static final List<NewObject> hord = <NewObject>[
     NewObject('SELECT THE OPTION', Icons.description),
     NewObject('HOSTEL', Icons.arrow_back_ios),
@@ -82,13 +89,7 @@ class _PpGenealDState extends State<PpGenealD> {
     college.first, //2
     department.first, //3
     section.first, //4
-    yesorno.first, //5
-    yesorno.first, //6
-    yesorno.first, //7
-    becgrade.first, //8
-    yesorno.first, //9
-    yesorno.first, //10
-    hord.first, //11
+    hord.first, //5
   ];
 
   Widget _backButton() {
@@ -111,7 +112,7 @@ class _PpGenealDState extends State<PpGenealD> {
     );
   }
 
-  Widget _entryFieldalphabetsdisplay(String title, String hint, int i,
+  Widget _entryFieldalphabetsdisplay(String title, String hint,int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -142,8 +143,8 @@ class _PpGenealDState extends State<PpGenealD> {
                 ),
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
-            enabled: false,
-            // onChanged: (value) => setState(() => pp[i] = value),
+            enabled: true,
+            onChanged: (value) => setState(() => pg[i] = value),
           )
         ],
       ),
@@ -181,7 +182,7 @@ class _PpGenealDState extends State<PpGenealD> {
                 ),
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
-            // onChanged: (value) => setState(() => pp[i] = value),
+            onChanged: (value) => setState(() => pg[i] = value),
           )
         ],
       ),
@@ -218,7 +219,7 @@ class _PpGenealDState extends State<PpGenealD> {
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
             keyboardType: TextInputType.number,
-            // onChanged: (value) => setState(() => pp[i] = value),
+            onChanged: (value) => setState(() => pg[i] = value),
             // keyboardType: TextInputType.number,
             // inputFormatters: <TextInputFormatter>[
             //   FilteringTextInputFormatter.digitsOnly
@@ -276,7 +277,9 @@ class _PpGenealDState extends State<PpGenealD> {
                           value: item,
                         ))
                     .toList(),
-                //onChanged: (value) => setState(() {dropbox[i] = value;}),
+                onChanged: (value) => setState(() {
+                  dropbox[i] = value;
+                }),
               ),
             ),
           )
@@ -317,8 +320,7 @@ class _PpGenealDState extends State<PpGenealD> {
                 fillColor: Color(0xfff3f3f4),
                 filled: true),
             keyboardType: TextInputType.number,
-
-            //onChanged: (value) => setState(() => pp[i] = value),
+            onChanged: (value) => setState(() => pg[i] = value),
 
             // inputFormatters: <TextInputFormatter>[
             //   FilteringTextInputFormatter.digitsOnly
@@ -394,11 +396,11 @@ class _PpGenealDState extends State<PpGenealD> {
                           Align(alignment: Alignment.center, child: _title()),
                           SizedBox(height: height * .1),
                           _entryFieldalphabetsdisplay(
-                              'UNIVERSITY REG NO.', 'regno', 0),
+                              'UNIVERSITY REG NO.', 'Eg:312419205041',0),
                           _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
                           _DropBox("TITLE", title, 0),
                           _entryFieldalphabetsdisplay(
-                              'NAME OF THE CANDIDATE', 'name', 2),
+                              'NAME OF THE CANDIDATE', 'name',2),
                           _entryFieldalphabets('FIRST NAME', 'first name', 3),
                           _entryFieldalphabets('LAST NAME', 'last name', 4),
                           _DropBox("GENDER", gender, 1),
@@ -409,20 +411,26 @@ class _PpGenealDState extends State<PpGenealD> {
                           _DropBox("DEPARTMENT", department, 3),
                           _DropBox("SECTION", section, 4),
                           _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019', 8),
-                          _DropBox("HOSTEL / DAY SCHOLAR", hord, 11),
+                          _DropBox("HOSTEL / DAY SCHOLAR", hord, 5),
                           Align(
                             alignment: Alignment.bottomRight,
-                            child: FloatingActionButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: PpEducationD()));
-                              },
-                            ),
+                            child: FloatingActionButton(onPressed: () {
+                              for(int i=0;i<pg.length;i++){
+                                print(pg[i]);
+                              }
+                              for(int i=0;i<dropbox.length;i++){
+                                print(dropbox[i].title);
+                              }
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.bottomToTop,
+                                      child: PpEducationD()));
+                            },),
                           )
+
                         ],
+
                       )))
                 ]),
               ));
