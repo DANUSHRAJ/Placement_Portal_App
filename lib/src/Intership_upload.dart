@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/MyHomePage.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
@@ -43,20 +45,47 @@ class _IntershipUploadState extends State<IntershipUpload> {
       String if_ed, String if_clink, String if_plink, String if_flink) async {
 //    log('$name-$regno-$un-$pwd');
 //    log('$regnovar-$usernamevar');
-    if_flink = "";
-    final upload_intern = await widget.api.uploadIntern(regnovar, usernamevar,
-        if_title, if_name, if_sd, if_ed, if_clink, if_plink, if_flink);
-    int check = 1;
-    setState(() {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => IntershipUpload(
-                    regnovar: regnovar,
-                    usernamevar: usernamevar,
-                  )));
-      check = 0;
-    });
+  int check=1;
+    if(if_title.isEmpty || if_name.isEmpty || if_sd.isEmpty || if_ed.isEmpty)
+    {
+//      log('Please Fill all the fields');
+      check=0;
+    }
+    DateTime startDate = DateTime.parse(if_sd);
+    DateTime endDate = DateTime.parse(if_ed);
+    if(startDate.isBefore(endDate))
+    {
+//      log('Correct Date');
+    }
+    else{
+      check=0;
+//      log('Wrong Date');
+    }
+    if(check==1) {
+      if_flink = "";
+      final upload_intern = await widget.api.uploadIntern(
+          regnovar,
+          usernamevar,
+          if_title,
+          if_name,
+          if_sd,
+          if_ed,
+          if_clink,
+          if_plink,
+          if_flink);
+      int check = 1;
+      setState(() {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    IntershipUpload(
+                      regnovar: regnovar,
+                      usernamevar: usernamevar,
+                    )));
+        check = 0;
+      });
+    }
   }
 
   Widget _backButton() {
