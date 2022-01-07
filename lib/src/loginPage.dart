@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:lottie/lottie.dart';
 
 import '../main.dart';
 import 'Widget/bezierContainer.dart';
@@ -25,6 +26,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  bool loading = false;
   final etPassword = new TextEditingController();
   final etRegisterNo = new TextEditingController();
   final account = new AccountsApi();
@@ -45,12 +47,6 @@ class _LoginPageState extends State<LoginPage> {
                       usernamevar: result.name,
                     )));
       } else {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) => CheckData(
-        //               message: "FAILED",
-        //             )));
         _showtoast(
             "                 LOGIN FAILED\nUsername or Password is Incorrect");
       }
