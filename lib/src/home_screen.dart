@@ -1,6 +1,7 @@
 import 'package:SJIT_PLACEMENT_PORTAL/src/Courses.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/PP_GenealD.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Placements.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Workshops.dart';
 import 'package:flutter/cupertino.dart';
@@ -223,7 +224,12 @@ class HomeScreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PpGenealD()));
+                          },
                         ),
 
                         //INTERNS

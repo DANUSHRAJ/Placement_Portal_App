@@ -8,7 +8,8 @@ import 'Account.dart';
 class AccountsApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io'  'http://127.0.0.1:8081';
 
-  static String apiUrl = 'http://127.0.0.1:8081';
+  static String apiUrl =
+      'https://4008-2402-3a80-19a0-5ade-61ae-2af7-a5c4-6c95.ngrok.io';
 
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
