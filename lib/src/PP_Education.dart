@@ -6,6 +6,110 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
+int Validation(BuildContext context,List<String> pe){
+  List<String> compareList = [
+    '10TH PERCENTAGE',
+    '10TH BOARD OF STUDY',
+    '10TH MEDIUM OF STUDY',
+    '10TH YEAR OF PASSING',
+    'NAME OF SCHOOL',
+    'GRADUATING STATE',
+    '12TH PERCENTAGE',
+    '12TH BOARD OF STUDY',
+    '12TH MEDIUM OF STUDY',
+    '12TH YEAR OF PASSING',
+    'NAME OF SCHOOL',
+    'GRADUATING STATE',
+    'DIPLOMA - SPECIALIZATION/BRANCH',
+    'DIPLOMA PERCENTAGE',
+    'DIPLOMA YEAR OF PASSING',
+    'NAME OF THE INSTITUTE',
+    'GRADUATING STATE',
+    'UG DEGREE (FOR PG STUDENTS)',
+    'UG BRANCH (FOR PG STUDENTS)',
+    'UG PERCENTAGE (FOR PG STUDENTS)',
+    'UG CGPA (FOR PG STUDENTS)',
+    'UG YEAR OF PASSING (FOR PG STUDENTS)',
+    'UG - COLLEGE OF STUDIES (FOR PG STUDENTS)',
+    'UG - GRADUATING UNIVERSITY',
+    'GRADUATING STATE'
+  ];
+  int check = -1;
+
+  Future showdialog(BuildContext context, String message) async {
+    return showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+          title: Center(
+            child: new Text(
+              message,
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          actions: [
+            Center(
+              child: new FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.black),
+                  ),
+                  color: Colors.deepPurpleAccent,
+                  splashColor: Colors.purpleAccent,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: new Text("OK")),
+            ),
+          ],
+        ));
+  }
+
+  for (int i = 0; i < pe.length; i++) {
+    if (pe[i] == 'null' || pe[i].isEmpty) {
+      check = i;
+      break;
+    }
+  }
+  if (check != -1) {
+    showdialog(context, "please fill the " + compareList[check]);
+    //print(compareList[check]+" was left blank");
+    return -1;
+  }
+
+  if (!RegExp(r'^\d{4}$').hasMatch(pe[3])) {
+    showdialog(context, "Please Check the " + compareList[3]);
+    return -1;
+    // print("10th passing");
+  }
+  if (!RegExp(r'^\d{4}$').hasMatch(pe[9])) {
+    //print("12th passing");
+    showdialog(context, "Please Check the " + compareList[9]);
+    return -1;
+  }
+
+  //percentage
+  if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+      .hasMatch(pe[0])) {
+    //print("10th percentage");
+    showdialog(context, "Please Check the " + compareList[0]);
+    return -1;
+  }
+  if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+      .hasMatch(pe[9])) {
+    //print("12th percentage");
+    showdialog(context, "Please Check the " + compareList[9]);
+    return -1;
+  }
+
+  return 1;
+
+}
+
+
 class PpEducationD extends StatefulWidget {
   const PpEducationD({Key key}) : super(key: key);
 
@@ -277,11 +381,13 @@ class _PpEducationDState extends State<PpEducationD> {
                                 for (int i = 0; i < pe.length; i++) {
                                   print(pe[i]);
                                 }
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: PpCurrentD()));
+                                if(Validation(context, pe)==1) {
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          type: PageTransitionType.bottomToTop,
+                                          child: PpCurrentD()));
+                                }
                               },
                             ),
                           )

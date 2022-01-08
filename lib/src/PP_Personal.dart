@@ -7,6 +7,162 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
+int Validation(BuildContext context, List<String> pp) {
+  List<String> compareList = [
+    'LAND LINE NUMBER',
+    'PRIMARY MOBILE NO',
+    'EMERGENCY CONTACT NO',
+    'PRIMARY EMAIL ID',
+    'ALTERNATE EMAIL ID',
+    'PAN CARD NUMBER',
+    'NATIONALITY',
+    'INDIAN PASSPORT NUMBER',
+    'AADHAAR NUMBER',
+    'FATHER NAME',
+    'DESIGNATION & ORGANISATION',
+    'FATHER MOBILE NUMBER',
+    'FATHER EMAIL ID',
+    'MOTHER NAME',
+    'DESIGNATION & ORGANISATION',
+    'MOTHER MOBILE NUMBER',
+    'MOTHER EMAIL ID',
+    'PERMANENT ADDRESS WITH PIN CODE',
+    'PERMANENT ADDRESS LINE 1',
+    'PERMANENT ADDRESS LINE 2',
+    'PERMANENT CITY',
+    'STATE',
+    'POSTAL CODE',
+  ];
+
+  Future showdialog(BuildContext context, String message) async {
+    return showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+              title: Center(
+                child: new Text(
+                  message,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              actions: [
+                Center(
+                  child: new FlatButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.black),
+                      ),
+                      color: Colors.deepPurpleAccent,
+                      splashColor: Colors.purpleAccent,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: new Text("OK")),
+                ),
+              ],
+            ));
+  }
+
+  int check = -1;
+  for (int i = 0; i < pp.length; i++) {
+    if (pp[i] == 'null' || pp[i].isEmpty) {
+      check = i;
+      break;
+    }
+  }
+  if (check != -1) {
+    showdialog(context, "please fill the " + compareList[check]);
+    //print(compareList[check]+" was left blank");
+    return -1;
+  }
+
+  // phone number
+  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[0])) {
+    //print("land line number");
+    showdialog(context, "Please Check the " + compareList[0]);
+    return -1;
+  }
+  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[1])) {
+    //print("primary number");
+    showdialog(context, "Please Check the " + compareList[1]);
+    return -1;
+  }
+  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[2])) {
+    //print("emergency number");
+    showdialog(context, "Please Check the " + compareList[2]);
+    return -1;
+  }
+
+  //email id
+  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[3])) {
+    //print("primary");
+    showdialog(context, "Please Check the " + compareList[3]);
+    return -1;
+  }
+  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[4])) {
+    //print("alternate");
+    showdialog(context, "Please Check the " + compareList[4]);
+    return -1;
+  }
+
+  //pancard
+  if (!RegExp(r'[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}$')
+      .hasMatch(pp[5])) {
+    //print("pan card");
+    showdialog(context, "Please Check the " + compareList[5]);
+    return -1;
+  }
+
+  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pp[9]))) {
+    showdialog(context, "Please Check the " + compareList[9]);
+    return -1;
+    //print("father name");
+  }
+
+  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[11])) {
+    //print("father's mobile number");
+    showdialog(context, "Please Check the " + compareList[11]);
+    return -1;
+  }
+
+  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+      .hasMatch(pp[12])) {
+    //print("father email id");
+    showdialog(context, "Please Check the " + compareList[12]);
+    return -1;
+  }
+
+  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pp[13]))) {
+    showdialog(context, "Please Check the " + compareList[13]);
+    return -1;
+    //print("mother name");
+  }
+
+  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[15])) {
+    //print("mother's mobile number");
+    showdialog(context, "Please Check the " + compareList[15]);
+    return -1;
+  }
+
+  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+      .hasMatch(pp[16])) {
+    //print("mother email id");
+    showdialog(context, "Please Check the " + compareList[16]);
+    return -1;
+  }
+
+  //postal code
+  if (!RegExp(r'^\d{6}$').hasMatch(pp[22])) {
+    //print("postal code");
+    showdialog(context, "Please Check the " + compareList[22]);
+    return -1;
+  }
+  return 1;
+}
+
 class PpPersonalD extends StatefulWidget {
   const PpPersonalD({Key key}) : super(key: key);
 

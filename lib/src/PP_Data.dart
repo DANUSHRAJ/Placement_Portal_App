@@ -190,16 +190,7 @@ void profile(
       return;
       //print("last name");
     }
-    if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[64]))) {
-      showdialog(context, "Please Check the " + compareList[64]);
-      return;
-      //print("father name");
-    }
-    if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(profile[68]))) {
-      showdialog(context, "Please Check the " + compareList[68]);
-      return;
-      //print("mother name");
-    }
+
 
     //register number
     if (!RegExp(r'^3124\d{8}$').hasMatch(profile[0])) {

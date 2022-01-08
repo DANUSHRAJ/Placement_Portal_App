@@ -6,6 +6,65 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
+int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
+  Future showdialog(BuildContext context, String message) async {
+    return showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+              title: Center(
+                child: new Text(
+                  message,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              actions: [
+                Center(
+                  child: new FlatButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.black),
+                      ),
+                      color: Colors.deepPurpleAccent,
+                      splashColor: Colors.purpleAccent,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: new Text("OK")),
+                ),
+              ],
+            ));
+  }
+
+  for (int i = 0; i < 5; i++) {
+    if (i != 2 && dropbox[i].title == 'SELECT THE OPTION') {
+      showdialog(context, "please select the Valid OPTION");
+      return -1;
+    }
+  }
+
+  if (dropbox[2].title == 'SELECT BEC GRADE') {
+    showdialog(context, "please select the Valid SECTION");
+    return -1;
+  }
+
+  if (pa[0] == 'null' || pa[0].isEmpty) {
+    showdialog(context, "please fill the " + "LANGUAGES KNOWN");
+    //print(compareList[check]+" was left blank");
+    return -1;
+  }
+
+  if (pa[1] == 'null' || pa[1].isEmpty) {
+    showdialog(context, "please fill the " + "GAP IN EDUCATION");
+    //print(compareList[check]+" was left blank");
+    return -1;
+  }
+  return 1;
+}
+
 class PpExtraD extends StatefulWidget {
   const PpExtraD({Key key}) : super(key: key);
 
