@@ -7,6 +7,105 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
+Future<int> Validation(BuildContext context,List<String> pce,NewObject noArrears) async {
+  int check = -1;
+
+  List<String> compareList = [
+    'SEM1 GPA',
+    'SEM2 GPA',
+    'SEM3 GPA',
+    'SEM4 GPA',
+    'SEM5 GPA',
+    'SEM6 GPA',
+    'SEM7 GPA',
+    'SEM8 GPA',
+    'OVERALL CGPA',
+    'NO OF ARREARS SEM 1',
+    'NO OF ARREARS SEM 2',
+    'NO OF ARREARS SEM 3',
+    'NO OF ARREARS SEM 4',
+    'NO OF ARREARS SEM 5',
+    'NO OF ARREARS SEM 6',
+    'NO OF ARREARS SEM 7',
+    'NO OF ARREARS SEM 8',
+    'TOTAL NO OF STANDING ARREARS',
+    'if yes how many',
+
+  ];
+
+  Future showdialog(BuildContext context, String message) async {
+    return showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+          title: Center(
+            child: new Text(
+              message,
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          actions: [
+            Center(
+              child: new FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.black),
+                  ),
+                  color: Colors.deepPurpleAccent,
+                  splashColor: Colors.purpleAccent,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: new Text("OK")),
+            ),
+          ],
+        ));
+  }
+
+  for (int i = 0; i < pce.length; i++) {
+    if (pce[i] == 'null' || pce[i].isEmpty) {
+      check = i;
+      break;
+    }
+  }
+  if (check != -1) {
+    showdialog(context, "please fill the " + compareList[check]);
+    //print(compareList[check]+" was left blank");
+    return -1;
+  }
+
+
+  if(noArrears.title=='SELECT THE OPTION'){
+    showdialog(context, "please select the Valid OPTION");
+    return 0;
+  }
+
+  //gpa
+  for (int i = 0; i < 9; i++) {
+    if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+        .hasMatch(pce[i])) {
+      //print(compareList[i]+" was invalid");
+      showdialog(context, "Please Check the " + compareList[i]);
+      return -1;
+    }
+  }
+  //arrear
+  for (int i = 9; i < 19; i++) {
+    if (!RegExp(r'^(?:[1-9]|[1-4][0-9]|50)$').hasMatch(pce[i])) {
+      //print(compareList[i]+" was invalid");
+      showdialog(context, "Please Check the " + compareList[i]);
+      return -1;
+    }
+  }
+
+
+}
+
+
+
 class PpCurrentD extends StatefulWidget {
   const PpCurrentD({Key key}) : super(key: key);
 
@@ -257,11 +356,13 @@ class _PpCurrentDState extends State<PpCurrentD> {
                             for(int i=0;i<pce.length;i++){
                               print(pce[i]);
                             }
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.bottomToTop,
-                                    child: PpPersonalD()));
+                            if(Validation(context,pce,no_arrears)==1) {
+                              Navigator.push(
+                                  context,
+                                  PageTransition(
+                                      type: PageTransitionType.bottomToTop,
+                                      child: PpPersonalD()));
+                            }
                           },),
                         )
 

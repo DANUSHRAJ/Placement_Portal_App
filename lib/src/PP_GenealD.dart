@@ -1,3 +1,4 @@
+import 'package:SJIT_PLACEMENT_PORTAL/src/PP_CurrentEducation.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Education.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
@@ -7,6 +8,155 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'api.dart';
+
+Future<int> Validation(BuildContext context,List<String> pg,List<NewObject> dropbox) async {
+
+  List<String> compareList = [
+    'UNIVERSITY REG NO',
+    'ROLL NO',
+    'NAME OF THE CANDIDATE',
+    'FIRST NAME',
+    'LAST NAME',
+    'DATE OF BIRTH (DD/MM/YY)',
+    'DATE OF BIRTH (MM/DD/YY)',
+    'DATE OF BIRTH (YYYY-MM-DD)',
+    'YEAR OF ADMISSION'
+  ];
+  int check = -1;
+
+  Future showdialog(BuildContext context, String message) async {
+    return showDialog(
+        context: context,
+        builder: (context) => new AlertDialog(
+          title: Center(
+            child: new Text(
+              message,
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          actions: [
+            Center(
+              child: new FlatButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18.0),
+                    side: BorderSide(color: Colors.black),
+                  ),
+                  color: Colors.deepPurpleAccent,
+                  splashColor: Colors.purpleAccent,
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: new Text("OK")),
+            ),
+          ],
+        ));
+  }
+
+  if (dropbox[0].title == 'SELECT TITLE') {
+    showdialog(context, "please select the Valid TITLE");
+    return -1;
+  }
+  if (dropbox[1].title == 'SELECT GENDER') {
+    showdialog(context, "please select the Valid GENDER");
+    return -1;
+  }
+  if (dropbox[2].title == 'SELECT COLLEGE') {
+    showdialog(context, "please select the Valid COLLEGE");
+    return -1;
+  }
+  if (dropbox[3].title == 'SELECT DEPARTMENT') {
+    showdialog(context, "please select the Valid DEPARTMENT");
+    return -1;
+  }
+  if (dropbox[4].title == 'SELECT SECTION') {
+    showdialog(context, "please select the Valid SECTION");
+    return -1;
+  }
+
+  if (dropbox[5].title == 'SELECT THE OPTION') {
+    showdialog(context, "please select the Valid OPTION");
+    return -1;
+  }
+
+  for (int i = 0; i < pg.length; i++) {
+    if (pg[i] == 'null' || pg[i].isEmpty) {
+      check = i;
+      break;
+    }
+  }
+  if (check != -1) {
+    showdialog(context, "please fill the " + compareList[check]);
+    //print(compareList[check]+" was left blank");
+    return -1;
+  }
+  //name
+  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[2]))) {
+    showdialog(context, "Please Check the " + compareList[2]);
+    return -1;
+    //print("candidate");
+  }
+  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[3]))) {
+    showdialog(context, "Please Check the " + compareList[3]);
+    return -1;
+    //print("first name");
+  }
+  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[4]))) {
+    showdialog(context, "Please Check the " + compareList[4]);
+    return -1;
+    //print("last name");
+  }
+
+
+  //register number
+  if (!RegExp(r'^3124\d{8}$').hasMatch(pg[0])) {
+    showdialog(context, "Please Check the " + compareList[0]);
+    return -1;
+    //print("Register number was invalid");
+  }
+  //roll no
+  if (pg[1].length != 8) {
+    showdialog(context, "Please Check the " + compareList[1]);
+    return -1;
+    //print("Check roll number");
+  }
+  // dob
+  // dd-mm-yyyy
+  if (!RegExp(r'^([0-2][0-9]|(3)[0-1])(\-)(((0)[0-9])|((1)[0-2]))(\-)\d{4}$')
+      .hasMatch(pg[5])) {
+    //print("dob was invalid");
+    showdialog(context, "Please Check the " + compareList[5]);
+    return -1;
+  }
+  // mm-dd-yyyy
+  if (!RegExp(r'^(0[1-9]|1[0-2])\-(0[1-9]|1\d|2\d|3[01])\-(19|20)\d{2}$')
+      .hasMatch(pg[6])) {
+    //print("dob was invalid");
+    showdialog(context, "Please Check the " + compareList[6]);
+    return -1;
+  }
+  // yyyy-mm-dd
+  if (!RegExp(r'^\d{4}\-(0?[1-9]|1[012])\-(0?[1-9]|[12][0-9]|3[01])$')
+      .hasMatch(pg[7])) {
+    //print("dob was invalid");
+    showdialog(context, "Please Check the " + compareList[7]);
+    return -1;
+  }
+
+  //year
+  if (!RegExp(r'^\d{4}$').hasMatch(pg[8])) {
+    showdialog(context, "Please Check the " + compareList[8]);
+    return -1;
+    //print("year of admission");
+  }
+
+  return 1;
+}
+
+
 
 class PpGenealD extends StatefulWidget {
   String regnovar;
@@ -463,11 +613,13 @@ class _PpGenealDState extends State<PpGenealD> {
                               for(int i=0;i<dropbox.length;i++){
                                 print(dropbox[i].title);
                               }
-                              Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType.bottomToTop,
-                                      child: PpEducationD()));
+                              if(Validation(context, pg, dropbox)==1) {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        child: PpEducationD()));
+                              }
                             },),
                           )
 
