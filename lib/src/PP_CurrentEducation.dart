@@ -24,8 +24,26 @@ class NewObject {
 class _PpCurrentDState extends State<PpCurrentD> {
   bool loading = false;
 
-  List<String> pce=[
-    'null','null','null','null','null','null','null','null','null','null','null','null','null','null','null','null','null','null','null'
+  List<String> pce = [
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null'
   ];
 
   static final List<NewObject> yesorno = <NewObject>[
@@ -34,7 +52,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
     NewObject('NO', Icons.arrow_back_ios),
   ];
 
-  NewObject no_arrears=yesorno.first;
+  NewObject no_arrears = yesorno.first;
 
   Widget _backButton() {
     return InkWell(
@@ -56,7 +74,10 @@ class _PpCurrentDState extends State<PpCurrentD> {
     );
   }
 
-  Widget _DropBox(String title, List<NewObject> key,) {
+  Widget _DropBox(
+    String title,
+    List<NewObject> key,
+  ) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       width: 500,
@@ -87,23 +108,25 @@ class _PpCurrentDState extends State<PpCurrentD> {
                 value: no_arrears, // currently selected item
                 items: key
                     .map((item) => DropdownMenuItem<NewObject>(
-                  child: Row(
-                    children: [
-                      Icon(item.icon),
-                      const SizedBox(width: 8),
-                      Text(
-                        item.title,
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  value: item,
-                ))
+                          child: Row(
+                            children: [
+                              Icon(item.icon),
+                              const SizedBox(width: 8),
+                              Text(
+                                item.title,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                          value: item,
+                        ))
                     .toList(),
-                onChanged: (value) => setState(() {no_arrears = value;}),
+                onChanged: (value) => setState(() {
+                  no_arrears = value;
+                }),
               ),
             ),
           )
@@ -178,7 +201,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
                   style: GoogleFonts.adventPro(
                     fontSize: 30,
                     fontWeight: FontWeight.w700,
-                    color: Colors.black,
+                    color: Colors.limeAccent,
                   ),
                 ),
               ]),
@@ -193,82 +216,82 @@ class _PpCurrentDState extends State<PpCurrentD> {
     return Scaffold(
         body: loading
             ? Center(
-            child: Lottie.network(
-                'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+                child: Lottie.network(
+                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
             : Container(
-          height: height,
-          child: Stack(children: <Widget>[
-            Container(
-                height: double.infinity,
-                width: double.infinity,
-                child: Image.asset(
-                  'assets/images/inner_bg.gif',
-                  fit: BoxFit.cover,
-                )),
-            Positioned(
-              top: -MediaQuery.of(context).size.height * .45,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer(),
-            ),
-            Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(height: height * .05),
-                        Align(alignment: Alignment.center, child: _title()),
-                        SizedBox(height: height * .1),
-                        _entryFieldnumbers('SEM1 GPA', 'Eg:7.12', 0),
-                        _entryFieldnumbers('SEM2 GPA', 'Eg:7.12', 1),
-                        _entryFieldnumbers('SEM3 GPA', 'Eg:7.12', 2),
-                        _entryFieldnumbers('SEM4 GPA', 'Eg:7.12', 3),
-                        _entryFieldnumbers('SEM5 GPA', 'Eg:7.12', 4),
-                        _entryFieldnumbers('SEM6 GPA', 'Eg:7.12', 5),
-                        _entryFieldnumbers('SEM7 GPA', 'Eg:7.12', 6),
-                        _entryFieldnumbers('SEM8 GPA', 'Eg:7.12', 7),
-                        _entryFieldnumbers('OVERALL GPA', 'Eg:7.12', 8),
-                        _entryFieldnumbers('NO OF ARREARS SEM 1',
-                            'if there is no arrears enter 0', 9),
-                        _entryFieldnumbers('NO OF ARREARS SEM 2',
-                            'if there is no arrears enter 0', 10),
-                        _entryFieldnumbers('NO OF ARREARS SEM 3',
-                            'if there is no arrears enter 0', 11),
-                        _entryFieldnumbers('NO OF ARREARS SEM 4',
-                            'if there is no arrears enter 0', 12),
-                        _entryFieldnumbers('NO OF ARREARS SEM 5',
-                            'if there is no arrears enter 0', 13),
-                        _entryFieldnumbers('NO OF ARREARS SEM 6',
-                            'if there is no arrears enter 0', 14),
-                        _entryFieldnumbers('NO OF ARREARS SEM 7',
-                            'if there is no arrears enter 0', 15),
-                        _entryFieldnumbers('NO OF ARREARS SEM 8',
-                            'if there is no arrears enter 0', 16),
-                        _entryFieldnumbers('TOTAL NO OF STANDING ARREARS',
-                            'if there is no arrears enter 0', 17),
-                        _DropBox("HISTORY OF ARREARS [Y/N]", yesorno),
-                        _entryFieldnumbers('IF YES, HOW MANY?',
-                            'if there is no arrears enter 0', 18),
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: FloatingActionButton(onPressed: () {
-                            print("------");
-                            for(int i=0;i<pce.length;i++){
-                              print(pce[i]);
-                            }
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.bottomToTop,
-                                    child: PpPersonalD()));
-                          },),
-                        )
-
-                      ],
-
-                    )))
-          ]),
-        ));
+                height: height,
+                child: Stack(children: <Widget>[
+                  Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: Image.asset(
+                        'assets/images/inner_bg.gif',
+                        fit: BoxFit.cover,
+                      )),
+                  Positioned(
+                    top: -MediaQuery.of(context).size.height * .45,
+                    right: -MediaQuery.of(context).size.width * .4,
+                    child: BezierContainer(),
+                  ),
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: SingleChildScrollView(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(height: height * .05),
+                          Align(alignment: Alignment.center, child: _title()),
+                          SizedBox(height: height * .1),
+                          _entryFieldnumbers('SEM1 GPA', 'Eg:7.12', 0),
+                          _entryFieldnumbers('SEM2 GPA', 'Eg:7.12', 1),
+                          _entryFieldnumbers('SEM3 GPA', 'Eg:7.12', 2),
+                          _entryFieldnumbers('SEM4 GPA', 'Eg:7.12', 3),
+                          _entryFieldnumbers('SEM5 GPA', 'Eg:7.12', 4),
+                          _entryFieldnumbers('SEM6 GPA', 'Eg:7.12', 5),
+                          _entryFieldnumbers('SEM7 GPA', 'Eg:7.12', 6),
+                          _entryFieldnumbers('SEM8 GPA', 'Eg:7.12', 7),
+                          _entryFieldnumbers('OVERALL GPA', 'Eg:7.12', 8),
+                          _entryFieldnumbers('NO OF ARREARS SEM 1',
+                              'if there is no arrears enter 0', 9),
+                          _entryFieldnumbers('NO OF ARREARS SEM 2',
+                              'if there is no arrears enter 0', 10),
+                          _entryFieldnumbers('NO OF ARREARS SEM 3',
+                              'if there is no arrears enter 0', 11),
+                          _entryFieldnumbers('NO OF ARREARS SEM 4',
+                              'if there is no arrears enter 0', 12),
+                          _entryFieldnumbers('NO OF ARREARS SEM 5',
+                              'if there is no arrears enter 0', 13),
+                          _entryFieldnumbers('NO OF ARREARS SEM 6',
+                              'if there is no arrears enter 0', 14),
+                          _entryFieldnumbers('NO OF ARREARS SEM 7',
+                              'if there is no arrears enter 0', 15),
+                          _entryFieldnumbers('NO OF ARREARS SEM 8',
+                              'if there is no arrears enter 0', 16),
+                          _entryFieldnumbers('TOTAL NO OF STANDING ARREARS',
+                              'if there is no arrears enter 0', 17),
+                          _DropBox("HISTORY OF ARREARS [Y/N]", yesorno),
+                          _entryFieldnumbers('IF YES, HOW MANY?',
+                              'if there is no arrears enter 0', 18),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: FloatingActionButton(
+                              onPressed: () {
+                                print("------");
+                                for (int i = 0; i < pce.length; i++) {
+                                  print(pce[i]);
+                                }
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        child: PpPersonalD()));
+                              },
+                            ),
+                          )
+                        ],
+                      )))
+                ]),
+              ));
   }
 }

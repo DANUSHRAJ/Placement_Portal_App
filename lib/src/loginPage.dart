@@ -1,17 +1,17 @@
 import 'dart:convert';
 import 'dart:developer';
-
+import 'dart:ui' as ui;
 import 'package:SJIT_PLACEMENT_PORTAL/src/signup.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
 
 import '../main.dart';
-import 'Widget/bezierContainer.dart';
 import 'api.dart';
 import 'home_screen.dart';
 
@@ -124,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   static const colorizeColors = [
-    Colors.limeAccent,
+    Colors.white,
     Colors.blue,
     Colors.yellow,
     Colors.red,
@@ -167,6 +167,10 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: isPassword,
             decoration: InputDecoration(
                 hintText: 'Enter Username',
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .caption
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
@@ -174,7 +178,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: BorderStyle.none,
                   ),
                 ),
-                fillColor: Color(0xfff3f3f4),
+                fillColor: Color(0xFFECD5C5),
                 filled: true),
             keyboardType: TextInputType.number,
 
@@ -194,6 +198,25 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.black,
         textColor: Colors.limeAccent,
         fontSize: 16.0);
+  }
+
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ui.ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
   }
 
   Widget _entryField1(String title, {bool isPassword = false}) {
@@ -232,6 +255,10 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: isPassword,
             decoration: InputDecoration(
                 hintText: 'Enter Password',
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .caption
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
@@ -239,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: BorderStyle.none,
                   ),
                 ),
-                fillColor: Color(0xfff3f3f4),
+                fillColor: Color(0xFFECD5C5),
                 filled: true),
           )
         ],
@@ -262,9 +289,9 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.all(Radius.circular(20)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: Colors.purple.shade200,
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
+                  color: Colors.orange.shade200,
+                  offset: Offset(1, 4),
+                  blurRadius: 20,
                   spreadRadius: 1)
             ],
             gradient: LinearGradient(
@@ -275,7 +302,7 @@ class _LoginPageState extends State<LoginPage> {
           'Login',
           style: GoogleFonts.adventPro(
               fontSize: 30,
-              color: Colors.limeAccent,
+              color: Colors.deepOrangeAccent,
               fontWeight: FontWeight.bold),
         ),
       ),
@@ -284,12 +311,12 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _divider() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      //margin: EdgeInsets.symmetric(vertical: 10),
       child: Row(
         children: <Widget>[
-          SizedBox(
-            width: 20,
-          ),
+          // SizedBox(
+          //   width: 20,
+          // ),
           Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
@@ -313,9 +340,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          SizedBox(
-            width: 20,
-          ),
+          // SizedBox(
+          //   width: 20,
+          // ),
         ],
       ),
     );
@@ -347,7 +374,7 @@ class _LoginPageState extends State<LoginPage> {
             Text(
               'Register',
               style: TextStyle(
-                  color: Colors.limeAccent,
+                  color: Colors.deepOrangeAccent,
                   fontSize: 15,
                   fontWeight: FontWeight.w900),
             ),
@@ -379,7 +406,7 @@ class _LoginPageState extends State<LoginPage> {
               alignment: Alignment.bottomRight,
               child: Text('Forgot Password ?',
                   style: TextStyle(
-                      color: Colors.limeAccent,
+                      color: Colors.orangeAccent,
                       fontSize: 14,
                       fontWeight: FontWeight.bold)),
             ),
@@ -398,7 +425,7 @@ class _LoginPageState extends State<LoginPage> {
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
-            color: Colors.black,
+            color: Colors.deepOrangeAccent,
           ),
           children: [
             TextSpan(
@@ -407,7 +434,7 @@ class _LoginPageState extends State<LoginPage> {
                 textStyle: Theme.of(context).textTheme.display1,
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
-                color: Colors.orangeAccent,
+                color: Colors.white,
               ),
             ),
             TextSpan(
@@ -416,7 +443,7 @@ class _LoginPageState extends State<LoginPage> {
                 textStyle: Theme.of(context).textTheme.display1,
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
-                color: Colors.white,
+                color: Colors.deepOrangeAccent,
               ),
             ),
           ]),
@@ -435,47 +462,71 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-        body: Container(
-            child: Stack(
-      children: <Widget>[
-        Container(
-            height: double.infinity,
-            width: double.infinity,
-            child: Image.asset(
-              'assets/images/inner_bg.gif',
-              fit: BoxFit.cover,
-            )),
-        Positioned(
-            top: -height * .45,
-            right: -MediaQuery.of(context).size.width * .4,
-            child: BezierContainer()),
-        SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: height * .08),
-                Positioned(top: 40, left: 0, child: _backButton()),
-                SizedBox(height: height * .02),
-                Align(alignment: Alignment.center, child: _title()),
-                SizedBox(height: 80),
-                _emailPasswordWidget(),
-                SizedBox(height: 20, width: 5),
-                _submitButton(),
-                Align(
-                    alignment: Alignment.bottomRight,
-                    child: _createAccountLabel1()),
-                _divider(),
-                _createAccountLabel(),
-                //_showToast()
-              ],
-            ),
+    return OfflineBuilder(
+      connectivityBuilder: (
+        BuildContext context,
+        ConnectivityResult connectivity,
+        Widget child,
+      ) {
+        final bool connected = connectivity != ConnectivityResult.none;
+        return Scaffold(
+          body: Container(
+              child: connected
+                  ? Container(
+                      child: Stack(
+                      children: <Widget>[
+                        generateBluredImage(),
+                        SingleChildScrollView(
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                //,
+
+                                SizedBox(height: height * .08),
+                                Positioned(
+                                    top: 40, left: 0, child: _backButton()),
+                                SizedBox(height: height * .07),
+                                Align(
+                                    alignment: Alignment.center,
+                                    child: _title()),
+                                SizedBox(height: 80),
+                                _emailPasswordWidget(),
+                                SizedBox(height: 20, width: 5),
+                                _submitButton(),
+                                Align(
+                                    alignment: Alignment.bottomRight,
+                                    child: _createAccountLabel1()),
+                                _divider(),
+                                _createAccountLabel(),
+                                //_showToast()
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ))
+                  : Container(
+                      color: Colors.black,
+                      height: 1000,
+                      width: 1000,
+                      child: Lottie.asset("assets/images/nointernet.json"),
+                    )),
+        );
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Text(
+            'There are no bottons to push :)',
           ),
-        ),
-      ],
-    )));
+          new Text(
+            'Just turn off your internet.',
+          ),
+        ],
+      ),
+    );
   }
 }

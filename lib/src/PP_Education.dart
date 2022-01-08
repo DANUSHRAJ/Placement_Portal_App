@@ -51,7 +51,6 @@ class _PpEducationDState extends State<PpEducationD> {
     'null',
   ];
 
-
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -175,7 +174,7 @@ class _PpEducationDState extends State<PpEducationD> {
                   style: GoogleFonts.adventPro(
                     fontSize: 30,
                     fontWeight: FontWeight.w700,
-                    color: Colors.black,
+                    color: Colors.limeAccent,
                   ),
                 ),
               ]),

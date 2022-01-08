@@ -41,6 +41,7 @@ dependencies:
   loading_indicator: ^3.0.2
   dotted_border: ^2.0.0+1
   iconsax: ^0.0.8
+  flutter_offline: ^2.0.0
 
 dependency_overrides:
 flutter_svg: ^0.17.4
@@ -68,7 +69,15 @@ flutter:
 
 
   assets:
+    
     - assets/images/
+    - assets/images/orange.json
+    - assets/images/nointernet.json
+    - assets/images/Pdata.gif
+    - assets/images/Timeline.gif
+    - assets/images/workshops.gif
+    - assets/images/Placem.gif
+    - assets/images/courses.gif
 
   fonts:
     - family: Montserrat Medium

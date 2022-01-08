@@ -176,8 +176,8 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network(
-                                  'https://cdn.dribbble.com/users/767646/screenshots/1943995/team.gif',
+                                Image.asset(
+                                  "assets/images/Pdata.gif",
                                   height: 95,
                                 ),
                                 Text(
@@ -210,8 +210,8 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network(
-                                  'https://cdn.dribbble.com/users/789033/screenshots/3685590/waiting.gif',
+                                Image.asset(
+                                  'assets/images/Timeline.gif',
                                   height: 95,
                                 ),
                                 Text(
@@ -228,7 +228,10 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PpGenealD(regnovar: regnovar,usernamevar: usernamevar,)));
+                                    builder: (context) => PpGenealD(
+                                          regnovar: regnovar,
+                                          usernamevar: usernamevar,
+                                        )));
                           },
                         ),
 
@@ -241,8 +244,8 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network(
-                                  'https://cdn.dribbble.com/users/1162077/screenshots/5403918/focus-animation.gif',
+                                Image.asset(
+                                  'assets/images/Interns.gif',
                                   height: 95,
                                 ),
                                 Text(
@@ -276,8 +279,8 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network(
-                                  'https://cdn.dribbble.com/users/707433/screenshots/6720160/gears2.gif',
+                                Image.asset(
+                                  'assets/images/workshops.gif',
                                   height: 95,
                                 ),
                                 Text(
@@ -309,8 +312,8 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network(
-                                  'https://cdn.dribbble.com/users/527271/screenshots/2470948/loop_2.gif',
+                                Image.asset(
+                                  'assets/images/courses.gif',
                                   height: 95,
                                 ),
                                 Text(
@@ -340,8 +343,8 @@ class HomeScreen extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Image.network(
-                                  'https://cdn.dribbble.com/users/2344801/screenshots/4774578/alphatestersanimation2.gif',
+                                Image.asset(
+                                  'assets/images/Placem.gif',
                                   height: 95,
                                 ),
                                 Text(
@@ -359,7 +362,7 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: PpGenealD()));
+                                    child: HomeScreen()));
                           },
                         ),
                       ],

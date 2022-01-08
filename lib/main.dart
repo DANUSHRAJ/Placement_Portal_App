@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'src/welcomePage.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/Animations/FadeAnimation.dart';
@@ -9,7 +12,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application. 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'SJIT PLACEMENT PORTAL',
       theme: ThemeData(
         textTheme: GoogleFonts.latoTextTheme(textTheme).copyWith(
-          bodyText1: GoogleFonts.montserrat(textStyle: textTheme.bodyText1),
+          bodyText1: GoogleFonts.aBeeZee(textStyle: textTheme.bodyText1),
         ),
       ),
       debugShowCheckedModeBanner: false,
@@ -102,6 +105,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           });
   }
 
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -110,17 +132,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       body: Container(
         child: Stack(
           children: <Widget>[
-            Container(
-                height: double.infinity,
-                width: double.infinity,
-                child: Image.asset(
-                  'assets/images/inner_bg.gif',
-                  fit: BoxFit.cover,
-                )),
-            Positioned(
-                top: -height * .47,
-                right: -MediaQuery.of(context).size.width * .4,
-                child: BezierContainer()),
+            generateBluredImage(),
+            // Container(
+            //     height: double.infinity,
+            //     width: double.infinity,
+            //     child: Image.asset(
+            //       'assets/images/rots.gif',
+            //       fit: BoxFit.cover,
+            //     )),
+
+            // Lottie.network(
+            //     'https://assets5.lottiefiles.com/packages/lf20_tyi61jpp.json'),
+            Lottie.asset("assets/images/orange.json"),
             Container(
               padding: EdgeInsets.all(20.0),
               child: Column(
@@ -192,7 +215,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   padding: EdgeInsets.all(10),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(50),
-                                      color: Colors.cyanAccent),
+                                      color: Colors.orangeAccent),
                                   child: InkWell(
                                     onTap: () {
                                       _scaleController.forward();
@@ -237,9 +260,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               ),
                             )),
                       )),
-                  SizedBox(
-                    height: 90,
-                  ),
                 ],
               ),
             )

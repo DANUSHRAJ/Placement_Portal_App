@@ -11,6 +11,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
 import 'Account.dart';
 import 'api.dart';
 import 'home_screen.dart';
+import 'dart:ui' as ui;
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -29,7 +30,7 @@ class _SignUpPageState extends State<SignUpPage> {
   final etPassword = new TextEditingController();
 
   static const colorizeColors = [
-    Colors.limeAccent,
+    Colors.white,
     Colors.blue,
     Colors.yellow,
     Colors.red,
@@ -106,13 +107,6 @@ class _SignUpPageState extends State<SignUpPage> {
         check = 0;
       });
       if (check == 1) {
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) =>
-        //             CheckData(
-        //               message: "FAILURE",
-        //             )));
         _showtoast("SIGNUP FAILED");
       }
     }
@@ -183,12 +177,10 @@ class _SignUpPageState extends State<SignUpPage> {
             obscureText: isPassword,
             decoration: InputDecoration(
                 hintText: 'Enter RegisterNumber (eg:3124********)',
-                hintStyle: TextStyle(
-                  color: Colors.black45, // <-- Change this
-                  fontSize: null,
-                  fontWeight: FontWeight.w500,
-                  fontStyle: FontStyle.italic,
-                ),
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .caption
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
@@ -196,7 +188,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: BorderStyle.solid,
                   ),
                 ),
-                fillColor: Colors.white,
+                fillColor: Color(0xFFECD5C5),
                 filled: true),
             keyboardType: TextInputType.number,
           )
@@ -239,6 +231,10 @@ class _SignUpPageState extends State<SignUpPage> {
             obscureText: isPassword,
             decoration: InputDecoration(
                 hintText: 'Enter mail-id',
+                hintStyle: Theme.of(context)
+                    .textTheme
+                    .caption
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
@@ -246,7 +242,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     style: BorderStyle.solid,
                   ),
                 ),
-                fillColor: Colors.white,
+                fillColor: Color(0xFFECD5C5),
                 filled: true),
             keyboardType: TextInputType.emailAddress,
             inputFormatters: <TextInputFormatter>[
@@ -282,10 +278,6 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
               isRepeatingAnimation: true,
               totalRepeatCount: 10000,
-              //pause: const Duration(milliseconds: 1000),
-              // onTap: () {
-              //   print("Tap Event");
-              // },
             ),
           ),
           SizedBox(
@@ -296,6 +288,10 @@ class _SignUpPageState extends State<SignUpPage> {
               obscureText: isPassword,
               decoration: InputDecoration(
                   hintText: 'Enter Password',
+                  hintStyle: Theme.of(context)
+                      .textTheme
+                      .caption
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
@@ -303,7 +299,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  fillColor: Colors.white,
+                  fillColor: Color(0xFFECD5C5),
                   filled: true))
         ],
       ),
@@ -334,10 +330,6 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
               isRepeatingAnimation: true,
               totalRepeatCount: 10000,
-              //pause: const Duration(milliseconds: 1000),
-              // onTap: () {
-              //   print("Tap Event");
-              // },
             ),
           ),
           SizedBox(
@@ -348,6 +340,10 @@ class _SignUpPageState extends State<SignUpPage> {
               obscureText: isPassword,
               decoration: InputDecoration(
                   hintText: 'Enter your Name',
+                  hintStyle: Theme.of(context)
+                      .textTheme
+                      .caption
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(
@@ -355,7 +351,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       style: BorderStyle.solid,
                     ),
                   ),
-                  fillColor: Colors.white,
+                  fillColor: Color(0xFFECD5C5),
                   filled: true))
         ],
       ),
@@ -376,10 +372,10 @@ class _SignUpPageState extends State<SignUpPage> {
             borderRadius: BorderRadius.all(Radius.circular(20)),
             boxShadow: <BoxShadow>[
               BoxShadow(
-                  color: Colors.purple,
+                  color: Colors.orangeAccent,
                   offset: Offset(2, 4),
-                  blurRadius: 5,
-                  spreadRadius: 2)
+                  blurRadius: 10,
+                  spreadRadius: 3)
             ],
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
@@ -389,7 +385,7 @@ class _SignUpPageState extends State<SignUpPage> {
           'Register Now',
           style: GoogleFonts.adventPro(
               fontSize: 30,
-              color: Colors.limeAccent,
+              color: Colors.deepOrangeAccent,
               fontWeight: FontWeight.bold),
         ),
       ),
@@ -420,7 +416,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Text(
               'Login',
               style: TextStyle(
-                  color: Colors.limeAccent,
+                  color: Colors.orangeAccent,
                   fontSize: 13,
                   fontWeight: FontWeight.w600),
             ),
@@ -439,7 +435,7 @@ class _SignUpPageState extends State<SignUpPage> {
             textStyle: Theme.of(context).textTheme.display1,
             fontSize: 30,
             fontWeight: FontWeight.w700,
-            color: Colors.black,
+            color: Colors.deepOrangeAccent,
           ),
           children: [
             TextSpan(
@@ -448,7 +444,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 textStyle: Theme.of(context).textTheme.display1,
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
-                color: Colors.orangeAccent,
+                color: Colors.white,
               ),
             ),
             TextSpan(
@@ -457,10 +453,27 @@ class _SignUpPageState extends State<SignUpPage> {
                 textStyle: Theme.of(context).textTheme.display1,
                 fontSize: 30,
                 fontWeight: FontWeight.w700,
-                color: Colors.white,
+                color: Colors.deepOrangeAccent,
               ),
             ),
           ]),
+    );
+  }
+
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      child: new BackdropFilter(
+        filter: new ui.ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
     );
   }
 
@@ -483,18 +496,7 @@ class _SignUpPageState extends State<SignUpPage> {
         height: height,
         child: Stack(
           children: <Widget>[
-            Container(
-                height: double.infinity,
-                width: double.infinity,
-                child: Image.asset(
-                  'assets/images/inner_bg.gif',
-                  fit: BoxFit.cover,
-                )),
-            Positioned(
-              top: -MediaQuery.of(context).size.height * .45,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer(),
-            ),
+            generateBluredImage(),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(

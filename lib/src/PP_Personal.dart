@@ -23,12 +23,31 @@ class NewObject {
 
 class _PpPersonalDState extends State<PpPersonalD> {
   bool loading = false;
-  List<String> pp=[
-    'null','null','null','null','null','null','null','null','null','null',
-    'null','null','null','null','null','null','null','null','null','null',
-    'null','null','null'
+  List<String> pp = [
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null',
+    'null'
   ];
-
 
   Widget _backButton() {
     return InkWell(
@@ -127,7 +146,6 @@ class _PpPersonalDState extends State<PpPersonalD> {
     );
   }
 
-
   Widget _entryFieldnumbers(String title, String hint, int i,
       {bool isPassword = false}) {
     return Container(
@@ -193,7 +211,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
                   style: GoogleFonts.adventPro(
                     fontSize: 30,
                     fontWeight: FontWeight.w700,
-                    color: Colors.black,
+                    color: Colors.limeAccent,
                   ),
                 ),
               ]),
@@ -208,82 +226,82 @@ class _PpPersonalDState extends State<PpPersonalD> {
     return Scaffold(
         body: loading
             ? Center(
-            child: Lottie.network(
-                'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+                child: Lottie.network(
+                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
             : Container(
-          height: height,
-          child: Stack(children: <Widget>[
-            Container(
-                height: double.infinity,
-                width: double.infinity,
-                child: Image.asset(
-                  'assets/images/inner_bg.gif',
-                  fit: BoxFit.cover,
-                )),
-            Positioned(
-              top: -MediaQuery.of(context).size.height * .45,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer(),
-            ),
-            Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: SingleChildScrollView(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        SizedBox(height: height * .05),
-                        Align(alignment: Alignment.center, child: _title()),
-                        SizedBox(height: height * .1),
-                        _entryFieldnumbers('LAND LINE NUMBER', '', 0),
-                        _entryFieldnumbers('PRIMARY MOBILE NO', '', 1),
-                        _entryFieldnumbers('EMERGENCY CONTACT NO', '', 2),
-                        _entryFieldalphabetsdisplay(
-                            'PRIMARY EMAIL ID', 'email', 3),
-                        _entryFieldalphabets(
-                            'ALTERNATE EMAIL ID', 'abc@gmail.com', 4),
-
-                        _entryFieldalphabets('PAN CARD NUMBER', '', 5),
-                        _entryFieldalphabets('NATIONALITY', '', 6),
-                        _entryFieldalphabets('INDIAN PASSPORT NUMBER', '', 7),
-                        _entryFieldnumbers('AADHAAR NUMBER', '', 8),
-                        _entryFieldalphabets('FATHER NAME', '', 9),
-                        _entryFieldalphabets(
-                            'DESIGNATION & ORGANISATION', '', 10),
-                        _entryFieldnumbers('FATHER MOBILE NUMBER', '', 11),
-                        _entryFieldalphabets('FATHER EMAIL ID', '', 12),
-                        _entryFieldalphabets('MOTHER NAME', '', 13),
-                        _entryFieldalphabets(
-                            'DESIGNATION & ORGANISATION', '', 14),
-                        _entryFieldnumbers('MOTHER MOBILE NUMBER', '', 15),
-                        _entryFieldalphabets('MOTHER EMAIL ID', '', 16),
-                        _entryFieldalphabets(
-                            'PERMANENT ADDRESS WITH PIN CODE', '', 17),
-                        _entryFieldalphabets(
-                            'PERMANENT ADDRESS LINE 1', '', 18),
-                        _entryFieldalphabets(
-                            'PERMANENT ADDRESS LINE 2', '', 19),
-                        _entryFieldalphabets('PERMANENT CITY', '', 20),
-                        _entryFieldalphabets('STATE', 'Tamil Nadu', 21),
-                        _entryFieldnumbers('POSTAL CODE', '', 22),
-
-                        Align(
-                          alignment: Alignment.bottomRight,
-                          child: FloatingActionButton(onPressed: () {
-                            print("-----");
-                            for(int i=0;i<pp.length;i++){
-                              print(pp[i]);
-                            }
-                            Navigator.push(
-                                context,
-                                PageTransition(
-                                    type: PageTransitionType.bottomToTop,
-                                    child: PpExtraD()));
-                          },),
-                        )
-                      ],
-                    )))
-          ]),
-        ));
+                height: height,
+                child: Stack(children: <Widget>[
+                  Container(
+                      height: double.infinity,
+                      width: double.infinity,
+                      child: Image.asset(
+                        'assets/images/inner_bg.gif',
+                        fit: BoxFit.cover,
+                      )),
+                  Positioned(
+                    top: -MediaQuery.of(context).size.height * .45,
+                    right: -MediaQuery.of(context).size.width * .4,
+                    child: BezierContainer(),
+                  ),
+                  Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: SingleChildScrollView(
+                          child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(height: height * .05),
+                          Align(alignment: Alignment.center, child: _title()),
+                          SizedBox(height: height * .1),
+                          _entryFieldnumbers('LAND LINE NUMBER', '', 0),
+                          _entryFieldnumbers('PRIMARY MOBILE NO', '', 1),
+                          _entryFieldnumbers('EMERGENCY CONTACT NO', '', 2),
+                          _entryFieldalphabetsdisplay(
+                              'PRIMARY EMAIL ID', 'email', 3),
+                          _entryFieldalphabets(
+                              'ALTERNATE EMAIL ID', 'abc@gmail.com', 4),
+                          _entryFieldalphabets('PAN CARD NUMBER', '', 5),
+                          _entryFieldalphabets('NATIONALITY', '', 6),
+                          _entryFieldalphabets('INDIAN PASSPORT NUMBER', '', 7),
+                          _entryFieldnumbers('AADHAAR NUMBER', '', 8),
+                          _entryFieldalphabets('FATHER NAME', '', 9),
+                          _entryFieldalphabets(
+                              'DESIGNATION & ORGANISATION', '', 10),
+                          _entryFieldnumbers('FATHER MOBILE NUMBER', '', 11),
+                          _entryFieldalphabets('FATHER EMAIL ID', '', 12),
+                          _entryFieldalphabets('MOTHER NAME', '', 13),
+                          _entryFieldalphabets(
+                              'DESIGNATION & ORGANISATION', '', 14),
+                          _entryFieldnumbers('MOTHER MOBILE NUMBER', '', 15),
+                          _entryFieldalphabets('MOTHER EMAIL ID', '', 16),
+                          _entryFieldalphabets(
+                              'PERMANENT ADDRESS WITH PIN CODE', '', 17),
+                          _entryFieldalphabets(
+                              'PERMANENT ADDRESS LINE 1', '', 18),
+                          _entryFieldalphabets(
+                              'PERMANENT ADDRESS LINE 2', '', 19),
+                          _entryFieldalphabets('PERMANENT CITY', '', 20),
+                          _entryFieldalphabets('STATE', 'Tamil Nadu', 21),
+                          _entryFieldnumbers('POSTAL CODE', '', 22),
+                          Align(
+                            alignment: Alignment.bottomRight,
+                            child: FloatingActionButton(
+                              onPressed: () {
+                                print("-----");
+                                for (int i = 0; i < pp.length; i++) {
+                                  print(pp[i]);
+                                }
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        child: PpExtraD()));
+                              },
+                            ),
+                          )
+                        ],
+                      )))
+                ]),
+              ));
   }
 }
