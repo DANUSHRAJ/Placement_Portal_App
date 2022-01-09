@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Education.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Personal.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
@@ -304,10 +306,46 @@ class _PpCurrentDState extends State<PpCurrentD> {
     );
   }
 
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: Text(
+            "CURRENT EDUCATION DATA",
+            style: GoogleFonts.adventPro(
+                fontSize: 30,
+                color: Colors.orangeAccent,
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          leading: _backButton(),
+          // actions: [
+          //   IconButton(icon: Icon(Icons.home_outlined), onPressed: () {}),
+          // ],
+          backgroundColor: Colors.black,
+          elevation: 0,
+        ),
         body: loading
             ? Center(
                 child: Lottie.network(
@@ -315,18 +353,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
             : Container(
                 height: height,
                 child: Stack(children: <Widget>[
-                  Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/inner_bg.gif',
-                        fit: BoxFit.cover,
-                      )),
-                  Positioned(
-                    top: -MediaQuery.of(context).size.height * .45,
-                    right: -MediaQuery.of(context).size.width * .4,
-                    child: BezierContainer(),
-                  ),
+                  generateBluredImage(),
                   Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: SingleChildScrollView(
@@ -334,9 +361,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SizedBox(height: height * .05),
-                          Align(alignment: Alignment.center, child: _title()),
-                          SizedBox(height: height * .1),
+                          SizedBox(height: height * .2),
                           _entryFieldnumbers('SEM1 GPA', 'Eg:7.12', 0),
                           _entryFieldnumbers('SEM2 GPA', 'Eg:7.12', 1),
                           _entryFieldnumbers('SEM3 GPA', 'Eg:7.12', 2),
@@ -367,24 +392,26 @@ class _PpCurrentDState extends State<PpCurrentD> {
                           _DropBox("HISTORY OF ARREARS [Y/N]", yesorno),
                           _entryFieldnumbers('IF YES, HOW MANY?',
                               'if there is no arrears enter 0', 18),
+                          SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
-                            child: FloatingActionButton(
+                            child: FloatingActionButton.extended(
+                              backgroundColor: const Color(0xFFE96710),
+                              foregroundColor: Colors.black,
                               onPressed: () {
-                                print("------");
-                                for (int i = 0; i < pce.length; i++) {
-                                  print(pce[i]);
-                                }
-                                if (Validation(context, pce, no_arrears) == 1) {
-                                  Navigator.push(
-                                      context,
-                                      PageTransition(
-                                          type: PageTransitionType.bottomToTop,
-                                          child: PpPersonalD()));
-                                }
+                                // if (Validation(context, pg, dropbox) == 1) {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        child: PpPersonalD()));
+                                //}
                               },
+                              label: Text('NEXT'),
+                              icon: Icon(Icons.arrow_right_alt_rounded),
                             ),
-                          )
+                          ),
+                          SizedBox(height: height * .04),
                         ],
                       )))
                 ]),

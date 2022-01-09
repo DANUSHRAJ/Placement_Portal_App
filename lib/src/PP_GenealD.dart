@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_CurrentEducation.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Education.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
@@ -557,76 +559,110 @@ class _PpGenealDState extends State<PpGenealD> {
     );
   }
 
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+        backgroundColor: Colors.black,
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: Text(
+            "GENERAL DATA",
+            style: GoogleFonts.adventPro(
+                fontSize: 30,
+                color: Colors.orangeAccent,
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          leading: _backButton(),
+          // actions: [
+          //   IconButton(icon: Icon(Icons.home_outlined), onPressed: () {}),
+          // ],
+          backgroundColor: Colors.black,
+          elevation: 0,
+        ),
         body: loading
-            ? Center(
-                child: Lottie.network(
-                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+            ? Center(child: Lottie.asset('assets/images/loading.json'))
             : Container(
                 height: height,
                 child: Stack(children: <Widget>[
+                  generateBluredImage(),
+                  //SizedBox(height: height * .05),
                   Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/inner_bg.gif',
-                        fit: BoxFit.cover,
-                      )),
-                  Positioned(
-                    top: -MediaQuery.of(context).size.height * .45,
-                    right: -MediaQuery.of(context).size.width * .4,
-                    child: BezierContainer(),
-                  ),
-                  Container(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      child: SingleChildScrollView(
-                          child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          SizedBox(height: height * .05),
-                          Align(alignment: Alignment.center, child: _title()),
-                          SizedBox(height: height * .1),
-                          _entryFieldalphabetsdisplay(
-                              'UNIVERSITY REG NO.', vregno, 0),
-                          _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
-                          _DropBox("TITLE", title, 0),
-                          _entryFieldalphabetsdisplay(
-                              'NAME OF THE CANDIDATE', vname, 2),
-                          _entryFieldalphabets('FIRST NAME', 'first name', 3),
-                          _entryFieldalphabets('LAST NAME', 'last name', 4),
-                          _DropBox("GENDER", gender, 1),
-                          _entryFieldDob("D.O.B", "DD-MM-YYYY", 5),
-                          _entryFieldDob("D.O.B", "MM-DD-YYYY", 6),
-                          _entryFieldDob("D.O.B", "YYYY-MM-DD", 7),
-                          _DropBox("COLLEGE", college, 2),
-                          _DropBox("DEPARTMENT", department, 3),
-                          _DropBox("SECTION", section, 4),
-                          _entryFieldnumbers('YEAR OF ADMISSION', 'Eg:2019', 8),
-                          _DropBox("HOSTEL / DAY SCHOLAR", hord, 5),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: FloatingActionButton(
-                              onPressed: () {
-                                for (int i = 0; i < pg.length; i++) {
-                                  print(pg[i]);
-                                }
-                                for (int i = 0; i < dropbox.length; i++) {
-                                  print(dropbox[i].title);
-                                }
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: PpEducationD()));
-                              },
-                            ),
-                          )
-                        ],
-                      )))
+                    child: Stack(children: <Widget>[
+                      Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: SingleChildScrollView(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              SizedBox(height: height * .2),
+                              // Align(alignment: Alignment.center, child: _title()),
+                              // SizedBox(height: height * .1),
+                              _entryFieldalphabetsdisplay(
+                                  'UNIVERSITY REG NO.', vregno, 0),
+                              _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
+                              _DropBox("TITLE", title, 0),
+                              _entryFieldalphabetsdisplay(
+                                  'NAME OF THE CANDIDATE', vname, 2),
+                              _entryFieldalphabets(
+                                  'FIRST NAME', 'first name', 3),
+                              _entryFieldalphabets('LAST NAME', 'last name', 4),
+                              _DropBox("GENDER", gender, 1),
+                              _entryFieldDob("D.O.B", "DD-MM-YYYY", 5),
+                              _entryFieldDob("D.O.B", "MM-DD-YYYY", 6),
+                              _entryFieldDob("D.O.B", "YYYY-MM-DD", 7),
+                              _DropBox("COLLEGE", college, 2),
+                              _DropBox("DEPARTMENT", department, 3),
+                              _DropBox("SECTION", section, 4),
+                              _entryFieldnumbers(
+                                  'YEAR OF ADMISSION', 'Eg:2019', 8),
+                              _DropBox("HOSTEL / DAY SCHOLAR", hord, 5),
+                              SizedBox(height: height * .02),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: FloatingActionButton.extended(
+                                  backgroundColor: const Color(0xFFE96710),
+                                  foregroundColor: Colors.black,
+                                  onPressed: () {
+                                    // if (Validation(context, pg, dropbox) == 1) {
+                                    Navigator.push(
+                                        context,
+                                        PageTransition(
+                                            type:
+                                                PageTransitionType.bottomToTop,
+                                            child: PpEducationD()));
+                                    //}
+                                  },
+                                  label: Text('NEXT'),
+                                  icon: Icon(Icons.arrow_right_alt_rounded),
+                                ),
+                              ),
+                              SizedBox(height: height * .04),
+                            ],
+                          )))
+                    ]),
+                  )
                 ]),
               ));
   }

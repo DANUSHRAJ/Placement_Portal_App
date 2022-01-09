@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Education.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
@@ -112,11 +114,11 @@ class _PpExtraDState extends State<PpExtraD> {
             context, MaterialPageRoute(builder: (context) => HomeScreen()));
       },
       child: Container(
-        //padding: EdgeInsets.symmetric(horizontal: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           children: <Widget>[
             Container(
-              padding: EdgeInsets.only(left: 0, top: 20, bottom: 10),
+              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
               child: Icon(Icons.home_outlined, color: Colors.white),
             ),
           ],
@@ -291,10 +293,43 @@ class _PpExtraDState extends State<PpExtraD> {
     );
   }
 
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: Text(
+            "ADDITIONAL INFORMATION",
+            style: GoogleFonts.adventPro(
+                fontSize: 30,
+                color: Colors.orangeAccent,
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          leading: _backButton(),
+          backgroundColor: Colors.black,
+          elevation: 0,
+        ),
         body: loading
             ? Center(
                 child: Lottie.network(
@@ -302,18 +337,7 @@ class _PpExtraDState extends State<PpExtraD> {
             : Container(
                 height: height,
                 child: Stack(children: <Widget>[
-                  Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/inner_bg.gif',
-                        fit: BoxFit.cover,
-                      )),
-                  Positioned(
-                    top: -MediaQuery.of(context).size.height * .45,
-                    right: -MediaQuery.of(context).size.width * .4,
-                    child: BezierContainer(),
-                  ),
+                  generateBluredImage(),
                   Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: SingleChildScrollView(
@@ -321,13 +345,7 @@ class _PpExtraDState extends State<PpExtraD> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SizedBox(height: height * .01),
-                          Align(
-                            alignment: Alignment.topLeft,
-                            child: _backButton(),
-                          ),
-                          Align(alignment: Alignment.center, child: _title()),
-                          SizedBox(height: height * .1),
+                          SizedBox(height: height * .2),
                           _DropBox("SPORTS QUOTA", yesorno, 0),
                           _DropBox("BEC EXAM STATUS", yesorno, 1),
                           _DropBox("BEC EXAM GRADE", becgrade, 2),
@@ -343,16 +361,26 @@ class _PpExtraDState extends State<PpExtraD> {
                               "IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL",
                               yesorno,
                               4),
+                          SizedBox(height: height * .02),
                           Align(
-                              alignment: Alignment.bottomRight,
-                              child: FloatingActionButton(
-                                onPressed: () {
-                                  print("---");
-                                  for (int i = 0; i < dropbox.length; i++) {
-                                    print(dropbox[i].title);
-                                  }
-                                },
-                              ))
+                            alignment: Alignment.bottomRight,
+                            child: FloatingActionButton.extended(
+                              backgroundColor: const Color(0xFFE96710),
+                              foregroundColor: Colors.black,
+                              onPressed: () {
+                                // if (Validation(context, pg, dropbox) == 1) {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        child: HomeScreen()));
+                                //}
+                              },
+                              label: Text('SUBMIT'),
+                              icon: Icon(Icons.upload_rounded),
+                            ),
+                          ),
+                          SizedBox(height: height * .04),
                         ],
                       )))
                 ]),

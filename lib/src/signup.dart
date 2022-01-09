@@ -492,6 +492,23 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text(
+          "SIGN UP",
+          style: GoogleFonts.adventPro(
+              fontSize: 30,
+              color: Colors.deepOrangeAccent,
+              fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        leading: _backButton(),
+        // actions: [
+        //   IconButton(icon: Icon(Icons.home_outlined), onPressed: () {}),
+        // ],
+        backgroundColor: Colors.transparent,
+        elevation: 10,
+      ),
       body: Container(
         height: height,
         child: Stack(
@@ -504,11 +521,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(height: height * .1),
-                    Align(alignment: Alignment.center, child: _title()),
-                    SizedBox(
-                      height: 50,
-                    ),
+                    // SizedBox(height: height * .1),
+                    // Align(alignment: Alignment.center, child: _title()),
+                    SizedBox(height: height * .2),
                     _emailPasswordWidget(),
                     SizedBox(
                       height: 20,
@@ -519,7 +534,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
               ),
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
+            // Positioned(top: 40, left: 0, child: _backButton()),
           ],
         ),
       ),

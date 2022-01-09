@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/Courses.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
@@ -91,74 +93,121 @@ class HomeScreen extends StatelessWidget {
         fontSize: 16.0);
   }
 
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
+
+  Widget buildBlurryWidget(Widget _child, Widget __child, Widget ___child) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(30.0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        child: Container(
+          color: Colors.white.withOpacity(0.15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _child,
+              __child,
+              ___child,
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     // to get size
     //var size = MediaQuery.of(context).size;
     final height = MediaQuery.of(context).size.height;
 
-    // style
-    // var cardTextStyle = TextStyle(
-    //     fontFamily: "Montserrat Regular",
-    //     fontSize: 14,
-    //     color: Color.fromRGBO(63, 63, 63, 1));
-
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        centerTitle: true,
+        //shadowColor: Colors.orangeAccent,
+        leading: _backButton(context),
+        actions: [
+          IconButton(icon: Icon(Icons.search_rounded), onPressed: () {}),
+          IconButton(icon: Icon(Icons.notifications_rounded), onPressed: () {}),
+        ],
+        backgroundColor: Colors.transparent,
+        elevation: 30,
+      ),
       body: Stack(
         children: <Widget>[
-          Container(
-              height: double.infinity,
-              width: double.infinity,
-              child:
-                  Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover)),
-          Positioned(
-              top: -height * .45,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer()),
+          generateBluredImage(),
+          SizedBox(
+            height: 26,
+          ),
           SafeArea(
             child: Padding(
               padding: EdgeInsets.all(16.0),
               child: Column(
                 children: <Widget>[
                   Container(
-                    height: 90,
-                    margin: EdgeInsets.only(bottom: 20),
+                    //height: 90,
+                    // margin: EdgeInsets.only(bottom: 20),
                     child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        SizedBox(
-                          width: 26,
-                        ),
+                        // SizedBox(
+                        //   width: 26,
+                        // ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                              "Welcome, $usernamevar",
-                              style: GoogleFonts.adventPro(
-                                  fontSize: 30,
-                                  color: Colors.limeAccent,
-                                  fontWeight: FontWeight.bold),
+                            // SizedBox(height: height * .03),
+                            Container(
+                              child: buildBlurryWidget(
+                                  Text(
+                                    "\n    Welcome, $usernamevar    ",
+                                    style: GoogleFonts.adventPro(
+                                        fontSize: 30,
+                                        color: Colors.limeAccent,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "$regnovar",
+                                    style: GoogleFonts.adventPro(
+                                        fontSize: 25,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "Have A Great Day\n",
+                                    style: GoogleFonts.adventPro(
+                                        fontSize: 25,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )),
                             ),
-                            Text(
-                              "$regnovar",
-                              style: GoogleFonts.adventPro(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "Have A great day",
-                              style: GoogleFonts.adventPro(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
-                            )
                           ],
                         )
                       ],
                     ),
+                  ),
+                  SizedBox(
+                    height: height * .02,
                   ),
                   Expanded(
                     child: GridView.count(
@@ -194,7 +243,7 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => PpData(
+                                    builder: (context) => PpGenealD(
                                           regnovar: regnovar,
                                           usernamevar: usernamevar,
                                         )));
@@ -372,7 +421,6 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(top: 40, left: 0, child: _backButton(context)),
         ],
       ),
     );

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ui';
 
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
@@ -44,41 +45,29 @@ class _IntershipUploadState extends State<IntershipUpload> {
       String if_ed, String if_clink, String if_plink, String if_flink) async {
 //    log('$name-$regno-$un-$pwd');
 //    log('$regnovar-$usernamevar');
-  int check=1;
-    if(if_title.isEmpty || if_name.isEmpty || if_sd.isEmpty || if_ed.isEmpty)
-    {
+    int check = 1;
+    if (if_title.isEmpty || if_name.isEmpty || if_sd.isEmpty || if_ed.isEmpty) {
 //      log('Please Fill all the fields');
-      check=0;
+      check = 0;
     }
     DateTime startDate = DateTime.parse(if_sd);
     DateTime endDate = DateTime.parse(if_ed);
-    if(startDate.isBefore(endDate))
-    {
+    if (startDate.isBefore(endDate)) {
 //      log('Correct Date');
-    }
-    else{
-      check=0;
+    } else {
+      check = 0;
 //      log('Wrong Date');
     }
-    if(check==1) {
+    if (check == 1) {
       if_flink = "";
-      final upload_intern = await widget.api.uploadIntern(
-          regnovar,
-          usernamevar,
-          if_title,
-          if_name,
-          if_sd,
-          if_ed,
-          if_clink,
-          if_plink,
-          if_flink);
+      final upload_intern = await widget.api.uploadIntern(regnovar, usernamevar,
+          if_title, if_name, if_sd, if_ed, if_clink, if_plink, if_flink);
       int check = 1;
       setState(() {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) =>
-                    IntershipUpload(
+                builder: (context) => IntershipUpload(
                       regnovar: regnovar,
                       usernamevar: usernamevar,
                     )));
@@ -355,12 +344,11 @@ class _IntershipUploadState extends State<IntershipUpload> {
   Widget _submitButton(String title) {
     return InkWell(
       onTap: () {
-// variable names = i_title  i_name  i_sd i_ed  i_clink i_plink i_flink
         _addInternDetails(i_title.text, i_name.text, i_sd.text, i_ed.text,
             i_clink.text, i_plink.text, i_flink.text);
         //_findAccount(etRegisterNo.text, etPassword.text);
-        // Navigator.pop(
-        //     context, MaterialPageRoute(builder: (context) => ()));
+        Navigator.pop(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
       },
       child: Container(
         width: MediaQuery.of(context).size.width * .5,
@@ -368,13 +356,13 @@ class _IntershipUploadState extends State<IntershipUpload> {
         alignment: Alignment.center,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(20)),
-            // boxShadow: <BoxShadow>[
-            //   BoxShadow(
-            //       color: Colors.purple.shade200,
-            //       offset: Offset(2, 4),
-            //       blurRadius: 5,
-            //       spreadRadius: 1)
-            // ],
+            boxShadow: <BoxShadow>[
+              BoxShadow(
+                  color: Colors.orangeAccent,
+                  offset: Offset(2, 4),
+                  blurRadius: 5,
+                  spreadRadius: 1)
+            ],
             gradient: LinearGradient(
                 begin: Alignment.centerLeft,
                 end: Alignment.centerRight,
@@ -383,7 +371,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
           title,
           style: GoogleFonts.adventPro(
               fontSize: 30,
-              color: Colors.limeAccent,
+              color: Colors.deepOrangeAccent,
               fontWeight: FontWeight.bold),
         ),
       ),
@@ -441,26 +429,50 @@ class _IntershipUploadState extends State<IntershipUpload> {
     );
   }
 
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text(
+          "INTERNSHIP UPLOAD",
+          style: GoogleFonts.adventPro(
+              fontSize: 30,
+              color: Colors.orangeAccent,
+              fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        leading: _backButton(),
+        // actions: [
+        //   IconButton(icon: Icon(Icons.home_outlined), onPressed: () {}),
+        // ],
+        backgroundColor: Colors.black,
+        elevation: 0,
+      ),
       body: Container(
         child: Stack(
           children: <Widget>[
-            Container(
-              height: double.infinity,
-              width: double.infinity,
-              child: Image.asset(
-                'assets/images/inner_bg.gif',
-                fit: BoxFit.cover,
-              ),
-            ),
-            Positioned(
-              top: -MediaQuery.of(context).size.height * .45,
-              right: -MediaQuery.of(context).size.width * .4,
-              child: BezierContainer(),
-            ),
+            generateBluredImage(),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
@@ -468,9 +480,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(height: height * .1),
-                    _title(),
-                    SizedBox(height: height * .05),
+                    SizedBox(height: height * .2),
                     _entryFieldalphabets("TITLE OF THE INTERN",
                         "eg:ML,Cyber Security,Full Stack"),
                     _entryFieldalphabets2(
@@ -527,7 +537,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
                       ),
                     ),
                     _submitButton("SUBMIT"),
-                    SizedBox(height: height * .15),
+                    SizedBox(height: height * .1),
                   ],
                 ),
               ),
@@ -571,7 +581,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
         }
       },
       unselectedItemColor: Colors.white,
-      selectedItemColor: Colors.limeAccent,
+      selectedItemColor: Colors.deepOrangeAccent,
       items: [
         BottomNavigationBarItem(icon: Icon(Icons.upload_file), label: "UPLOAD"),
         BottomNavigationBarItem(

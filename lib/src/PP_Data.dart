@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 import 'package:lottie/lottie.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/api.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
@@ -190,7 +191,6 @@ void profile(
       return;
       //print("last name");
     }
-
 
     //register number
     if (!RegExp(r'^3124\d{8}$').hasMatch(profile[0])) {
@@ -867,6 +867,25 @@ class _PpDataState extends State<PpData> with TickerProviderStateMixin {
     );
   }
 
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -875,24 +894,11 @@ class _PpDataState extends State<PpData> with TickerProviderStateMixin {
       body: loading
           ? Center(
               child: Lottie.network(
-                  'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json')
-              // CircularProgressIndicator(
-              //   value: controller.value,
-              // ),
-              )
+                  'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
           : Container(
               height: height,
               child: Stack(children: <Widget>[
-                Container(
-                    height: double.infinity,
-                    width: double.infinity,
-                    child: Image.asset('assets/images/inner_bg.gif',
-                        fit: BoxFit.cover)),
-                Positioned(
-                  top: -MediaQuery.of(context).size.height * .45,
-                  right: -MediaQuery.of(context).size.width * .4,
-                  child: BezierContainer(),
-                ),
+                generateBluredImage(),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: SingleChildScrollView(

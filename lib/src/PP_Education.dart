@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_CurrentEducation.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
@@ -6,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
-int Validation(BuildContext context,List<String> pe){
+int Validation(BuildContext context, List<String> pe) {
   List<String> compareList = [
     '10TH PERCENTAGE',
     '10TH BOARD OF STUDY',
@@ -40,32 +42,32 @@ int Validation(BuildContext context,List<String> pe){
     return showDialog(
         context: context,
         builder: (context) => new AlertDialog(
-          title: Center(
-            child: new Text(
-              message,
-              style: TextStyle(
-                fontSize: 13,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          actions: [
-            Center(
-              child: new FlatButton(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18.0),
-                    side: BorderSide(color: Colors.black),
+              title: Center(
+                child: new Text(
+                  message,
+                  style: TextStyle(
+                    fontSize: 13,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
                   ),
-                  color: Colors.deepPurpleAccent,
-                  splashColor: Colors.purpleAccent,
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: new Text("OK")),
-            ),
-          ],
-        ));
+                ),
+              ),
+              actions: [
+                Center(
+                  child: new FlatButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18.0),
+                        side: BorderSide(color: Colors.black),
+                      ),
+                      color: Colors.deepPurpleAccent,
+                      splashColor: Colors.purpleAccent,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: new Text("OK")),
+                ),
+              ],
+            ));
   }
 
   for (int i = 0; i < pe.length; i++) {
@@ -106,9 +108,7 @@ int Validation(BuildContext context,List<String> pe){
   }
 
   return 1;
-
 }
-
 
 class PpEducationD extends StatefulWidget {
   const PpEducationD({Key key}) : super(key: key);
@@ -287,10 +287,46 @@ class _PpEducationDState extends State<PpEducationD> {
     );
   }
 
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: Text(
+            "EDUCATION DATA",
+            style: GoogleFonts.adventPro(
+                fontSize: 30,
+                color: Colors.orangeAccent,
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          leading: _backButton(),
+          // actions: [
+          //   IconButton(icon: Icon(Icons.home_outlined), onPressed: () {}),
+          // ],
+          backgroundColor: Colors.black,
+          elevation: 0,
+        ),
         body: loading
             ? Center(
                 child: Lottie.network(
@@ -298,18 +334,7 @@ class _PpEducationDState extends State<PpEducationD> {
             : Container(
                 height: height,
                 child: Stack(children: <Widget>[
-                  Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/inner_bg.gif',
-                        fit: BoxFit.cover,
-                      )),
-                  Positioned(
-                    top: -MediaQuery.of(context).size.height * .45,
-                    right: -MediaQuery.of(context).size.width * .4,
-                    child: BezierContainer(),
-                  ),
+                  generateBluredImage(),
                   Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: SingleChildScrollView(
@@ -317,9 +342,9 @@ class _PpEducationDState extends State<PpEducationD> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SizedBox(height: height * .05),
-                          Align(alignment: Alignment.center, child: _title()),
-                          SizedBox(height: height * .1),
+                          // SizedBox(height: height * .05),
+                          // Align(alignment: Alignment.center, child: _title()),
+                          SizedBox(height: height * .2),
                           _entryFieldnumbers('10th Percentage', 'Eg:92.6', 0),
                           _entryFieldalphabets(
                               '10TH BOARD OF STUDY', 'Eg:State Board', 1),
@@ -374,23 +399,26 @@ class _PpEducationDState extends State<PpEducationD> {
                               'Eg:Anna University', 23),
                           _entryFieldalphabets(
                               'GRADUATING STATE', 'Eg:Tamil Nadu', 24),
+                          SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
-                            child: FloatingActionButton(
+                            child: FloatingActionButton.extended(
+                              backgroundColor: const Color(0xFFE96710),
+                              foregroundColor: Colors.black,
                               onPressed: () {
-                                for (int i = 0; i < pe.length; i++) {
-                                  print(pe[i]);
-                                }
-                                if(Validation(context, pe)==1) {
-                                  Navigator.push(
-                                      context,
-                                      PageTransition(
-                                          type: PageTransitionType.bottomToTop,
-                                          child: PpCurrentD()));
-                                }
+                                // if (Validation(context, pg, dropbox) == 1) {
+                                Navigator.push(
+                                    context,
+                                    PageTransition(
+                                        type: PageTransitionType.bottomToTop,
+                                        child: PpCurrentD()));
+                                //}
                               },
+                              label: Text('NEXT'),
+                              icon: Icon(Icons.arrow_right_alt_rounded),
                             ),
-                          )
+                          ),
+                          SizedBox(height: height * .04),
                         ],
                       )))
                 ]),

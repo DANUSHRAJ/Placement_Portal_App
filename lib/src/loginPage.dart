@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _backButton() {
     return InkWell(
       onTap: () {
-        Navigator.pop(
+        Navigator.push(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       },
       child: Container(
@@ -470,6 +470,23 @@ class _LoginPageState extends State<LoginPage> {
       ) {
         final bool connected = connectivity != ConnectivityResult.none;
         return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            title: Text(
+              "LOGIN",
+              style: GoogleFonts.adventPro(
+                  fontSize: 30,
+                  color: Colors.deepOrangeAccent,
+                  fontWeight: FontWeight.bold),
+            ),
+            centerTitle: true,
+            leading: _backButton(),
+            // actions: [
+            //   IconButton(icon: Icon(Icons.home_outlined), onPressed: () {}),
+            // ],
+            backgroundColor: Colors.transparent,
+            elevation: 10,
+          ),
           body: Container(
               child: connected
                   ? Container(
@@ -485,13 +502,13 @@ class _LoginPageState extends State<LoginPage> {
                               children: <Widget>[
                                 //,
 
-                                SizedBox(height: height * .08),
-                                Positioned(
-                                    top: 40, left: 0, child: _backButton()),
-                                SizedBox(height: height * .07),
-                                Align(
-                                    alignment: Alignment.center,
-                                    child: _title()),
+                                SizedBox(height: height * .2),
+                                // Positioned(
+                                //     top: 40, left: 0, child: _backButton()),
+                                // SizedBox(height: height * .07),
+                                // Align(
+                                //     alignment: Alignment.center,
+                                //     child: _title()),
                                 SizedBox(height: 80),
                                 _emailPasswordWidget(),
                                 SizedBox(height: 20, width: 5),

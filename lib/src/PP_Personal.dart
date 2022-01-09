@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Education.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Extra.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
@@ -376,10 +378,46 @@ class _PpPersonalDState extends State<PpPersonalD> {
     );
   }
 
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: Text(
+            "PERSONAL DATA",
+            style: GoogleFonts.adventPro(
+                fontSize: 30,
+                color: Colors.orangeAccent,
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          leading: _backButton(),
+          // actions: [
+          //   IconButton(icon: Icon(Icons.home_outlined), onPressed: () {}),
+          // ],
+          backgroundColor: Colors.black,
+          elevation: 0,
+        ),
         body: loading
             ? Center(
                 child: Lottie.network(
@@ -387,18 +425,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
             : Container(
                 height: height,
                 child: Stack(children: <Widget>[
-                  Container(
-                      height: double.infinity,
-                      width: double.infinity,
-                      child: Image.asset(
-                        'assets/images/inner_bg.gif',
-                        fit: BoxFit.cover,
-                      )),
-                  Positioned(
-                    top: -MediaQuery.of(context).size.height * .45,
-                    right: -MediaQuery.of(context).size.width * .4,
-                    child: BezierContainer(),
-                  ),
+                  generateBluredImage(),
                   Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: SingleChildScrollView(
@@ -406,9 +433,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          SizedBox(height: height * .05),
-                          Align(alignment: Alignment.center, child: _title()),
-                          SizedBox(height: height * .1),
+                          SizedBox(height: height * .2),
                           _entryFieldnumbers('LAND LINE NUMBER', '', 0),
                           _entryFieldnumbers('PRIMARY MOBILE NO', '', 1),
                           _entryFieldnumbers('EMERGENCY CONTACT NO', '', 2),
@@ -439,22 +464,26 @@ class _PpPersonalDState extends State<PpPersonalD> {
                           _entryFieldalphabets('PERMANENT CITY', '', 20),
                           _entryFieldalphabets('STATE', 'Tamil Nadu', 21),
                           _entryFieldnumbers('POSTAL CODE', '', 22),
+                          SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
-                            child: FloatingActionButton(
+                            child: FloatingActionButton.extended(
+                              backgroundColor: const Color(0xFFE96710),
+                              foregroundColor: Colors.black,
                               onPressed: () {
-                                print("-----");
-                                for (int i = 0; i < pp.length; i++) {
-                                  print(pp[i]);
-                                }
+                                // if (Validation(context, pg, dropbox) == 1) {
                                 Navigator.push(
                                     context,
                                     PageTransition(
                                         type: PageTransitionType.bottomToTop,
                                         child: PpExtraD()));
+                                //}
                               },
+                              label: Text('NEXT'),
+                              icon: Icon(Icons.arrow_right_alt_rounded),
                             ),
-                          )
+                          ),
+                          SizedBox(height: height * .04),
                         ],
                       )))
                 ]),
