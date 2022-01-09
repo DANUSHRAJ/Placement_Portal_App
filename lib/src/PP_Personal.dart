@@ -405,8 +405,9 @@ class _PpPersonalDState extends State<PpPersonalD> {
         appBar: AppBar(
           title: Text(
             "PERSONAL DATA",
+            textAlign: TextAlign.justify,
             style: GoogleFonts.adventPro(
-                fontSize: 30,
+                fontSize: 25,
                 color: Colors.orangeAccent,
                 fontWeight: FontWeight.bold),
           ),

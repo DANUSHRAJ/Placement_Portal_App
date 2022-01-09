@@ -155,8 +155,9 @@ class _IntershipsState extends State<Interships> with TickerProviderStateMixin {
       appBar: AppBar(
         title: Text(
           "INTERSHIP COMPLETED",
+          textAlign: TextAlign.justify,
           style: GoogleFonts.adventPro(
-              fontSize: 30,
+              fontSize: 25,
               color: Colors.orangeAccent,
               fontWeight: FontWeight.bold),
         ),

@@ -587,8 +587,9 @@ class _PpGenealDState extends State<PpGenealD> {
         appBar: AppBar(
           title: Text(
             "GENERAL DATA",
+            textAlign: TextAlign.justify,
             style: GoogleFonts.adventPro(
-                fontSize: 30,
+                fontSize: 25,
                 color: Colors.orangeAccent,
                 fontWeight: FontWeight.bold),
           ),

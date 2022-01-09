@@ -121,6 +121,7 @@ class HomeScreen extends StatelessWidget {
           color: Colors.white.withOpacity(0.15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _child,
               __child,
@@ -134,8 +135,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // to get size
-    //var size = MediaQuery.of(context).size;
     final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -159,22 +158,19 @@ class HomeScreen extends StatelessWidget {
           ),
           SafeArea(
             child: Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
                   Container(
                     //height: 90,
-                    // margin: EdgeInsets.only(bottom: 20),
+                    margin: EdgeInsets.only(bottom: 20),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        // SizedBox(
-                        //   width: 26,
-                        // ),
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             // SizedBox(height: height * .03),
                             Container(

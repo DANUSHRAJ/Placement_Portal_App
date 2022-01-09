@@ -320,8 +320,9 @@ class _PpExtraDState extends State<PpExtraD> {
         appBar: AppBar(
           title: Text(
             "ADDITIONAL INFORMATION",
+            textAlign: TextAlign.justify,
             style: GoogleFonts.adventPro(
-                fontSize: 30,
+                fontSize: 25,
                 color: Colors.orangeAccent,
                 fontWeight: FontWeight.bold),
           ),

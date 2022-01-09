@@ -133,16 +133,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         child: Stack(
           children: <Widget>[
             generateBluredImage(),
-            // Container(
-            //     height: double.infinity,
-            //     width: double.infinity,
-            //     child: Image.asset(
-            //       'assets/images/rots.gif',
-            //       fit: BoxFit.cover,
-            //     )),
-
-            // Lottie.network(
-            //     'https://assets5.lottiefiles.com/packages/lf20_tyi61jpp.json'),
             Lottie.asset("assets/images/orange.json"),
             Container(
               padding: EdgeInsets.all(20.0),
