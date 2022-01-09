@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:SJIT_PLACEMENT_PORTAL/src/GenealDJSON.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_CurrentEducation.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Education.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
@@ -10,9 +11,11 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'api.dart';
+import 'profileapi.dart';
 
-Future<int> Validation(
-    BuildContext context, List<String> pg, List<NewObject> dropbox) async {
+int Validation(
+    BuildContext context, List<String> pg, List<NewObject> dropbox) {
+
   List<String> compareList = [
     'UNIVERSITY REG NO',
     'ROLL NO',
@@ -23,6 +26,14 @@ Future<int> Validation(
     'DATE OF BIRTH (MM/DD/YY)',
     'DATE OF BIRTH (YYYY-MM-DD)',
     'YEAR OF ADMISSION'
+  ];
+  List<String> compareListDD = [
+    'TITILE',
+    'GENDER',
+    'COLLEGE',
+    'DEPARTMENT',
+    'SECTION',
+    'HOSTEL/DAYSCHOLOAR'
   ];
   int check = -1;
 
@@ -85,7 +96,7 @@ Future<int> Validation(
   }
 
   for (int i = 0; i < pg.length; i++) {
-    if (pg[i] == 'null' || pg[i].isEmpty) {
+    if (pg[i] == null || pg[i].isEmpty) {
       check = i;
       break;
     }
@@ -96,28 +107,28 @@ Future<int> Validation(
     return -1;
   }
   //name
-  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[2]))) {
-    showdialog(context, "Please Check the " + compareList[2]);
-    return -1;
-    //print("candidate");
-  }
-  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[3]))) {
-    showdialog(context, "Please Check the " + compareList[3]);
-    return -1;
-    //print("first name");
-  }
-  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[4]))) {
-    showdialog(context, "Please Check the " + compareList[4]);
-    return -1;
-    //print("last name");
-  }
+//  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[2]))) {
+//    showdialog(context, "Please Check the " + compareList[2]);
+//    return -1;
+//    //print("candidate");
+//  }
+//  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[3]))) {
+//    showdialog(context, "Please Check the " + compareList[3]);
+//    return -1;
+//    //print("first name");
+//  }
+//  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[4]))) {
+//    showdialog(context, "Please Check the " + compareList[4]);
+//    return -1;
+//    //print("last name");
+//  }
 
   //register number
-  if (!RegExp(r'^3124\d{8}$').hasMatch(pg[0])) {
-    showdialog(context, "Please Check the " + compareList[0]);
-    return -1;
-    //print("Register number was invalid");
-  }
+//  if (!RegExp(r'^3124\d{8}$').hasMatch(pg[0])) {
+//    showdialog(context, "Please Check the " + compareList[0]);
+//    return -1;
+//    //print("Register number was invalid");
+//  }
   //roll no
   if (pg[1].length != 8) {
     showdialog(context, "Please Check the " + compareList[1]);
@@ -162,6 +173,7 @@ class PpGenealD extends StatefulWidget {
   String usernamevar;
 
   final AccountsApi api = AccountsApi();
+  final ProfileApi papi = ProfileApi();
 
   PpGenealD({Key key, this.regnovar, this.usernamevar}) : super(key: key);
 
@@ -171,8 +183,8 @@ class PpGenealD extends StatefulWidget {
 }
 
 class NewObject {
-  final String title;
-  final IconData icon;
+  String title;
+  IconData icon;
 
   NewObject(this.title, this.icon);
 }
@@ -200,9 +212,79 @@ class _PpGenealDState extends State<PpGenealD> {
         vregno = value.regno;
         vname = value.name;
         vemail = value.username;
+        pg[0]=vregno;
+        pg[2]=vname;
 //        internDet = value;
         loading = false;
       });
+    });
+  }
+
+  void _loadUploadedData([bool showSpinner = false]) async {
+//    log('Regno: $regnovar');
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+
+    await widget.papi.getGenealD(regnovar).then((value) {
+      print('In PP_GenealD: $value');
+      String temp1 = value.toString();
+      print('$temp1');
+      if(temp1==null||temp1.isEmpty){
+        setState(() {
+          loading = false;
+          return;
+        });
+      }
+      setState(() {
+        //Done for PG only
+        pg[1]=value.rollno;
+        pg[3]=value.fname;
+        pg[4]=value.lname;
+        pg[5]=value.dob1;
+        pg[6]=value.dob2;
+        pg[7]=value.dob3;
+        pg[8]=value.yoa;
+//        dropbox[0].title=value.title;
+//        dropbox[0].title=value.title;
+//        vregno = value.regno;
+//        vname = value.name;
+//        vemail = value.username;
+//        internDet = value;
+        loading = false;
+      });
+    });
+  }
+
+  void _uploadtoDB(BuildContext context, List<String> pg, List<NewObject> dropbox, [bool showSpinner = false]) async {
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+
+    final String uregno=pg[0];
+    final String rollno=pg[1];
+    final String name=pg[2];
+    final String fname=pg[3];
+    final String lname=pg[4];
+    final String dob1=pg[5];
+    final String dob2=pg[6];
+    final String dob3=pg[7];
+    final String yoa=pg[8];
+    final String title=dropbox[0].title;
+    final String gender=dropbox[1].title;
+    final String college=dropbox[2].title;
+    final String dept=dropbox[3].title;
+    final String sec=dropbox[4].title;
+    final String hd=dropbox[5].title;
+
+    await widget.papi.uploadgenealD(uregno, rollno, name, fname, lname, dob1, dob2, dob3, yoa, title, gender, college, dept, sec, hd);
+
+    setState(() {
+      loading = false;
     });
   }
 
@@ -210,18 +292,19 @@ class _PpGenealDState extends State<PpGenealD> {
   void initState() {
     super.initState();
     _loadPPData(true);
+    _loadUploadedData(true);
   }
 
   List<String> pg = [
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null'
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
   ];
   //profile General Data
   // String regno;
@@ -240,24 +323,24 @@ class _PpGenealDState extends State<PpGenealD> {
   // String section_d;
   // String yoa;
   // String scholar;
-  static final List<NewObject> title = <NewObject>[
+  static List<NewObject> title = <NewObject>[
     NewObject('SELECT TITLE', Icons.description),
     NewObject('Mr', Icons.person),
     NewObject('Ms', Icons.person),
   ];
-  static final List<NewObject> gender = <NewObject>[
+  static List<NewObject> gender = <NewObject>[
     NewObject('SELECT GENDER', Icons.person),
     NewObject('MALE', Icons.male_rounded),
     NewObject('FEMALE', Icons.female_rounded),
   ];
 
-  static final List<NewObject> college = <NewObject>[
+  static List<NewObject> college = <NewObject>[
     NewObject('SELECT COLLEGE', Icons.description),
     NewObject('SJIT', Icons.home_outlined),
     NewObject('SJCE', Icons.home_outlined),
   ];
 
-  static final List<NewObject> department = <NewObject>[
+  static List<NewObject> department = <NewObject>[
     NewObject('SELECT DEPARTMENT', Icons.description),
     NewObject('B.Tech IT', Icons.mobile_friendly_rounded),
     NewObject('B.E CSE', Icons.computer_rounded),
@@ -267,20 +350,20 @@ class _PpGenealDState extends State<PpGenealD> {
     NewObject('B.E CIVIL', Icons.apartment_outlined),
   ];
 
-  static final List<NewObject> section = <NewObject>[
+  static List<NewObject> section = <NewObject>[
     NewObject('SELECT SECTION', Icons.description),
     NewObject('A', Icons.arrow_back_ios),
     NewObject('B', Icons.arrow_back_ios),
     NewObject('C', Icons.arrow_back_ios),
   ];
 
-  static final List<NewObject> hord = <NewObject>[
+  static List<NewObject> hord = <NewObject>[
     NewObject('SELECT THE OPTION', Icons.description),
     NewObject('HOSTEL', Icons.arrow_back_ios),
     NewObject('DAY SCHOLAR', Icons.arrow_back_ios),
   ];
 
-  static final List<NewObject> dropbox = <NewObject>[
+  static List<NewObject> dropbox = <NewObject>[
     title.first, //0
     gender.first, //1
     college.first, //2
@@ -330,7 +413,8 @@ class _PpGenealDState extends State<PpGenealD> {
           ),
           TextFormField(
             decoration: InputDecoration(
-                hintText: hint,
+//                hintText: hint,
+                labelText: pg[i],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
@@ -370,6 +454,7 @@ class _PpGenealDState extends State<PpGenealD> {
           TextFormField(
             decoration: InputDecoration(
                 hintText: hint,
+                labelText: pg[i],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
@@ -621,23 +706,23 @@ class _PpGenealDState extends State<PpGenealD> {
                               // Align(alignment: Alignment.center, child: _title()),
                               // SizedBox(height: height * .1),
                               _entryFieldalphabetsdisplay(
-                                  'UNIVERSITY REG NO.', vregno, 0),
-                              _entryFieldalphabets('ROLL NO', 'Eg:19IT1242', 1),
+                                  'UNIVERSITY REG NO.', pg[0], 0),
+                              _entryFieldalphabets('ROLL NO', pg[1], 1),
                               _DropBox("TITLE", title, 0),
                               _entryFieldalphabetsdisplay(
-                                  'NAME OF THE CANDIDATE', vname, 2),
+                                  'NAME OF THE CANDIDATE', pg[2], 2),
                               _entryFieldalphabets(
-                                  'FIRST NAME', 'first name', 3),
-                              _entryFieldalphabets('LAST NAME', 'last name', 4),
+                                  'FIRST NAME', pg[3], 3),
+                              _entryFieldalphabets('LAST NAME', pg[4], 4),
                               _DropBox("GENDER", gender, 1),
-                              _entryFieldDob("D.O.B", "DD-MM-YYYY", 5),
-                              _entryFieldDob("D.O.B", "MM-DD-YYYY", 6),
-                              _entryFieldDob("D.O.B", "YYYY-MM-DD", 7),
+                              _entryFieldDob("D.O.B", pg[5], 5),
+                              _entryFieldDob("D.O.B", pg[6], 6),
+                              _entryFieldDob("D.O.B", pg[7], 7),
                               _DropBox("COLLEGE", college, 2),
                               _DropBox("DEPARTMENT", department, 3),
                               _DropBox("SECTION", section, 4),
                               _entryFieldnumbers(
-                                  'YEAR OF ADMISSION', 'Eg:2019', 8),
+                                  'YEAR OF ADMISSION', pg[8], 8),
                               _DropBox("HOSTEL / DAY SCHOLAR", hord, 5),
                               SizedBox(height: height * .02),
                               Align(
@@ -646,14 +731,18 @@ class _PpGenealDState extends State<PpGenealD> {
                                   backgroundColor: const Color(0xFFE96710),
                                   foregroundColor: Colors.black,
                                   onPressed: () {
-                                    // if (Validation(context, pg, dropbox) == 1) {
+//                                    print('Success');
+//                                    print(Validation(context, pg, dropbox));
+                                     if (Validation(context, pg, dropbox) == 1) {
+//                                       print('Success');
+                                     _uploadtoDB(context, pg, dropbox);
                                     Navigator.push(
                                         context,
                                         PageTransition(
                                             type:
                                                 PageTransitionType.bottomToTop,
                                             child: PpEducationD()));
-                                    //}
+                                    }
                                   },
                                   label: Text('NEXT'),
                                   icon: Icon(Icons.arrow_right_alt_rounded),

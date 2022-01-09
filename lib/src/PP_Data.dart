@@ -351,7 +351,7 @@ void profile(
   batch += 2004;
   profile[78] = batch.toString();
   final ProfileApi api = ProfileApi();
-  await api.uploadppdata(compareList, profile);
+//  await api.uploadppdata(compareList, profile);
 }
 
 class PpData extends StatefulWidget {
