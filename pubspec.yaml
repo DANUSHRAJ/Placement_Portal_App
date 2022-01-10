@@ -42,6 +42,8 @@ dependencies:
   dotted_border: ^2.0.0+1
   iconsax: ^0.0.8
   flutter_offline: ^2.0.0
+  flutter_awesome_buttons: ^1.1.0
+  slider_button: ^2.0.0
 
 dependency_overrides:
 flutter_svg: ^0.17.4

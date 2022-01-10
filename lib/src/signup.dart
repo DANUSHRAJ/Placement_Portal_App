@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ui';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
+import 'package:page_transition/page_transition.dart';
 import 'Account.dart';
 import 'api.dart';
 import 'home_screen.dart';
@@ -52,16 +54,14 @@ class _SignUpPageState extends State<SignUpPage> {
     if (name.isEmpty || regno.isEmpty || un.isEmpty || pwd.isEmpty) {
       _showtoast("* Fields are empty");
       check = 0;
-    }
-    if (!RegExp(r'^3124\d{8}$').hasMatch(regno)) {
+    } else if (!RegExp(r'^3124\d{8}$').hasMatch(regno)) {
       _showtoast("* Incorrect Register Number format");
       check = 0;
-    }
-    if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(un)) {
+    } else if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+        .hasMatch(un)) {
       _showtoast("* Incorrect E-mail format");
       check = 0;
-    }
-    if (!RegExp(r'[a-zA-Z0-9!@#$&()\\-`.+,/\"]{8,16}').hasMatch(pwd)) {
+    } else if (!RegExp(r'[a-zA-Z0-9!@#$&()\\-`.+,/\"]{8,16}').hasMatch(pwd)) {
       _showtoast(
           "* Incorrect Password format \n-length must be 8-16 characters");
       check = 0;
@@ -83,13 +83,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       usernamevar: result.name,
                     )));
         check = 2;
-      } else if (result.regno == regno || result.username == un) {
-        log('Try to Login with correct credentials!');
-        _showtoast("Try to Login with correct credentials!");
-        check = 0;
       }
-    } else {
-      log('Unsuccessfull coz incorrect values!');
+    } else if (check == 1) {
       _showtoast("* Unsuccessfull coz incorrect values!");
     }
     if (check == 1) {
@@ -147,7 +142,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _entryField1(String title, {bool isPassword = false}) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -201,7 +196,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _entryField2(String title, {bool isPassword = false}) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -258,7 +253,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _entryField3(String title, {bool isPassword = false}) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -310,7 +305,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   Widget _entryField11(String title, {bool isPassword = false}) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -358,6 +353,64 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
+  Widget buildBlurryWidget() {
+    final height = MediaQuery.of(context).size.height;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(30.0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        child: Container(
+          color: Colors.white.withOpacity(0.15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: height * .01,
+              ),
+              _entryField11("Name          "),
+              SizedBox(
+                height: height * .01,
+              ),
+              _entryField1("Register Number"),
+              SizedBox(
+                height: height * .01,
+              ),
+              _entryField2("Email id       "),
+              SizedBox(
+                height: height * .01,
+              ),
+              _entryField3("Password       ", isPassword: true),
+              SizedBox(
+                height: height * .03,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Widget buildBlurryWidget1() {
+  //   final height = MediaQuery.of(context).size.height;
+  //   return ClipRRect(
+  //     borderRadius: BorderRadius.circular(20.0),
+  //     child: BackdropFilter(
+  //       filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+  //       child: Container(
+  //         color: Colors.white.withOpacity(0.15),
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.end,
+  //           crossAxisAlignment: CrossAxisAlignment.end,
+  //           children: [
+
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
   Widget _submitButton() {
     return InkWell(
       onTap: () {
@@ -365,26 +418,14 @@ class _SignUpPageState extends State<SignUpPage> {
             etName.text, etRegisterNo.text, etmailId.text, etPassword.text);
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * .5,
-        padding: EdgeInsets.symmetric(vertical: 9),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.orangeAccent,
-                  offset: Offset(2, 4),
-                  blurRadius: 10,
-                  spreadRadius: 3)
-            ],
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Colors.black, Colors.black87])),
+        width: MediaQuery.of(context).size.width * .3,
+        //padding: EdgeInsets.symmetric(vertical: 9),
+        alignment: Alignment.bottomRight,
+
         child: Text(
-          'Register Now',
+          "Join now\u2192",
           style: GoogleFonts.adventPro(
-              fontSize: 30,
+              fontSize: 25,
               color: Colors.deepOrangeAccent,
               fontWeight: FontWeight.bold),
         ),
@@ -395,8 +436,8 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget _loginAccountLabel() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+        Navigator.push(context,
+            PageTransition(type: PageTransitionType.fade, child: LoginPage()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),
@@ -408,7 +449,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Text('Already have an account ?',
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 14,
+                    fontSize: 15,
                     fontWeight: FontWeight.w900)),
             SizedBox(
               width: 10,
@@ -417,46 +458,12 @@ class _SignUpPageState extends State<SignUpPage> {
               'Login',
               style: TextStyle(
                   color: Colors.orangeAccent,
-                  fontSize: 13,
+                  fontSize: 15,
                   fontWeight: FontWeight.w600),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _title() {
-    return RichText(
-      textAlign: TextAlign.justify,
-      text: TextSpan(
-          text: 'SI',
-          style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.display1,
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-            color: Colors.deepOrangeAccent,
-          ),
-          children: [
-            TextSpan(
-              text: 'GN',
-              style: GoogleFonts.adventPro(
-                textStyle: Theme.of(context).textTheme.display1,
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
-            TextSpan(
-              text: 'UP',
-              style: GoogleFonts.adventPro(
-                textStyle: Theme.of(context).textTheme.display1,
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
-                color: Colors.deepOrangeAccent,
-              ),
-            ),
-          ]),
     );
   }
 
@@ -477,14 +484,42 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _entryField11("Name          "),
-        _entryField1("Register Number"),
-        _entryField2("Email id       "),
-        _entryField3("Password       ", isPassword: true),
-      ],
+  Widget _divider() {
+    return Container(
+      //margin: EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: <Widget>[
+          // SizedBox(
+          //   width: 20,
+          // ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Divider(
+                thickness: 3,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          Text(
+            'OR',
+            style: GoogleFonts.adventPro(
+                fontSize: 19, color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Divider(
+                thickness: 3,
+                color: Colors.white,
+              ),
+            ),
+          ),
+          // SizedBox(
+          //   width: 20,
+          // ),
+        ],
+      ),
     );
   }
 
@@ -503,10 +538,7 @@ class _SignUpPageState extends State<SignUpPage> {
         ),
         centerTitle: true,
         leading: _backButton(),
-        // actions: [
-        //   IconButton(icon: Icon(Icons.home_outlined), onPressed: () {}),
-        // ],
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black,
         elevation: 10,
       ),
       body: Container(
@@ -515,20 +547,20 @@ class _SignUpPageState extends State<SignUpPage> {
           children: <Widget>[
             generateBluredImage(),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: SingleChildScrollView(
+                //reverse: true,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    // SizedBox(height: height * .1),
-                    // Align(alignment: Alignment.center, child: _title()),
                     SizedBox(height: height * .2),
-                    _emailPasswordWidget(),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    buildBlurryWidget(),
+                    SizedBox(height: height * .05),
                     _submitButton(),
+                    SizedBox(height: height * .02),
+                    _divider(),
+                    SizedBox(height: height * .01),
                     _loginAccountLabel(),
                   ],
                 ),

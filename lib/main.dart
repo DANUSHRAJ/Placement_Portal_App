@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
@@ -100,7 +101,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               Navigator.push(
                   context,
                   PageTransition(
-                      type: PageTransitionType.fade, child: WelcomePage()));
+                      type: PageTransitionType.fade, child: LoginPage()));
             }
           });
   }
@@ -133,13 +134,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         child: Stack(
           children: <Widget>[
             generateBluredImage(),
-            Lottie.asset("assets/images/orange.json"),
-            Container(
+            // Container(
+            //   child: Lottie.asset("assets/images/orange.json"),
+            // ),
+            SingleChildScrollView(
+                child: Container(
               padding: EdgeInsets.all(20.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
+                    child: FadeAnimation(
+                      0,
+                      Lottie.asset("assets/images/orange.json",
+                          height: height * .35),
+                    ),
+                  ),
+                  SizedBox(height: height * .07),
                   Align(
                     alignment: Alignment.center,
                     child: FadeAnimation(
@@ -191,7 +204,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                         )),
                   ),
                   FadeAnimation(
-                      3,
+                      7,
                       AnimatedBuilder(
                         animation: _scaleController,
                         builder: (context, child) => Transform.scale(
@@ -252,7 +265,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       )),
                 ],
               ),
-            )
+            ))
           ],
         ),
       ),

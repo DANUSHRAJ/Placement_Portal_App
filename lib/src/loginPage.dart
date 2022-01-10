@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui' as ui;
+import 'dart:ui';
 import 'package:SJIT_PLACEMENT_PORTAL/src/signup.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../main.dart';
 import 'api.dart';
@@ -137,7 +139,7 @@ class _LoginPageState extends State<LoginPage> {
   );
   Widget _entryField(String title, {bool isPassword = false}) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -221,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _entryField1(String title, {bool isPassword = false}) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -241,10 +243,6 @@ class _LoginPageState extends State<LoginPage> {
               ],
               isRepeatingAnimation: true,
               totalRepeatCount: 10000,
-              //pause: const Duration(milliseconds: 1000),
-              // onTap: () {
-              //   print("Tap Event");
-              // },
             ),
           ),
           SizedBox(
@@ -282,26 +280,14 @@ class _LoginPageState extends State<LoginPage> {
         //     context, MaterialPageRoute(builder: (context) => ()));
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * .5,
-        padding: EdgeInsets.symmetric(vertical: 9),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.orange.shade200,
-                  offset: Offset(1, 4),
-                  blurRadius: 20,
-                  spreadRadius: 1)
-            ],
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Colors.black87, Colors.black87])),
+        width: MediaQuery.of(context).size.width * .3,
+        //padding: EdgeInsets.symmetric(vertical: 9),
+        alignment: Alignment.bottomRight,
+
         child: Text(
-          'Login',
+          "Let's Go \u2192",
           style: GoogleFonts.adventPro(
-              fontSize: 30,
+              fontSize: 25,
               color: Colors.deepOrangeAccent,
               fontWeight: FontWeight.bold),
         ),
@@ -333,7 +319,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: 15),
               child: Divider(
                 thickness: 3,
                 color: Colors.white,
@@ -351,8 +337,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+        Navigator.push(context,
+            PageTransition(type: PageTransitionType.fade, child: SignUpPage()));
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 20),
@@ -372,7 +358,7 @@ class _LoginPageState extends State<LoginPage> {
               width: 10,
             ),
             Text(
-              'Register',
+              'Sign up',
               style: TextStyle(
                   color: Colors.deepOrangeAccent,
                   fontSize: 15,
@@ -391,18 +377,16 @@ class _LoginPageState extends State<LoginPage> {
           _findAccountforFP(etRegisterNo.text);
           _showtoast("Kindly Check your E-mail inbox/spam box");
         }
-//        }Navigator.push(
-//            context, MaterialPageRoute(builder: (context) => Interships()));
       },
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
+        //margin: EdgeInsets.symmetric(vertical: 20),
         padding: EdgeInsets.all(15),
         alignment: Alignment.bottomRight,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.symmetric(vertical: 10),
+              //padding: EdgeInsets.symmetric(vertical: 10),
               alignment: Alignment.bottomRight,
               child: Text('Forgot Password ?',
                   style: TextStyle(
@@ -416,46 +400,34 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-          text: 'LO',
-          style: GoogleFonts.adventPro(
-            textStyle: Theme.of(context).textTheme.display1,
-            fontSize: 30,
-            fontWeight: FontWeight.w700,
-            color: Colors.deepOrangeAccent,
+  Widget buildBlurryWidget() {
+    final height = MediaQuery.of(context).size.height;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(30.0),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+        child: Container(
+          color: Colors.white.withOpacity(0.15),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: height * .01,
+              ),
+              _entryField("  Username"),
+              SizedBox(
+                height: height * .025,
+              ),
+              _entryField1("  Password", isPassword: true),
+              _createAccountLabel1(),
+              SizedBox(
+                height: height * .01,
+              ),
+            ],
           ),
-          children: [
-            TextSpan(
-              text: 'G',
-              style: GoogleFonts.adventPro(
-                textStyle: Theme.of(context).textTheme.display1,
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-            ),
-            TextSpan(
-              text: 'IN',
-              style: GoogleFonts.adventPro(
-                textStyle: Theme.of(context).textTheme.display1,
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
-                color: Colors.deepOrangeAccent,
-              ),
-            ),
-          ]),
-    );
-  }
-
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _entryField("Username"),
-        _entryField1("Password", isPassword: true),
-      ],
+        ),
+      ),
     );
   }
 
@@ -473,18 +445,15 @@ class _LoginPageState extends State<LoginPage> {
           extendBodyBehindAppBar: true,
           appBar: AppBar(
             title: Text(
-              "LOGIN",
+              "SJIT PLACEMENT PORTAL",
               style: GoogleFonts.adventPro(
-                  fontSize: 30,
+                  fontSize: 25,
                   color: Colors.deepOrangeAccent,
                   fontWeight: FontWeight.bold),
             ),
             centerTitle: true,
             leading: _backButton(),
-            // actions: [
-            //   IconButton(icon: Icon(Icons.home_outlined), onPressed: () {}),
-            // ],
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.black,
             elevation: 10,
           ),
           body: Container(
@@ -495,27 +464,22 @@ class _LoginPageState extends State<LoginPage> {
                         generateBluredImage(),
                         SingleChildScrollView(
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            padding: EdgeInsets.symmetric(horizontal: 10),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                //,
+                                SizedBox(height: height * .15),
+                                Image.asset('assets/images/joseph.png',
+                                    width: 300, height: 150),
+                                SizedBox(height: height * .05),
+                                buildBlurryWidget(),
 
-                                SizedBox(height: height * .2),
-                                // Positioned(
-                                //     top: 40, left: 0, child: _backButton()),
-                                // SizedBox(height: height * .07),
-                                // Align(
-                                //     alignment: Alignment.center,
-                                //     child: _title()),
-                                SizedBox(height: 80),
-                                _emailPasswordWidget(),
                                 SizedBox(height: 20, width: 5),
-                                _submitButton(),
                                 Align(
                                     alignment: Alignment.bottomRight,
-                                    child: _createAccountLabel1()),
+                                    child: _submitButton()),
+                                SizedBox(height: height * .04),
                                 _divider(),
                                 _createAccountLabel(),
                                 //_showToast()
