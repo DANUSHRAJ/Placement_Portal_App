@@ -229,9 +229,9 @@ class _PpGenealDState extends State<PpGenealD> {
     }
 
     await widget.papi.getGenealD(regnovar).then((value) {
-      print('In PP_GenealD: $value');
+//      print('In PP_GenealD: $value');
       String temp1 = value.toString();
-      print('$temp1');
+//      print('$temp1');
       if(temp1==null||temp1.isEmpty){
         setState(() {
           loading = false;
@@ -741,7 +741,7 @@ class _PpGenealDState extends State<PpGenealD> {
                                         PageTransition(
                                             type:
                                                 PageTransitionType.bottomToTop,
-                                            child: PpEducationD()));
+                                            child: PpEducationD(regnovar: regnovar, usernamevar: usernamevar,)));
                                     }
                                   },
                                   label: Text('NEXT'),

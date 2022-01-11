@@ -15,7 +15,7 @@ void start() async {
 //  final coll = db.collection('interns');
 
   // Create server
-  const port = 1;
+  const port = 8;
   final serv = Sevr();
 
   final corsPaths = ['/', '/:id'];
@@ -27,6 +27,13 @@ void start() async {
       }
     ]);
   }
+
+  serv.get('/closeServer',[
+    (ServRequest req, ServResponse res) async {
+      await serv.close();
+      return res.status(200).json({'Message': "Server Terminated"});
+    }
+  ]);
 
   serv.get('/getaccounts', [
     setCors,
@@ -148,6 +155,54 @@ void start() async {
         (ServRequest req, ServResponse res) async {
       final coll = db.collection('profile');
       await coll.save(req.body);
+//      log('$req.body');
+      return res.json(
+        await coll.findOne(where.eq('regno', req.body['regno'])),
+      );
+    }
+  ]);
+
+  serv.post('/updategenealD', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('profile');
+      await coll
+          .update(where.eq('regno', req.body['regno']), {'\$set': req.body});
+//      log('$req.body');
+      return res.json(
+        await coll.findOne(where.eq('regno', req.body['regno'])),
+      );
+    }
+  ]);
+
+  serv.post('/getEducationD', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('profile_edu');
+//      return res.json(await coll.findOne(where.eq('regno', req.body['regno'])));
+      final profile = await coll.findOne(where.eq('regno', req.body['regno']));
+      return res.json(profile);
+    }
+  ]);
+
+  serv.post('/uploadEducationD', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('profile_edu');
+      await coll.save(req.body);
+//      log('$req.body');
+      return res.json(
+        await coll.findOne(where.eq('regno', req.body['regno'])),
+      );
+    }
+  ]);
+
+  serv.post('/updateEducationD', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('profile_edu');
+      await coll
+          .update(where.eq('regno', req.body['regno']), {'\$set': req.body});
 //      log('$req.body');
       return res.json(
         await coll.findOne(where.eq('regno', req.body['regno'])),
