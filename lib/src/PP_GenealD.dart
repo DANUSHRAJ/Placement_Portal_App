@@ -247,7 +247,14 @@ class _PpGenealDState extends State<PpGenealD> {
         pg[6]=value.dob2;
         pg[7]=value.dob3;
         pg[8]=value.yoa;
-//        dropbox[0].title=value.title;
+//        print(value.title);
+        dropbox[0].title=value.title.toString();
+//        print(value.gender);
+        dropbox[1].title=value.gender.toString();
+        dropbox[2].title=value.college.toString();
+        dropbox[3].title=value.dept.toString();
+        dropbox[4].title=value.sec.toString();
+        dropbox[5].title=value.hd.toString();
 //        dropbox[0].title=value.title;
 //        vregno = value.regno;
 //        vname = value.name;

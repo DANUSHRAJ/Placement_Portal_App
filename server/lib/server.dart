@@ -210,6 +210,41 @@ void start() async {
     }
   ]);
 
+  serv.post('/getCurrentD', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('profile_cur');
+//      return res.json(await coll.findOne(where.eq('regno', req.body['regno'])));
+      final profile = await coll.findOne(where.eq('regno', req.body['regno']));
+      return res.json(profile);
+    }
+  ]);
+
+  serv.post('/uploadCurrentD', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('profile_cur');
+      await coll.save(req.body);
+//      log('$req.body');
+      return res.json(
+        await coll.findOne(where.eq('regno', req.body['regno'])),
+      );
+    }
+  ]);
+
+  serv.post('/updateCurrentD', [
+    setCors,
+        (ServRequest req, ServResponse res) async {
+      final coll = db.collection('profile_cur');
+      await coll
+          .update(where.eq('regno', req.body['regno']), {'\$set': req.body});
+//      log('$req.body');
+      return res.json(
+        await coll.findOne(where.eq('regno', req.body['regno'])),
+      );
+    }
+  ]);
+
   serv.post('/uploadppdataex', [
     setCors,
     (ServRequest req, ServResponse res) async {

@@ -37,22 +37,22 @@ class GenealDJSON {
       );
 
   factory GenealDJSON.fromJson(Map json) {
-    final id = json['_id'].replaceAll('ObjectId(\"', '').replaceAll('\")', '');
-    final regno = json['regno'];
-    final rollno = json['ROLL NO'];
-    final name = json['NAME OF THE CANDIDATE'];
-    final fname = json['FIRST NAME'];
-    final lname = json['LAST NAME'];
-    final dob1 = json['DATE OF BIRTH (DD/MM/YY)'];
-    final dob2 = json['DATE OF BIRTH (MM/DD/YY)'];
-    final dob3 = json['DATE OF BIRTH (YYYY-MM-DD)'];
-    final yoa = json['YEAR OF ADMISSION'];
-    final title = json['TITLE'];
-    final gender = json['GENDER'];
-    final college = json['COLLEGE'];
-    final dept = json['DEPARTMENT'];
-    final sec = json['SECTION'];
-    final hd = json['HOSTEL/DAYSCHOLOAR'];
+    final String id = json['_id'].replaceAll('ObjectId(\"', '').replaceAll('\")', '');
+    final String regno = json['regno'];
+    final String rollno = json['ROLL NO'];
+    final String name = json['NAME OF THE CANDIDATE'];
+    final String fname = json['FIRST NAME'];
+    final String lname = json['LAST NAME'];
+    final String dob1 = json['DATE OF BIRTH (DD/MM/YY)'];
+    final String dob2 = json['DATE OF BIRTH (MM/DD/YY)'];
+    final String dob3 = json['DATE OF BIRTH (YYYY-MM-DD)'];
+    final String yoa = json['YEAR OF ADMISSION'];
+    final String title = json['TITLE'];
+    final String gender = json['GENDER'];
+    final String college = json['COLLEGE'];
+    final String dept = json['DEPARTMENT'];
+    final String sec = json['SECTION'];
+    final String hd = json['HD'];
     return GenealDJSON._(id, regno, rollno, name, fname, lname, dob1, dob2, dob3, yoa, title, gender, college, dept, sec, hd);
   }
 }

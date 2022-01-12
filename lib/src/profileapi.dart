@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:core';
 import 'dart:developer';
 
+import 'package:SJIT_PLACEMENT_PORTAL/src/CurrentDJSON.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/ProfileData.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
@@ -57,7 +58,7 @@ class ProfileApi {
         'DATE OF BIRTH (MM/DD/YY)': dob2,
         'DATE OF BIRTH (YYYY-MM-DD)': dob3,
         'YEAR OF ADMISSION': yoa,
-        'TITILE': title,
+        'TITLE': title,
         'GENDER': gender,
         'COLLEGE': college,
         'DEPARTMENT': dept,
@@ -79,7 +80,7 @@ class ProfileApi {
         'DATE OF BIRTH (MM/DD/YY)': dob2,
         'DATE OF BIRTH (YYYY-MM-DD)': dob3,
         'YEAR OF ADMISSION': yoa,
-        'TITILE': title,
+        'TITLE': title,
         'GENDER': gender,
         'COLLEGE': college,
         'DEPARTMENT': dept,
@@ -128,7 +129,7 @@ class ProfileApi {
       final String ugguniv,
       final String ugs) async {
     ProfileApi api = ProfileApi();
-    final rescheck = await api.getGenealD(uregno);
+    final rescheck = await api.getEducationD(uregno);
 //      log('$rescheck');
     if (rescheck == null) {
       final response = await _dio.post('/uploadEducationD', data: {
@@ -191,6 +192,98 @@ class ProfileApi {
         'UG - COLLEGE OF STUDIES (FOR PG STUDENTS)': ugclg,
         'UG - GRADUATING UNIVERSITY': ugguniv,
         'UG - GRADUATING STATE': ugs
+      });
+    }
+  }
+
+  Future<CurrentDJSON> getCurrentD(String regno) async {
+    final response = await _dio.post('/getCurrentD', data: {'regno': regno});
+    var res = response.data;
+//    log('Response: $res');
+    if (res != null) {
+      return CurrentDJSON.fromJson(response.data);
+    } else {
+      return null;
+    }
+  }
+
+  Future<CurrentDJSON> uploadCurrentD(
+  final String uregno,
+  final String gpa1,
+  final String gpa2,
+  final String gpa3,
+  final String gpa4,
+  final String gpa5,
+  final String gpa6,
+  final String gpa7,
+  final String gpa8,
+  final String ogpa,
+  final String are1,
+  final String are2,
+  final String are3,
+  final String are4,
+  final String are5,
+  final String are6,
+  final String are7,
+  final String are8,
+  final String tare,
+  final String areYN,
+  final String areno
+      ) async {
+    ProfileApi api = ProfileApi();
+    final rescheck = await api.getCurrentD(uregno);
+//      log('$rescheck');
+    if (rescheck == null) {
+      final response = await _dio.post('/uploadCurrentD', data: {
+            'regno': uregno,
+             'SEM1 GPA':gpa1,
+             'SEM2 GPA':gpa2,
+             'SEM3 GPA':gpa3,
+             'SEM4 GPA':gpa4,
+             'SEM5 GPA':gpa5,
+             'SEM6 GPA':gpa6,
+             'SEM7 GPA':gpa7,
+             'SEM8 GPA':gpa8,
+             'OVERALL CGPA':ogpa,
+             'NO OF ARREARS SEM 1':are1,
+             'NO OF ARREARS SEM 2':are2,
+             'NO OF ARREARS SEM 3':are3,
+             'NO OF ARREARS SEM 4':are4,
+             'NO OF ARREARS SEM 5':are5,
+             'NO OF ARREARS SEM 6':are6,
+             'NO OF ARREARS SEM 7':are7,
+             'NO OF ARREARS SEM 8':are8,
+             'TOTAL NO OF STANDING ARREARS':tare,
+             'HISTORY OF ARREARS [Y/N]':areYN,
+             'IF YES, HOW MANY?':areno
+      });
+      //    log('$name-$regno-$username-$password');
+//        var result = response.data;
+//        log('$result');
+      return CurrentDJSON.fromJson(response.data);
+    } else {
+      await _dio.post('/updateCurrentD', data: {
+        'regno': uregno,
+        'SEM1 GPA':gpa1,
+        'SEM2 GPA':gpa2,
+        'SEM3 GPA':gpa3,
+        'SEM4 GPA':gpa4,
+        'SEM5 GPA':gpa5,
+        'SEM6 GPA':gpa6,
+        'SEM7 GPA':gpa7,
+        'SEM8 GPA':gpa8,
+        'OVERALL CGPA':ogpa,
+        'NO OF ARREARS SEM 1':are1,
+        'NO OF ARREARS SEM 2':are2,
+        'NO OF ARREARS SEM 3':are3,
+        'NO OF ARREARS SEM 4':are4,
+        'NO OF ARREARS SEM 5':are5,
+        'NO OF ARREARS SEM 6':are6,
+        'NO OF ARREARS SEM 7':are7,
+        'NO OF ARREARS SEM 8':are8,
+        'TOTAL NO OF STANDING ARREARS':tare,
+        'HISTORY OF ARREARS [Y/N]':areYN,
+        'IF YES, HOW MANY?':areno
       });
     }
   }
