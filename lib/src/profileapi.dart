@@ -12,7 +12,7 @@ import 'GenealDJSON.dart';
 
 class ProfileApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io';http://127.0.0.1:8081
-  static String apiUrl = 'http://127.0.0.1:8';
+  static String apiUrl = 'http://127.0.0.1:8081';
 
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
@@ -68,9 +68,8 @@ class ProfileApi {
 //        var result = response.data;
 //        log('$result');
       return GenealDJSON.fromJson(response.data);
-    }
-    else{
-      await _dio.post('/updategenealD',data: {
+    } else {
+      await _dio.post('/updategenealD', data: {
         'regno': uregno,
         'ROLL NO': rollno,
         'NAME OF THE CANDIDATE': name,
@@ -102,33 +101,32 @@ class ProfileApi {
   }
 
   Future<EducationDJSON> uploadEducationD(
-  final String uregno,
-  final String tp,//Tenth Percentage
-  final String tbs,//Tenth Board of Study
-  final String tms,//Tenth Medium of Study
-  final String tyop,//Tenth Year of Passing
-  final String tsn,//Tenth School Name
-  final String tgs,//Tenth graduating State
-  final String twp,
-  final String twbs,
-  final String twms,
-  final String twyop,
-  final String twsn,
-  final String twgs,
-  final String dspec,
-  final String dp,
-  final String dyop,
-  final String dsn,
-  final String dgs,
-  final String ugdeg,
-  final String ugbranch,
-  final String ugp,
-  final String ugcgpa,
-  final String ugyop,
-  final String ugclg,
-  final String ugguniv,
-  final String ugs
-      ) async {
+      final String uregno,
+      final String tp, //Tenth Percentage
+      final String tbs, //Tenth Board of Study
+      final String tms, //Tenth Medium of Study
+      final String tyop, //Tenth Year of Passing
+      final String tsn, //Tenth School Name
+      final String tgs, //Tenth graduating State
+      final String twp,
+      final String twbs,
+      final String twms,
+      final String twyop,
+      final String twsn,
+      final String twgs,
+      final String dspec,
+      final String dp,
+      final String dyop,
+      final String dsn,
+      final String dgs,
+      final String ugdeg,
+      final String ugbranch,
+      final String ugp,
+      final String ugcgpa,
+      final String ugyop,
+      final String ugclg,
+      final String ugguniv,
+      final String ugs) async {
     ProfileApi api = ProfileApi();
     final rescheck = await api.getGenealD(uregno);
 //      log('$rescheck');
@@ -165,36 +163,35 @@ class ProfileApi {
 //        var result = response.data;
 //        log('$result');
       return EducationDJSON.fromJson(response.data);
-    }
-    else{
-    await _dio.post('/updateEducationD',data: {
-    'regno': uregno,
-    '10TH PERCENTAGE': tp,
-    '10TH BOARD OF STUDY': tbs,
-    '10TH MEDIUM OF STUDY': tms,
-    '10TH YEAR OF PASSING': tyop,
-    '10TH NAME OF SCHOOL': tsn,
-    '10TH GRADUATING STATE': tgs,
-    '12TH PERCENTAGE': twp,
-    '12TH BOARD OF STUDY': twbs,
-    '12TH MEDIUM OF STUDY': twms,
-    '12TH YEAR OF PASSING': twyop,
-    '12TH NAME OF SCHOOL': twsn,
-    '12TH GRADUATING STATE': twgs,
-    'DIPLOMA - SPECIALIZATION/BRANCH': dspec,
-    'DIPLOMA PERCENTAGE': dp,
-    'DIPLOMA YEAR OF PASSING': dyop,
-    'NAME OF THE INSTITUTE': dsn,
-    'DIPLOMA GRADUATING STATE': dgs,
-    'UG DEGREE (FOR PG STUDENTS)': ugdeg,
-    'UG BRANCH (FOR PG STUDENTS)': ugbranch,
-    'UG PERCENTAGE (FOR PG STUDENTS)': ugp,
-    'UG CGPA (FOR PG STUDENTS)': ugcgpa,
-    'UG YEAR OF PASSING (FOR PG STUDENTS)': ugyop,
-    'UG - COLLEGE OF STUDIES (FOR PG STUDENTS)': ugclg,
-    'UG - GRADUATING UNIVERSITY': ugguniv,
-    'UG - GRADUATING STATE': ugs
-    });
+    } else {
+      await _dio.post('/updateEducationD', data: {
+        'regno': uregno,
+        '10TH PERCENTAGE': tp,
+        '10TH BOARD OF STUDY': tbs,
+        '10TH MEDIUM OF STUDY': tms,
+        '10TH YEAR OF PASSING': tyop,
+        '10TH NAME OF SCHOOL': tsn,
+        '10TH GRADUATING STATE': tgs,
+        '12TH PERCENTAGE': twp,
+        '12TH BOARD OF STUDY': twbs,
+        '12TH MEDIUM OF STUDY': twms,
+        '12TH YEAR OF PASSING': twyop,
+        '12TH NAME OF SCHOOL': twsn,
+        '12TH GRADUATING STATE': twgs,
+        'DIPLOMA - SPECIALIZATION/BRANCH': dspec,
+        'DIPLOMA PERCENTAGE': dp,
+        'DIPLOMA YEAR OF PASSING': dyop,
+        'NAME OF THE INSTITUTE': dsn,
+        'DIPLOMA GRADUATING STATE': dgs,
+        'UG DEGREE (FOR PG STUDENTS)': ugdeg,
+        'UG BRANCH (FOR PG STUDENTS)': ugbranch,
+        'UG PERCENTAGE (FOR PG STUDENTS)': ugp,
+        'UG CGPA (FOR PG STUDENTS)': ugcgpa,
+        'UG YEAR OF PASSING (FOR PG STUDENTS)': ugyop,
+        'UG - COLLEGE OF STUDIES (FOR PG STUDENTS)': ugclg,
+        'UG - GRADUATING UNIVERSITY': ugguniv,
+        'UG - GRADUATING STATE': ugs
+      });
     }
   }
 
