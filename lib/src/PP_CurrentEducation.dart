@@ -272,7 +272,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
           children: <Widget>[
             Container(
               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.home_outlined, color: Colors.white),
+              child: Icon(Icons.arrow_back_ios_new, color: Colors.white),
             ),
           ],
         ),

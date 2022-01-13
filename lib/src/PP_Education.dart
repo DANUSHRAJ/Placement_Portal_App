@@ -121,9 +121,8 @@ class PpEducationD extends StatefulWidget {
   final ProfileApi papi = ProfileApi();
 
   @override
-  _PpEducationDState createState() => _PpEducationDState(
-      regnovar: regnovar, usernamevar: usernamevar
-  );
+  _PpEducationDState createState() =>
+      _PpEducationDState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class NewObject {
@@ -152,38 +151,38 @@ class _PpEducationDState extends State<PpEducationD> {
 //      print('In PP_GenealD: $value');
       String temp1 = value.toString();
 //      print('$temp1');
-      if(temp1==null||temp1.isEmpty){
+      if (temp1 == null || temp1.isEmpty) {
         setState(() {
           loading = false;
           return;
         });
       }
       setState(() {
-        pe[0]=value.tp;
-        pe[1]=value.tbs;
-        pe[2]=value.tms;
-        pe[3]=value.tyop;
-        pe[4]=value.tsn;
-        pe[5]=value.tgs;
-        pe[6]=value.twp;
-        pe[7]=value.twbs;
-        pe[8]=value.twms;
-        pe[9]=value.twyop;
-        pe[10]=value.twsn;
-        pe[11]=value.twgs;
-        pe[12]=value.dspec;
-        pe[13]=value.dp;
-        pe[14]=value.dyop;
-        pe[15]=value.dsn;
-        pe[16]=value.dgs;
-        pe[17]=value.ugdeg;
-        pe[18]=value.ugbranch;
-        pe[19]=value.ugp;
-        pe[20]=value.ugcgpa;
-        pe[21]=value.ugyop;
-        pe[22]=value.ugclg;
-        pe[23]=value.ugguniv;
-        pe[24]=value.ugs;
+        pe[0] = value.tp;
+        pe[1] = value.tbs;
+        pe[2] = value.tms;
+        pe[3] = value.tyop;
+        pe[4] = value.tsn;
+        pe[5] = value.tgs;
+        pe[6] = value.twp;
+        pe[7] = value.twbs;
+        pe[8] = value.twms;
+        pe[9] = value.twyop;
+        pe[10] = value.twsn;
+        pe[11] = value.twgs;
+        pe[12] = value.dspec;
+        pe[13] = value.dp;
+        pe[14] = value.dyop;
+        pe[15] = value.dsn;
+        pe[16] = value.dgs;
+        pe[17] = value.ugdeg;
+        pe[18] = value.ugbranch;
+        pe[19] = value.ugp;
+        pe[20] = value.ugcgpa;
+        pe[21] = value.ugyop;
+        pe[22] = value.ugclg;
+        pe[23] = value.ugguniv;
+        pe[24] = value.ugs;
 //        dropbox[0].title=value.title;
 //        dropbox[0].title=value.title;
 //        vregno = value.regno;
@@ -195,41 +194,68 @@ class _PpEducationDState extends State<PpEducationD> {
     });
   }
 
-  void _uploadtoDB(BuildContext context, List<String> pg, [bool showSpinner = false]) async {
+  void _uploadtoDB(BuildContext context, List<String> pg,
+      [bool showSpinner = false]) async {
     if (showSpinner) {
       setState(() {
         loading = true;
       });
     }
 
-    final String uregno=regnovar;
-    final String tp=pe[0];//Tenth Percentage
-    final String tbs=pe[1];//Tenth Board of Study
-    final String tms=pe[2];//Tenth Medium of Study
-    final String tyop=pe[3];//Tenth Year of Passing
-    final String tsn=pe[4];//Tenth School Name
-    final String tgs=pe[5];//Tenth graduating State
-    final String twp=pe[6];
-    final String twbs=pe[7];
-    final String twms=pe[8];
-    final String twyop=pe[9];
-    final String twsn=pe[10];
-    final String twgs=pe[11];
-    final String dspec=pe[12];
-    final String dp=pe[13];
-    final String dyop=pe[14];
-    final String dsn=pe[15];
-    final String dgs=pe[16];
-    final String ugdeg=pe[17];
-    final String ugbranch=pe[18];
-    final String ugp=pe[19];
-    final String ugcgpa=pe[20];
-    final String ugyop=pe[21];
-    final String ugclg=pe[22];
-    final String ugguniv=pe[23];
-    final String ugs=pe[24];
+    final String uregno = regnovar;
+    final String tp = pe[0]; //Tenth Percentage
+    final String tbs = pe[1]; //Tenth Board of Study
+    final String tms = pe[2]; //Tenth Medium of Study
+    final String tyop = pe[3]; //Tenth Year of Passing
+    final String tsn = pe[4]; //Tenth School Name
+    final String tgs = pe[5]; //Tenth graduating State
+    final String twp = pe[6];
+    final String twbs = pe[7];
+    final String twms = pe[8];
+    final String twyop = pe[9];
+    final String twsn = pe[10];
+    final String twgs = pe[11];
+    final String dspec = pe[12];
+    final String dp = pe[13];
+    final String dyop = pe[14];
+    final String dsn = pe[15];
+    final String dgs = pe[16];
+    final String ugdeg = pe[17];
+    final String ugbranch = pe[18];
+    final String ugp = pe[19];
+    final String ugcgpa = pe[20];
+    final String ugyop = pe[21];
+    final String ugclg = pe[22];
+    final String ugguniv = pe[23];
+    final String ugs = pe[24];
 
-    await widget.papi.uploadEducationD(uregno,tp,tbs,tms,tyop,tsn,tgs,twp,twbs,twms,twyop,twsn,twgs,dspec,dp,dyop,dsn,dgs,ugdeg,ugbranch,ugp,ugcgpa,ugyop,ugclg,ugguniv,ugs);
+    await widget.papi.uploadEducationD(
+        uregno,
+        tp,
+        tbs,
+        tms,
+        tyop,
+        tsn,
+        tgs,
+        twp,
+        twbs,
+        twms,
+        twyop,
+        twsn,
+        twgs,
+        dspec,
+        dp,
+        dyop,
+        dsn,
+        dgs,
+        ugdeg,
+        ugbranch,
+        ugp,
+        ugcgpa,
+        ugyop,
+        ugclg,
+        ugguniv,
+        ugs);
 
     setState(() {
       loading = false;
@@ -282,7 +308,7 @@ class _PpEducationDState extends State<PpEducationD> {
           children: <Widget>[
             Container(
               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-              child: Icon(Icons.home_outlined, color: Colors.white),
+              child: Icon(Icons.arrow_back_ios_new, color: Colors.white),
             ),
           ],
         ),
@@ -462,43 +488,30 @@ class _PpEducationDState extends State<PpEducationD> {
                           // Align(alignment: Alignment.center, child: _title()),
                           SizedBox(height: height * .2),
                           _entryFieldnumbers('10th Percentage', pe[0], 0),
-                          _entryFieldalphabets(
-                              '10TH BOARD OF STUDY', pe[1], 1),
+                          _entryFieldalphabets('10TH BOARD OF STUDY', pe[1], 1),
                           _entryFieldalphabets(
                               '10TH MEDIUM OF STUDY', pe[2], 2),
-                          _entryFieldnumbers(
-                              '10th YEAR OF PASSING', pe[3], 3),
-                          _entryFieldalphabets(
-                              'NAME OF SCHOOL', pe[4], 4),
-                          _entryFieldalphabets(
-                              'GRADUATING STATE', pe[5], 5),
+                          _entryFieldnumbers('10th YEAR OF PASSING', pe[3], 3),
+                          _entryFieldalphabets('NAME OF SCHOOL', pe[4], 4),
+                          _entryFieldalphabets('GRADUATING STATE', pe[5], 5),
                           _entryFieldnumbers('12th Percentage', pe[6], 6),
-                          _entryFieldalphabets(
-                              '12th BOARD OF STUDY', pe[7], 7),
+                          _entryFieldalphabets('12th BOARD OF STUDY', pe[7], 7),
                           _entryFieldalphabets(
                               '12th MEDIUM OF STUDY', pe[8], 8),
-                          _entryFieldnumbers(
-                              '12th YEAR OF PASSING', pe[9], 9),
+                          _entryFieldnumbers('12th YEAR OF PASSING', pe[9], 9),
+                          _entryFieldalphabets('NAME OF SCHOOL', pe[10], 10),
+                          _entryFieldalphabets('GRADUATING STATE', pe[11], 11),
                           _entryFieldalphabets(
-                              'NAME OF SCHOOL', pe[10], 10),
-                          _entryFieldalphabets(
-                              'GRADUATING STATE', pe[11], 11),
-                          _entryFieldalphabets(
-                              'DIPLOMA - SPECIALIZATION/BRANCH',
-                              pe[12],
-                              12),
-                          _entryFieldnumbers(
-                              'DIPLOMA Percentage', pe[13], 13),
+                              'DIPLOMA - SPECIALIZATION/BRANCH', pe[12], 12),
+                          _entryFieldnumbers('DIPLOMA Percentage', pe[13], 13),
                           _entryFieldnumbers(
                               'DIPLOMA YEAR OF PASSING', pe[14], 14),
-                          _entryFieldalphabets(
-                              'NAME OF INSTITUTE', pe[15], 15),
-                          _entryFieldalphabets(
-                              'GRADUATING STATE', pe[16], 16),
+                          _entryFieldalphabets('NAME OF INSTITUTE', pe[15], 15),
+                          _entryFieldalphabets('GRADUATING STATE', pe[16], 16),
                           _entryFieldalphabets(
                               'UG DEGREE (FOR PG STUDENTS) ', pe[17], 17),
-                          _entryFieldalphabets('UG BRANCH (FOR PG STUDENTS) ',
-                              pe[18], 18),
+                          _entryFieldalphabets(
+                              'UG BRANCH (FOR PG STUDENTS) ', pe[18], 18),
                           _entryFieldnumbers(
                               'UG PERCENTAGE (FOR PG STUDENTS)', pe[19], 19),
                           _entryFieldnumbers(
@@ -511,10 +524,9 @@ class _PpEducationDState extends State<PpEducationD> {
                               'UG - COLLEGE OF STUDIES (FOR PG STUDENTS)) ',
                               pe[22],
                               22),
-                          _entryFieldalphabets('UG - GRADUATING UNIVERSITY) ',
-                              pe[23], 23),
                           _entryFieldalphabets(
-                              'GRADUATING STATE', pe[24], 24),
+                              'UG - GRADUATING UNIVERSITY) ', pe[23], 23),
+                          _entryFieldalphabets('GRADUATING STATE', pe[24], 24),
                           SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
@@ -522,13 +534,13 @@ class _PpEducationDState extends State<PpEducationD> {
                               backgroundColor: const Color(0xFFE96710),
                               foregroundColor: Colors.black,
                               onPressed: () {
-                                 if (Validation(context, pe) == 1) {
-                                   _uploadtoDB(context, pe);
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: PpCurrentD(regnovar: regnovar, usernamevar: usernamevar,)));
+                                if (Validation(context, pe) == 1) {
+                                  _uploadtoDB(context, pe);
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          type: PageTransitionType.bottomToTop,
+                                          child: PpCurrentD()));
                                 }
                               },
                               label: Text('NEXT'),
