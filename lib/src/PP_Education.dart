@@ -151,7 +151,7 @@ class _PpEducationDState extends State<PpEducationD> {
 //      print('In PP_GenealD: $value');
       String temp1 = value.toString();
 //      print('$temp1');
-      if (temp1 == null || temp1.isEmpty) {
+      if (value.runtimeType == Null) {
         setState(() {
           loading = false;
           return;

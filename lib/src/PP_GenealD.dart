@@ -245,8 +245,12 @@ class _PpGenealDState extends State<PpGenealD> {
         pg[6] = value.dob2;
         pg[7] = value.dob3;
         pg[8] = value.yoa;
-//        dropbox[0].title=value.title;
-//        dropbox[0].title=value.title;
+        dropbox[0].title=value.title;
+        dropbox[1].title=value.gender;
+        dropbox[2].title=value.college;
+        dropbox[3].title=value.dept;
+        dropbox[4].title=value.sec;
+        dropbox[5].title=value.hd;
 //        vregno = value.regno;
 //        vname = value.name;
 //        vemail = value.username;
