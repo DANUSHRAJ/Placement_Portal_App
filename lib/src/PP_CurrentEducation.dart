@@ -11,8 +11,7 @@ import 'package:page_transition/page_transition.dart';
 
 import 'profileapi.dart';
 
-int Validation(
-    BuildContext context, List<String> pce, NewObject noArrears) {
+int Validation(BuildContext context, List<String> pce, NewObject noArrears) {
   int check = -1;
 
   List<String> compareList = [
@@ -115,9 +114,8 @@ class PpCurrentD extends StatefulWidget {
   final ProfileApi papi = ProfileApi();
 
   @override
-  _PpCurrentDState createState() => _PpCurrentDState(
-      regnovar: regnovar, usernamevar: usernamevar
-  );
+  _PpCurrentDState createState() =>
+      _PpCurrentDState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class NewObject {
@@ -148,33 +146,33 @@ class _PpCurrentDState extends State<PpCurrentD> {
 //      print('$temp1');
 //      if(temp1=='null'||temp1.isEmpty){
 //        print(value.runtimeType);
-        if(value.runtimeType == Null){
+      if (value.runtimeType == Null) {
         setState(() {
           loading = false;
         });
         return;
       }
       setState(() {
-        pce[0]=value.gpa1;
-        pce[1]=value.gpa2;
-        pce[2]=value.gpa3;
-        pce[3]=value.gpa4;
-        pce[4]=value.gpa5;
-        pce[5]=value.gpa6;
-        pce[6]=value.gpa7;
-        pce[7]=value.gpa8;
-        pce[8]=value.ogpa;
-        pce[9]=value.are1;
-        pce[10]=value.are2;
-        pce[11]=value.are3;
-        pce[12]=value.are4;
-        pce[13]=value.are5;
-        pce[14]=value.are6;
-        pce[15]=value.are7;
-        pce[16]=value.are8;
-        pce[17]=value.tare;
-        pce[18]=value.areno;
-        no_arrears.title=value.areYN;
+        pce[0] = value.gpa1;
+        pce[1] = value.gpa2;
+        pce[2] = value.gpa3;
+        pce[3] = value.gpa4;
+        pce[4] = value.gpa5;
+        pce[5] = value.gpa6;
+        pce[6] = value.gpa7;
+        pce[7] = value.gpa8;
+        pce[8] = value.ogpa;
+        pce[9] = value.are1;
+        pce[10] = value.are2;
+        pce[11] = value.are3;
+        pce[12] = value.are4;
+        pce[13] = value.are5;
+        pce[14] = value.are6;
+        pce[15] = value.are7;
+        pce[16] = value.are8;
+        pce[17] = value.tare;
+        pce[18] = value.areno;
+        no_arrears.title = value.areYN;
 //        dropbox[0].title=value.title;
 //        dropbox[0].title=value.title;
 //        vregno = value.regno;
@@ -186,38 +184,58 @@ class _PpCurrentDState extends State<PpCurrentD> {
     });
   }
 
-  void _uploadtoDB(BuildContext context, List<String> pg, NewObject noArrears, [bool showSpinner = false]) async {
+  void _uploadtoDB(BuildContext context, List<String> pg, NewObject noArrears,
+      [bool showSpinner = false]) async {
     if (showSpinner) {
       setState(() {
         loading = true;
       });
     }
 //    print("Success");
-    final String uregno=regnovar;
-    final String gpa1=pce[0];
-    final String gpa2=pce[1];
-    final String gpa3=pce[2];
-    final String gpa4=pce[3];
-    final String gpa5=pce[4];
-    final String gpa6=pce[5];
-    final String gpa7=pce[6];
-    final String gpa8=pce[7];
-    final String ogpa=pce[8];
-    final String are1=pce[9];
-    final String are2=pce[10];
-    final String are3=pce[11];
-    final String are4=pce[12];
-    final String are5=pce[13];
-    final String are6=pce[14];
-    final String are7=pce[15];
-    final String are8=pce[16];
-    final String tare=pce[17];
-    final String areYN=noArrears.title;
-    final String areno=pce[18];
+    final String uregno = regnovar;
+    final String gpa1 = pce[0];
+    final String gpa2 = pce[1];
+    final String gpa3 = pce[2];
+    final String gpa4 = pce[3];
+    final String gpa5 = pce[4];
+    final String gpa6 = pce[5];
+    final String gpa7 = pce[6];
+    final String gpa8 = pce[7];
+    final String ogpa = pce[8];
+    final String are1 = pce[9];
+    final String are2 = pce[10];
+    final String are3 = pce[11];
+    final String are4 = pce[12];
+    final String are5 = pce[13];
+    final String are6 = pce[14];
+    final String are7 = pce[15];
+    final String are8 = pce[16];
+    final String tare = pce[17];
+    final String areYN = noArrears.title;
+    final String areno = pce[18];
 
-    await widget.papi.uploadCurrentD(uregno, gpa1, gpa2, gpa3, gpa4, gpa5
-    , gpa6, gpa7, gpa8, ogpa, are1, are2, are3, are4, are5, are6, are7, are8
-    , tare, areYN, areno);
+    await widget.papi.uploadCurrentD(
+        uregno,
+        gpa1,
+        gpa2,
+        gpa3,
+        gpa4,
+        gpa5,
+        gpa6,
+        gpa7,
+        gpa8,
+        ogpa,
+        are1,
+        are2,
+        are3,
+        are4,
+        are5,
+        are6,
+        are7,
+        are8,
+        tare,
+        areYN,
+        areno);
 
     setState(() {
       loading = false;
@@ -440,6 +458,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         extendBodyBehindAppBar: true,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           title: Text(
             "CURRENT EDUCATION DATA",
@@ -457,9 +476,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
           elevation: 0,
         ),
         body: loading
-            ? Center(
-                child: Lottie.network(
-                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+            ? Center(child: Lottie.asset('assets/images/loading1.json'))
             : Container(
                 height: height,
                 child: Stack(children: <Widget>[
@@ -481,27 +498,25 @@ class _PpCurrentDState extends State<PpCurrentD> {
                           _entryFieldnumbers('SEM7 GPA', pce[6], 6),
                           _entryFieldnumbers('SEM8 GPA', pce[7], 7),
                           _entryFieldnumbers('OVERALL CGPA', pce[8], 8),
-                          _entryFieldnumbers('NO OF ARREARS SEM 1',
-                              pce[9], 9),
-                          _entryFieldnumbers('NO OF ARREARS SEM 2',
-                              pce[10], 10),
-                          _entryFieldnumbers('NO OF ARREARS SEM 3',
-                              pce[11], 11),
-                          _entryFieldnumbers('NO OF ARREARS SEM 4',
-                              pce[12], 12),
-                          _entryFieldnumbers('NO OF ARREARS SEM 5',
-                              pce[13], 13),
-                          _entryFieldnumbers('NO OF ARREARS SEM 6',
-                              pce[14], 14),
-                          _entryFieldnumbers('NO OF ARREARS SEM 7',
-                              pce[15], 15),
-                          _entryFieldnumbers('NO OF ARREARS SEM 8',
-                              pce[16], 16),
-                          _entryFieldnumbers('TOTAL NO OF STANDING ARREARS',
-                              pce[17], 17),
+                          _entryFieldnumbers('NO OF ARREARS SEM 1', pce[9], 9),
+                          _entryFieldnumbers(
+                              'NO OF ARREARS SEM 2', pce[10], 10),
+                          _entryFieldnumbers(
+                              'NO OF ARREARS SEM 3', pce[11], 11),
+                          _entryFieldnumbers(
+                              'NO OF ARREARS SEM 4', pce[12], 12),
+                          _entryFieldnumbers(
+                              'NO OF ARREARS SEM 5', pce[13], 13),
+                          _entryFieldnumbers(
+                              'NO OF ARREARS SEM 6', pce[14], 14),
+                          _entryFieldnumbers(
+                              'NO OF ARREARS SEM 7', pce[15], 15),
+                          _entryFieldnumbers(
+                              'NO OF ARREARS SEM 8', pce[16], 16),
+                          _entryFieldnumbers(
+                              'TOTAL NO OF STANDING ARREARS', pce[17], 17),
                           _DropBox("HISTORY OF ARREARS [Y/N]", yesorno),
-                          _entryFieldnumbers('IF YES, HOW MANY?',
-                              pce[18], 18),
+                          _entryFieldnumbers('IF YES, HOW MANY?', pce[18], 18),
                           SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
@@ -510,14 +525,14 @@ class _PpCurrentDState extends State<PpCurrentD> {
                               foregroundColor: Colors.black,
                               onPressed: () {
 //                                print(Validation(context, pce, no_arrears));
-                                 if (Validation(context, pce, no_arrears) == 1) {
+                                if (Validation(context, pce, no_arrears) == 1) {
 //                                   print("Success");
-                                   _uploadtoDB(context, pce, no_arrears);
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: PpPersonalD()));
+                                  _uploadtoDB(context, pce, no_arrears);
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          type: PageTransitionType.bottomToTop,
+                                          child: PpPersonalD()));
                                 }
                               },
                               label: Text('NEXT'),

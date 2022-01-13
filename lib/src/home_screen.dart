@@ -50,7 +50,7 @@ class HomeScreen extends StatelessWidget {
                               builder: (context) => WelcomePage()));
                     },
                     child: new Text(
-                      'Exit',
+                      'Yes',
                       style: GoogleFonts.adventPro(
                           fontSize: 15,
                           color: Colors.black,
@@ -64,7 +64,7 @@ class HomeScreen extends StatelessWidget {
   Widget _backButton(BuildContext context) {
     return InkWell(
       onTap: () {
-        showdialog(context, "Click confirm to Log Out");
+        showdialog(context, "Are you sure to leave");
         // Navigator.pop(
         //     context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar, usernamevar: usernamevar,)));
       },
@@ -112,7 +112,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget buildBlurryWidget(Widget _child, Widget __child, Widget ___child) {
+  Widget buildBlurryWidget(
+      Widget _child, Widget __child, Widget ___child, Widget ____child) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(30.0),
       child: BackdropFilter(
@@ -120,12 +121,13 @@ class HomeScreen extends StatelessWidget {
         child: Container(
           color: Colors.white.withOpacity(0.15),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _child,
               __child,
               ___child,
+              ____child,
             ],
           ),
         ),
@@ -166,17 +168,26 @@ class HomeScreen extends StatelessWidget {
                     margin: EdgeInsets.only(bottom: 20),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             // SizedBox(height: height * .03),
                             Container(
                               child: buildBlurryWidget(
                                   Text(
-                                    "\n    Welcome, $usernamevar    ",
+                                    "\nWelcome,",
+                                    textAlign: TextAlign.start,
+                                    style: GoogleFonts.adventPro(
+                                        fontSize: 30,
+                                        color: Colors.limeAccent,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "    $usernamevar    ",
+                                    textAlign: TextAlign.justify,
                                     style: GoogleFonts.adventPro(
                                         fontSize: 30,
                                         color: Colors.limeAccent,
@@ -184,13 +195,15 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     "$regnovar",
+                                    textAlign: TextAlign.justify,
                                     style: GoogleFonts.adventPro(
                                         fontSize: 25,
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    "Have A Great Day\n",
+                                    "            Have A Great Day          \n",
+                                    textAlign: TextAlign.justify,
                                     style: GoogleFonts.adventPro(
                                         fontSize: 25,
                                         color: Colors.white,

@@ -317,6 +317,7 @@ class _PpExtraDState extends State<PpExtraD> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         extendBodyBehindAppBar: true,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           title: Text(
             "ADDITIONAL INFORMATION",
@@ -332,9 +333,7 @@ class _PpExtraDState extends State<PpExtraD> {
           elevation: 0,
         ),
         body: loading
-            ? Center(
-                child: Lottie.network(
-                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+            ? Center(child: Lottie.asset('assets/images/loading1.json'))
             : Container(
                 height: height,
                 child: Stack(children: <Widget>[
