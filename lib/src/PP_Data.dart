@@ -892,9 +892,7 @@ class _PpDataState extends State<PpData> with TickerProviderStateMixin {
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: loading
-          ? Center(
-              child: Lottie.network(
-                  'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+          ? Center(child: Lottie.asset('assets/images/loading1.json'))
           : Container(
               height: height,
               child: Stack(children: <Widget>[

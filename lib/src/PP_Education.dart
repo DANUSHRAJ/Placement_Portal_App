@@ -154,8 +154,8 @@ class _PpEducationDState extends State<PpEducationD> {
       if (value.runtimeType == Null) {
         setState(() {
           loading = false;
-          return;
         });
+        return;
       }
       setState(() {
         pe[0] = value.tp;
@@ -451,6 +451,7 @@ class _PpEducationDState extends State<PpEducationD> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+        backgroundColor: Colors.black,
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           title: Text(
@@ -470,9 +471,7 @@ class _PpEducationDState extends State<PpEducationD> {
           elevation: 0,
         ),
         body: loading
-            ? Center(
-                child: Lottie.network(
-                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+            ? Center(child: Lottie.asset('assets/images/loading1.json'))
             : Container(
                 height: height,
                 child: Stack(children: <Widget>[
@@ -525,7 +524,7 @@ class _PpEducationDState extends State<PpEducationD> {
                               pe[22],
                               22),
                           _entryFieldalphabets(
-                              'UG - GRADUATING UNIVERSITY) ', pe[23], 23),
+                              'UG - GRADUATING UNIVERSITY ', pe[23], 23),
                           _entryFieldalphabets('GRADUATING STATE', pe[24], 24),
                           SizedBox(height: height * .02),
                           Align(

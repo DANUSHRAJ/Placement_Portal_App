@@ -230,11 +230,11 @@ class _PpGenealDState extends State<PpGenealD> {
 //      print('In PP_GenealD: $value');
       String temp1 = value.toString();
 //      print('$temp1');
-      if (temp1 == null || temp1.isEmpty) {
+      if (value.runtimeType == Null) {
         setState(() {
           loading = false;
-          return;
         });
+        return;
       }
       setState(() {
         //Done for PG only
@@ -245,12 +245,12 @@ class _PpGenealDState extends State<PpGenealD> {
         pg[6] = value.dob2;
         pg[7] = value.dob3;
         pg[8] = value.yoa;
-        dropbox[0].title=value.title;
-        dropbox[1].title=value.gender;
-        dropbox[2].title=value.college;
-        dropbox[3].title=value.dept;
-        dropbox[4].title=value.sec;
-        dropbox[5].title=value.hd;
+        dropbox[0].title = value.title;
+        dropbox[1].title = value.gender;
+        dropbox[2].title = value.college;
+        dropbox[3].title = value.dept;
+        dropbox[4].title = value.sec;
+        dropbox[5].title = value.hd;
 //        vregno = value.regno;
 //        vname = value.name;
 //        vemail = value.username;
@@ -682,7 +682,7 @@ class _PpGenealDState extends State<PpGenealD> {
           elevation: 0,
         ),
         body: loading
-            ? Center(child: Lottie.asset('assets/images/loading.json'))
+            ? Center(child: Lottie.asset('assets/images/loading1.json'))
             : Container(
                 height: height,
                 child: Stack(children: <Widget>[

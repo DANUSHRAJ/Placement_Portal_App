@@ -15,7 +15,7 @@ void start() async {
 //  final coll = db.collection('interns');
 
   // Create server
-  const port = 8081;
+  const port = 20;
   final serv = Sevr();
 
   final corsPaths = ['/', '/:id'];

@@ -402,6 +402,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
         extendBodyBehindAppBar: true,
+        backgroundColor: Colors.black,
         appBar: AppBar(
           title: Text(
             "PERSONAL DATA",
@@ -420,9 +421,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
           elevation: 0,
         ),
         body: loading
-            ? Center(
-                child: Lottie.network(
-                    'https://assets3.lottiefiles.com/packages/lf20_rru67jvx.json'))
+            ? Center(child: Lottie.asset('assets/images/loading1.json'))
             : Container(
                 height: height,
                 child: Stack(children: <Widget>[
