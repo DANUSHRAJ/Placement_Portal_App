@@ -71,7 +71,8 @@ void start() async {
     (ServRequest req, ServResponse res) async {
       final coll = db.collection('interns');
       final interns = await coll.find().toList();
-      return res.status(200).json({'interns': interns});
+      return interns;
+//      return res.status(200).json({'interns': interns});
     }
   ]);
 

@@ -347,8 +347,8 @@ class _IntershipUploadState extends State<IntershipUpload> {
         _addInternDetails(i_title.text, i_name.text, i_sd.text, i_ed.text,
             i_clink.text, i_plink.text, i_flink.text);
         //_findAccount(etRegisterNo.text, etPassword.text);
-        Navigator.pop(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar,usernamevar: usernamevar,)));
       },
       child: Container(
         width: MediaQuery.of(context).size.width * .5,

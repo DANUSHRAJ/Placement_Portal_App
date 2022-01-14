@@ -49,15 +49,17 @@ class _IntershipsState extends State<Interships> with TickerProviderStateMixin {
         loading = true;
       });
     }
-
+//    print("Success");
     await widget.api.getinternsDet(regnovar).then((value) {
       setState(() {
         internDet = value;
+//        print(value);
         loading = false;
       });
     });
     Map<int, IWCDetails> map = internDet.asMap();
     for (int i = 0; i < map.length; i++) {
+//      print(map[i]);
       title = map[i].title;
       name = map[i].name;
       recno = (i + 1).toString();

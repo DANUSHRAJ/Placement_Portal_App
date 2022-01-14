@@ -6,7 +6,7 @@ import 'IWCDetails.dart';
 
 class InternsApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io'  'http://127.0.0.1:8081';
-  static String apiUrl = 'http://127.0.0.1:8081';
+  static String apiUrl = 'http://localhost:8081';
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
   Future<List<IWCDetails>> getinterns() async {
@@ -19,7 +19,7 @@ class InternsApi {
   Future<List<IWCDetails>> getinternsDet(String regno) async {
     final response = await _dio.post('/getinterndet', data: {'regno': regno});
 //    log('$response');
-    return (response.data['interns'] as List)
+    return (response.data as List)
         .map<IWCDetails>((json) => IWCDetails.fromJson(json))
         .toList();
   }
