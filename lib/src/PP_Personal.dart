@@ -85,7 +85,7 @@ int Validation(BuildContext context, List<String> pp) {
   }
 
 //  // phone number
- if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[0])&&pp[0]!='NA') {
+ if (!RegExp(r'^(?:[+0]9)?[0-9]{11}$').hasMatch(pp[0])&&pp[0]!='NA') {
    //print("land line number");
    showdialog(context, "Please Check the " + compareList[0]);
    return -1;
