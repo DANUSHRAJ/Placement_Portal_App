@@ -105,28 +105,28 @@ int Validation(BuildContext context, List<String> pg, List<NewObject> dropbox) {
     return -1;
   }
   //name
-//  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[2]))) {
-//    showdialog(context, "Please Check the " + compareList[2]);
-//    return -1;
-//    //print("candidate");
-//  }
-//  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[3]))) {
-//    showdialog(context, "Please Check the " + compareList[3]);
-//    return -1;
-//    //print("first name");
-//  }
-//  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[4]))) {
-//    showdialog(context, "Please Check the " + compareList[4]);
-//    return -1;
-//    //print("last name");
-//  }
+ // if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[2]))) {
+ //   showdialog(context, "Please Check the " + compareList[2]);
+ //   return -1;
+ //   //print("candidate");
+ // }
+ // if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[3]))) {
+ //   showdialog(context, "Please Check the " + compareList[3]);
+ //   return -1;
+ //   //print("first name");
+ // }
+ // if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[4]))) {
+ //   showdialog(context, "Please Check the " + compareList[4]);
+ //   return -1;
+ //   //print("last name");
+ // }
 
   //register number
-//  if (!RegExp(r'^3124\d{8}$').hasMatch(pg[0])) {
-//    showdialog(context, "Please Check the " + compareList[0]);
-//    return -1;
-//    //print("Register number was invalid");
-//  }
+ if (!RegExp(r'^3124\d{8}$').hasMatch(pg[0])) {
+   showdialog(context, "Please Check the " + compareList[0]);
+   return -1;
+   //print("Register number was invalid");
+ }
   //roll no
   if (pg[1].length != 8) {
     showdialog(context, "Please Check the " + compareList[1]);

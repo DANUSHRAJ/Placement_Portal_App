@@ -85,41 +85,41 @@ int Validation(BuildContext context, List<String> pp) {
   }
 
 //  // phone number
-//  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[0])) {
-//    //print("land line number");
-//    showdialog(context, "Please Check the " + compareList[0]);
-//    return -1;
-//  }
-//  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[1])) {
-//    //print("primary number");
-//    showdialog(context, "Please Check the " + compareList[1]);
-//    return -1;
-//  }
-//  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[2])) {
-//    //print("emergency number");
-//    showdialog(context, "Please Check the " + compareList[2]);
-//    return -1;
-//  }
+ if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[0])&&pp[0]!='NA') {
+   //print("land line number");
+   showdialog(context, "Please Check the " + compareList[0]);
+   return -1;
+ }
+ if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[1])) {
+   //print("primary number");
+   showdialog(context, "Please Check the " + compareList[1]);
+   return -1;
+ }
+ if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[2])) {
+   //print("emergency number");
+   showdialog(context, "Please Check the " + compareList[2]);
+   return -1;
+ }
 //
 //  //email id
-//  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[3])) {
-//    //print("primary");
-//    showdialog(context, "Please Check the " + compareList[3]);
-//    return -1;
-//  }
-//  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[4])) {
-//    //print("alternate");
-//    showdialog(context, "Please Check the " + compareList[4]);
-//    return -1;
-//  }
+ if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[3])) {
+   //print("primary");
+   showdialog(context, "Please Check the " + compareList[3]);
+   return -1;
+ }
+ if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[4])) {
+   //print("alternate");
+   showdialog(context, "Please Check the " + compareList[4]);
+   return -1;
+ }
 //
 //  //pancard
-//  if (!RegExp(r'[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}$')
-//      .hasMatch(pp[5])) {
-//    //print("pan card");
-//    showdialog(context, "Please Check the " + compareList[5]);
-//    return -1;
-//  }
+ if (!RegExp(r'[A-Z]{5}[0-9]{4}[A-Z]{1}$')
+     .hasMatch(pp[5])) {
+   //print("pan card");
+   showdialog(context, "Please Check the " + compareList[5]);
+   return -1;
+ }
 //
 //  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pp[9]))) {
 //    showdialog(context, "Please Check the " + compareList[9]);
@@ -127,18 +127,18 @@ int Validation(BuildContext context, List<String> pp) {
 //    //print("father name");
 //  }
 //
-//  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[11])) {
-//    //print("father's mobile number");
-//    showdialog(context, "Please Check the " + compareList[11]);
-//    return -1;
-//  }
-//
-//  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
-//      .hasMatch(pp[12])) {
-//    //print("father email id");
-//    showdialog(context, "Please Check the " + compareList[12]);
-//    return -1;
-//  }
+ if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[11])&&pp[11]!='NA') {
+   //print("father's mobile number");
+   showdialog(context, "Please Check the " + compareList[11]);
+   return -1;
+ }
+
+ if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+     .hasMatch(pp[12])&&pp[12]!='NA') {
+   //print("father email id");
+   showdialog(context, "Please Check the " + compareList[12]);
+   return -1;
+ }
 //
 //  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pp[13]))) {
 //    showdialog(context, "Please Check the " + compareList[13]);
@@ -146,25 +146,25 @@ int Validation(BuildContext context, List<String> pp) {
 //    //print("mother name");
 //  }
 //
-//  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[15])) {
-//    //print("mother's mobile number");
-//    showdialog(context, "Please Check the " + compareList[15]);
-//    return -1;
-//  }
+ if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[15])&&pp[15]!='NA') {
+   //print("mother's mobile number");
+   showdialog(context, "Please Check the " + compareList[15]);
+   return -1;
+ }
 //
-//  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
-//      .hasMatch(pp[16])) {
-//    //print("mother email id");
-//    showdialog(context, "Please Check the " + compareList[16]);
-//    return -1;
-//  }
+ if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+     .hasMatch(pp[16])&&pp[16]!='NA') {
+   //print("mother email id");
+   showdialog(context, "Please Check the " + compareList[16]);
+   return -1;
+ }
 //
 //  //postal code
-//  if (!RegExp(r'^\d{6}$').hasMatch(pp[22])) {
-//    //print("postal code");
-//    showdialog(context, "Please Check the " + compareList[22]);
-//    return -1;
-//  }
+ if (!RegExp(r'^\d{6}$').hasMatch(pp[22])) {
+   //print("postal code");
+   showdialog(context, "Please Check the " + compareList[22]);
+   return -1;
+ }
   return 1;
 }
 
@@ -613,7 +613,10 @@ class _PpPersonalDState extends State<PpPersonalD> {
                                     context,
                                     PageTransition(
                                         type: PageTransitionType.bottomToTop,
-                                        child: PpExtraD()));
+                                        child: PpExtraD(
+                                          regnovar: regnovar,
+                                          usernamevar: usernamevar,
+                                        )));
                                 }
                               },
                               label: Text('NEXT'),

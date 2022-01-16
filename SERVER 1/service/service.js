@@ -447,6 +447,49 @@ module.exports.updatePersonalD = async (req,res)=>{
         console.log(err);
     }
 };
+
+module.exports.getExtraD = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("profile_extra").findOne(
+            {'regno':req.body.regno}
+        );
+        res.send(result);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.uploadExtraD = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("profile_extra").insertOne(req.body);
+	    const result1 = await client.db("Cluster0").collection("profile_extra").findOne(
+            {'regno':req.body.regno}
+        );
+        // console.log("Success");
+        res.send(result1);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.updateExtraD = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("profile_extra").update(
+           {regno: req.body.regno},
+            {$set: req.body},
+            (err1,result)=>{
+                if(err1)
+                    console.log(err1);
+            }
+        );
+        const result1 = await client.db("Cluster0").collection("profile_extra").findOne(
+            {'regno':req.body.regno}
+        );
+        // console.log("Success");
+        res.send(result1);
+    } catch(err){
+        console.log(err);
+    }
+};
+
 module.exports.uploadppdataex = async (req,res)=>{
     try{
         const result = await client.db("Cluster0").collection("profile").update(

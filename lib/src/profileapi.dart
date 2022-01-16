@@ -9,8 +9,10 @@ import 'package:flutter/cupertino.dart';
 
 import 'Account.dart';
 import 'EducationDJSON1.dart';
+import 'ExtraDJSON.dart';
 import 'GenealDJSON.dart';
 import 'PersonalDJSON.dart';
+import 'ExtraDJSON.dart';
 
 class ProfileApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io';http://127.0.0.1:8081
@@ -385,6 +387,58 @@ class ProfileApi {
         'PERMANENT CITY':pcity,
         'STATE':state,
         'POSTAL CODE':pco
+      });
+    }
+  }
+
+  Future<ExtraDJSON> getExtraD(String regno) async {
+    final response = await _dio.post('/getExtraD', data: {'regno': regno});
+    var res = response.data;
+//    log('Response: $res');
+    if (res != "") {
+      return ExtraDJSON.fromJson(response.data);
+    } else {
+      return null;
+    }
+  }
+
+  Future<ExtraDJSON> uploadExtraD(
+      final String uregno,
+      final String lang,
+      final String gap,
+      final String skill,
+      final String sportQ,
+      final String becS,
+      final String becG,
+      final String higherS) async {
+    ProfileApi api = ProfileApi();
+    final rescheck = await api.getExtraD(uregno);
+//      log('$rescheck');
+    if (rescheck == null) {
+      final response = await _dio.post('/uploadExtraD', data: {
+        'regno': uregno,
+        'LANGUAGES KNOWN': lang,
+        'GAP IN EDUCATION (in Years)': gap,
+        'IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL': skill,
+        'SPORTS QUOTA': sportQ,
+        'BEC EXAM STATUS': becS,
+        'BEC EXAM GRADE': becG,
+        'ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]': higherS,
+      });
+      //    log('$name-$regno-$username-$password');
+//        var result = response.data;
+//        log('$result');
+      return ExtraDJSON.fromJson(response.data);
+    } else {
+      await _dio.post('/updateExtraD', data: {
+        'regno': uregno,
+        'LANGUAGES KNOWN': lang,
+        'GAP IN EDUCATION (in Years)': gap,
+        'IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL': skill,
+        'SPORTS QUOTA': sportQ,
+        'BEC EXAM STATUS': becS,
+        'BEC EXAM GRADE': becG,
+        'ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]': higherS,
       });
     }
   }

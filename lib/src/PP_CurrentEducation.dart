@@ -68,40 +68,40 @@ int Validation(BuildContext context, List<String> pce, NewObject noArrears) {
             ));
   }
 
-//  for (int i = 0; i < pce.length; i++) {
-//    if (pce[i] == null || pce[i].isEmpty) {
-//      check = i;
-//      break;
-//    }
-//  }
-//  if (check != -1) {
-//    showdialog(context, "please fill the " + compareList[check]);
-//    //print(compareList[check]+" was left blank");
-//    return -1;
-//  }
+ for (int i = 0; i < pce.length; i++) {
+   if (pce[i] == null || pce[i].isEmpty) {
+     check = i;
+     break;
+   }
+ }
+ if (check != -1) {
+   showdialog(context, "please fill the " + compareList[check]);
+   //print(compareList[check]+" was left blank");
+   return -1;
+ }
 //
-//  if (noArrears.title == 'SELECT THE OPTION') {
-//    showdialog(context, "please select the Valid OPTION");
-//    return 0;
-//  }
+ if (noArrears.title == 'SELECT THE OPTION') {
+   showdialog(context, "please select the Valid OPTION");
+   return 0;
+ }
 //
 //  //gpa
-//  for (int i = 0; i < 9; i++) {
-//    if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
-//        .hasMatch(pce[i])) {
-//      //print(compareList[i]+" was invalid");
-//      showdialog(context, "Please Check the " + compareList[i]);
-//      return -1;
-//    }
-//  }
+ for (int i = 0; i < 9; i++) {
+   if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+       .hasMatch(pce[i])&&pce[i]!='NA') {
+     //print(compareList[i]+" was invalid");
+     showdialog(context, "Please Check the " + compareList[i]);
+     return -1;
+   }
+ }
 //  //arrear
-//  for (int i = 9; i < 19; i++) {
-//    if (!RegExp(r'^(?:[1-9]|[1-4][0-9]|50)$').hasMatch(pce[i])) {
-//      //print(compareList[i]+" was invalid");
-//      showdialog(context, "Please Check the " + compareList[i]);
-//      return -1;
-//    }
-//  }
+ for (int i = 9; i < 19; i++) {
+   if (!RegExp(r'^[0-9]+$').hasMatch(pce[i])) {
+     //print(compareList[i]+" was invalid");
+     showdialog(context, "Please Check the " + compareList[i]);
+     return -1;
+   }
+ }
   return 1;
 }
 

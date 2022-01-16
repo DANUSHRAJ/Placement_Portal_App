@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'profileapi.dart';
+
 int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
   Future showdialog(BuildContext context, String message) async {
     return showDialog(
@@ -41,26 +43,32 @@ int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
             ));
   }
 
-  for (int i = 0; i < 5; i++) {
-    if (i != 2 && dropbox[i].title == 'SELECT THE OPTION') {
-      showdialog(context, "please select the Valid OPTION");
-      return -1;
-    }
-  }
-
-  if (dropbox[2].title == 'SELECT BEC GRADE') {
-    showdialog(context, "please select the Valid SECTION");
-    return -1;
-  }
-
-  if (pa[0] == 'null' || pa[0].isEmpty) {
+  // for (int i = 0; i < 5; i++) {
+  //   if (i != 2 && dropbox[i].title == 'SELECT THE OPTION') {
+  //     showdialog(context, "please select the Valid OPTION");
+  //     return -1;
+  //   }
+  // }
+  //
+  // if (dropbox[2].title == 'SELECT BEC GRADE') {
+  //   showdialog(context, "please select the Valid SECTION");
+  //   return -1;
+  // }
+  //
+  if (pa[0] == null || pa[0].isEmpty) {
     showdialog(context, "please fill the " + "LANGUAGES KNOWN");
     //print(compareList[check]+" was left blank");
     return -1;
   }
 
-  if (pa[1] == 'null' || pa[1].isEmpty) {
+  if (pa[1] == null || pa[1].isEmpty) {
     showdialog(context, "please fill the " + "GAP IN EDUCATION");
+    //print(compareList[check]+" was left blank");
+    return -1;
+  }
+
+  if (pa[2] == null || pa[2].isEmpty) {
+    showdialog(context, "please fill the " +"SKILL");
     //print(compareList[check]+" was left blank");
     return -1;
   }
@@ -68,23 +76,97 @@ int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
 }
 
 class PpExtraD extends StatefulWidget {
-  const PpExtraD({Key key}) : super(key: key);
+  String regnovar;
+  String usernamevar;
+
+  final ProfileApi papi = ProfileApi();
+
+  PpExtraD({Key key,this.regnovar,this.usernamevar}) : super(key: key);
 
   @override
-  _PpExtraDState createState() => _PpExtraDState();
+  _PpExtraDState createState() => _PpExtraDState(regnovar : regnovar,usernamevar: usernamevar);
 }
 
 class NewObject {
-  final String title;
+  String title;
   final IconData icon;
 
   NewObject(this.title, this.icon);
 }
 
 class _PpExtraDState extends State<PpExtraD> {
+  String regnovar;
+  String usernamevar;
   bool loading = false;
 
-  List<String> pa = ['null', 'null'];
+  _PpExtraDState({this.regnovar, this.usernamevar});
+
+  void _loadUploadedData([bool showSpinner = false]) async{
+    if(showSpinner){
+      setState(() {
+        loading=true;
+      });
+    }
+
+    await widget.papi.getExtraD(regnovar).then((value){
+      if (value.runtimeType == Null) {
+        setState(() {
+          loading = false;
+        });
+        return;
+      }
+      setState(() {
+        pa[0] = value.lang;
+        pa[1] = value.gap;
+        pa[2] = value.skill;
+        dropbox[0].title=value.sportQ;
+        dropbox[1].title=value.becS;
+        dropbox[2].title=value.becG;
+        dropbox[3].title=value.higherS;
+        loading = false;
+      });
+    });
+  }
+
+  void _uploadtoDB(BuildContext context, List<String> pa,List<NewObject> dropbox,
+      [bool showSpinner = false]) async {
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+//    print("Success");
+    final String uregno = regnovar;
+    final String lang = pa[0];
+    final String gap = pa[1];
+    final String skill = pa[2];
+    final String sportQ = dropbox[0].title;
+    final String becS = dropbox[1].title;
+    final String becG = dropbox[2].title;
+    final String higherS = dropbox[3].title;
+
+    await widget.papi.uploadExtraD(
+        uregno,
+        lang,
+        gap,
+        skill,
+        sportQ,
+        becS,
+        becG,
+        higherS);
+
+    setState(() {
+      loading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUploadedData(true);
+  }
+
+  List<String> pa = [null, null,null];
 
   static final List<NewObject> yesorno = <NewObject>[
     NewObject('SELECT THE OPTION', Icons.description),
@@ -104,7 +186,6 @@ class _PpExtraDState extends State<PpExtraD> {
     yesorno.first, //1
     becgrade.first, //2
     yesorno.first, //3
-    yesorno.first, //4
   ];
 
   Widget _backButton() {
@@ -149,6 +230,7 @@ class _PpExtraDState extends State<PpExtraD> {
           TextFormField(
             decoration: InputDecoration(
                 hintText: hint,
+                labelText: pa[i],
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                   borderSide: BorderSide(
@@ -350,17 +432,15 @@ class _PpExtraDState extends State<PpExtraD> {
                           _DropBox("BEC EXAM STATUS", yesorno, 1),
                           _DropBox("BEC EXAM GRADE", becgrade, 2),
                           _entryFieldalphabets(
-                              'LANGUAGES KNOWN', 'Tamil,English,Hindi', 0),
+                              'LANGUAGES KNOWN', pa[0], 0),
                           _entryFieldnumbers(
                               'GAP IN EDUCATION (in Years) - If Any',
-                              'if there is no gap enter 0',
+                              pa[1],
                               1),
                           _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]",
                               yesorno, 3),
-                          _DropBox(
-                              "IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL",
-                              yesorno,
-                              4),
+                          _entryFieldalphabets(
+                              'IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL', pa[2], 2),
                           SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
@@ -368,13 +448,17 @@ class _PpExtraDState extends State<PpExtraD> {
                               backgroundColor: const Color(0xFFE96710),
                               foregroundColor: Colors.black,
                               onPressed: () {
-                                // if (Validation(context, pg, dropbox) == 1) {
+                                 if (Validation(context, pa, dropbox) == 1) {
+                                   _uploadtoDB(context,pa,dropbox);
                                 Navigator.push(
                                     context,
                                     PageTransition(
                                         type: PageTransitionType.bottomToTop,
-                                        child: HomeScreen()));
-                                //}
+                                        child: HomeScreen(
+                                          regnovar: regnovar,
+                                          usernamevar: usernamevar,
+                                        )));
+                                }
                               },
                               label: Text('SUBMIT'),
                               icon: Icon(Icons.upload_rounded),

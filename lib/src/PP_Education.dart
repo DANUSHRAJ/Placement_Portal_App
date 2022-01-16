@@ -72,42 +72,42 @@ int Validation(BuildContext context, List<String> pe) {
             ));
   }
 
-//  for (int i = 0; i < pe.length; i++) {
-//    if (pe[i] == null || pe[i].isEmpty) {
-//      check = i;
-//      break;
-//    }
-//  }
-//  if (check != -1) {
-//    showdialog(context, "please fill the " + compareList[check]);
-//    //print(compareList[check]+" was left blank");
-//    return -1;
-//  }
+ for (int i = 0; i < pe.length; i++) {
+   if (pe[i] == null || pe[i].isEmpty) {
+     check = i;
+     break;
+   }
+ }
+ if (check != -1) {
+   showdialog(context, "please fill the " + compareList[check]);
+   //print(compareList[check]+" was left blank");
+   return -1;
+ }
 //  //year
-//  if (!RegExp(r'^\d{4}$').hasMatch(pe[3])) {
-//    showdialog(context, "Please Check the " + compareList[3]);
-//    return -1;
-//    // print("10th passing");
-//  }
-//  if (!RegExp(r'^\d{4}$').hasMatch(pe[9])) {
-//    //print("12th passing");
-//    showdialog(context, "Please Check the " + compareList[9]);
-//    return -1;
-//  }
-//
-//  //percentage
-//  if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
-//      .hasMatch(pe[0])) {
-//    //print("10th percentage");
-//    showdialog(context, "Please Check the " + compareList[0]);
-//    return -1;
-//  }
-//  if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
-//      .hasMatch(pe[9])) {
-//    //print("12th percentage");
-//    showdialog(context, "Please Check the " + compareList[9]);
-//    return -1;
-//  }
+ if (!RegExp(r'^\d{4}$').hasMatch(pe[3])) {
+   showdialog(context, "Please Check the " + compareList[3]);
+   return -1;
+   // print("10th passing");
+ }
+ if (!RegExp(r'^\d{4}$').hasMatch(pe[9])) {
+   //print("12th passing");
+   showdialog(context, "Please Check the " + compareList[9]);
+   return -1;
+ }
+
+ //percentage
+ if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+     .hasMatch(pe[0])) {
+   //print("10th percentage");
+   showdialog(context, "Please Check the " + compareList[0]);
+   return -1;
+ }
+ if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+     .hasMatch(pe[6])) {
+   //print("12th percentage");
+   showdialog(context, "Please Check the " + compareList[6]);
+   return -1;
+ }
 
   return 1;
 }
