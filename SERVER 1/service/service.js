@@ -322,6 +322,7 @@ module.exports.updategenealD = async (req,res)=>{
         const result1 = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
+//        console.log("Success");
         res.send(result1);
     } catch(err){
         console.log(err);
@@ -400,6 +401,47 @@ module.exports.updateCurrentD = async (req,res)=>{
         const result1 = await client.db("Cluster0").collection("profile_cur").findOne(
             {'regno':req.body.regno}
         );
+        res.send(result1);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.getPersonalD = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("profile_per").findOne(
+            {'regno':req.body.regno}
+        );
+        res.send(result);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.uploadPersonalD = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("profile_per").insertOne(req.body);
+	    const result1 = await client.db("Cluster0").collection("profile_per").findOne(
+            {'regno':req.body.regno}
+        );
+        // console.log("Success");
+        res.send(result1);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.updatePersonalD = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("profile_per").update(
+           {regno: req.body.regno},
+            {$set: req.body},
+            (err1,result)=>{
+                if(err1)
+                    console.log(err1);
+            }
+        );
+        const result1 = await client.db("Cluster0").collection("profile_per").findOne(
+            {'regno':req.body.regno}
+        );
+        // console.log("Success");
         res.send(result1);
     } catch(err){
         console.log(err);

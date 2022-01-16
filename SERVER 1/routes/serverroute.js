@@ -90,6 +90,15 @@ server_router.post("/uploadCurrentD",service.uploadCurrentD);
 //http://localhost:8081/updateCurrentD
 server_router.post("/updateCurrentD",service.updateCurrentD);
 
+//http://localhost:8081/getPersonalD
+server_router.post("/getPersonalD",service.getPersonalD);
+
+//http://localhost:8081/uploadPersonalD
+server_router.post("/uploadPersonalD",service.uploadPersonalD);
+
+//http://localhost:8081/updatePersonalD
+server_router.post("/updatePersonalD",service.updatePersonalD);
+
 //http://localhost:8081/uploadppdataex
 server_router.post("/uploadppdataex",service.uploadppdataex);
 
