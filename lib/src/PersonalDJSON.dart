@@ -1,5 +1,6 @@
 
- /*'LAND LINE NUMBER',
+ /*
+     'LAND LINE NUMBER',
      'PRIMARY MOBILE NO',
      'EMERGENCY CONTACT NO',
      'PRIMARY EMAIL ID',
@@ -21,7 +22,8 @@
      'PERMANENT ADDRESS LINE 2',
      'PERMANENT CITY',
      'STATE',
-     'POSTAL CODE',*/
+     'POSTAL CODE',
+     */
 
 
  class PersonalDJSON {

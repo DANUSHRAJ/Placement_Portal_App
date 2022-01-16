@@ -9,6 +9,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'api.dart';
+import 'profileapi.dart';
+
 int Validation(BuildContext context, List<String> pp) {
   List<String> compareList = [
     'LAND LINE NUMBER',
@@ -70,7 +73,7 @@ int Validation(BuildContext context, List<String> pp) {
 
   int check = -1;
   for (int i = 0; i < pp.length; i++) {
-    if (pp[i] == 'null' || pp[i].isEmpty) {
+    if (pp[i] == null || pp[i].isEmpty) {
       check = i;
       break;
     }
@@ -81,95 +84,101 @@ int Validation(BuildContext context, List<String> pp) {
     return -1;
   }
 
-  // phone number
-  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[0])) {
-    //print("land line number");
-    showdialog(context, "Please Check the " + compareList[0]);
-    return -1;
-  }
-  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[1])) {
-    //print("primary number");
-    showdialog(context, "Please Check the " + compareList[1]);
-    return -1;
-  }
-  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[2])) {
-    //print("emergency number");
-    showdialog(context, "Please Check the " + compareList[2]);
-    return -1;
-  }
-
-  //email id
-  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[3])) {
-    //print("primary");
-    showdialog(context, "Please Check the " + compareList[3]);
-    return -1;
-  }
-  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[4])) {
-    //print("alternate");
-    showdialog(context, "Please Check the " + compareList[4]);
-    return -1;
-  }
-
-  //pancard
-  if (!RegExp(r'[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}$')
-      .hasMatch(pp[5])) {
-    //print("pan card");
-    showdialog(context, "Please Check the " + compareList[5]);
-    return -1;
-  }
-
-  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pp[9]))) {
-    showdialog(context, "Please Check the " + compareList[9]);
-    return -1;
-    //print("father name");
-  }
-
-  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[11])) {
-    //print("father's mobile number");
-    showdialog(context, "Please Check the " + compareList[11]);
-    return -1;
-  }
-
-  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
-      .hasMatch(pp[12])) {
-    //print("father email id");
-    showdialog(context, "Please Check the " + compareList[12]);
-    return -1;
-  }
-
-  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pp[13]))) {
-    showdialog(context, "Please Check the " + compareList[13]);
-    return -1;
-    //print("mother name");
-  }
-
-  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[15])) {
-    //print("mother's mobile number");
-    showdialog(context, "Please Check the " + compareList[15]);
-    return -1;
-  }
-
-  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
-      .hasMatch(pp[16])) {
-    //print("mother email id");
-    showdialog(context, "Please Check the " + compareList[16]);
-    return -1;
-  }
-
-  //postal code
-  if (!RegExp(r'^\d{6}$').hasMatch(pp[22])) {
-    //print("postal code");
-    showdialog(context, "Please Check the " + compareList[22]);
-    return -1;
-  }
+//  // phone number
+//  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[0])) {
+//    //print("land line number");
+//    showdialog(context, "Please Check the " + compareList[0]);
+//    return -1;
+//  }
+//  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[1])) {
+//    //print("primary number");
+//    showdialog(context, "Please Check the " + compareList[1]);
+//    return -1;
+//  }
+//  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[2])) {
+//    //print("emergency number");
+//    showdialog(context, "Please Check the " + compareList[2]);
+//    return -1;
+//  }
+//
+//  //email id
+//  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[3])) {
+//    //print("primary");
+//    showdialog(context, "Please Check the " + compareList[3]);
+//    return -1;
+//  }
+//  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[4])) {
+//    //print("alternate");
+//    showdialog(context, "Please Check the " + compareList[4]);
+//    return -1;
+//  }
+//
+//  //pancard
+//  if (!RegExp(r'[A-Z]{3}[ABCFGHLJPTF]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}$')
+//      .hasMatch(pp[5])) {
+//    //print("pan card");
+//    showdialog(context, "Please Check the " + compareList[5]);
+//    return -1;
+//  }
+//
+//  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pp[9]))) {
+//    showdialog(context, "Please Check the " + compareList[9]);
+//    return -1;
+//    //print("father name");
+//  }
+//
+//  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[11])) {
+//    //print("father's mobile number");
+//    showdialog(context, "Please Check the " + compareList[11]);
+//    return -1;
+//  }
+//
+//  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+//      .hasMatch(pp[12])) {
+//    //print("father email id");
+//    showdialog(context, "Please Check the " + compareList[12]);
+//    return -1;
+//  }
+//
+//  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pp[13]))) {
+//    showdialog(context, "Please Check the " + compareList[13]);
+//    return -1;
+//    //print("mother name");
+//  }
+//
+//  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[15])) {
+//    //print("mother's mobile number");
+//    showdialog(context, "Please Check the " + compareList[15]);
+//    return -1;
+//  }
+//
+//  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+//      .hasMatch(pp[16])) {
+//    //print("mother email id");
+//    showdialog(context, "Please Check the " + compareList[16]);
+//    return -1;
+//  }
+//
+//  //postal code
+//  if (!RegExp(r'^\d{6}$').hasMatch(pp[22])) {
+//    //print("postal code");
+//    showdialog(context, "Please Check the " + compareList[22]);
+//    return -1;
+//  }
   return 1;
 }
 
 class PpPersonalD extends StatefulWidget {
-  const PpPersonalD({Key key}) : super(key: key);
+  String regnovar;
+  String usernamevar;
+
+  PpPersonalD({Key key, this.regnovar, this.usernamevar}) : super(key: key);
+
+  final AccountsApi api = AccountsApi();
+  final ProfileApi papi = ProfileApi();
 
   @override
-  _PpPersonalDState createState() => _PpPersonalDState();
+  _PpPersonalDState createState() => _PpPersonalDState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class NewObject {
@@ -180,31 +189,158 @@ class NewObject {
 }
 
 class _PpPersonalDState extends State<PpPersonalD> {
+  String regnovar;
+  String usernamevar;
   bool loading = false;
+
+  _PpPersonalDState({this.regnovar, this.usernamevar});
+
+  void _loadPPData([bool showSpinner = false]) async {
+//    log('Regno: $regnovar');
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+
+    await widget.api.getOneAccount(regnovar).then((value) {
+      setState(() {
+        pp[3] = value.username;
+//        internDet = value;
+        loading = false;
+      });
+    });
+  }
+
+  void _loadUploadedData([bool showSpinner = false]) async {
+//    log('Regno: $regnovar');
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+
+    await widget.papi.getPersonalD(regnovar).then((value) {
+//      print('In PP_GenealD: $value');
+//      String temp1 = value.toString();
+//      print('$temp1');
+//      if(temp1=='null'||temp1.isEmpty){
+//        print(value.runtimeType);
+      if (value.runtimeType == Null) {
+        setState(() {
+          loading = false;
+        });
+        return;
+      }
+      setState(() {
+        pp[0] = value.land;
+        pp[1] = value.pmno;
+        pp[2] = value.emno;
+        pp[3] = value.pmail;
+        pp[4] = value.amail;
+        pp[5] = value.pan;
+        pp[6] = value.natio;
+        pp[7] = value.pass;
+        pp[8] = value.adhr;
+        pp[9] = value.fname;
+        pp[10] = value.focp;
+        pp[11] = value.fmno;
+        pp[12] = value.fmail;
+        pp[13] = value.mname;
+        pp[14] = value.mocp;
+        pp[15] = value.mmno;
+        pp[16] = value.mmail;
+        pp[17] = value.paddr;
+        pp[18] = value.paddr1;
+        pp[19] = value.paddr2;
+        pp[20] = value.pcity;
+        pp[21] = value.state;
+        pp[22] = value.pco;
+//        dropbox[0].title=value.title;
+//        dropbox[0].title=value.title;
+//        vregno = value.regno;
+//        vname = value.name;
+//        vemail = value.username;
+//        internDet = value;
+        loading = false;
+      });
+    });
+  }
+
+  void _uploadtoDB(BuildContext context, [bool showSpinner = false]) async {
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+//    print("Success");
+    final String uregno = regnovar;
+    final String land=pp[0];
+    final String pmno=pp[1];
+    final String emno=pp[2];
+    final String pmail=pp[3];
+    final String amail=pp[4];
+    final String pan=pp[5];
+    final String natio=pp[6];
+    final String pass=pp[7];
+    final String adhr=pp[8];
+    final String fname=pp[9];
+    final String focp=pp[10];
+    final String fmno=pp[11];
+    final String fmail=pp[12];
+    final String mname=pp[13];
+    final String mocp=pp[14];
+    final String mmno=pp[15];
+    final String mmail=pp[16];
+    final String paddr=pp[17];
+    final String paddr1=pp[18];
+    final String paddr2=pp[19];
+    final String pcity=pp[20];
+    final String state=pp[21];
+    final String pco=pp[22];
+
+    await widget.papi.uploadPersonalD(
+        uregno,land,pmno,emno,pmail,amail,pan,natio,pass,
+        adhr,fname,focp,fmno,fmail,mname,mocp,mmno,mmail,paddr,paddr1,
+        paddr2,pcity,state,pco
+    );
+
+    setState(() {
+      loading = false;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUploadedData(true);
+    _loadPPData(true);
+  }
+
   List<String> pp = [
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null',
-    'null'
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
   ];
 
   Widget _backButton() {
@@ -434,36 +570,36 @@ class _PpPersonalDState extends State<PpPersonalD> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(height: height * .2),
-                          _entryFieldnumbers('LAND LINE NUMBER', '', 0),
-                          _entryFieldnumbers('PRIMARY MOBILE NO', '', 1),
-                          _entryFieldnumbers('EMERGENCY CONTACT NO', '', 2),
+                          _entryFieldnumbers('LAND LINE NUMBER', pp[0], 0),
+                          _entryFieldnumbers('PRIMARY MOBILE NO', pp[1], 1),
+                          _entryFieldnumbers('EMERGENCY CONTACT NO', pp[2], 2),
                           _entryFieldalphabetsdisplay(
-                              'PRIMARY EMAIL ID', 'email', 3),
+                              'PRIMARY EMAIL ID', pp[3], 3),
                           _entryFieldalphabets(
-                              'ALTERNATE EMAIL ID', 'abc@gmail.com', 4),
-                          _entryFieldalphabets('PAN CARD NUMBER', '', 5),
-                          _entryFieldalphabets('NATIONALITY', '', 6),
-                          _entryFieldalphabets('INDIAN PASSPORT NUMBER', '', 7),
-                          _entryFieldnumbers('AADHAAR NUMBER', '', 8),
-                          _entryFieldalphabets('FATHER NAME', '', 9),
+                              'ALTERNATE EMAIL ID', pp[4], 4),
+                          _entryFieldalphabets('PAN CARD NUMBER', pp[5], 5),
+                          _entryFieldalphabets('NATIONALITY', pp[6], 6),
+                          _entryFieldalphabets('INDIAN PASSPORT NUMBER', pp[7], 7),
+                          _entryFieldnumbers('AADHAAR NUMBER', pp[8], 8),
+                          _entryFieldalphabets('FATHER NAME', pp[9], 9),
                           _entryFieldalphabets(
-                              'DESIGNATION & ORGANISATION', '', 10),
-                          _entryFieldnumbers('FATHER MOBILE NUMBER', '', 11),
-                          _entryFieldalphabets('FATHER EMAIL ID', '', 12),
-                          _entryFieldalphabets('MOTHER NAME', '', 13),
+                              'DESIGNATION & ORGANISATION', pp[10], 10),
+                          _entryFieldnumbers('FATHER MOBILE NUMBER', pp[11], 11),
+                          _entryFieldalphabets('FATHER EMAIL ID', pp[12], 12),
+                          _entryFieldalphabets('MOTHER NAME', pp[13], 13),
                           _entryFieldalphabets(
-                              'DESIGNATION & ORGANISATION', '', 14),
-                          _entryFieldnumbers('MOTHER MOBILE NUMBER', '', 15),
-                          _entryFieldalphabets('MOTHER EMAIL ID', '', 16),
+                              'DESIGNATION & ORGANISATION', pp[14], 14),
+                          _entryFieldnumbers('MOTHER MOBILE NUMBER', pp[15], 15),
+                          _entryFieldalphabets('MOTHER EMAIL ID', pp[16], 16),
                           _entryFieldalphabets(
-                              'PERMANENT ADDRESS WITH PIN CODE', '', 17),
+                              'PERMANENT ADDRESS WITH PIN CODE', pp[17], 17),
                           _entryFieldalphabets(
-                              'PERMANENT ADDRESS LINE 1', '', 18),
+                              'PERMANENT ADDRESS LINE 1', pp[18], 18),
                           _entryFieldalphabets(
-                              'PERMANENT ADDRESS LINE 2', '', 19),
-                          _entryFieldalphabets('PERMANENT CITY', '', 20),
-                          _entryFieldalphabets('STATE', 'Tamil Nadu', 21),
-                          _entryFieldnumbers('POSTAL CODE', '', 22),
+                              'PERMANENT ADDRESS LINE 2', pp[19], 19),
+                          _entryFieldalphabets('PERMANENT CITY', pp[20], 20),
+                          _entryFieldalphabets('STATE', pp[21], 21),
+                          _entryFieldnumbers('POSTAL CODE', pp[22], 22),
                           SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
@@ -471,13 +607,14 @@ class _PpPersonalDState extends State<PpPersonalD> {
                               backgroundColor: const Color(0xFFE96710),
                               foregroundColor: Colors.black,
                               onPressed: () {
-                                // if (Validation(context, pg, dropbox) == 1) {
+                                 if (Validation(context, pp) == 1) {
+                                   _uploadtoDB(context);
                                 Navigator.push(
                                     context,
                                     PageTransition(
                                         type: PageTransitionType.bottomToTop,
                                         child: PpExtraD()));
-                                //}
+                                }
                               },
                               label: Text('NEXT'),
                               icon: Icon(Icons.arrow_right_alt_rounded),

@@ -532,7 +532,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
                                       context,
                                       PageTransition(
                                           type: PageTransitionType.bottomToTop,
-                                          child: PpPersonalD()));
+                                          child: PpPersonalD(regnovar: regnovar, usernamevar: usernamevar,)));
                                 }
                               },
                               label: Text('NEXT'),

@@ -539,7 +539,7 @@ class _PpEducationDState extends State<PpEducationD> {
                                       context,
                                       PageTransition(
                                           type: PageTransitionType.bottomToTop,
-                                          child: PpCurrentD()));
+                                          child: PpCurrentD(regnovar: regnovar, usernamevar: usernamevar,)));
                                 }
                               },
                               label: Text('NEXT'),
