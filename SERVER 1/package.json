@@ -2,7 +2,7 @@
   "dependencies": {
     "body-parser": "^1.19.1",
     "express": "^4.17.2",
-    "firebase-admin": "^10.0.1",
+    "firebase-admin": "^4.2.1",
     "fs": "^0.0.1-security",
     "mongodb": "^4.2.2",
     "mongoose": "^6.1.3",
@@ -14,5 +14,16 @@
     "uuid": "^8.3.2",
     "winston": "^3.3.3",
     "winston-logrotate": "^1.3.0"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "server-1",
+  "version": "1.0.0",
+  "main": "server.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "description": ""
 }

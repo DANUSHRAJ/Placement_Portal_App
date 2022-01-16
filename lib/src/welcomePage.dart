@@ -43,12 +43,12 @@ class _WelcomePageState extends State<WelcomePage> {
                 colors: [Colors.black87, Colors.black87])),
         child: Text(
           'Login',
-          style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.display1,
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: Colors.deepOrangeAccent,
-          ),
+          // style: GoogleFonts.portLligatSans(
+          //   textStyle: Theme.of(context).textTheme.display1,
+          //   fontSize: 20,
+          //   fontWeight: FontWeight.w700,
+          //   color: Colors.deepOrangeAccent,
+          // ),
         ),
       ),
     );
@@ -72,12 +72,12 @@ class _WelcomePageState extends State<WelcomePage> {
         ),
         child: Text(
           'Register now',
-          style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.display1,
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
+          // style: GoogleFonts.portLligatSans(
+          //   textStyle: Theme.of(context).textTheme.display1,
+          //   fontSize: 20,
+          //   fontWeight: FontWeight.w700,
+          //   color: Colors.white,
+          // ),
         ),
       ),
     );
@@ -87,14 +87,13 @@ class _WelcomePageState extends State<WelcomePage> {
     return Center(
       child: RichText(
         textAlign: TextAlign.center,
-        text: TextSpan(
-            text: 'SJIT',
-            style: GoogleFonts.portLligatSans(
-              textStyle: Theme.of(context).textTheme.display1,
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Colors.orangeAccent,
-            ),
+        text: TextSpan(text: 'SJIT',
+            // style: GoogleFonts.portLligatSans(
+            //   textStyle: Theme.of(context).textTheme.display1,
+            //   fontSize: 30,
+            //   fontWeight: FontWeight.w700,
+            //   color: Colors.orangeAccent,
+            // ),
             children: [
               TextSpan(
                 text: ' PLACEMENT ',
