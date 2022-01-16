@@ -14,7 +14,7 @@ import 'PersonalDJSON.dart';
 
 class ProfileApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io';http://127.0.0.1:8081
-  static String apiUrl = 'http://127.0.0.1:8081';
+  static String apiUrl = 'https://sppdemo.herokuapp.com';
 
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
@@ -323,37 +323,36 @@ class ProfileApi {
       final String paddr2,
       final String pcity,
       final String state,
-      final String pco
-      ) async {
+      final String pco) async {
     ProfileApi api = ProfileApi();
     final rescheck = await api.getPersonalD(uregno);
 //      log('$rescheck');
     if (rescheck == null) {
       final response = await _dio.post('/uploadPersonalD', data: {
         'regno': uregno,
-        'LAND LINE NUMBER':land,
-        'PRIMARY MOBILE NO':pmno,
-        'EMERGENCY CONTACT NO':emno,
-        'PRIMARY EMAIL ID':pmail,
-        'ALTERNATE EMAIL ID':amail,
-        'PAN CARD NUMBER':pan,
-        'NATIONALITY':natio,
-        'INDIAN PASSPORT NUMBER':pass,
-        'AADHAAR NUMBER':adhr,
-        'FATHER NAME':fname,
-        'DESIGNATION & ORGANISATION':focp,
-        'FATHER MOBILE NUMBER':fmno,
-        'FATHER EMAIL ID':fmail,
-        'MOTHER NAME':mname,
-        'DESIGNATION & ORGANISATION':mocp,
-        'MOTHER MOBILE NUMBER':mmno,
-        'MOTHER EMAIL ID':mmail,
-        'PERMANENT ADDRESS WITH PIN CODE':paddr,
-        'PERMANENT ADDRESS LINE 1':paddr1,
-        'PERMANENT ADDRESS LINE 2':paddr2,
-        'PERMANENT CITY':pcity,
-        'STATE':state,
-        'POSTAL CODE':pco
+        'LAND LINE NUMBER': land,
+        'PRIMARY MOBILE NO': pmno,
+        'EMERGENCY CONTACT NO': emno,
+        'PRIMARY EMAIL ID': pmail,
+        'ALTERNATE EMAIL ID': amail,
+        'PAN CARD NUMBER': pan,
+        'NATIONALITY': natio,
+        'INDIAN PASSPORT NUMBER': pass,
+        'AADHAAR NUMBER': adhr,
+        'FATHER NAME': fname,
+        'DESIGNATION & ORGANISATION': focp,
+        'FATHER MOBILE NUMBER': fmno,
+        'FATHER EMAIL ID': fmail,
+        'MOTHER NAME': mname,
+        'DESIGNATION & ORGANISATION': mocp,
+        'MOTHER MOBILE NUMBER': mmno,
+        'MOTHER EMAIL ID': mmail,
+        'PERMANENT ADDRESS WITH PIN CODE': paddr,
+        'PERMANENT ADDRESS LINE 1': paddr1,
+        'PERMANENT ADDRESS LINE 2': paddr2,
+        'PERMANENT CITY': pcity,
+        'STATE': state,
+        'POSTAL CODE': pco
       });
       //    log('$name-$regno-$username-$password');
 //        var result = response.data;
@@ -362,29 +361,29 @@ class ProfileApi {
     } else {
       await _dio.post('/updatePersonalD', data: {
         'regno': uregno,
-        'LAND LINE NUMBER':land,
-        'PRIMARY MOBILE NO':pmno,
-        'EMERGENCY CONTACT NO':emno,
-        'PRIMARY EMAIL ID':pmail,
-        'ALTERNATE EMAIL ID':amail,
-        'PAN CARD NUMBER':pan,
-        'NATIONALITY':natio,
-        'INDIAN PASSPORT NUMBER':pass,
-        'AADHAAR NUMBER':adhr,
-        'FATHER NAME':fname,
-        'DESIGNATION & ORGANISATION':focp,
-        'FATHER MOBILE NUMBER':fmno,
-        'FATHER EMAIL ID':fmail,
-        'MOTHER NAME':mname,
-        'DESIGNATION & ORGANISATION':mocp,
-        'MOTHER MOBILE NUMBER':mmno,
-        'MOTHER EMAIL ID':mmail,
-        'PERMANENT ADDRESS WITH PIN CODE':paddr,
-        'PERMANENT ADDRESS LINE 1':paddr1,
-        'PERMANENT ADDRESS LINE 2':paddr2,
-        'PERMANENT CITY':pcity,
-        'STATE':state,
-        'POSTAL CODE':pco
+        'LAND LINE NUMBER': land,
+        'PRIMARY MOBILE NO': pmno,
+        'EMERGENCY CONTACT NO': emno,
+        'PRIMARY EMAIL ID': pmail,
+        'ALTERNATE EMAIL ID': amail,
+        'PAN CARD NUMBER': pan,
+        'NATIONALITY': natio,
+        'INDIAN PASSPORT NUMBER': pass,
+        'AADHAAR NUMBER': adhr,
+        'FATHER NAME': fname,
+        'DESIGNATION & ORGANISATION': focp,
+        'FATHER MOBILE NUMBER': fmno,
+        'FATHER EMAIL ID': fmail,
+        'MOTHER NAME': mname,
+        'DESIGNATION & ORGANISATION': mocp,
+        'MOTHER MOBILE NUMBER': mmno,
+        'MOTHER EMAIL ID': mmail,
+        'PERMANENT ADDRESS WITH PIN CODE': paddr,
+        'PERMANENT ADDRESS LINE 1': paddr1,
+        'PERMANENT ADDRESS LINE 2': paddr2,
+        'PERMANENT CITY': pcity,
+        'STATE': state,
+        'POSTAL CODE': pco
       });
     }
   }
