@@ -348,7 +348,12 @@ class _IntershipUploadState extends State<IntershipUpload> {
             i_clink.text, i_plink.text, i_flink.text);
         //_findAccount(etRegisterNo.text, etPassword.text);
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen(regnovar: regnovar,usernamevar: usernamevar,)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                      regnovar: regnovar,
+                      usernamevar: usernamevar,
+                    )));
       },
       child: Container(
         width: MediaQuery.of(context).size.width * .5,
@@ -387,46 +392,6 @@ class _IntershipUploadState extends State<IntershipUpload> {
         backgroundColor: Colors.black,
         textColor: Colors.limeAccent,
         fontSize: 16.0);
-  }
-
-  Widget _title() {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        text: 'INTERN',
-        style: GoogleFonts.portLligatSans(
-          fontSize: 30,
-          fontWeight: FontWeight.w700,
-          color: Colors.white,
-        ),
-        children: [
-          TextSpan(
-            text: 'SHIP',
-            style: GoogleFonts.adventPro(
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ),
-          ),
-          TextSpan(
-            text: '\nUPL',
-            style: GoogleFonts.adventPro(
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Colors.orangeAccent,
-            ),
-          ),
-          TextSpan(
-            text: 'OAD',
-            style: GoogleFonts.adventPro(
-              fontSize: 30,
-              fontWeight: FontWeight.w700,
-              color: Colors.lightGreenAccent,
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
   Widget generateBluredImage() {
@@ -482,11 +447,11 @@ class _IntershipUploadState extends State<IntershipUpload> {
                   children: <Widget>[
                     SizedBox(height: height * .2),
                     _entryFieldalphabets("TITLE OF THE INTERN",
-                        "eg:ML,Cyber Security,Full Stack"),
+                        "eg: ML,Cyber Security,Full Stack"),
                     _entryFieldalphabets2(
                         "ORGANIZATION NAME", "eg:Amazon,Microsoft,Zoho"),
-                    _entryFieldDob("START DATE", "DD-MM-YYYY"),
-                    _entryFieldDob2("END DATE", "DD-MM-YYYY"),
+                    _entryFieldDob("START DATE", "YYYY-MM-DD"),
+                    _entryFieldDob2("END DATE", "YYYY-MM-DD"),
                     _entryFieldalphabets3("CERTIFICATE VERIFICATION",
                         "Enter link Or Certificate Id"),
                     _entryFieldalphabets4("PROJECT RELATED LINKS",
