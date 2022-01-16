@@ -1,6 +1,6 @@
 var express = require('express');
 var server = require('./routes/serverroute');
-
+var PORT = process.env.PORT || 8081
 var app = express();
 
 app.use((req, res, next) => {
@@ -28,4 +28,4 @@ app.use(express.json({ limit: "500mb", extended: true }));
 //http://localhost:8081/
 app.use('/',server);
 
-app.listen(8081);
+app.listen(PORT);

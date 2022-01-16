@@ -44,7 +44,7 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Text(
           'Login',
           style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.headline4,
+            textStyle: Theme.of(context).textTheme.display1,
             fontSize: 20,
             fontWeight: FontWeight.w700,
             color: Colors.deepOrangeAccent,
@@ -73,7 +73,7 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Text(
           'Register now',
           style: GoogleFonts.portLligatSans(
-            textStyle: Theme.of(context).textTheme.headline4,
+            textStyle: Theme.of(context).textTheme.display1,
             fontSize: 20,
             fontWeight: FontWeight.w700,
             color: Colors.white,
@@ -90,7 +90,7 @@ class _WelcomePageState extends State<WelcomePage> {
         text: TextSpan(
             text: 'SJIT',
             style: GoogleFonts.portLligatSans(
-              textStyle: Theme.of(context).textTheme.headline4,
+              textStyle: Theme.of(context).textTheme.display1,
               fontSize: 30,
               fontWeight: FontWeight.w700,
               color: Colors.orangeAccent,
