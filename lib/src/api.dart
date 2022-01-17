@@ -23,7 +23,7 @@ class AccountsApi {
     final response = await _dio.post('/getoneaccount', data: {'regno': regno});
     var res = response.data;
 //    log('Response: $res');
-    if (res != null) {
+    if (res != "") {
       return Account.fromJson(response.data);
     } else {
       return null;
