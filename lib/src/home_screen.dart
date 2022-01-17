@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:SJIT_PLACEMENT_PORTAL/src/Courses.dart';
@@ -8,11 +9,13 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/Placements.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Workshops.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'PP_GenealD.dart';
+import 'Size_congfig.dart';
 import 'Widget/bezierContainer.dart';
 import 'welcomePage.dart';
 
@@ -44,10 +47,11 @@ class HomeScreen extends StatelessWidget {
                     )),
                 new RaisedButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WelcomePage()));
+                      if (Platform.isAndroid) {
+                        SystemNavigator.pop();
+                      } else if (Platform.isIOS) {
+                        exit(0);
+                      }
                     },
                     child: new Text(
                       'Yes',
@@ -121,8 +125,8 @@ class HomeScreen extends StatelessWidget {
         child: Container(
           color: Colors.white.withOpacity(0.15),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _child,
               __child,
@@ -137,7 +141,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    SizeConfig().init(context);
+    //final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -155,26 +160,27 @@ class HomeScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           generateBluredImage(),
-          SizedBox(
-            height: 26,
-          ),
+          // SizedBox(
+          //   height: 26,
+          // ),
           SafeArea(
             child: Padding(
               padding: EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
                   Container(
+                    height: SizeConfig.blockSizeVertical * 35,
+                    width: SizeConfig.blockSizeHorizontal * 150,
                     //height: 90,
-                    margin: EdgeInsets.only(bottom: 20),
+                    //margin: EdgeInsets.only(bottom: 20),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
                         Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
-                            // SizedBox(height: height * .03),
                             Container(
                               child: buildBlurryWidget(
                                   Text(
@@ -215,9 +221,9 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: height * .02,
-                  ),
+                  // SizedBox(
+                  //   height: height * .02,
+                  // ),
                   Expanded(
                     child: GridView.count(
                       mainAxisSpacing: 10,

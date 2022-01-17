@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:SJIT_PLACEMENT_PORTAL/src/Size_congfig.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:flutter/material.dart';
@@ -127,6 +128,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black87,
@@ -139,19 +141,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             // ),
             SingleChildScrollView(
                 child: Container(
+              height: SizeConfig.blockSizeVertical * 100,
+              width: SizeConfig.blockSizeHorizontal * 150,
               padding: EdgeInsets.all(20.0),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-//                  Align(
-//                    alignment: Alignment.center,
-//                    child: FadeAnimation(
-//                      0,
-//                      Lottie.asset("assets/images/orange.json",
-//                          height: height * .35),
-//                    ),
-//                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: FadeAnimation(
+                      0,
+                      Lottie.asset("assets/images/orange.json",
+                          height: height * .35),
+                    ),
+                  ),
                   SizedBox(height: height * .07),
                   Align(
                     alignment: Alignment.center,

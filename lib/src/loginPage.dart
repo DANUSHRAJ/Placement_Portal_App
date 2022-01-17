@@ -14,6 +14,7 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
 import '../main.dart';
+import 'Size_congfig.dart';
 import 'api.dart';
 import 'home_screen.dart';
 
@@ -434,6 +435,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    SizeConfig().init(context);
     return OfflineBuilder(
       connectivityBuilder: (
         BuildContext context,
@@ -457,6 +459,9 @@ class _LoginPageState extends State<LoginPage> {
             elevation: 10,
           ),
           body: Container(
+              height: SizeConfig.blockSizeVertical * 100,
+              width: SizeConfig.blockSizeHorizontal * 150,
+              // padding: EdgeInsets.all(20.0),
               child: connected
                   ? Container(
                       child: Stack(
@@ -464,10 +469,12 @@ class _LoginPageState extends State<LoginPage> {
                         generateBluredImage(),
                         SingleChildScrollView(
                           child: Container(
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            //height: SizeConfig.blockSizeVertical * 120,
+                            // width: SizeConfig.blockSizeHorizontal * 150,
+                            padding: EdgeInsets.all(10.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
                                 SizedBox(height: height * .15),
                                 Image.asset('assets/images/joseph.png',
