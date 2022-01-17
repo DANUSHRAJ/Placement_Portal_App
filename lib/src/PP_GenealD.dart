@@ -211,7 +211,7 @@ class _PpGenealDState extends State<PpGenealD> {
         vname = value.name;
         vemail = value.username;
         pg[0] = vregno;
-        pg[2] = vname;
+//        pg[2] = vname;
 //        internDet = value;
         loading = false;
       });
@@ -239,6 +239,7 @@ class _PpGenealDState extends State<PpGenealD> {
       setState(() {
         //Done for PG only
         pg[1] = value.rollno;
+        pg[2] = value.name;
         pg[3] = value.fname;
         pg[4] = value.lname;
         pg[5] = value.dob1;
@@ -704,7 +705,7 @@ class _PpGenealDState extends State<PpGenealD> {
                                   'UNIVERSITY REG NO.', pg[0], 0),
                               _entryFieldalphabets('ROLL NO', pg[1], 1),
                               _DropBox("TITLE", title, 0),
-                              _entryFieldalphabetsdisplay(
+                              _entryFieldalphabets(
                                   'NAME OF THE CANDIDATE', pg[2], 2),
                               _entryFieldalphabets('FIRST NAME', pg[3], 3),
                               _entryFieldalphabets('LAST NAME', pg[4], 4),
