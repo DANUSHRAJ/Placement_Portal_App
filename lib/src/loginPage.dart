@@ -90,6 +90,7 @@ class _LoginPageState extends State<LoginPage>
       log('Please fill the Register Number');
       _showtoast("* Please enter your register number");
       check = 0;
+      return;
     }
     if (check == 1) {
       final result = await widget.api.getOneAccount(regnovar);
@@ -375,7 +376,7 @@ class _LoginPageState extends State<LoginPage>
         width: MediaQuery.of(context).size.width * .33,
         height: 50.0,
         decoration: BoxDecoration(
-          color: Colors.black,
+          color: Colors.transparent,
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
         ),
 

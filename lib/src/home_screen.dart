@@ -147,6 +147,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final height = MediaQuery.of(context).size.height;
+    final width =MediaQuery.of(context).size.width;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -165,8 +166,8 @@ class HomeScreen extends StatelessWidget {
         children: <Widget>[
           generateBluredImage(),
           SafeArea(
-            // child: Padding(
-            //   padding: EdgeInsets.all(20.0),
+            child: Padding(
+              padding: EdgeInsets.all(10.0),
             child: Column(
               children: <Widget>[
                 Container(
@@ -184,6 +185,7 @@ class HomeScreen extends StatelessWidget {
                         children: <Widget>[
                           Container(
                             margin: EdgeInsets.all(5),
+                            width: width*0.9,
                             child: buildBlurryWidget(
                                 Text(
                                   "\nWelcome,",
@@ -210,7 +212,7 @@ class HomeScreen extends StatelessWidget {
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
-                                  "            Have A Great Day          \n",
+                                  "Have A Great Day\n",
                                   textAlign: TextAlign.justify,
                                   style: GoogleFonts.adventPro(
                                       fontSize: 25,
@@ -437,7 +439,7 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          //),
+          ),
         ],
       ),
     );

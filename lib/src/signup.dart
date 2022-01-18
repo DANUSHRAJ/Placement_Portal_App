@@ -423,7 +423,7 @@ class _SignUpPageState extends State<SignUpPage> {
         alignment: Alignment.bottomRight,
 
         child: Text(
-          "Join now\u2192",
+          "Join now —>",
           style: GoogleFonts.adventPro(
               fontSize: 25,
               color: Colors.deepOrangeAccent,
@@ -517,6 +517,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -541,7 +542,7 @@ class _SignUpPageState extends State<SignUpPage> {
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: SingleChildScrollView(
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  //crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: height * .2),
@@ -549,7 +550,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(height: height * .05),
                     buildBlurryWidget(),
                     SizedBox(height: height * .05),
-                    _submitButton(),
+                    Container(
+                      alignment: Alignment.bottomRight,
+                        child: _submitButton()),
                     // SizedBox(height: height * .02),
                   ],
                 ),
