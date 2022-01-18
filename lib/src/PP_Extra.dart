@@ -1,7 +1,5 @@
 import 'dart:ui';
 
-import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Education.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -349,32 +347,6 @@ class _PpExtraDState extends State<PpExtraD> {
     );
   }
 
-  Widget _title() {
-    return Column(
-      children: [
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-              text: 'ADDITIONAL',
-              style: GoogleFonts.portLligatSans(
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-              children: [
-                TextSpan(
-                  text: '  INFORMATION',
-                  style: GoogleFonts.adventPro(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.limeAccent,
-                  ),
-                ),
-              ]),
-        ),
-      ],
-    );
-  }
 
   Widget generateBluredImage() {
     return new Container(

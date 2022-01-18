@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:sizer/sizer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Size_congfig.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';

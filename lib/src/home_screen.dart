@@ -3,11 +3,8 @@ import 'dart:ui';
 
 import 'package:SJIT_PLACEMENT_PORTAL/src/Courses.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_GenealD.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Placements.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Workshops.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,7 +13,6 @@ import 'package:page_transition/page_transition.dart';
 
 import 'PP_GenealD.dart';
 import 'Size_congfig.dart';
-import 'Widget/bezierContainer.dart';
 
 class HomeScreen extends StatelessWidget {
   final String regnovar;
