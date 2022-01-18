@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:sizer/sizer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Size_congfig.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
@@ -7,9 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
-import 'src/welcomePage.dart';
+
 import 'package:SJIT_PLACEMENT_PORTAL/Animations/FadeAnimation.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
 
 void main() => runApp(MyApp());
 
@@ -148,14 +147,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-//                  Align(
-//                    alignment: Alignment.center,
-//                    child: FadeAnimation(
-//                      0,
-//                      Lottie.asset("assets/images/orange.json",
-//                          height: height * .35),
-//                    ),
-//                  ),
+                  // Align(
+                  //   alignment: Alignment.center,
+                  //   child: FadeAnimation(
+                  //     0,
+                  //     Lottie.asset("assets/images/orange.json",
+                  //         height: height * .35),
+                  //   ),
+                  // ),
                   SizedBox(height: height * .07),
                   Align(
                     alignment: Alignment.center,

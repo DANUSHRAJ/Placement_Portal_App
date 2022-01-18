@@ -8,7 +8,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
+
 import 'package:page_transition/page_transition.dart';
 import 'Account.dart';
 import 'api.dart';

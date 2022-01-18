@@ -281,12 +281,12 @@ class _LoginPageState extends State<LoginPage> {
         //     context, MaterialPageRoute(builder: (context) => ()));
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * .3,
+        // width: MediaQuery.of(context).size.width * .5,
         //padding: EdgeInsets.symmetric(vertical: 9),
         alignment: Alignment.bottomRight,
 
         child: Text(
-          "Let's Go \u2192",
+          "Let's Go —>",
           style: GoogleFonts.adventPro(
               fontSize: 25,
               color: Colors.deepOrangeAccent,
