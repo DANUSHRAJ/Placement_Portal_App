@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 import 'package:lottie/lottie.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/api.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/welcomePage.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
