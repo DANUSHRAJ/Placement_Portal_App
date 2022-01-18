@@ -28,7 +28,34 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends State<LoginPage>
+    with SingleTickerProviderStateMixin {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
+  final FocusNode myFocusNodeEmailLogin = FocusNode();
+  final FocusNode myFocusNodePasswordLogin = FocusNode();
+
+  final FocusNode myFocusNodePassword = FocusNode();
+  final FocusNode myFocusNodeEmail = FocusNode();
+  final FocusNode myFocusNodeName = FocusNode();
+
+  TextEditingController loginEmailController = new TextEditingController();
+  TextEditingController loginPasswordController = new TextEditingController();
+
+  bool _obscureTextLogin = true;
+  bool _obscureTextSignup = true;
+  bool _obscureTextSignupConfirm = true;
+
+  TextEditingController signupEmailController = new TextEditingController();
+  TextEditingController signupNameController = new TextEditingController();
+  TextEditingController signupPasswordController = new TextEditingController();
+  TextEditingController signupConfirmPasswordController =
+      new TextEditingController();
+
+  PageController _pageController;
+
+  Color left = Colors.black;
+  Color right = Colors.white;
   bool loading = false;
   final etPassword = new TextEditingController();
   final etRegisterNo = new TextEditingController();
@@ -123,6 +150,69 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _redirect() {
+    // Navigator.push(
+    //     context,
+    //     PageTransition(
+    //         type: PageTransitionType.leftToRightWithFade, child: LoginPage()));
+  }
+
+  void _redirect1() {
+    Navigator.push(
+        context,
+        PageTransition(
+            type: PageTransitionType.bottomToTop, child: SignUpPage()));
+  }
+
+  Widget _buildMenuBar(BuildContext context) {
+    return Container(
+      width: 300.0,
+      height: 50.0,
+      decoration: BoxDecoration(
+        color: Color(0x552B2B2B),
+        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+      ),
+      // child: CustomPaint(
+      //   painter:,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: FlatButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              shape: StadiumBorder(),
+              onPressed: _redirect,
+              color: Colors.orangeAccent,
+              child: Text(
+                " Existing ",
+                style: GoogleFonts.adventPro(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          Expanded(
+            child: FlatButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onPressed: _redirect1,
+              child: Text(
+                "New",
+                style: GoogleFonts.adventPro(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -282,9 +372,15 @@ class _LoginPageState extends State<LoginPage> {
         //     context, MaterialPageRoute(builder: (context) => ()));
       },
       child: Container(
-        // width: MediaQuery.of(context).size.width * .5,
+        width: MediaQuery.of(context).size.width * .33,
+        height: 50.0,
+        decoration: BoxDecoration(
+          color: Colors.black,
+          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+        ),
+
         //padding: EdgeInsets.symmetric(vertical: 9),
-        alignment: Alignment.bottomRight,
+        alignment: Alignment.center,
 
         child: Text(
           "Let's Go —>",
@@ -435,7 +531,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    // final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height >= 775.0
+        ? MediaQuery.of(context).size.height
+        : 775.0;
     SizeConfig().init(context);
     return OfflineBuilder(
       connectivityBuilder: (
@@ -470,8 +570,6 @@ class _LoginPageState extends State<LoginPage> {
                         generateBluredImage(),
                         SingleChildScrollView(
                           child: Container(
-                            //height: SizeConfig.blockSizeVertical * 120,
-                            // width: SizeConfig.blockSizeHorizontal * 150,
                             padding: EdgeInsets.all(10.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
@@ -481,16 +579,13 @@ class _LoginPageState extends State<LoginPage> {
                                 Image.asset('assets/images/joseph.png',
                                     width: 300, height: 150),
                                 SizedBox(height: height * .05),
+                                _buildMenuBar(context),
+                                SizedBox(height: height * .05),
                                 buildBlurryWidget(),
-
                                 SizedBox(height: 20, width: 5),
                                 Align(
                                     alignment: Alignment.bottomRight,
                                     child: _submitButton()),
-                                SizedBox(height: height * .04),
-                                _divider(),
-                                _createAccountLabel(),
-                                //_showToast()
                               ],
                             ),
                           ),

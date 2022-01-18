@@ -433,40 +433,6 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _loginAccountLabel() {
-    return InkWell(
-      onTap: () {
-        Navigator.push(context,
-            PageTransition(type: PageTransitionType.fade, child: LoginPage()));
-      },
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
-        padding: EdgeInsets.all(15),
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('Already have an account ?',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w900)),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              'Login',
-              style: TextStyle(
-                  color: Colors.orangeAccent,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget generateBluredImage() {
     return new Container(
       decoration: new BoxDecoration(
@@ -484,40 +450,65 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget _divider() {
+  void _redirect() {
+    Navigator.push(
+        context,
+        PageTransition(
+            type: PageTransitionType.topToBottom, child: LoginPage()));
+  }
+
+  void _redirect1() {
+    // Navigator.push(
+    //     context,
+    //     PageTransition(
+    //         type: PageTransitionType.rightToLeftWithFade, child: SignUpPage()));
+  }
+
+  Widget _buildMenuBar(BuildContext context) {
     return Container(
-      //margin: EdgeInsets.symmetric(vertical: 10),
+      width: 300.0,
+      height: 50.0,
+      decoration: BoxDecoration(
+        color: Color(0x552B2B2B),
+        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+      ),
+      // child: CustomPaint(
+      //   painter:,
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          // SizedBox(
-          //   width: 20,
-          // ),
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Divider(
-                thickness: 3,
-                color: Colors.white,
+            flex: 1,
+            child: FlatButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              shape: StadiumBorder(),
+              onPressed: _redirect,
+              child: Text(
+                " Existing ",
+                style: GoogleFonts.adventPro(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
-          Text(
-            'OR',
-            style: GoogleFonts.adventPro(
-                fontSize: 19, color: Colors.white, fontWeight: FontWeight.bold),
-          ),
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Divider(
-                thickness: 3,
-                color: Colors.white,
+            child: FlatButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              color: Colors.orangeAccent,
+              shape: StadiumBorder(),
+              onPressed: _redirect1,
+              child: Text(
+                "New",
+                style: GoogleFonts.adventPro(
+                    fontSize: 25,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
               ),
             ),
           ),
-          // SizedBox(
-          //   width: 20,
-          // ),
         ],
       ),
     );
@@ -549,19 +540,17 @@ class _SignUpPageState extends State<SignUpPage> {
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: SingleChildScrollView(
-                //reverse: true,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(height: height * .2),
+                    _buildMenuBar(context),
+                    SizedBox(height: height * .05),
                     buildBlurryWidget(),
                     SizedBox(height: height * .05),
                     _submitButton(),
-                    SizedBox(height: height * .02),
-                    _divider(),
-                    SizedBox(height: height * .01),
-                    _loginAccountLabel(),
+                    // SizedBox(height: height * .02),
                   ],
                 ),
               ),

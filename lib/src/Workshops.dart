@@ -1,11 +1,8 @@
 import 'package:SJIT_PLACEMENT_PORTAL/src/Workshop_upload.dart';
 import 'package:flutter/material.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/PP_Data.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
 
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
