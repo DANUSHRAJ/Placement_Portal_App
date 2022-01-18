@@ -9,52 +9,53 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'profileapi.dart';
+Future showdialog(BuildContext context, String message) async {
+  return showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: Center(
+          child: new Text(
+            message,
+            style: TextStyle(
+              fontSize: 13,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        actions: [
+          Center(
+            child: new FlatButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20.0),
+                  side: BorderSide(color: Colors.black),
+                ),
+                color: Colors.deepOrange,
+                splashColor: Colors.deepOrangeAccent,
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: new Text("OK")),
+          ),
+        ],
+      ));
+}
 
 int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
-  Future showdialog(BuildContext context, String message) async {
-    return showDialog(
-        context: context,
-        builder: (context) => new AlertDialog(
-              title: Center(
-                child: new Text(
-                  message,
-                  style: TextStyle(
-                    fontSize: 13,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              actions: [
-                Center(
-                  child: new FlatButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18.0),
-                        side: BorderSide(color: Colors.black),
-                      ),
-                      color: Colors.deepPurpleAccent,
-                      splashColor: Colors.purpleAccent,
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: new Text("OK")),
-                ),
-              ],
-            ));
+
+
+  for (int i = 0; i < dropbox.length; i++) {
+    if (i != 2 && dropbox[i].title == 'SELECT THE OPTION') {
+      showdialog(context, "please select the Valid OPTION");
+      return -1;
+    }
   }
 
-  // for (int i = 0; i < 5; i++) {
-  //   if (i != 2 && dropbox[i].title == 'SELECT THE OPTION') {
-  //     showdialog(context, "please select the Valid OPTION");
-  //     return -1;
-  //   }
-  // }
-  //
-  // if (dropbox[2].title == 'SELECT BEC GRADE') {
-  //   showdialog(context, "please select the Valid SECTION");
-  //   return -1;
-  // }
-  //
+  if (dropbox[2].title == 'SELECT BEC GRADE') {
+    showdialog(context, "please select the Valid SECTION");
+    return -1;
+  }
+
   if (pa[0] == null || pa[0].isEmpty) {
     showdialog(context, "please fill the " + "LANGUAGES KNOWN");
     //print(compareList[check]+" was left blank");
@@ -450,6 +451,7 @@ class _PpExtraDState extends State<PpExtraD> {
                               onPressed: () {
                                  if (Validation(context, pa, dropbox) == 1) {
                                    _uploadtoDB(context,pa,dropbox);
+
                                 Navigator.push(
                                     context,
                                     PageTransition(
@@ -458,6 +460,7 @@ class _PpExtraDState extends State<PpExtraD> {
                                           regnovar: regnovar,
                                           usernamevar: usernamevar,
                                         )));
+                                   showdialog(context, "Your Profile Data has been Submitted Successfully!");
                                 }
                               },
                               label: Text('SUBMIT'),
