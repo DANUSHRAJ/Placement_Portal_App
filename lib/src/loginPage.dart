@@ -79,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
           final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
           final response = await http.post(url,
               headers: {
+                'origin': 'http://localhost',
                 'Content-Type': 'application/json',
               },
               body: jsonEncode({
