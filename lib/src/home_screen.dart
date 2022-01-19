@@ -5,6 +5,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/Courses.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Interships.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/PP_GenealD.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Workshops.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/menatwork.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -143,7 +144,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     final height = MediaQuery.of(context).size.height;
-    final width =MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -164,277 +165,281 @@ class HomeScreen extends StatelessWidget {
           SafeArea(
             child: Padding(
               padding: EdgeInsets.all(10.0),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  // height: SizeConfig.blockSizeVertical * 35,
-                  // width: SizeConfig.blockSizeHorizontal * 100,
-                  // //height: 90,
-                  //margin: EdgeInsets.only(bottom: 20),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.all(5),
-                            width: width*0.9,
-                            child: buildBlurryWidget(
-                                Text(
-                                  "\nWelcome,",
-                                  textAlign: TextAlign.start,
-                                  style: GoogleFonts.adventPro(
-                                      fontSize: 30,
-                                      color: Colors.limeAccent,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "    $usernamevar    ",
-                                  textAlign: TextAlign.justify,
-                                  style: GoogleFonts.adventPro(
-                                      fontSize: 30,
-                                      color: Colors.limeAccent,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "$regnovar",
-                                  textAlign: TextAlign.justify,
-                                  style: GoogleFonts.adventPro(
-                                      fontSize: 25,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  "Have A Great Day\n",
-                                  textAlign: TextAlign.justify,
-                                  style: GoogleFonts.adventPro(
-                                      fontSize: 25,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                          ),
-                        ],
-                      )
-                    ],
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    // height: SizeConfig.blockSizeVertical * 35,
+                    // width: SizeConfig.blockSizeHorizontal * 100,
+                    // //height: 90,
+                    //margin: EdgeInsets.only(bottom: 20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.all(5),
+                              width: width * 0.9,
+                              child: buildBlurryWidget(
+                                  Text(
+                                    "\nWelcome,",
+                                    textAlign: TextAlign.start,
+                                    style: GoogleFonts.adventPro(
+                                        fontSize: 30,
+                                        color: Colors.limeAccent,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "    $usernamevar    ",
+                                    textAlign: TextAlign.justify,
+                                    style: GoogleFonts.adventPro(
+                                        fontSize: 30,
+                                        color: Colors.limeAccent,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "$regnovar",
+                                    textAlign: TextAlign.justify,
+                                    style: GoogleFonts.adventPro(
+                                        fontSize: 25,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "Have A Great Day\n",
+                                    textAlign: TextAlign.justify,
+                                    style: GoogleFonts.adventPro(
+                                        fontSize: 25,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold),
+                                  )),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: height * .02,
-                ),
-                Expanded(
-                  child: GridView.count(
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    primary: true,
-                    crossAxisCount: 2,
-                    children: <Widget>[
-                      InkWell(
-                        //PERSONAL DATA
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                "assets/images/Pdata.gif",
-                                height: 95,
-                              ),
-                              Text(
-                                'PERSONAL DATA',
-                                style: GoogleFonts.adventPro(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PpGenealD(
-                                        regnovar: regnovar,
-                                        usernamevar: usernamevar,
-                                      )));
-                        },
-                      ),
-
-                      //TIMELINE
-                      InkWell(
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/Timeline.gif',
-                                height: 95,
-                              ),
-                              Text(
-                                'TIMELINE',
-                                style: GoogleFonts.adventPro(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PpGenealD(
-                                        regnovar: regnovar,
-                                        usernamevar: usernamevar,
-                                      )));
-                        },
-                      ),
-
-                      //INTERNS
-                      InkWell(
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/Interns.gif',
-                                height: 95,
-                              ),
-                              Text(
-                                'INTERNSHIPS',
-                                style: GoogleFonts.adventPro(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.bottomToTop,
-                                  child: Interships(
-                                      regnovar: regnovar,
-                                      usernamevar: usernamevar)));
-                        },
-                      ),
-
-                      //WORSHOPS
-                      InkWell(
-                        child: Card(
-                          color: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/workshops.gif',
-                                height: 95,
-                              ),
-                              Text(
-                                'WORKSHOPS',
-                                style: GoogleFonts.adventPro(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.bottomToTop,
-                                  child: Workshops(
-                                      regnovar: regnovar,
-                                      usernamevar: usernamevar)));
-                        },
-                      ),
-
-                      InkWell(
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/courses.gif',
-                                height: 95,
-                              ),
-                              Text(
-                                'COURSES',
-                                style: GoogleFonts.adventPro(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.bottomToTop,
-                                  child: Courses()));
-                        },
-                      ),
-
-                      InkWell(
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(50)),
-                          elevation: 4,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Image.asset(
-                                'assets/images/Placem.gif',
-                                height: 95,
-                              ),
-                              Text(
-                                'PLACEMENTS',
-                                style: GoogleFonts.adventPro(
-                                    fontSize: 15,
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              PageTransition(
-                                  type: PageTransitionType.bottomToTop,
-                                  child: HomeScreen()));
-                        },
-                      ),
-                    ],
+                  SizedBox(
+                    height: height * .02,
                   ),
-                ),
-              ],
+                  Expanded(
+                    child: GridView.count(
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      primary: true,
+                      crossAxisCount: 2,
+                      children: <Widget>[
+                        InkWell(
+                          //PERSONAL DATA
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            elevation: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  "assets/images/Pdata.gif",
+                                  height: 95,
+                                ),
+                                Text(
+                                  'PERSONAL DATA',
+                                  style: GoogleFonts.adventPro(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => PpGenealD(
+                                          regnovar: regnovar,
+                                          usernamevar: usernamevar,
+                                        )));
+                          },
+                        ),
+
+                        //TIMELINE
+                        InkWell(
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            elevation: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/images/Timeline.gif',
+                                  height: 95,
+                                ),
+                                Text(
+                                  'TIMELINE',
+                                  style: GoogleFonts.adventPro(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Menatwork()
+                                    // PpGenealD(
+                                    //       regnovar: regnovar,
+                                    //       usernamevar: usernamevar,
+                                    //     ))
+                                    ));
+                          },
+                        ),
+
+                        //INTERNS
+                        InkWell(
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            elevation: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/images/Interns.gif',
+                                  height: 95,
+                                ),
+                                Text(
+                                  'INTERNSHIPS',
+                                  style: GoogleFonts.adventPro(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.bottomToTop,
+                                    child: Interships(
+                                        regnovar: regnovar,
+                                        usernamevar: usernamevar)));
+                          },
+                        ),
+
+                        //WORSHOPS
+                        InkWell(
+                          child: Card(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            elevation: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/images/workshops.gif',
+                                  height: 95,
+                                ),
+                                Text(
+                                  'WORKSHOPS',
+                                  style: GoogleFonts.adventPro(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.bottomToTop,
+                                    child: Menatwork()));
+
+                            // Workshops(
+                            //     regnovar: regnovar,
+                            //     usernamevar: usernamevar)));
+                          },
+                        ),
+
+                        InkWell(
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            elevation: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/images/courses.gif',
+                                  height: 95,
+                                ),
+                                Text(
+                                  'COURSES',
+                                  style: GoogleFonts.adventPro(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.bottomToTop,
+                                    child: Menatwork()));
+                          },
+                        ),
+
+                        InkWell(
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(50)),
+                            elevation: 4,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/images/Placem.gif',
+                                  height: 95,
+                                ),
+                                Text(
+                                  'PLACEMENTS',
+                                  style: GoogleFonts.adventPro(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                PageTransition(
+                                    type: PageTransitionType.bottomToTop,
+                                    child: Menatwork()));
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
           ),
         ],
       ),
