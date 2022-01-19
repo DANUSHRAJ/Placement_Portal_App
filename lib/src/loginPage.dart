@@ -123,6 +123,7 @@ class _LoginPageState extends State<LoginPage>
               }));
 
           print(response.body);
+          _showtoast("Kindly Check your E-mail inbox/spam box");
         }
       }
     }
@@ -405,7 +406,6 @@ class _LoginPageState extends State<LoginPage>
       onTap: () {
         if ((etRegisterNo.toString().isNotEmpty)) {
           _findAccountforFP(etRegisterNo.text);
-          _showtoast("Kindly Check your E-mail inbox/spam box");
         }
       },
       child: Container(
