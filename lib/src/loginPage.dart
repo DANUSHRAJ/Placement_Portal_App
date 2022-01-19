@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui' as ui;
 import 'dart:ui';
+import 'package:SJIT_PLACEMENT_PORTAL/src/menatwork.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/signup.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +14,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
-
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import '../main.dart';
 import 'Size_congfig.dart';
 import 'api.dart';
@@ -56,17 +58,42 @@ class _LoginPageState extends State<LoginPage>
 
   Color left = Colors.black;
   Color right = Colors.white;
+
+  Timer _timer;
+  double _progress;
+
+  @override
+  void initState() {
+    super.initState();
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+    EasyLoading.addStatusCallback((status) {
+      if (status == EasyLoadingStatus.dismiss) {
+        _timer?.cancel();
+      }
+    });
+
+    // EasyLoading.removeCallbacks();
+  }
+
   bool loading = false;
+
   final etPassword = new TextEditingController();
   final etRegisterNo = new TextEditingController();
   final account = new AccountsApi();
 
-  void _findAccount(String regnovar, String passvar) async {
+  Future<void> _findAccount(String regnovar, String passvar) async {
     if (regnovar.isEmpty) {
       _showtoast("* Username field is empty");
     } else if (passvar.isEmpty) {
       _showtoast("* Password field is empty");
     } else {
+      _timer?.cancel();
+      await EasyLoading.show(
+        status: 'loading...',
+        maskType: EasyLoadingMaskType.black,
+      );
       final result = await widget.api.getOneAccount(regnovar);
       if (result.regno == regnovar && result.password == passvar) {
         Navigator.push(
@@ -76,10 +103,20 @@ class _LoginPageState extends State<LoginPage>
                       regnovar: result.regno,
                       usernamevar: result.name,
                     )));
+        EasyLoading.showSuccess('Great Success!');
+        EasyLoading.dismiss();
       } else {
-        _showtoast(
-            "                 LOGIN FAILED\nUsername or Password is Incorrect");
+        EasyLoading.dismiss();
+        // _showtoast(
+        //     "
+        //          LOGIN FAILED\nUsername or Password is Incorrect");
+
+        EasyLoading.showError(
+          'LOGIN FAILED',
+        );
+        EasyLoading.dismiss();
       }
+      // }
     }
   }
 
@@ -129,11 +166,21 @@ class _LoginPageState extends State<LoginPage>
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-    fToast = FToast();
-    fToast.init(context);
+  void configLoading() {
+    EasyLoading.instance
+      ..displayDuration = const Duration(milliseconds: 2000)
+      ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+      ..loadingStyle = EasyLoadingStyle.dark
+      ..indicatorSize = 45.0
+      ..radius = 10.0
+      ..progressColor = Colors.yellow
+      ..backgroundColor = Colors.green
+      ..indicatorColor = Colors.yellow
+      ..textColor = Colors.yellow
+      ..maskColor = Colors.blue.withOpacity(0.5)
+      ..userInteractions = true
+      ..dismissOnTap = false;
+    //..customAnimation = CustomAnimation();
   }
 
   Widget _backButton() {
@@ -464,6 +511,8 @@ class _LoginPageState extends State<LoginPage>
   @override
   Widget build(BuildContext context) {
     // final height = MediaQuery.of(context).size.height;
+    builder:
+    EasyLoading.init();
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height >= 775.0
         ? MediaQuery.of(context).size.height

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'dart:ui';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_offline/flutter_offline.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,10 +48,16 @@ class _SignUpPageState extends State<SignUpPage> {
     fontSize: 20.0,
     fontFamily: 'Horizon',
   );
-
+  Timer _timer;
+  double _progress;
   @override
   void initState() {
     super.initState();
+    EasyLoading.addStatusCallback((status) {
+      if (status == EasyLoadingStatus.dismiss) {
+        _timer?.cancel();
+      }
+    });
   }
 
   void _addAccount(String name, String regno, String un, String pwd) async {
@@ -102,6 +110,8 @@ class _SignUpPageState extends State<SignUpPage> {
       setState(() {
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
+        EasyLoading.showSuccess('Signup Success!');
+        EasyLoading.dismiss();
         check = 0;
       });
       if (check == 1) {

@@ -3,6 +3,7 @@ import 'package:SJIT_PLACEMENT_PORTAL/src/Size_congfig.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       home: HomePage(),
+      builder: EasyLoading.init(),
     );
   }
 }
