@@ -10,11 +10,11 @@
      'INDIAN PASSPORT NUMBER',
      'AADHAAR NUMBER',
      'FATHER NAME',
-     'DESIGNATION & ORGANISATION',
+     'Father DESIGNATION & ORGANISATION',
      'FATHER MOBILE NUMBER',
      'FATHER EMAIL ID',
      'MOTHER NAME',
-     'DESIGNATION & ORGANISATION',
+     'Mother DESIGNATION & ORGANISATION',
      'MOTHER MOBILE NUMBER',
      'MOTHER EMAIL ID',
      'PERMANENT ADDRESS WITH PIN CODE',
@@ -73,11 +73,11 @@
      final var8 = json['INDIAN PASSPORT NUMBER'];
      final var9 = json['AADHAAR NUMBER'];
      final var10 = json['FATHER NAME'];
-     final var11 = json['DESIGNATION & ORGANISATION'];
+     final var11 = json['Father DESIGNATION & ORGANISATION'];
      final var12 = json['FATHER MOBILE NUMBER'];
      final var13 = json['FATHER EMAIL ID'];
      final var14 = json['MOTHER NAME'];
-     final var15 = json['DESIGNATION & ORGANISATION'];
+     final var15 = json['Mother DESIGNATION & ORGANISATION'];
      final var16 = json['MOTHER MOBILE NUMBER'];
      final var17 = json['MOTHER EMAIL ID'];
      final var18 = json['PERMANENT ADDRESS WITH PIN CODE'];
@@ -102,8 +102,7 @@
          var11,
          var12,
          var13,
-         var14
-         ,
+         var14,
          var15,
          var16,
          var17,
