@@ -6,11 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
+import 'package:flutter_offline/flutter_offline.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 
 import 'package:page_transition/page_transition.dart';
 import 'Account.dart';
+import 'Size_congfig.dart';
 import 'api.dart';
 import 'home_screen.dart';
 import 'dart:ui' as ui;
@@ -177,7 +180,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     .caption
                     .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(25),
                   borderSide: BorderSide(
                     width: 0,
                     style: BorderStyle.solid,
@@ -231,7 +234,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     .caption
                     .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(25),
                   borderSide: BorderSide(
                     width: 0,
                     style: BorderStyle.solid,
@@ -288,7 +291,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       .caption
                       .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(25),
                     borderSide: BorderSide(
                       width: 0,
                       style: BorderStyle.solid,
@@ -340,7 +343,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       .caption
                       .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(25),
                     borderSide: BorderSide(
                       width: 0,
                       style: BorderStyle.solid,
@@ -368,7 +371,7 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(
                 height: height * .01,
               ),
-              _entryField11("Name          "),
+              _entryField11("Name"),
               SizedBox(
                 height: height * .01,
               ),
@@ -376,11 +379,11 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(
                 height: height * .01,
               ),
-              _entryField2("Email id       "),
+              _entryField2("Email id"),
               SizedBox(
                 height: height * .01,
               ),
-              _entryField3("Password       ", isPassword: true),
+              _entryField3("Password", isPassword: true),
               SizedBox(
                 height: height * .03,
               ),
@@ -418,18 +421,38 @@ class _SignUpPageState extends State<SignUpPage> {
             etName.text, etRegisterNo.text, etmailId.text, etPassword.text);
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * .3,
-        //padding: EdgeInsets.symmetric(vertical: 9),
-        alignment: Alignment.bottomRight,
-
-        child: Text(
-          "Join now —>",
-          style: GoogleFonts.adventPro(
-              fontSize: 25,
-              color: Colors.deepOrangeAccent,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
+          width: MediaQuery.of(context).size.width * .4,
+          height: 50.0,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.all(Radius.circular(25.0)),
+          ),
+          child: RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              style: GoogleFonts.adventPro(
+                  fontSize: 25,
+                  color: Colors.deepOrangeAccent,
+                  fontWeight: FontWeight.bold),
+              children: [
+                TextSpan(text: 'Join Now '),
+                WidgetSpan(
+                  child: Icon(Icons.arrow_right_alt_rounded,
+                      size: 30, color: Colors.white),
+                ),
+                //),
+              ],
+            ),
+          )
+          // child: Text(
+          //   "Join now —> ",
+          //   style: GoogleFonts.adventPro(
+          //       fontSize: 25,
+          //       color: Colors.deepOrangeAccent,
+          //       fontWeight: FontWeight.bold),
+          // ),
+          ),
     );
   }
 
@@ -451,7 +474,7 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _redirect() {
-    Navigator.push(
+    Navigator.pop(
         context,
         PageTransition(
             type: PageTransitionType.topToBottom, child: LoginPage()));
@@ -518,49 +541,81 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: Text(
-          "SIGN UP",
-          style: GoogleFonts.adventPro(
-              fontSize: 30,
-              color: Colors.deepOrangeAccent,
-              fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        leading: _backButton(),
-        backgroundColor: Colors.black,
-        elevation: 10,
-      ),
-      body: Container(
-        height: height,
-        child: Stack(
-          children: <Widget>[
-            generateBluredImage(),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: SingleChildScrollView(
-                child: Column(
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: height * .2),
-                    _buildMenuBar(context),
-                    SizedBox(height: height * .05),
-                    buildBlurryWidget(),
-                    SizedBox(height: height * .05),
-                    Container(
-                      alignment: Alignment.bottomRight,
-                        child: _submitButton()),
-                    // SizedBox(height: height * .02),
-                  ],
-                ),
-              ),
+    return OfflineBuilder(
+      connectivityBuilder: (
+        BuildContext context,
+        ConnectivityResult connectivity,
+        Widget child,
+      ) {
+        final bool connected = connectivity != ConnectivityResult.none;
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            title: Text(
+              "SJIT PLACEMENT PORTAL",
+              style: GoogleFonts.adventPro(
+                  fontSize: 25,
+                  color: Colors.deepOrangeAccent,
+                  fontWeight: FontWeight.bold),
             ),
-            // Positioned(top: 40, left: 0, child: _backButton()),
-          ],
-        ),
+            centerTitle: true,
+            leading: _backButton(),
+            backgroundColor: Colors.black,
+            elevation: 10,
+          ),
+          body: Container(
+              // height: SizeConfig.blockSizeVertical * 100,
+              // width: SizeConfig.blockSizeHorizontal * 150,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              // padding: EdgeInsets.all(20.0),
+              child: connected
+                  ? Container(
+                      height: height,
+                      child: Stack(
+                        children: <Widget>[
+                          generateBluredImage(),
+                          Container(
+                            padding: EdgeInsets.all(25.0),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                //crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  SizedBox(height: height * .2),
+                                  _buildMenuBar(context),
+                                  SizedBox(height: height * .05),
+                                  buildBlurryWidget(),
+                                  SizedBox(height: height * .05),
+                                  Container(
+                                      alignment: Alignment.bottomRight,
+                                      child: _submitButton()),
+                                  SizedBox(height: height * .03),
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Positioned(top: 40, left: 0, child: _backButton()),
+                        ],
+                      ))
+                  : Container(
+                      color: Colors.black,
+                      height: 1000,
+                      width: 1000,
+                      child: Lottie.asset("assets/images/nointernet.json"),
+                    )),
+        );
+      },
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Text(
+            'There are no bottons to push :)',
+          ),
+          new Text(
+            'Just turn off your internet.',
+          ),
+        ],
       ),
     );
   }

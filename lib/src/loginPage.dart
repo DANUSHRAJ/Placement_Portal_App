@@ -267,10 +267,10 @@ class _LoginPageState extends State<LoginPage>
                     .caption
                     .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(25),
                   borderSide: BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
+                    width: 1,
+                    style: BorderStyle.solid,
                   ),
                 ),
                 fillColor: Color(0xFFECD5C5),
@@ -351,10 +351,10 @@ class _LoginPageState extends State<LoginPage>
                     .caption
                     .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(25),
                   borderSide: BorderSide(
-                    width: 0,
-                    style: BorderStyle.none,
+                    width: 1,
+                    style: BorderStyle.solid,
                   ),
                 ),
                 fillColor: Color(0xFFECD5C5),
@@ -373,99 +373,30 @@ class _LoginPageState extends State<LoginPage>
         //     context, MaterialPageRoute(builder: (context) => ()));
       },
       child: Container(
-        width: MediaQuery.of(context).size.width * .33,
-        height: 50.0,
-        decoration: BoxDecoration(
-          color: Colors.transparent,
-          borderRadius: BorderRadius.all(Radius.circular(25.0)),
-        ),
-
-        //padding: EdgeInsets.symmetric(vertical: 9),
-        alignment: Alignment.center,
-
-        child: Text(
-          "Let's Go —>",
-          style: GoogleFonts.adventPro(
-              fontSize: 25,
-              color: Colors.deepOrangeAccent,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-
-  Widget _divider() {
-    return Container(
-      //margin: EdgeInsets.symmetric(vertical: 10),
-      child: Row(
-        children: <Widget>[
-          // SizedBox(
-          //   width: 20,
-          // ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Divider(
-                thickness: 3,
-                color: Colors.white,
-              ),
-            ),
+          width: MediaQuery.of(context).size.width * .4,
+          // height: 50.0,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.all(Radius.circular(25.0)),
           ),
-          Text(
-            'OR',
-            style: GoogleFonts.adventPro(
-                fontSize: 19, color: Colors.white, fontWeight: FontWeight.bold),
-          ),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              child: Divider(
-                thickness: 3,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          // SizedBox(
-          //   width: 20,
-          // ),
-        ],
-      ),
-    );
-  }
-
-  Widget _createAccountLabel() {
-    return InkWell(
-      onTap: () {
-        Navigator.push(context,
-            PageTransition(type: PageTransitionType.fade, child: SignUpPage()));
-      },
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 20),
-        padding: EdgeInsets.all(15),
-        alignment: Alignment.bottomCenter,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Not yet Joined ?',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w900),
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              'Sign up',
-              style: TextStyle(
+          child: RichText(
+            textAlign: TextAlign.center,
+            text: TextSpan(
+              style: GoogleFonts.adventPro(
+                  fontSize: 25,
                   color: Colors.deepOrangeAccent,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w900),
+                  fontWeight: FontWeight.bold),
+              children: [
+                TextSpan(text: "Let's Go "),
+                WidgetSpan(
+                  child: Icon(Icons.arrow_right_alt_rounded,
+                      size: 30, color: Colors.white),
+                ),
+                //),
+              ],
             ),
-          ],
-        ),
-      ),
+          )),
     );
   }
 
@@ -561,9 +492,10 @@ class _LoginPageState extends State<LoginPage>
             elevation: 10,
           ),
           body: Container(
-              height: SizeConfig.blockSizeVertical * 100,
-              width: SizeConfig.blockSizeHorizontal * 150,
-              // padding: EdgeInsets.all(20.0),
+              // height: SizeConfig.blockSizeVertical * 100,
+              // width: SizeConfig.blockSizeHorizontal * 150,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
               child: connected
                   ? Container(
                       child: Stack(
@@ -571,12 +503,12 @@ class _LoginPageState extends State<LoginPage>
                         generateBluredImage(),
                         SingleChildScrollView(
                           child: Container(
-                            padding: EdgeInsets.all(10.0),
+                            padding: EdgeInsets.all(25.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
-                                SizedBox(height: height * .15),
+                                SizedBox(height: height * .1),
                                 Image.asset('assets/images/joseph.png',
                                     width: 300, height: 150),
                                 SizedBox(height: height * .05),
