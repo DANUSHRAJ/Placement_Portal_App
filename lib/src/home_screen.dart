@@ -332,11 +332,20 @@ class HomeScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.push(
                                 context,
-                                PageTransition(
-                                    type: PageTransitionType.bottomToTop,
-                                    child: Interships(
-                                        regnovar: regnovar,
-                                        usernamevar: usernamevar)));
+                                MaterialPageRoute(
+                                    builder: (context) => Menatwork()
+                                  // PpGenealD(
+                                  //       regnovar: regnovar,
+                                  //       usernamevar: usernamevar,
+                                  //     ))
+                                ));
+//                            Navigator.push(
+//                                context,
+//                                PageTransition(
+//                                    type: PageTransitionType.bottomToTop,
+//                                    child: Interships(
+//                                        regnovar: regnovar,
+//                                        usernamevar: usernamevar)));
                           },
                         ),
 

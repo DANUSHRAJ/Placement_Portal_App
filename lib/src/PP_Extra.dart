@@ -49,7 +49,7 @@ int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
     }
   }
 
-  if (dropbox[2].title == 'SELECT BEC GRADE') {
+  if (dropbox[1].title == 'SELECT BEC GRADE') {
     showdialog(context, "please select the Valid SECTION");
     return -1;
   }
@@ -68,6 +68,12 @@ int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
 
   if (pa[2] == null || pa[2].isEmpty) {
     showdialog(context, "please fill the " +"SKILL");
+    //print(compareList[check]+" was left blank");
+    return -1;
+  }
+
+  if (pa[3] == null || pa[3].isEmpty) {
+    showdialog(context, "please fill the " +"BEC Exam Grade");
     //print(compareList[check]+" was left blank");
     return -1;
   }
@@ -118,10 +124,11 @@ class _PpExtraDState extends State<PpExtraD> {
         pa[0] = value.lang;
         pa[1] = value.gap;
         pa[2] = value.skill;
+        pa[3] = value.becG;
         dropbox[0].title=value.sportQ;
         dropbox[1].title=value.becS;
-        dropbox[2].title=value.becG;
-        dropbox[3].title=value.higherS;
+//        dropbox[2].title=value.becG;
+        dropbox[2].title=value.higherS;
         loading = false;
       });
     });
@@ -139,10 +146,13 @@ class _PpExtraDState extends State<PpExtraD> {
     final String lang = pa[0];
     final String gap = pa[1];
     final String skill = pa[2];
+    final String becG = pa[3];
     final String sportQ = dropbox[0].title;
+//    final String becS = dropbox[1].title;
+//    final String becG = dropbox[2].title;
+//    final String higherS = dropbox[3].title;
     final String becS = dropbox[1].title;
-    final String becG = dropbox[2].title;
-    final String higherS = dropbox[3].title;
+    final String higherS = dropbox[2].title;
 
     await widget.papi.uploadExtraD(
         uregno,
@@ -165,7 +175,7 @@ class _PpExtraDState extends State<PpExtraD> {
     _loadUploadedData(true);
   }
 
-  List<String> pa = [null, null,null];
+  List<String> pa = [null, null,null, null];
 
   static final List<NewObject> yesorno = <NewObject>[
     NewObject('SELECT THE OPTION', Icons.description),
@@ -182,9 +192,9 @@ class _PpExtraDState extends State<PpExtraD> {
 
   static final List<NewObject> dropbox = <NewObject>[
     yesorno.first, //0
-    yesorno.first, //1
-    becgrade.first, //2
-    yesorno.first, //3
+//    yesorno.first, //1
+    becgrade.first, //1
+    yesorno.first, //2
   ];
 
   Widget _backButton() {
@@ -402,8 +412,10 @@ class _PpExtraDState extends State<PpExtraD> {
                         children: <Widget>[
                           SizedBox(height: height * .2),
                           _DropBox("SPORTS QUOTA", yesorno, 0),
-                          _DropBox("BEC EXAM STATUS", yesorno, 1),
-                          _DropBox("BEC EXAM GRADE", becgrade, 2),
+                          _DropBox("BEC EXAM STATUS", becgrade, 1),
+                          _entryFieldalphabets(
+                              'BEC EXAM GRADE', pa[3], 3),
+//                          _DropBox("BEC EXAM GRADE", becgrade, 2),
                           _entryFieldalphabets(
                               'LANGUAGES KNOWN', pa[0], 0),
                           _entryFieldnumbers(
@@ -411,7 +423,7 @@ class _PpExtraDState extends State<PpExtraD> {
                               pa[1],
                               1),
                           _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]",
-                              yesorno, 3),
+                              yesorno, 2),
                           _entryFieldalphabets(
                               'IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL', pa[2], 2),
                           SizedBox(height: height * .02),
