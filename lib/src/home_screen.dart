@@ -126,7 +126,7 @@ class HomeScreen extends StatelessWidget {
         child: Container(
           color: Colors.white.withOpacity(0.15),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             //crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _child,
@@ -189,7 +189,7 @@ class HomeScreen extends StatelessWidget {
                               width: width * 0.9,
                               child: buildBlurryWidget(
                                   Text(
-                                    "\nWelcome,",
+                                    "\nHi,",
                                     textAlign: TextAlign.start,
                                     style: GoogleFonts.adventPro(
                                         fontSize: 30,
@@ -197,10 +197,10 @@ class HomeScreen extends StatelessWidget {
                                         fontWeight: FontWeight.bold),
                                   ),
                                   Text(
-                                    "    $usernamevar    ",
+                                    "$usernamevar".split(" ")[0],
                                     textAlign: TextAlign.justify,
                                     style: GoogleFonts.adventPro(
-                                        fontSize: 30,
+                                        fontSize: 35,
                                         color: Colors.limeAccent,
                                         fontWeight: FontWeight.bold),
                                   ),
