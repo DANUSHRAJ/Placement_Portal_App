@@ -153,8 +153,12 @@ class HomeScreen extends StatelessWidget {
         //shadowColor: Colors.orangeAccent,
         leading: _backButton(context),
         actions: [
-          IconButton(icon: Icon(Icons.search_rounded), onPressed: () {}),
-          IconButton(icon: Icon(Icons.notifications_rounded), onPressed: () {}),
+          //IconButton(icon: Icon(Icons.search_rounded), onPressed: () {}),
+          IconButton(
+              icon: Icon(Icons.notifications_rounded),
+              onPressed: () {
+                _showtoast("No Notifications found");
+              }),
         ],
         backgroundColor: Colors.transparent,
         elevation: 30,
