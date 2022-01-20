@@ -95,7 +95,16 @@ class _LoginPageState extends State<LoginPage>
         maskType: EasyLoadingMaskType.black,
       );
       final result = await widget.api.getOneAccount(regnovar);
-      if (result.regno == regnovar && result.password == passvar) {
+      if (result == null) {
+        EasyLoading.dismiss();
+        EasyLoading.showError(
+          'Account not found',
+        );
+
+        EasyLoading.dismiss();
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+      } else if (result.regno == regnovar && result.password == passvar) {
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -107,14 +116,9 @@ class _LoginPageState extends State<LoginPage>
         EasyLoading.dismiss();
       } else {
         EasyLoading.dismiss();
-        // _showtoast(
-        //     "
-        //          LOGIN FAILED\nUsername or Password is Incorrect");
-
         EasyLoading.showError(
           'LOGIN FAILED',
         );
-        EasyLoading.dismiss();
       }
       // }
     }

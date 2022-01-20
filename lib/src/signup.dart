@@ -78,44 +78,35 @@ class _SignUpPageState extends State<SignUpPage> {
       check = 0;
     }
     if (check == 1) {
-      check = 1;
-//      log('Regno: $regno');
+      _timer?.cancel();
+      await EasyLoading.show(
+        status: 'loading...',
+        maskType: EasyLoadingMaskType.black,
+      );
       final result = await widget.api.getOneAccount(regno);
-//      log('Result: $result');
+
       if (result == null) {
-      } else if (result.regno == regno &&
-          result.username == un &&
-          result.password == pwd) {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen(
-                      regnovar: result.regno,
-                      usernamevar: result.name,
-                    )));
-        check = 2;
-      }
-    } else if (check == 1) {
-      _showtoast("* Unsuccessfull coz incorrect values!");
-    }
-    if (check == 1) {
-      //String.substring(int startIndex, [ int endIndex ])
-      var batch = int.parse(regno.substring(4, 6));
-      batch += 2004;
-      var batchstr = batch.toString();
-//      log('Batch: $batch');
-      final createdAccount =
-          await widget.api.createAccount(name, regno, un, pwd, batchstr);
-      check = 1;
-      setState(() {
+        var batch = int.parse(regno.substring(4, 6));
+        batch += 2004;
+        var batchstr = batch.toString();
+        final createdAccount =
+            await widget.api.createAccount(name, regno, un, pwd, batchstr);
+        check = 1;
+        setState(() {
+          EasyLoading.showSuccess('Signup Success!');
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => LoginPage()));
+          EasyLoading.dismiss();
+          check = 0;
+        });
+      } else if (result.regno == regno) {
+        EasyLoading.showError(
+          'Account already exits!',
+        );
+        EasyLoading.dismiss();
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
-        EasyLoading.showSuccess('Signup Success!');
-        EasyLoading.dismiss();
-        check = 0;
-      });
-      if (check == 1) {
-        _showtoast("SIGNUP FAILED");
+        check = 2;
       }
     }
   }
