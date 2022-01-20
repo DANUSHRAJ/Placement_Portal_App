@@ -226,7 +226,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
 //      print('$temp1');
 //      if(temp1=='null'||temp1.isEmpty){
 //        print(value.runtimeType);
-      if (value.runtimeType == Null) {
+      if (value.runtimeType == Null||value.land.runtimeType==Null) {
         setState(() {
           loading = false;
         });

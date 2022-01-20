@@ -230,7 +230,7 @@ class _PpGenealDState extends State<PpGenealD> {
 //      print('In PP_GenealD: $value');
       String temp1 = value.toString();
 //      print('$temp1');
-      if (value.runtimeType == Null) {
+      if (value.runtimeType == Null||value.rollno.runtimeType==Null) {
         setState(() {
           loading = false;
         });
