@@ -42,16 +42,17 @@ Future showdialog(BuildContext context, String message) async {
 
 int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
   for (int i = 0; i < dropbox.length; i++) {
-    if (i != 2 && dropbox[i].title == 'SELECT THE OPTION') {
+    if (i != 1 && dropbox[i].title == 'SELECT THE OPTION') {
       showdialog(context, "please select the Valid OPTION");
       return -1;
     }
   }
 
   if (dropbox[1].title == 'SELECT BEC GRADE') {
-    showdialog(context, "please select the Valid SECTION");
+    showdialog(context, "please select the Valid OPTION");
     return -1;
   }
+
   for(int i=0;i<pa.length;i++){
     pa[i]=pa[i].toUpperCase();
   }
@@ -180,18 +181,11 @@ class _PpExtraDState extends State<PpExtraD> {
     NewObject('NO', Icons.arrow_back_ios),
   ];
 
-  static final List<NewObject> becgrade = <NewObject>[
-    NewObject('SELECT BEC GRADE', Icons.description),
-    NewObject('PRELIMINARY', Icons.arrow_back_ios),
-    NewObject('VANTAGE', Icons.arrow_back_ios),
-    NewObject('HIGHER', Icons.arrow_back_ios),
-  ];
 
   static final List<NewObject> dropbox = <NewObject>[
     yesorno.first, //0
-//    yesorno.first, //1
-    becgrade.first, //1
-    yesorno.first, //2
+    yesorno.first, //1
+    yesorno.first
   ];
 
   Widget _backButton() {
@@ -408,7 +402,7 @@ class _PpExtraDState extends State<PpExtraD> {
                         children: <Widget>[
                           SizedBox(height: height * .2),
                           _DropBox("SPORTS QUOTA", yesorno, 0),
-                          _DropBox("BEC EXAM STATUS", becgrade, 1),
+                          _DropBox("BEC EXAM STATUS", yesorno, 1),
                           _entryFieldalphabets('BEC EXAM GRADE', pa[3], 3),
 //                          _DropBox("BEC EXAM GRADE", becgrade, 2),
                           _entryFieldalphabets('LANGUAGES KNOWN', pa[0], 0),

@@ -102,6 +102,10 @@ int Validation(BuildContext context, List<String> pp) {
    showdialog(context, "Please Check the " + compareList[2]);
    return -1;
  }
+ if(pp[1]==pp[2]){
+   showdialog(context, "Please Check Your Primary number and Emergency number should not be same");
+   return -1;
+ }
 //
 //  //email id
  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[3])) {
@@ -114,6 +118,12 @@ int Validation(BuildContext context, List<String> pp) {
    showdialog(context, "Please Check the " + compareList[4]);
    return -1;
  }
+
+  if(pp[1]==pp[2]){
+    showdialog(context, "Please Check Your Primary Email ID and Alternate Email ID should not be same");
+    return -1;
+  }
+
 //
 //  //pancard
  if (!RegExp(r'[A-Z]{5}[0-9]{4}[A-Z]{1}$')
@@ -122,13 +132,12 @@ int Validation(BuildContext context, List<String> pp) {
    showdialog(context, "Please Check the " + compareList[5]);
    return -1;
  }
-//
-//  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pp[9]))) {
-//    showdialog(context, "Please Check the " + compareList[9]);
-//    return -1;
-//    //print("father name");
-//  }
-//
+//^[A-PR-WYa-pr-wy][1-9]\\d\\s?\\d{4}[1-9]$
+ if(!RegExp(r'^[A-Z]{1}[0-9]{7}$').hasMatch(pp[7])&&pp[7]!='NA'){
+   showdialog(context, "Please Check the " + compareList[7]);
+   return -1;
+ }
+
  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[11])&&pp[11]!='NA') {
    //print("father's mobile number");
    showdialog(context, "Please Check the " + compareList[11]);
@@ -141,12 +150,6 @@ int Validation(BuildContext context, List<String> pp) {
    showdialog(context, "Please Check the " + compareList[12]);
    return -1;
  }
-//
-//  if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pp[13]))) {
-//    showdialog(context, "Please Check the " + compareList[13]);
-//    return -1;
-//    //print("mother name");
-//  }
 //
  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[15])&&pp[15]!='NA') {
    //print("mother's mobile number");

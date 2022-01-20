@@ -90,7 +90,7 @@ int Validation(BuildContext context, List<String> pce, NewObject noArrears) {
   for (int i = 0; i < 9; i++) {
     if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
             .hasMatch(pce[i]) &&
-        pce[i] != 'NA') {
+        pce[i] != '-') {
       //print(compareList[i]+" was invalid");
       showdialog(context, "Please Check the " + compareList[i]);
       return -1;
@@ -98,12 +98,20 @@ int Validation(BuildContext context, List<String> pce, NewObject noArrears) {
   }
 //  //arrear
   for (int i = 9; i < 19; i++) {
-    if (!RegExp(r'^[0-9]+$').hasMatch(pce[i])) {
+    if (!RegExp(r'^[0-9]+$').hasMatch(pce[i])&&pce[i]!='-') {
       //print(compareList[i]+" was invalid");
       showdialog(context, "Please Check the " + compareList[i]);
       return -1;
     }
   }
+  // int sum=0;
+  // for(int i=9;i<17;i++){
+  //   sum+=int.parse(pce[i]);
+  // }
+  // if(sum!=int.parse(pce[17])){
+  //   showdialog(context, "Please Check the No. of ARREARS are given correctly");
+  //   return -1;
+  // }
   return 1;
 }
 
@@ -518,7 +526,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
                           _entryFieldnumbers(
                               'TOTAL NO OF STANDING ARREARS', pce[17], 17),
                           _DropBox("HISTORY OF ARREARS [Y/N]", yesorno),
-                          _entryFieldnumbers('IF YES, HOW MANY?', pce[18], 18),
+                          _entryFieldnumbers('HOW MANY ARREARS? IF YES ELSE give 0', pce[18], 18),
                           SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
