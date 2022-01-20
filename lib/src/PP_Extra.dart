@@ -114,7 +114,7 @@ class _PpExtraDState extends State<PpExtraD> {
     }
 
     await widget.papi.getExtraD(regnovar).then((value){
-      if (value.runtimeType == Null) {
+      if (value.runtimeType == Null||value.lang.runtimeType==Null) {
         setState(() {
           loading = false;
         });

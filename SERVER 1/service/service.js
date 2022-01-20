@@ -330,7 +330,7 @@ module.exports.updategenealD = async (req,res)=>{
 };
 module.exports.getEducationD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_edu").findOne(
+        const result = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         res.send(result);
@@ -340,8 +340,8 @@ module.exports.getEducationD = async (req,res)=>{
 };
 module.exports.uploadEducationD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_edu").insertOne(req.body);
-	    const result1 = await client.db("Cluster0").collection("profile_edu").findOne(
+        const result = await client.db("Cluster0").collection("profile").insertOne(req.body);
+	    const result1 = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         res.send(result1);
@@ -351,7 +351,7 @@ module.exports.uploadEducationD = async (req,res)=>{
 };
 module.exports.updateEducationD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_edu").update(
+        const result = await client.db("Cluster0").collection("profile").update(
            {regno: req.body.regno},
             {$set: req.body},
             (err1,result)=>{
@@ -359,7 +359,7 @@ module.exports.updateEducationD = async (req,res)=>{
                     console.log(err1);
             }
         );
-        const result1 = await client.db("Cluster0").collection("profile_edu").findOne(
+        const result1 = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         res.send(result1);
@@ -369,7 +369,7 @@ module.exports.updateEducationD = async (req,res)=>{
 };
 module.exports.getCurrentD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_cur").findOne(
+        const result = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         res.send(result);
@@ -379,8 +379,8 @@ module.exports.getCurrentD = async (req,res)=>{
 };
 module.exports.uploadCurrentD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_cur").insertOne(req.body);
-	    const result1 = await client.db("Cluster0").collection("profile_cur").findOne(
+        const result = await client.db("Cluster0").collection("profile").insertOne(req.body);
+	    const result1 = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         res.send(result1);
@@ -390,7 +390,7 @@ module.exports.uploadCurrentD = async (req,res)=>{
 };
 module.exports.updateCurrentD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_cur").update(
+        const result = await client.db("Cluster0").collection("profile").update(
            {regno: req.body.regno},
             {$set: req.body},
             (err1,result)=>{
@@ -398,7 +398,7 @@ module.exports.updateCurrentD = async (req,res)=>{
                     console.log(err1);
             }
         );
-        const result1 = await client.db("Cluster0").collection("profile_cur").findOne(
+        const result1 = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         res.send(result1);
@@ -408,7 +408,7 @@ module.exports.updateCurrentD = async (req,res)=>{
 };
 module.exports.getPersonalD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_per").findOne(
+        const result = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         res.send(result);
@@ -418,8 +418,8 @@ module.exports.getPersonalD = async (req,res)=>{
 };
 module.exports.uploadPersonalD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_per").insertOne(req.body);
-	    const result1 = await client.db("Cluster0").collection("profile_per").findOne(
+        const result = await client.db("Cluster0").collection("profile").insertOne(req.body);
+	    const result1 = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         // console.log("Success");
@@ -430,7 +430,7 @@ module.exports.uploadPersonalD = async (req,res)=>{
 };
 module.exports.updatePersonalD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_per").update(
+        const result = await client.db("Cluster0").collection("profile").update(
            {regno: req.body.regno},
             {$set: req.body},
             (err1,result)=>{
@@ -438,7 +438,7 @@ module.exports.updatePersonalD = async (req,res)=>{
                     console.log(err1);
             }
         );
-        const result1 = await client.db("Cluster0").collection("profile_per").findOne(
+        const result1 = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         // console.log("Success");
@@ -450,7 +450,7 @@ module.exports.updatePersonalD = async (req,res)=>{
 
 module.exports.getExtraD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_extra").findOne(
+        const result = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         res.send(result);
@@ -460,8 +460,8 @@ module.exports.getExtraD = async (req,res)=>{
 };
 module.exports.uploadExtraD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_extra").insertOne(req.body);
-	    const result1 = await client.db("Cluster0").collection("profile_extra").findOne(
+        const result = await client.db("Cluster0").collection("profile").insertOne(req.body);
+	    const result1 = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         // console.log("Success");
@@ -472,7 +472,7 @@ module.exports.uploadExtraD = async (req,res)=>{
 };
 module.exports.updateExtraD = async (req,res)=>{
     try{
-        const result = await client.db("Cluster0").collection("profile_extra").update(
+        const result = await client.db("Cluster0").collection("profile").update(
            {regno: req.body.regno},
             {$set: req.body},
             (err1,result)=>{
@@ -480,7 +480,7 @@ module.exports.updateExtraD = async (req,res)=>{
                     console.log(err1);
             }
         );
-        const result1 = await client.db("Cluster0").collection("profile_extra").findOne(
+        const result1 = await client.db("Cluster0").collection("profile").findOne(
             {'regno':req.body.regno}
         );
         // console.log("Success");

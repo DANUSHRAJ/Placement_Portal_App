@@ -147,7 +147,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
 //      print('$temp1');
 //      if(temp1=='null'||temp1.isEmpty){
 //        print(value.runtimeType);
-      if (value.runtimeType == Null) {
+      if (value.runtimeType == Null || value.gpa1.runtimeType == Null) {
         setState(() {
           loading = false;
         });
