@@ -102,8 +102,8 @@ class _LoginPageState extends State<LoginPage>
         );
 
         EasyLoading.dismiss();
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => SignUpPage()));
+//        Navigator.push(
+//            context, MaterialPageRoute(builder: (context) => SignUpPage()));
       } else if (result.regno == regnovar && result.password == passvar) {
         Navigator.push(
             context,

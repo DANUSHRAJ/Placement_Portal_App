@@ -94,6 +94,7 @@ int Validation(BuildContext context, List<String> pg, List<NewObject> dropbox) {
   }
 
   for (int i = 0; i < pg.length; i++) {
+    pg[i]=pg[i].toUpperCase();
     if (pg[i] == null || pg[i].isEmpty) {
       check = i;
       break;

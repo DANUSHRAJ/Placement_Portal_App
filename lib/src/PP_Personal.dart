@@ -73,6 +73,8 @@ int Validation(BuildContext context, List<String> pp) {
 
   int check = -1;
   for (int i = 0; i < pp.length; i++) {
+    if(!(i==3||i==4||i==12||i==16))
+      pp[i]=pp[i].toUpperCase();
     if (pp[i] == null || pp[i].isEmpty) {
       check = i;
       break;
@@ -583,12 +585,12 @@ class _PpPersonalDState extends State<PpPersonalD> {
                           _entryFieldnumbers('AADHAAR NUMBER', pp[8], 8),
                           _entryFieldalphabets('FATHER NAME', pp[9], 9),
                           _entryFieldalphabets(
-                              'DESIGNATION & ORGANISATION', pp[10], 10),
+                              'Father DESIGNATION & ORGANISATION', pp[10], 10),
                           _entryFieldnumbers('FATHER MOBILE NUMBER', pp[11], 11),
                           _entryFieldalphabets('FATHER EMAIL ID', pp[12], 12),
                           _entryFieldalphabets('MOTHER NAME', pp[13], 13),
                           _entryFieldalphabets(
-                              'DESIGNATION & ORGANISATION', pp[14], 14),
+                              'Mother DESIGNATION & ORGANISATION', pp[14], 14),
                           _entryFieldnumbers('MOTHER MOBILE NUMBER', pp[15], 15),
                           _entryFieldalphabets('MOTHER EMAIL ID', pp[16], 16),
                           _entryFieldalphabets(
