@@ -147,14 +147,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: FadeAnimation(
-                      0,
-                      Lottie.asset("assets/images/orange.json",
-                          height: height * .35),
-                    ),
-                  ),
+                   Align(
+                     alignment: Alignment.center,
+                     child: FadeAnimation(
+                       0,
+                       Lottie.asset("assets/images/orange.json",
+                           height: height * .35),
+                     ),
+                   ),
                   SizedBox(height: height * .07),
                   Align(
                     alignment: Alignment.center,

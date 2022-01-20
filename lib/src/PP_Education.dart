@@ -73,6 +73,7 @@ int Validation(BuildContext context, List<String> pe) {
   }
 
  for (int i = 0; i < pe.length; i++) {
+   pe[i]=pe[i].toUpperCase();
    if (pe[i] == null || pe[i].isEmpty) {
      check = i;
      break;

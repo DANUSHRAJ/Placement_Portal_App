@@ -52,6 +52,9 @@ int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
     showdialog(context, "please select the Valid SECTION");
     return -1;
   }
+  for(int i=0;i<pa.length;i++){
+    pa[i]=pa[i].toUpperCase();
+  }
 
   if (pa[0] == null || pa[0].isEmpty) {
     showdialog(context, "please fill the " + "LANGUAGES KNOWN");

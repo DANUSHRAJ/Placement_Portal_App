@@ -69,6 +69,7 @@ int Validation(BuildContext context, List<String> pce, NewObject noArrears) {
   }
 
   for (int i = 0; i < pce.length; i++) {
+    pce[i]=pce[i].toUpperCase();
     if (pce[i] == null || pce[i].isEmpty) {
       check = i;
       break;
