@@ -7,41 +7,40 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'profileapi.dart';
+
 Future showdialog(BuildContext context, String message) async {
   return showDialog(
       context: context,
       builder: (context) => new AlertDialog(
-        title: Center(
-          child: new Text(
-            message,
-            style: TextStyle(
-              fontSize: 13,
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        actions: [
-          Center(
-            child: new FlatButton(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20.0),
-                  side: BorderSide(color: Colors.black),
+            title: Center(
+              child: new Text(
+                message,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
                 ),
-                color: Colors.deepOrange,
-                splashColor: Colors.deepOrangeAccent,
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: new Text("OK")),
-          ),
-        ],
-      ));
+              ),
+            ),
+            actions: [
+              Center(
+                child: new FlatButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                      side: BorderSide(color: Colors.black),
+                    ),
+                    color: Colors.deepOrange,
+                    splashColor: Colors.deepOrangeAccent,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: new Text("OK")),
+              ),
+            ],
+          ));
 }
 
 int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
-
-
   for (int i = 0; i < dropbox.length; i++) {
     if (i != 2 && dropbox[i].title == 'SELECT THE OPTION') {
       showdialog(context, "please select the Valid OPTION");
@@ -67,13 +66,13 @@ int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
   }
 
   if (pa[2] == null || pa[2].isEmpty) {
-    showdialog(context, "please fill the " +"SKILL");
+    showdialog(context, "please fill the " + "SKILL");
     //print(compareList[check]+" was left blank");
     return -1;
   }
 
   if (pa[3] == null || pa[3].isEmpty) {
-    showdialog(context, "please fill the " +"BEC Exam Grade");
+    showdialog(context, "please fill the " + "BEC Exam Grade");
     //print(compareList[check]+" was left blank");
     return -1;
   }
@@ -86,10 +85,11 @@ class PpExtraD extends StatefulWidget {
 
   final ProfileApi papi = ProfileApi();
 
-  PpExtraD({Key key,this.regnovar,this.usernamevar}) : super(key: key);
+  PpExtraD({Key key, this.regnovar, this.usernamevar}) : super(key: key);
 
   @override
-  _PpExtraDState createState() => _PpExtraDState(regnovar : regnovar,usernamevar: usernamevar);
+  _PpExtraDState createState() =>
+      _PpExtraDState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class NewObject {
@@ -106,15 +106,15 @@ class _PpExtraDState extends State<PpExtraD> {
 
   _PpExtraDState({this.regnovar, this.usernamevar});
 
-  void _loadUploadedData([bool showSpinner = false]) async{
-    if(showSpinner){
+  void _loadUploadedData([bool showSpinner = false]) async {
+    if (showSpinner) {
       setState(() {
-        loading=true;
+        loading = true;
       });
     }
 
-    await widget.papi.getExtraD(regnovar).then((value){
-      if (value.runtimeType == Null||value.lang.runtimeType==Null) {
+    await widget.papi.getExtraD(regnovar).then((value) {
+      if (value.runtimeType == Null || value.lang.runtimeType == Null) {
         setState(() {
           loading = false;
         });
@@ -125,16 +125,17 @@ class _PpExtraDState extends State<PpExtraD> {
         pa[1] = value.gap;
         pa[2] = value.skill;
         pa[3] = value.becG;
-        dropbox[0].title=value.sportQ;
-        dropbox[1].title=value.becS;
+        dropbox[0].title = value.sportQ;
+        dropbox[1].title = value.becS;
 //        dropbox[2].title=value.becG;
-        dropbox[2].title=value.higherS;
+        dropbox[2].title = value.higherS;
         loading = false;
       });
     });
   }
 
-  void _uploadtoDB(BuildContext context, List<String> pa,List<NewObject> dropbox,
+  void _uploadtoDB(
+      BuildContext context, List<String> pa, List<NewObject> dropbox,
       [bool showSpinner = false]) async {
     if (showSpinner) {
       setState(() {
@@ -154,15 +155,8 @@ class _PpExtraDState extends State<PpExtraD> {
     final String becS = dropbox[1].title;
     final String higherS = dropbox[2].title;
 
-    await widget.papi.uploadExtraD(
-        uregno,
-        lang,
-        gap,
-        skill,
-        sportQ,
-        becS,
-        becG,
-        higherS);
+    await widget.papi
+        .uploadExtraD(uregno, lang, gap, skill, sportQ, becS, becG, higherS);
 
     setState(() {
       loading = false;
@@ -175,7 +169,7 @@ class _PpExtraDState extends State<PpExtraD> {
     _loadUploadedData(true);
   }
 
-  List<String> pa = [null, null,null, null];
+  List<String> pa = [null, null, null, null];
 
   static final List<NewObject> yesorno = <NewObject>[
     NewObject('SELECT THE OPTION', Icons.description),
@@ -357,7 +351,6 @@ class _PpExtraDState extends State<PpExtraD> {
     );
   }
 
-
   Widget generateBluredImage() {
     return new Container(
       decoration: new BoxDecoration(
@@ -413,19 +406,17 @@ class _PpExtraDState extends State<PpExtraD> {
                           SizedBox(height: height * .2),
                           _DropBox("SPORTS QUOTA", yesorno, 0),
                           _DropBox("BEC EXAM STATUS", becgrade, 1),
-                          _entryFieldalphabets(
-                              'BEC EXAM GRADE', pa[3], 3),
+                          _entryFieldalphabets('BEC EXAM GRADE', pa[3], 3),
 //                          _DropBox("BEC EXAM GRADE", becgrade, 2),
-                          _entryFieldalphabets(
-                              'LANGUAGES KNOWN', pa[0], 0),
+                          _entryFieldalphabets('LANGUAGES KNOWN', pa[0], 0),
                           _entryFieldnumbers(
-                              'GAP IN EDUCATION (in Years) - If Any',
-                              pa[1],
-                              1),
+                              'GAP IN EDUCATION (in Years) - If Any', pa[1], 1),
                           _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]",
                               yesorno, 2),
                           _entryFieldalphabets(
-                              'IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL', pa[2], 2),
+                              'IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL',
+                              pa[2],
+                              2),
                           SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
@@ -433,18 +424,19 @@ class _PpExtraDState extends State<PpExtraD> {
                               backgroundColor: const Color(0xFFE96710),
                               foregroundColor: Colors.black,
                               onPressed: () {
-                                 if (Validation(context, pa, dropbox) == 1) {
-                                   _uploadtoDB(context,pa,dropbox);
+                                if (Validation(context, pa, dropbox) == 1) {
+                                  _uploadtoDB(context, pa, dropbox);
 
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: HomeScreen(
-                                          regnovar: regnovar,
-                                          usernamevar: usernamevar,
-                                        )));
-                                   showdialog(context, "Your Profile Data has been Submitted Successfully!");
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          type: PageTransitionType.bottomToTop,
+                                          child: HomeScreen(
+                                            regnovar: regnovar,
+                                            usernamevar: usernamevar,
+                                          )));
+                                  showdialog(context,
+                                      "Your Profile Data has been Submitted Successfully!");
                                 }
                               },
                               label: Text('SUBMIT'),
