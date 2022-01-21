@@ -1,6 +1,6 @@
 import 'dart:ui';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Size_congfig.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/loginPage.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/GENERAL/Size_congfig.dart';
+import 'src/GENERAL/loginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_fonts/google_fonts.dart';
