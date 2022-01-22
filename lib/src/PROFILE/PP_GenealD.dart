@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:SJIT_PLACEMENT_PORTAL/src/JSON/GenealDJSON.dart';
 import 'PP_CurrentEducation.dart';
 import 'PP_Education.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
+
 import '../GENERAL/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -94,7 +94,7 @@ int Validation(BuildContext context, List<String> pg, List<NewObject> dropbox) {
   }
 
   for (int i = 0; i < pg.length; i++) {
-    pg[i]=pg[i].toUpperCase();
+    pg[i] = pg[i].toUpperCase();
     if (pg[i] == null || pg[i].isEmpty) {
       check = i;
       break;
@@ -107,33 +107,40 @@ int Validation(BuildContext context, List<String> pg, List<NewObject> dropbox) {
   }
   //name
 
-  if(pg[2]!=pg[3]+" "+pg[4]){
-    showdialog(context, "Please Check the "+compareList[2]+" is should be combination of "+compareList[3]+" and "+compareList[4]);
+  if (pg[2] != pg[3] + " " + pg[4]) {
+    showdialog(
+        context,
+        "Please Check the " +
+            compareList[2] +
+            " is should be combination of " +
+            compareList[3] +
+            " and " +
+            compareList[4]);
     return -1;
   }
 
- // if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[2]))) {
- //   showdialog(context, "Please Check the " + compareList[2]);
- //   return -1;
- //   //print("candidate");
- // }
- // if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[3]))) {
- //   showdialog(context, "Please Check the " + compareList[3]);
- //   return -1;
- //   //print("first name");
- // }
- // if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[4]))) {
- //   showdialog(context, "Please Check the " + compareList[4]);
- //   return -1;
- //   //print("last name");
- // }
+  // if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[2]))) {
+  //   showdialog(context, "Please Check the " + compareList[2]);
+  //   return -1;
+  //   //print("candidate");
+  // }
+  // if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[3]))) {
+  //   showdialog(context, "Please Check the " + compareList[3]);
+  //   return -1;
+  //   //print("first name");
+  // }
+  // if (!(RegExp(r'[!@#<>?":_`~;[\]\\|=+)(*&^%\s-]').hasMatch(pg[4]))) {
+  //   showdialog(context, "Please Check the " + compareList[4]);
+  //   return -1;
+  //   //print("last name");
+  // }
 
   //register number
- if (!RegExp(r'^3124\d{8}$').hasMatch(pg[0])) {
-   showdialog(context, "Please Check the " + compareList[0]);
-   return -1;
-   //print("Register number was invalid");
- }
+  if (!RegExp(r'^3124\d{8}$').hasMatch(pg[0])) {
+    showdialog(context, "Please Check the " + compareList[0]);
+    return -1;
+    //print("Register number was invalid");
+  }
   //roll no
   if (pg[1].length != 8) {
     showdialog(context, "Please Check the " + compareList[1]);
@@ -162,16 +169,22 @@ int Validation(BuildContext context, List<String> pg, List<NewObject> dropbox) {
     showdialog(context, "Please Check the " + compareList[7]);
     return -1;
   }
-  List<String> a=pg[5].split("-");
-  List<String> b=pg[6].split("-");
-  List<String> c=pg[7].split("-");
-  if(a[0]!=b[1]||a[0]!=c[2]||a[1]!=b[0]||a[1]!=c[1]||a[2]!=b[2]||a[2]!=c[0]){
+  List<String> a = pg[5].split("-");
+  List<String> b = pg[6].split("-");
+  List<String> c = pg[7].split("-");
+  if (a[0] != b[1] ||
+      a[0] != c[2] ||
+      a[1] != b[0] ||
+      a[1] != c[1] ||
+      a[2] != b[2] ||
+      a[2] != c[0]) {
     showdialog(context, "Please Check the DATE OF BIRTH");
     return -1;
   }
 
   //year
-  if (!RegExp(r'^\d{4}$').hasMatch(pg[8])||pg[8]!="20"+pg[0].substring(4,6)) {
+  if (!RegExp(r'^\d{4}$').hasMatch(pg[8]) ||
+      pg[8] != "20" + pg[0].substring(4, 6)) {
     showdialog(context, "Please Check the " + compareList[8]);
     return -1;
     //print("year of admission");
@@ -244,7 +257,7 @@ class _PpGenealDState extends State<PpGenealD> {
 //      print('In PP_GenealD: $value');
       String temp1 = value.toString();
 //      print('$temp1');
-      if (value.runtimeType == Null||value.rollno.runtimeType==Null) {
+      if (value.runtimeType == Null || value.rollno.runtimeType == Null) {
         setState(() {
           loading = false;
         });
@@ -739,9 +752,9 @@ class _PpGenealDState extends State<PpGenealD> {
                                   backgroundColor: const Color(0xFFE96710),
                                   foregroundColor: Colors.black,
                                   onPressed: () {
-                                    pg[3]=pg[3].trim();
-                                    pg[4]=pg[4].trim();
-                                    pg[2]=pg[2].trim();
+                                    pg[3] = pg[3].trim();
+                                    pg[4] = pg[4].trim();
+                                    pg[2] = pg[2].trim();
 //                                    print('Success');
 //                                    print(Validation(context, pg, dropbox));
                                     if (Validation(context, pg, dropbox) == 1) {

@@ -6,7 +6,7 @@ import '../api/api.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
+
 import '../GENERAL/loginPage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:developer';

@@ -5,7 +5,6 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import '../IWC/Interships.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
 import 'loginPage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_offline/flutter_offline.dart';

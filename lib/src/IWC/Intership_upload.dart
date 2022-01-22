@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:ui';
 
 import 'Interships.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
+
 import '../GENERAL/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';

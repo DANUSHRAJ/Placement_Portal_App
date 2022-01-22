@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:lottie/lottie.dart';
 import 'Intership_upload.dart';
 import '../PROFILE/PP_Data.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
+
 import '../GENERAL/home_screen.dart';
 import '../GENERAL/loginPage.dart';
 

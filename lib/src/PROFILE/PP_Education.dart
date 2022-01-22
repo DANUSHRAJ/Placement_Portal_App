@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'PP_CurrentEducation.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
+
 import '../GENERAL/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,43 +72,43 @@ int Validation(BuildContext context, List<String> pe) {
             ));
   }
 
- for (int i = 0; i < pe.length; i++) {
-   pe[i]=pe[i].toUpperCase();
-   if (pe[i] == null || pe[i].isEmpty) {
-     check = i;
-     break;
-   }
- }
- if (check != -1) {
-   showdialog(context, "please fill the " + compareList[check]);
-   //print(compareList[check]+" was left blank");
-   return -1;
- }
+  for (int i = 0; i < pe.length; i++) {
+    pe[i] = pe[i].toUpperCase();
+    if (pe[i] == null || pe[i].isEmpty) {
+      check = i;
+      break;
+    }
+  }
+  if (check != -1) {
+    showdialog(context, "please fill the " + compareList[check]);
+    //print(compareList[check]+" was left blank");
+    return -1;
+  }
 //  //year
- if (!RegExp(r'^\d{4}$').hasMatch(pe[3])) {
-   showdialog(context, "Please Check the " + compareList[3]);
-   return -1;
-   // print("10th passing");
- }
- if (!RegExp(r'^\d{4}$').hasMatch(pe[9])) {
-   //print("12th passing");
-   showdialog(context, "Please Check the " + compareList[9]);
-   return -1;
- }
+  if (!RegExp(r'^\d{4}$').hasMatch(pe[3])) {
+    showdialog(context, "Please Check the " + compareList[3]);
+    return -1;
+    // print("10th passing");
+  }
+  if (!RegExp(r'^\d{4}$').hasMatch(pe[9])) {
+    //print("12th passing");
+    showdialog(context, "Please Check the " + compareList[9]);
+    return -1;
+  }
 
- //percentage
- if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
-     .hasMatch(pe[0])) {
-   //print("10th percentage");
-   showdialog(context, "Please Check the " + compareList[0]);
-   return -1;
- }
- if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
-     .hasMatch(pe[6])) {
-   //print("12th percentage");
-   showdialog(context, "Please Check the " + compareList[6]);
-   return -1;
- }
+  //percentage
+  if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+      .hasMatch(pe[0])) {
+    //print("10th percentage");
+    showdialog(context, "Please Check the " + compareList[0]);
+    return -1;
+  }
+  if (!RegExp(r'(^100(\.0{1,2})?$)|(^([1-9]([0-9])?|0)(\.[0-9]{1,2})?$)')
+      .hasMatch(pe[6])) {
+    //print("12th percentage");
+    showdialog(context, "Please Check the " + compareList[6]);
+    return -1;
+  }
 
   return 1;
 }
@@ -152,7 +152,7 @@ class _PpEducationDState extends State<PpEducationD> {
 //      print('In PP_GenealD: $value');
       String temp1 = value.toString();
 //      print('$temp1');
-      if (value.runtimeType == Null||value.tp.runtimeType==Null) {
+      if (value.runtimeType == Null || value.tp.runtimeType == Null) {
         setState(() {
           loading = false;
         });
@@ -540,7 +540,10 @@ class _PpEducationDState extends State<PpEducationD> {
                                       context,
                                       PageTransition(
                                           type: PageTransitionType.bottomToTop,
-                                          child: PpCurrentD(regnovar: regnovar, usernamevar: usernamevar,)));
+                                          child: PpCurrentD(
+                                            regnovar: regnovar,
+                                            usernamevar: usernamevar,
+                                          )));
                                 }
                               },
                               label: Text('NEXT'),

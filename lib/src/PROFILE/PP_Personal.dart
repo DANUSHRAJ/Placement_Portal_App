@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'PP_Education.dart';
 import 'PP_Extra.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
+
 import '../GENERAL/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -73,8 +73,7 @@ int Validation(BuildContext context, List<String> pp) {
 
   int check = -1;
   for (int i = 0; i < pp.length; i++) {
-    if(!(i==3||i==4||i==12||i==16))
-      pp[i]=pp[i].toUpperCase();
+    if (!(i == 3 || i == 4 || i == 12 || i == 16)) pp[i] = pp[i].toUpperCase();
     if (pp[i] == null || pp[i].isEmpty) {
       check = i;
       break;
@@ -87,89 +86,92 @@ int Validation(BuildContext context, List<String> pp) {
   }
 
 //  // phone number
- if (!RegExp(r'^(?:[+0]9)?[0-9]{11}$').hasMatch(pp[0])&&pp[0]!='NA') {
-   //print("land line number");
-   showdialog(context, "Please Check the " + compareList[0]);
-   return -1;
- }
- if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[1])) {
-   //print("primary number");
-   showdialog(context, "Please Check the " + compareList[1]);
-   return -1;
- }
- if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[2])) {
-   //print("emergency number");
-   showdialog(context, "Please Check the " + compareList[2]);
-   return -1;
- }
- if(pp[1]==pp[2]){
-   showdialog(context, "Please Check Your Primary number and Emergency number should not be same");
-   return -1;
- }
+  if (!RegExp(r'^(?:[+0]9)?[0-9]{11}$').hasMatch(pp[0]) && pp[0] != 'NA') {
+    //print("land line number");
+    showdialog(context, "Please Check the " + compareList[0]);
+    return -1;
+  }
+  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[1])) {
+    //print("primary number");
+    showdialog(context, "Please Check the " + compareList[1]);
+    return -1;
+  }
+  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[2])) {
+    //print("emergency number");
+    showdialog(context, "Please Check the " + compareList[2]);
+    return -1;
+  }
+  if (pp[1] == pp[2]) {
+    showdialog(context,
+        "Please Check Your Primary number and Emergency number should not be same");
+    return -1;
+  }
 //
 //  //email id
- if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[3])) {
-   //print("primary");
-   showdialog(context, "Please Check the " + compareList[3]);
-   return -1;
- }
- if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[4])) {
-   //print("alternate");
-   showdialog(context, "Please Check the " + compareList[4]);
-   return -1;
- }
+  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[3])) {
+    //print("primary");
+    showdialog(context, "Please Check the " + compareList[3]);
+    return -1;
+  }
+  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$').hasMatch(pp[4])) {
+    //print("alternate");
+    showdialog(context, "Please Check the " + compareList[4]);
+    return -1;
+  }
 
-  if(pp[1]==pp[2]){
-    showdialog(context, "Please Check Your Primary Email ID and Alternate Email ID should not be same");
+  if (pp[1] == pp[2]) {
+    showdialog(context,
+        "Please Check Your Primary Email ID and Alternate Email ID should not be same");
     return -1;
   }
 
 //
 //  //pancard
- if (!RegExp(r'[A-Z]{5}[0-9]{4}[A-Z]{1}$')
-     .hasMatch(pp[5])) {
-   //print("pan card");
-   showdialog(context, "Please Check the " + compareList[5]);
-   return -1;
- }
+  if (!RegExp(r'[A-Z]{5}[0-9]{4}[A-Z]{1}$').hasMatch(pp[5])) {
+    //print("pan card");
+    showdialog(context, "Please Check the " + compareList[5]);
+    return -1;
+  }
 //^[A-PR-WYa-pr-wy][1-9]\\d\\s?\\d{4}[1-9]$
- if(!RegExp(r'^[A-Z]{1}[0-9]{7}$').hasMatch(pp[7])&&pp[7]!='NA'){
-   showdialog(context, "Please Check the " + compareList[7]);
-   return -1;
- }
+  if (!RegExp(r'^[A-Z]{1}[0-9]{7}$').hasMatch(pp[7]) && pp[7] != 'NA') {
+    showdialog(context, "Please Check the " + compareList[7]);
+    return -1;
+  }
 
- if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[11])&&pp[11]!='NA') {
-   //print("father's mobile number");
-   showdialog(context, "Please Check the " + compareList[11]);
-   return -1;
- }
+  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[11]) && pp[11] != 'NA') {
+    //print("father's mobile number");
+    showdialog(context, "Please Check the " + compareList[11]);
+    return -1;
+  }
 
- if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
-     .hasMatch(pp[12])&&pp[12]!='NA') {
-   //print("father email id");
-   showdialog(context, "Please Check the " + compareList[12]);
-   return -1;
- }
+  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+          .hasMatch(pp[12]) &&
+      pp[12] != 'NA') {
+    //print("father email id");
+    showdialog(context, "Please Check the " + compareList[12]);
+    return -1;
+  }
 //
- if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[15])&&pp[15]!='NA') {
-   //print("mother's mobile number");
-   showdialog(context, "Please Check the " + compareList[15]);
-   return -1;
- }
+  if (!RegExp(r'^(?:[+0]9)?[0-9]{10}$').hasMatch(pp[15]) && pp[15] != 'NA') {
+    //print("mother's mobile number");
+    showdialog(context, "Please Check the " + compareList[15]);
+    return -1;
+  }
 //
- if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
-     .hasMatch(pp[16])&&pp[16]!='NA') {
-   //print("mother email id");
-   showdialog(context, "Please Check the " + compareList[16]);
-   return -1;
- }
+  if (!RegExp(r'^([a-z0-9\.-]+)@([a-z0-9-]+).([a-z]{2,20})$')
+          .hasMatch(pp[16]) &&
+      pp[16] != 'NA') {
+    //print("mother email id");
+    showdialog(context, "Please Check the " + compareList[16]);
+    return -1;
+  }
 //
 //  //postal code
- if (!RegExp(r'^\d{6}$').hasMatch(pp[22])) {
-   //print("postal code");
-   showdialog(context, "Please Check the " + compareList[22]);
-   return -1;
- }
+  if (!RegExp(r'^\d{6}$').hasMatch(pp[22])) {
+    //print("postal code");
+    showdialog(context, "Please Check the " + compareList[22]);
+    return -1;
+  }
   return 1;
 }
 
@@ -183,7 +185,8 @@ class PpPersonalD extends StatefulWidget {
   final ProfileApi papi = ProfileApi();
 
   @override
-  _PpPersonalDState createState() => _PpPersonalDState(regnovar: regnovar, usernamevar: usernamevar);
+  _PpPersonalDState createState() =>
+      _PpPersonalDState(regnovar: regnovar, usernamevar: usernamevar);
 }
 
 class NewObject {
@@ -231,7 +234,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
 //      print('$temp1');
 //      if(temp1=='null'||temp1.isEmpty){
 //        print(value.runtimeType);
-      if (value.runtimeType == Null||value.land.runtimeType==Null) {
+      if (value.runtimeType == Null || value.land.runtimeType == Null) {
         setState(() {
           loading = false;
         });
@@ -280,35 +283,55 @@ class _PpPersonalDState extends State<PpPersonalD> {
     }
 //    print("Success");
     final String uregno = regnovar;
-    final String land=pp[0];
-    final String pmno=pp[1];
-    final String emno=pp[2];
-    final String pmail=pp[3];
-    final String amail=pp[4];
-    final String pan=pp[5];
-    final String natio=pp[6];
-    final String pass=pp[7];
-    final String adhr=pp[8];
-    final String fname=pp[9];
-    final String focp=pp[10];
-    final String fmno=pp[11];
-    final String fmail=pp[12];
-    final String mname=pp[13];
-    final String mocp=pp[14];
-    final String mmno=pp[15];
-    final String mmail=pp[16];
-    final String paddr=pp[17];
-    final String paddr1=pp[18];
-    final String paddr2=pp[19];
-    final String pcity=pp[20];
-    final String state=pp[21];
-    final String pco=pp[22];
+    final String land = pp[0];
+    final String pmno = pp[1];
+    final String emno = pp[2];
+    final String pmail = pp[3];
+    final String amail = pp[4];
+    final String pan = pp[5];
+    final String natio = pp[6];
+    final String pass = pp[7];
+    final String adhr = pp[8];
+    final String fname = pp[9];
+    final String focp = pp[10];
+    final String fmno = pp[11];
+    final String fmail = pp[12];
+    final String mname = pp[13];
+    final String mocp = pp[14];
+    final String mmno = pp[15];
+    final String mmail = pp[16];
+    final String paddr = pp[17];
+    final String paddr1 = pp[18];
+    final String paddr2 = pp[19];
+    final String pcity = pp[20];
+    final String state = pp[21];
+    final String pco = pp[22];
 
     await widget.papi.uploadPersonalD(
-        uregno,land,pmno,emno,pmail,amail,pan,natio,pass,
-        adhr,fname,focp,fmno,fmail,mname,mocp,mmno,mmail,paddr,paddr1,
-        paddr2,pcity,state,pco
-    );
+        uregno,
+        land,
+        pmno,
+        emno,
+        pmail,
+        amail,
+        pan,
+        natio,
+        pass,
+        adhr,
+        fname,
+        focp,
+        fmno,
+        fmail,
+        mname,
+        mocp,
+        mmno,
+        mmail,
+        paddr,
+        paddr1,
+        paddr2,
+        pcity,
+        state,
+        pco);
 
     setState(() {
       loading = false;
@@ -580,21 +603,23 @@ class _PpPersonalDState extends State<PpPersonalD> {
                           _entryFieldnumbers('EMERGENCY CONTACT NO', pp[2], 2),
                           _entryFieldalphabetsdisplay(
                               'PRIMARY EMAIL ID', pp[3], 3),
-                          _entryFieldalphabets(
-                              'ALTERNATE EMAIL ID', pp[4], 4),
+                          _entryFieldalphabets('ALTERNATE EMAIL ID', pp[4], 4),
                           _entryFieldalphabets('PAN CARD NUMBER', pp[5], 5),
                           _entryFieldalphabets('NATIONALITY', pp[6], 6),
-                          _entryFieldalphabets('INDIAN PASSPORT NUMBER', pp[7], 7),
+                          _entryFieldalphabets(
+                              'INDIAN PASSPORT NUMBER', pp[7], 7),
                           _entryFieldnumbers('AADHAAR NUMBER', pp[8], 8),
                           _entryFieldalphabets('FATHER NAME', pp[9], 9),
                           _entryFieldalphabets(
                               'Father DESIGNATION & ORGANISATION', pp[10], 10),
-                          _entryFieldnumbers('FATHER MOBILE NUMBER', pp[11], 11),
+                          _entryFieldnumbers(
+                              'FATHER MOBILE NUMBER', pp[11], 11),
                           _entryFieldalphabets('FATHER EMAIL ID', pp[12], 12),
                           _entryFieldalphabets('MOTHER NAME', pp[13], 13),
                           _entryFieldalphabets(
                               'Mother DESIGNATION & ORGANISATION', pp[14], 14),
-                          _entryFieldnumbers('MOTHER MOBILE NUMBER', pp[15], 15),
+                          _entryFieldnumbers(
+                              'MOTHER MOBILE NUMBER', pp[15], 15),
                           _entryFieldalphabets('MOTHER EMAIL ID', pp[16], 16),
                           _entryFieldalphabets(
                               'PERMANENT ADDRESS WITH PIN CODE', pp[17], 17),
@@ -612,16 +637,16 @@ class _PpPersonalDState extends State<PpPersonalD> {
                               backgroundColor: const Color(0xFFE96710),
                               foregroundColor: Colors.black,
                               onPressed: () {
-                                 if (Validation(context, pp) == 1) {
-                                   _uploadtoDB(context);
-                                Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        type: PageTransitionType.bottomToTop,
-                                        child: PpExtraD(
-                                          regnovar: regnovar,
-                                          usernamevar: usernamevar,
-                                        )));
+                                if (Validation(context, pp) == 1) {
+                                  _uploadtoDB(context);
+                                  Navigator.push(
+                                      context,
+                                      PageTransition(
+                                          type: PageTransitionType.bottomToTop,
+                                          child: PpExtraD(
+                                            regnovar: regnovar,
+                                            usernamevar: usernamevar,
+                                          )));
                                 }
                               },
                               label: Text('NEXT'),

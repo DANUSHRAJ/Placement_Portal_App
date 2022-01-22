@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'PP_Education.dart';
 import 'PP_Personal.dart';
-import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
+
 import '../GENERAL/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -69,7 +69,7 @@ int Validation(BuildContext context, List<String> pce, NewObject noArrears) {
   }
 
   for (int i = 0; i < pce.length; i++) {
-    pce[i]=pce[i].toUpperCase();
+    pce[i] = pce[i].toUpperCase();
     if (pce[i] == null || pce[i].isEmpty) {
       check = i;
       break;
@@ -98,7 +98,7 @@ int Validation(BuildContext context, List<String> pce, NewObject noArrears) {
   }
 //  //arrear
   for (int i = 9; i < 19; i++) {
-    if (!RegExp(r'^[0-9]+$').hasMatch(pce[i])&&pce[i]!='-') {
+    if (!RegExp(r'^[0-9]+$').hasMatch(pce[i]) && pce[i] != '-') {
       //print(compareList[i]+" was invalid");
       showdialog(context, "Please Check the " + compareList[i]);
       return -1;
@@ -526,7 +526,10 @@ class _PpCurrentDState extends State<PpCurrentD> {
                           _entryFieldnumbers(
                               'TOTAL NO OF STANDING ARREARS', pce[17], 17),
                           _DropBox("HISTORY OF ARREARS [Y/N]", yesorno),
-                          _entryFieldnumbers('HOW MANY ARREARS? IF YES ELSE give 0', pce[18], 18),
+                          _entryFieldnumbers(
+                              'HOW MANY ARREARS? IF YES ELSE give 0',
+                              pce[18],
+                              18),
                           SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
