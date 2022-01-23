@@ -66,6 +66,7 @@ class InternListing extends StatelessWidget {
           )
           .toList(),
       //
+      SizedBox(height: 100),
     ]);
   }
 }

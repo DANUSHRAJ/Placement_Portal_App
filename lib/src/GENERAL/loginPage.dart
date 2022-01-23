@@ -60,7 +60,6 @@ class _LoginPageState extends State<LoginPage>
   Color right = Colors.white;
 
   Timer _timer;
-  double _progress;
 
   @override
   void initState() {

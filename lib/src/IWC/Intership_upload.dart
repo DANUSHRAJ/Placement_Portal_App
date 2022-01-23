@@ -39,7 +39,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
   final String usernamevar;
   String tflink;
   File file;
-  var fileName='No file selected';
+  var fileName = 'No file selected';
 
   _IntershipUploadState({this.regnovar, this.usernamevar});
 
@@ -104,6 +104,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
   }
 
   Timer _timer;
+
   FToast fToast;
   @override
   void initState() {
@@ -533,11 +534,11 @@ class _IntershipUploadState extends State<IntershipUpload> {
                             ),
                             onTap: () {
                               selectFile();
-                            //   Navigator.push(
-                            //       context,
-                            //       PageTransition(
-                            //           type: PageTransitionType.bottomToTop,
-                            //           child: FileUpload(regnovar: regnovar, usernamevar: usernamevar,)));
+                              //   Navigator.push(
+                              //       context,
+                              //       PageTransition(
+                              //           type: PageTransitionType.bottomToTop,
+                              //           child: FileUpload(regnovar: regnovar, usernamevar: usernamevar,)));
                               // Navigator.push(
                               //     context,
                               //     PageTransition(
@@ -547,7 +548,8 @@ class _IntershipUploadState extends State<IntershipUpload> {
                           ),
                           Text(
                             fileName,
-                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w500),
                           ),
                           SizedBox(height: 48),
                         ],
@@ -617,6 +619,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
       ],
     );
   }
+
   Future selectFile() async {
     final result = await FilePicker.platform.pickFiles(allowMultiple: false);
 
@@ -635,6 +638,6 @@ class _IntershipUploadState extends State<IntershipUpload> {
     // print(file);
     var urlDownload = await fuapi.uploadFileFB(file);
     print("FU: $urlDownload");
-    tflink=urlDownload.toString();
+    tflink = urlDownload.toString();
   }
 }

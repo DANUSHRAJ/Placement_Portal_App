@@ -174,11 +174,12 @@ class _IntershipsState extends State<Interships> with TickerProviderStateMixin {
           : Stack(children: <Widget>[
               generateBluredImage(),
               Align(
-                alignment: Alignment.topRight,
+                alignment: Alignment.centerLeft,
                 child: InternListing(
                   internDet: internDet,
                 ),
               ),
+              //SizedBox(height: height * 1),
               Center(
                 child: Align(
                   alignment: Alignment.bottomCenter,
