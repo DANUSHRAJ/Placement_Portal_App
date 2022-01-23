@@ -338,7 +338,7 @@ class HomeScreen extends StatelessWidget {
                             //       regnovar: regnovar,
                             //       usernamevar: usernamevar,
                             //     ))
-                            // ));
+
                             Navigator.push(
                                 context,
                                 PageTransition(
