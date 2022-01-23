@@ -39,7 +39,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
   final String usernamevar;
   String tflink;
   File file;
-  var fileName = 'No file selected';
+  var fileName = 'No file selected yet';
 
   _IntershipUploadState({this.regnovar, this.usernamevar});
 
@@ -380,7 +380,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
       onTap: () {
         _addInternDetails(i_title.text, i_name.text, i_sd.text, i_ed.text,
             i_clink.text, i_plink.text, i_flink.text);
-        //_findAccount(etRegisterNo.text, etPassword.text);
+
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -456,7 +456,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
         title: Text(
           "INTERNSHIP UPLOAD",
           style: GoogleFonts.adventPro(
-              fontSize: 30,
+              fontSize: 25,
               color: Colors.orangeAccent,
               fontWeight: FontWeight.bold),
         ),
@@ -496,23 +496,6 @@ class _IntershipUploadState extends State<IntershipUpload> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          // ButtonWidget(
-                          //   text: 'Select File',
-                          //   icon: Icons.attach_file,
-                          //   onClicked: selectFile,
-                          // ),
-                          // SizedBox(height: 8),
-                          // Text(
-                          //   fileName,
-                          //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-                          // ),
-                          // SizedBox(height: 48),
-                          // ButtonWidget(
-                          //   text: 'Upload File',
-                          //   icon: Icons.cloud_upload_outlined,
-                          //   onClicked: uploadFile,
-                          // ),
-                          // SizedBox(height: 20),
                           InkWell(
                             child: Card(
                               color: Colors.amberAccent,
@@ -534,24 +517,16 @@ class _IntershipUploadState extends State<IntershipUpload> {
                             ),
                             onTap: () {
                               selectFile();
-                              //   Navigator.push(
-                              //       context,
-                              //       PageTransition(
-                              //           type: PageTransitionType.bottomToTop,
-                              //           child: FileUpload(regnovar: regnovar, usernamevar: usernamevar,)));
-                              // Navigator.push(
-                              //     context,
-                              //     PageTransition(
-                              //         type: PageTransitionType.bottomToTop,
-                              //         child: HomeScreen()));
                             },
                           ),
                           Text(
                             fileName,
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w500),
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
                           ),
-                          SizedBox(height: 48),
+                          // SizedBox(height: 48),
                         ],
                       ),
                     ),

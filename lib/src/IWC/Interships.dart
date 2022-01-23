@@ -193,7 +193,7 @@ class _IntershipsState extends State<Interships> with TickerProviderStateMixin {
 
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black,
       type: BottomNavigationBarType.fixed,
       onTap: (value) {
         if (value == 2) {
