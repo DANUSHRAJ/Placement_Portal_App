@@ -39,6 +39,7 @@ dependencies:
   slider_button: ^2.0.0
   flutter_easyloading: ^3.0.3
   simple_animations: ^1.1.3
+  file_picker: ^4.3.2
   
   
 

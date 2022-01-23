@@ -1,6 +1,14 @@
+import 'dart:async';
 import 'dart:developer';
+import 'dart:io';
 import 'dart:ui';
 
+import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/button_widget.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/api/fileUploadapi.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+
+// import 'FileUpload.dart';
 import 'Interships.dart';
 
 import '../GENERAL/home_screen.dart';
@@ -14,6 +22,7 @@ import '../api/internapi.dart';
 class IntershipUpload extends StatefulWidget {
   final String regnovar;
   final String usernamevar;
+  // String tf_link;
 
   IntershipUpload({Key key, this.regnovar, this.usernamevar}) : super(key: key);
 
@@ -28,6 +37,9 @@ class IntershipUpload extends StatefulWidget {
 class _IntershipUploadState extends State<IntershipUpload> {
   final String regnovar;
   final String usernamevar;
+  String tflink;
+  File file;
+  var fileName='No file selected';
 
   _IntershipUploadState({this.regnovar, this.usernamevar});
 
@@ -43,12 +55,22 @@ class _IntershipUploadState extends State<IntershipUpload> {
 
   void _addInternDetails(String if_title, String if_name, String if_sd,
       String if_ed, String if_clink, String if_plink, String if_flink) async {
+    await EasyLoading.show(
+      status: 'Uploading Data...',
+      maskType: EasyLoadingMaskType.black,
+    );
+    await uploadFile();
+    if_flink = tflink;
 //    log('$name-$regno-$un-$pwd');
 //    log('$regnovar-$usernamevar');
     int check = 1;
     if (if_title.isEmpty || if_name.isEmpty || if_sd.isEmpty || if_ed.isEmpty) {
 //      log('Please Fill all the fields');
       check = 0;
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Incorrect Details',
+      );
     }
     DateTime startDate = DateTime.parse(if_sd);
     DateTime endDate = DateTime.parse(if_ed);
@@ -56,10 +78,13 @@ class _IntershipUploadState extends State<IntershipUpload> {
 //      log('Correct Date');
     } else {
       check = 0;
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Incorrect Date format',
+      );
 //      log('Wrong Date');
     }
     if (check == 1) {
-      if_flink = "";
       final upload_intern = await widget.api.uploadIntern(regnovar, usernamevar,
           if_title, if_name, if_sd, if_ed, if_clink, if_plink, if_flink);
       int check = 1;
@@ -73,7 +98,23 @@ class _IntershipUploadState extends State<IntershipUpload> {
                     )));
         check = 0;
       });
+      EasyLoading.showSuccess('Great Success!');
+      EasyLoading.dismiss();
     }
+  }
+
+  Timer _timer;
+  FToast fToast;
+  @override
+  void initState() {
+    super.initState();
+    fToast = FToast();
+    fToast.init(context);
+    EasyLoading.addStatusCallback((status) {
+      if (status == EasyLoadingStatus.dismiss) {
+        _timer?.cancel();
+      }
+    });
   }
 
   Widget _backButton() {
@@ -175,14 +216,6 @@ class _IntershipUploadState extends State<IntershipUpload> {
         ],
       ),
     );
-  }
-
-  FToast fToast;
-  @override
-  void initState() {
-    super.initState();
-    fToast = FToast();
-    fToast.init(context);
   }
 
   Widget _entryFieldalphabets3(String title, String hint,
@@ -462,6 +495,23 @@ class _IntershipUploadState extends State<IntershipUpload> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
+                          // ButtonWidget(
+                          //   text: 'Select File',
+                          //   icon: Icons.attach_file,
+                          //   onClicked: selectFile,
+                          // ),
+                          // SizedBox(height: 8),
+                          // Text(
+                          //   fileName,
+                          //   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          // ),
+                          // SizedBox(height: 48),
+                          // ButtonWidget(
+                          //   text: 'Upload File',
+                          //   icon: Icons.cloud_upload_outlined,
+                          //   onClicked: uploadFile,
+                          // ),
+                          // SizedBox(height: 20),
                           InkWell(
                             child: Card(
                               color: Colors.amberAccent,
@@ -482,13 +532,24 @@ class _IntershipUploadState extends State<IntershipUpload> {
                               ),
                             ),
                             onTap: () {
-                              Navigator.push(
-                                  context,
-                                  PageTransition(
-                                      type: PageTransitionType.bottomToTop,
-                                      child: HomeScreen()));
+                              selectFile();
+                            //   Navigator.push(
+                            //       context,
+                            //       PageTransition(
+                            //           type: PageTransitionType.bottomToTop,
+                            //           child: FileUpload(regnovar: regnovar, usernamevar: usernamevar,)));
+                              // Navigator.push(
+                              //     context,
+                              //     PageTransition(
+                              //         type: PageTransitionType.bottomToTop,
+                              //         child: HomeScreen()));
                             },
                           ),
+                          Text(
+                            fileName,
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                          ),
+                          SizedBox(height: 48),
                         ],
                       ),
                     ),
@@ -555,5 +616,25 @@ class _IntershipUploadState extends State<IntershipUpload> {
             icon: Icon(Icons.check_box_outlined), label: "COMPLETED"),
       ],
     );
+  }
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles(allowMultiple: false);
+
+    if (result == null) return;
+    final path = result.files.single.path;
+    fileName = result.files.single.name;
+    final bytes = result.files.single.bytes;
+    print("Bytes $bytes");
+
+    setState(() => file = File(path));
+  }
+
+  Future uploadFile() async {
+    if (file == null) return;
+    FileUploadApi fuapi = FileUploadApi();
+    // print(file);
+    var urlDownload = await fuapi.uploadFileFB(file);
+    print("FU: $urlDownload");
+    tflink=urlDownload.toString();
   }
 }

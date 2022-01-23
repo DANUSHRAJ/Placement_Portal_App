@@ -51,6 +51,9 @@ server_router.post("/getinterndet",service.getinterndet);
 //http://localhost:8081/uploadintern
 server_router.post("/uploadintern",service.uploadintern);
 
+//http://localhost:8081/uploadFileFB
+server_router.post("/uploadFileFB",service.uploadFileFB);
+
 //http://localhost:8081/getworkshop
 server_router.post("/getworkshop",service.getworkshop);
 

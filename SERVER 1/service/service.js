@@ -1,6 +1,12 @@
 var express = require('express');
 const client = require('../config/db_config');
 
+
+const uploadFile = require("../config/upload");
+
+const firebaseAdmin = require('firebase-admin');
+const { v4: uuidv4 } = require('uuid');
+const serviceAccount = require('./placement-portal-56d18-firebase-adminsdk-v7pqd-01ce02b42c.json');
 //Refernece:
 //https://www.youtube.com/watch?v=fbYExfeFsI0
 // create
@@ -244,6 +250,63 @@ module.exports.uploadintern = async (req,res)=>{
         console.log(err);
     }
 };
+const adminfb = firebaseAdmin.initializeApp({
+    credential: firebaseAdmin.credential.cert(serviceAccount),
+});
+module.exports.uploadFileFB = async (req,res)=>{
+    try {
+        // console.log("Body: "+ req.body.file);
+        await uploadFile(req, res);
+        // console.log("File: "+req.file.filename);
+        if (req.file == undefined) {
+          return res.status(400).send({ message: "Please upload a file!" });
+        }
+
+        const storageRef = adminfb.storage().bucket(`gs://placement-portal-56d18.appspot.com`);
+        (async() => {
+            path='./config/uploads/'+req.file.filename;
+
+            storage = await storageRef.upload(path.toString(), {
+                    public: true,
+                    destination: `uploads/files/${req.file.filename}`,
+                    metadata: {
+                        firebaseStorageDownloadTokens: uuidv4(),
+                    }
+            });
+            let url = storage[0].metadata.mediaLink;
+            console.log(url);
+            
+            // const result = await client.db("resto").collection("foddetimg").insertOne({
+            //     'name':req.body.name,
+            //     'filename':req.file.originalname,
+            //     'filelocfb':url
+            // });
+
+            // const result1 = await client.db("resto").collection("foddet").updateMany(
+            //     {name: req.body.name},
+            //      {$set: {path: url}},
+            //      (err1,result1)=>{
+            //          if(err1)
+            //              console.log(err1);
+            //      }
+            //  );
+
+            res.status(200).send(url);
+        })();
+      } catch (err) {
+        console.log(err);
+    
+        if (err.code == "LIMIT_FILE_SIZE") {
+          return res.status(500).send({
+            message: "File size cannot be larger than 2MB!",
+          });
+        }
+    
+        res.status(500).send({
+          message: `Could not upload the file: ${req.file.originalname}. ${err}`,
+        });
+      }
+}
 module.exports.getworkshop = async (req,res)=>{
     try{
         const result = await client.db("Cluster0").collection("workshop").find();
