@@ -19,3 +19,6 @@ fields.txt in bin that specifies the fields needed to be exported.
 
 Firebase reference
 https://github.com/JohannesMilke/firebase_upload_example
+
+File encoding reference
+https://stackoverflow.com/questions/51161862/how-to-send-an-image-to-an-api-in-dart-flutter
