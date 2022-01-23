@@ -312,6 +312,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
           ),
           TextFormField(
             controller: i_sd,
+
             decoration: InputDecoration(
                 prefixIcon: Icon(Icons.calendar_today),
                 hintText: hint,
@@ -375,48 +376,6 @@ class _IntershipUploadState extends State<IntershipUpload> {
     );
   }
 
-  Widget _submitButton(String title) {
-    return InkWell(
-      onTap: () {
-        _addInternDetails(i_title.text, i_name.text, i_sd.text, i_ed.text,
-            i_clink.text, i_plink.text, i_flink.text);
-
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen(
-                      regnovar: regnovar,
-                      usernamevar: usernamevar,
-                    )));
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width * .5,
-        padding: EdgeInsets.symmetric(vertical: 9),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(
-                  color: Colors.orangeAccent,
-                  offset: Offset(2, 4),
-                  blurRadius: 5,
-                  spreadRadius: 1)
-            ],
-            gradient: LinearGradient(
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                colors: [Colors.black87, Colors.black87])),
-        child: Text(
-          title,
-          style: GoogleFonts.adventPro(
-              fontSize: 30,
-              color: Colors.deepOrangeAccent,
-              fontWeight: FontWeight.bold),
-        ),
-      ),
-    );
-  }
-
   void _showtoast(String value) {
     Fluttertoast.showToast(
         msg: value,
@@ -450,6 +409,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    var display1;
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -490,6 +450,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
                         "Enter link Or Certificate Id"),
                     _entryFieldalphabets4("PROJECT RELATED LINKS",
                         "Github links or website links or Docker Links"),
+                    SizedBox(height: height * .04),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
@@ -498,20 +459,52 @@ class _IntershipUploadState extends State<IntershipUpload> {
                         children: <Widget>[
                           InkWell(
                             child: Card(
-                              color: Colors.amberAccent,
+                              color: Colors.transparent,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10)),
                               elevation: 8,
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Text(
-                                    '\n     UPLOAD HERE    \n',
-                                    style: GoogleFonts.adventPro(
-                                        fontSize: 15,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
+                                children: [
+                                  RichText(
+                                    textAlign: TextAlign.justify,
+                                    text: TextSpan(
+                                      style: GoogleFonts.adventPro(
+                                          fontSize: 25,
+                                          color: Colors.orangeAccent,
+                                          fontWeight: FontWeight.bold),
+                                      children: [
+                                        WidgetSpan(
+                                          child: Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .7,
+                                            padding: EdgeInsets.symmetric(
+                                              vertical: 14,
+                                            ),
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(20)),
+                                              border: Border.all(
+                                                  color: Colors.white,
+                                                  width: 4),
+                                            ),
+                                            child: Text(
+                                              'Click To Upload Certificate',
+                                              style: GoogleFonts.portLligatSans(
+                                                  //textStyle: Theme.of(context).textTheme.display1,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.orangeAccent),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
+                                  SizedBox(height: height * .01),
                                 ],
                               ),
                             ),
@@ -526,26 +519,66 @@ class _IntershipUploadState extends State<IntershipUpload> {
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white),
                           ),
-                          // SizedBox(height: 48),
+                          SizedBox(height: height * .02),
                         ],
                       ),
                     ),
-                    Align(
-                      child: Text(
-                        "\n\n*ONLY .PDF FORMAT IS ACCEPTED.\n\n*FILE SIZE MUST BE LESS THAN 2 mb.\n\n",
-                        style: GoogleFonts.adventPro(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                    // Align(
+                    //   child: Text(
+                    //     "\n*FILE SIZE MUST BE LESS THAN 2 mb.\n",
+                    //     style: GoogleFonts.adventPro(
+                    //         fontSize: 15,
+                    //         color: Colors.white,
+                    //         fontWeight: FontWeight.bold),
+                    //   ),
+                    // ),
+                    SizedBox(height: height * .01),
+                    InkWell(
+                      child: Card(
+                        shadowColor: Colors.orange,
+                        color: Colors.amberAccent,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                        elevation: 8,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              '\n       SUBMIT       \n',
+                              style: GoogleFonts.adventPro(
+                                  fontSize: 17,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.justify,
+                            ),
+                          ],
+                        ),
                       ),
+                      onTap: () {
+                        _addInternDetails(
+                            i_title.text,
+                            i_name.text,
+                            i_sd.text,
+                            i_ed.text,
+                            i_clink.text,
+                            i_plink.text,
+                            i_flink.text);
+
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen(
+                                      regnovar: regnovar,
+                                      usernamevar: usernamevar,
+                                    )));
+                      },
                     ),
-                    _submitButton("SUBMIT"),
                     SizedBox(height: height * .1),
                   ],
                 ),
               ),
             ),
-            Positioned(top: 40, left: 0, child: _backButton()),
+            // Positioned(top: 40, left: 0, child: _backButton()),
             //SizedBox(height: height * .67),
             Align(
               alignment: Alignment.bottomCenter,
@@ -559,7 +592,7 @@ class _IntershipUploadState extends State<IntershipUpload> {
 
   BottomNavigationBar buildBottomNavigationBar() {
     return BottomNavigationBar(
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black,
       type: BottomNavigationBarType.fixed,
       currentIndex: _selectedIndex,
       onTap: (value) {
