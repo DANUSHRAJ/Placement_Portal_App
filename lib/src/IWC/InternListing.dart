@@ -38,7 +38,7 @@ class InternListing extends StatelessWidget {
       ...internDet
           .map<Widget>(
             (intern) => Align(
-              alignment: Alignment.topCenter,
+              alignment: Alignment.center,
               child: InkWell(
                 child: Card(
                   color: Colors.transparent,
@@ -47,17 +47,20 @@ class InternListing extends StatelessWidget {
                   elevation: 150,
                   child: buildBlurryWidget(
                     Text(
-                      '\n 🥳\n\t\t\t\tNAME OF THE INTERN: ' +
-                          intern.title +
-                          '\t\n\t\t\t ORGANIZATION NAME: ' +
-                          intern.name +
-                          '\t\n\t\t\t START DATE : ' +
+                      '\n 🥳\n    NAME OF THE INTERN: ' +
+                          intern.title.toUpperCase() +
+                          '\n\n    ORGANIZATION NAME: ' +
+                          intern.name.toUpperCase() +
+                          '\n\n    START DATE : ' +
                           intern.sd +
-                          '\t\n',
+                          '\n\n    END DATE : ' +
+                          intern.ed +
+                          '\n',
                       style: GoogleFonts.adventPro(
                           fontSize: 18,
                           color: Colors.white,
                           fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.justify,
                     ),
                   ),
                 ),
