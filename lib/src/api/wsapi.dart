@@ -7,7 +7,7 @@ import '../JSON/IWCDetails.dart';
 class WSApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io'  'http://127.0.0.1:8081';
 
-  static String apiUrl = 'https://a7f6-122-164-185-122.ngrok.io';
+  static String apiUrl = 'https://sjit-placement-portal.herokuapp.com';
 
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
 
