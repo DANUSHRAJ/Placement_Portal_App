@@ -564,13 +564,13 @@ class _IntershipUploadState extends State<IntershipUpload> {
                             i_plink.text,
                             i_flink.text);
 
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomeScreen(
-                                      regnovar: regnovar,
-                                      usernamevar: usernamevar,
-                                    )));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => HomeScreen(
+                        //               regnovar: regnovar,
+                        //               usernamevar: usernamevar,
+                        //             )));
                       },
                     ),
                     SizedBox(height: height * .1),

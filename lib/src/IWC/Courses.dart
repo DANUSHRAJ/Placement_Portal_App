@@ -1,393 +1,235 @@
-// import 'package:SJIT_PLACEMENT_PORTAL/src/Courses_upload.dart';
-// import 'package:SJIT_PLACEMENT_PORTAL/src/Workshop_upload.dart';
-// import 'package:SJIT_PLACEMENT_PORTAL/src/Workshops.dart';
-// import 'package:flutter/material.dart';
-// import 'package:SJIT_PLACEMENT_PORTAL/src/Widget/bezierContainer.dart';
-// import 'package:SJIT_PLACEMENT_PORTAL/src/home_screen.dart';
+import 'dart:developer';
+import 'dart:ui';
+import 'package:SJIT_PLACEMENT_PORTAL/src/api/courseapi.dart';
+import 'package:lottie/lottie.dart';
+import 'Courses_upload.dart';
+import 'Intership_upload.dart';
+import '../PROFILE/PP_Data.dart';
 
-// import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
-// import 'package:page_transition/page_transition.dart';
+import '../GENERAL/home_screen.dart';
+import '../GENERAL/loginPage.dart';
 
-// class Courses extends StatefulWidget {
-//   const Courses({Key key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
-//   @override
-//   _CoursesState createState() => _CoursesState();
-// }
+import '../JSON/IWCDetails.dart';
+import 'InternListing.dart';
+import '../api/internapi.dart';
 
-// class _CoursesState extends State<Courses> {
-//   int _selectedIndex = 0;
+class Courses extends StatefulWidget {
+  final String regnovar;
+  final String usernamevar;
 
-//   Widget _backButton() {
-//     return InkWell(
-//       onTap: () {
-//         Navigator.push(
-//             context, MaterialPageRoute(builder: (context) => HomeScreen()));
-//       },
-//       child: Container(
-//         padding: EdgeInsets.symmetric(horizontal: 10),
-//         child: Row(
-//           children: <Widget>[
-//             Container(
-//               padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
-//               child: Icon(Icons.home_outlined, color: Colors.white),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
+  final CoursesApi api = CoursesApi();
 
-//   Widget _title() {
-//     return RichText(
-//       textAlign: TextAlign.center,
-//       text: TextSpan(
-//           text: 'COU',
-//           style: GoogleFonts.portLligatSans(
-//             fontSize: 30,
-//             fontWeight: FontWeight.w700,
-//             color: Colors.white,
-//           ),
-//           children: [
-//             TextSpan(
-//               text: 'RSES',
-//               style: GoogleFonts.adventPro(
-//                 fontSize: 30,
-//                 fontWeight: FontWeight.w700,
-//                 color: Colors.black,
-//               ),
-//             ),
-//             TextSpan(
-//               text: '\nHO',
-//               style: GoogleFonts.adventPro(
-//                 fontSize: 30,
-//                 fontWeight: FontWeight.w700,
-//                 color: Colors.orangeAccent,
-//               ),
-//             ),
-//             TextSpan(
-//               text: 'ME',
-//               style: GoogleFonts.adventPro(
-//                 fontSize: 30,
-//                 fontWeight: FontWeight.w700,
-//                 color: Colors.lightGreenAccent,
-//               ),
-//             ),
-//           ]),
-//     );
-//   }
+  Courses({Key key, this.regnovar, this.usernamevar}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     final height = MediaQuery.of(context).size.height;
-//     return Scaffold(
-//         body: Center(
-//             child: Stack(children: <Widget>[
-//       Container(
-//         height: double.infinity,
-//         width: double.infinity,
-//         child: Image.asset('assets/images/inner_bg.gif', fit: BoxFit.cover),
-//       ),
-//       Positioned(
-//         top: -MediaQuery.of(context).size.height * .45,
-//         right: -MediaQuery.of(context).size.width * .4,
-//         child: BezierContainer(),
-//       ),
-//       Align(
-//         alignment: Alignment.center,
-//         child: SingleChildScrollView(
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.center,
-//             children: <Widget>[
-//               Container(
-//                 padding: EdgeInsets.symmetric(horizontal: 7),
-//                 child: Column(
-//                   crossAxisAlignment: CrossAxisAlignment.start,
-//                   mainAxisAlignment: MainAxisAlignment.start,
-//                   children: <Widget>[
-//                     SizedBox(height: height * .03),
-//                     Align(alignment: Alignment.topLeft, child: _backButton()),
-//                     Align(alignment: Alignment.topCenter, child: _title()),
+  @override
+  _CoursesState createState() =>
+      _CoursesState(regnovar: regnovar, usernamevar: usernamevar);
+}
 
-//                     SizedBox(height: height * .05),
+class _CoursesState extends State<Courses> with TickerProviderStateMixin {
+  final String regnovar;
+  final String usernamevar;
+  AnimationController _controller;
+  _CoursesState({this.regnovar, this.usernamevar});
 
-//                     Align(
-//                       alignment: Alignment.topLeft,
-//                       child: InkWell(
-//                         child: Card(
-//                           shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(10)),
-//                           elevation: 4,
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: <Widget>[
-//                               Text(
-//                                 ' UPCOMING COURSES ',
-//                                 style: GoogleFonts.adventPro(
-//                                     fontSize: 15,
-//                                     color: Colors.black,
-//                                     fontWeight: FontWeight.bold),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
+  List<IWCDetails> CoursesDet = [];
+  bool loading = false;
 
-//                     //INNER DETAILS
-//                     Align(
-//                       alignment: Alignment.topLeft,
-//                       child: InkWell(
-//                         child: Card(
-//                           color: Colors.cyanAccent,
-//                           shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(10)),
-//                           elevation: 4,
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: <Widget>[
-//                               Align(
-//                                   alignment: Alignment.topLeft,
-//                                   child: Text("")),
-//                               Align(
-//                                 // child: Container(
-//                                 //   padding: EdgeInsets.symmetric(horizontal: 20),
-//                                 child: SingleChildScrollView(
-//                                     child: Row(
-//                                       crossAxisAlignment:
-//                                           CrossAxisAlignment.center,
-//                                       children: <Widget>[
-//                                         Align(
-//                                           alignment: Alignment.topLeft,
-//                                           child: InkWell(
-//                                             child: Card(
-//                                               shape: RoundedRectangleBorder(
-//                                                   borderRadius:
-//                                                       BorderRadius.circular(
-//                                                           40)),
-//                                               elevation: 50,
-//                                               child: Column(
-//                                                 mainAxisAlignment:
-//                                                     MainAxisAlignment.center,
-//                                                 children: <Widget>[
-//                                                   Text(
-//                                                     ' \n 1.\n  NAME OF THE COURSE:              \n\n  ORGANIZATION NAME:                \n\n  DURATION(in months):             \n',
-//                                                     style:
-//                                                         GoogleFonts.adventPro(
-//                                                             fontSize: 15,
-//                                                             color: Colors.black,
-//                                                             fontWeight:
-//                                                                 FontWeight
-//                                                                     .bold),
-//                                                   ),
-//                                                 ],
-//                                               ),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         Align(
-//                                           alignment: Alignment.topLeft,
-//                                           child: InkWell(
-//                                             child: Card(
-//                                               shape: RoundedRectangleBorder(
-//                                                   borderRadius:
-//                                                       BorderRadius.circular(
-//                                                           40)),
-//                                               elevation: 50,
-//                                               child: Column(
-//                                                 mainAxisAlignment:
-//                                                     MainAxisAlignment.center,
-//                                                 children: <Widget>[
-//                                                   Text(
-//                                                     ' \n 2.\n  NAME OF THE COURSE:              \n\n  ORGANIZATION NAME:                \n\n  DURATION(in months):             \n',
-//                                                     style:
-//                                                         GoogleFonts.adventPro(
-//                                                             fontSize: 15,
-//                                                             color: Colors.black,
-//                                                             fontWeight:
-//                                                                 FontWeight
-//                                                                     .bold),
-//                                                   ),
-//                                                 ],
-//                                               ),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                       ],
-//                                     ),
-//                                     scrollDirection: Axis.horizontal),
-//                               ),
-//                               Align(
-//                                   alignment: Alignment.topLeft,
-//                                   child: Text("")),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                     //CONTINUE HERE
-//                     //
-//                     SizedBox(height: height * .1),
-//                     Align(
-//                       alignment: Alignment.topLeft,
-//                       child: InkWell(
-//                         child: Card(
-//                           shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(10)),
-//                           elevation: 4,
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: <Widget>[
-//                               Text(
-//                                 ' COMPLETED COURSES ',
-//                                 style: GoogleFonts.adventPro(
-//                                     fontSize: 15,
-//                                     color: Colors.black,
-//                                     fontWeight: FontWeight.bold),
-//                               ),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
+  var title, name, recno;
 
-//                     //INNER DETAILS
-//                     Align(
-//                       alignment: Alignment.topLeft,
-//                       child: InkWell(
-//                         child: Card(
-//                           color: Colors.orangeAccent,
-//                           shape: RoundedRectangleBorder(
-//                               borderRadius: BorderRadius.circular(10)),
-//                           elevation: 4,
-//                           child: Column(
-//                             mainAxisAlignment: MainAxisAlignment.center,
-//                             children: <Widget>[
-//                               Align(
-//                                   alignment: Alignment.topLeft,
-//                                   child: Text(
-//                                     "   \nTOTAL NUMBER OF COURSES:\n",
-//                                     style: GoogleFonts.portLligatSans(
-//                                         fontWeight: FontWeight.bold,
-//                                         color: Colors.black),
-//                                   )),
-//                               Align(
-//                                 // child: Container(
-//                                 //   padding: EdgeInsets.symmetric(horizontal: 20),
-//                                 child: SingleChildScrollView(
-//                                     child: Row(
-//                                       crossAxisAlignment:
-//                                           CrossAxisAlignment.center,
-//                                       children: <Widget>[
-//                                         Align(
-//                                           alignment: Alignment.topLeft,
-//                                           child: InkWell(
-//                                             child: Card(
-//                                               shape: RoundedRectangleBorder(
-//                                                   borderRadius:
-//                                                       BorderRadius.circular(
-//                                                           40)),
-//                                               elevation: 50,
-//                                               child: Column(
-//                                                 mainAxisAlignment:
-//                                                     MainAxisAlignment.center,
-//                                                 children: <Widget>[
-//                                                   Text(
-//                                                     ' \n 1.\n  NAME OF THE COURSE:              \n\n  ORGANIZATION NAME:                \n\n  DURATION(in months):             \n',
-//                                                     style:
-//                                                         GoogleFonts.adventPro(
-//                                                             fontSize: 15,
-//                                                             color: Colors.black,
-//                                                             fontWeight:
-//                                                                 FontWeight
-//                                                                     .bold),
-//                                                   ),
-//                                                 ],
-//                                               ),
-//                                             ),
-//                                           ),
-//                                         ),
-//                                         Align(
-//                                           alignment: Alignment.topLeft,
-//                                           child: InkWell(
-//                                             child: Card(
-//                                               shape: RoundedRectangleBorder(
-//                                                   borderRadius:
-//                                                       BorderRadius.circular(
-//                                                           40)),
-//                                               elevation: 50,
-//                                               child: Column(
-//                                                 mainAxisAlignment:
-//                                                     MainAxisAlignment.center,
-//                                                 children: <Widget>[
-//                                                   Text(
-//                                                     ' \n 2.\n  NAME OF THE COURSE:              \n\n  ORGANIZATION NAME:                \n\n  DURATION(in months):             \n',
-//                                                     style:
-//                                                         GoogleFonts.adventPro(
-//                                                             fontSize: 15,
-//                                                             color: Colors.black,
-//                                                             fontWeight:
-//                                                                 FontWeight
-//                                                                     .bold),
-//                                                   ),
-//                                                 ],
-//                                               ),
-//                                             ),
-//                                           ),
-//                                         ),
-// //VIEW YOUR COMPLETED INTERSHIPS
-//                                       ],
-//                                     ),
-//                                     scrollDirection: Axis.horizontal),
-//                               ),
-//                               Align(
-//                                   alignment: Alignment.topLeft,
-//                                   child: Text("")),
-//                             ],
-//                           ),
-//                         ),
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//               ),
-//               SizedBox(height: height * .03),
-//               Align(
-//                 alignment: Alignment.bottomCenter,
-//                 child: buildBottomNavigationBar(),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     ])));
-//   }
+  get child => null;
 
-//   BottomNavigationBar buildBottomNavigationBar() {
-//     return BottomNavigationBar(
-//       backgroundColor: Colors.transparent,
-//       type: BottomNavigationBarType.fixed,
-//       //currentIndex: _selectedIndex,
-//       onTap: (value) {
-//         if (value == 1) {
-//           Navigator.push(
-//               context,
-//               PageTransition(
-//                   type: PageTransitionType.leftToRightWithFade,
-//                   child: CoursesUpload()));
-//         } else {
-//           Navigator.push(context,
-//               PageTransition(type: PageTransitionType.fade, child: Courses()));
-//         }
-//       },
-//       unselectedItemColor: Colors.white,
-//       selectedItemColor: Colors.limeAccent,
-//       items: [
-//         BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "HOME"),
-//         BottomNavigationBarItem(
-//             icon: Icon(Icons.upload_file), label: "UPLOAD CERTIFICATES"),
-//       ],
-//     );
-//   }
-// }
+  void _loadCoursesDetails([bool showSpinner = false]) async {
+//    log('Regno: $regnovar');
+    if (showSpinner) {
+      setState(() {
+        loading = true;
+      });
+    }
+//    print("Success");
+    await widget.api.getcourseDet(regnovar).then((value) {
+      setState(() {
+        CoursesDet = value;
+//        print(value);
+        loading = false;
+      });
+    });
+    Map<int, IWCDetails> map = CoursesDet.asMap();
+    for (int i = 0; i < map.length; i++) {
+//      print(map[i]);
+      title = map[i].title;
+      name = map[i].name;
+      recno = (i + 1).toString();
+      //log('Record: RecNo: $recno-Title: $title-Cmp Name: $name');
+    }
+  }
+
+  int _selectedIndex = 0;
+  FToast fToast;
+  AnimationController controller;
+  @override
+  void initState() {
+    super.initState();
+    _loadCoursesDetails(true);
+    fToast = FToast();
+    fToast.init(context);
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    )..addListener(() {
+        setState(() {});
+      });
+    controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void _showtoast(String value) {
+    Fluttertoast.showToast(
+        msg: value,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.black,
+        textColor: Colors.limeAccent,
+        fontSize: 16.0);
+  }
+
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
+
+  Widget _backButton() {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                      regnovar: regnovar,
+                      usernamevar: usernamevar,
+                    )));
+      },
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.only(left: 0, top: 10, bottom: 10),
+              child: Icon(Icons.home_outlined, color: Colors.white),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final rollno = "dan";
+
+    final List<IWCDetails> CoursesDet1 = CoursesDet;
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: Text(
+          "COURSE COMPLETED",
+          textAlign: TextAlign.justify,
+          style: GoogleFonts.adventPro(
+              fontSize: 25,
+              color: Colors.orangeAccent,
+              fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        leading: _backButton(),
+        backgroundColor: Colors.black,
+        elevation: 0,
+      ),
+      backgroundColor: Colors.black,
+      body: loading
+          ? Center(child: Lottie.asset('assets/images/loading.json'))
+          : Stack(children: <Widget>[
+              generateBluredImage(),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: InternListing(
+                  internDet: CoursesDet,
+                ),
+              ),
+              //SizedBox(height: height * 1),
+              Center(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: buildBottomNavigationBar(),
+                ),
+              ),
+              SizedBox(height: height * .1),
+            ]),
+    );
+  }
+
+  BottomNavigationBar buildBottomNavigationBar() {
+    return BottomNavigationBar(
+      backgroundColor: Colors.black,
+      type: BottomNavigationBarType.fixed,
+      onTap: (value) {
+        if (value == 2) {
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.leftToRightWithFade,
+                  child: CoursesUpload(
+                      regnovar: regnovar, usernamevar: usernamevar)));
+        } else if (value == 1) {
+          _showtoast("NO UPCOMING COURSES");
+        } else {
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.fade,
+                  child: Courses(
+                    regnovar: regnovar,
+                    usernamevar: usernamevar,
+                  )));
+        }
+        // setState(() {
+        //   _selectedIndex = value;
+        // });
+      },
+      unselectedItemColor: Colors.white,
+      selectedItemColor: Colors.deepOrangeAccent,
+      items: [
+        BottomNavigationBarItem(
+            icon: Icon(Icons.check_box_outlined), label: "COMPLETED"),
+        BottomNavigationBarItem(
+            icon: Icon(Icons.timelapse_rounded), label: "UPCOMING"),
+        BottomNavigationBarItem(icon: Icon(Icons.upload_file), label: "UPLOAD"),
+      ],
+    );
+  }
+}

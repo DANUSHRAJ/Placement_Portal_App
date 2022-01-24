@@ -378,7 +378,9 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: Menatwork()));
+                                    child: Workshops(
+                                        regnovar: regnovar,
+                                        usernamevar: usernamevar)));
 
                             // Workshops(
                             //     regnovar: regnovar,
@@ -413,7 +415,9 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 PageTransition(
                                     type: PageTransitionType.bottomToTop,
-                                    child: Menatwork()));
+                                    child: Courses(
+                                        regnovar: regnovar,
+                                        usernamevar: usernamevar)));
                           },
                         ),
 

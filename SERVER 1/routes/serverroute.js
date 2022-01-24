@@ -51,6 +51,24 @@ server_router.post("/getinterndet",service.getinterndet);
 //http://localhost:8081/uploadintern
 server_router.post("/uploadintern",service.uploadintern);
 
+//http://localhost:8081/getws
+server_router.post("/getws",service.getws);
+
+//http://localhost:8081/getwsdet
+server_router.post("/getwsdet",service.getwsdet);
+
+//http://localhost:8081/uploadws
+server_router.post("/uploadws",service.uploadws);
+
+//http://localhost:8081/getcourse
+server_router.post("/getcourse",service.getcourse);
+
+//http://localhost:8081/getcoursedet
+server_router.post("/getcoursedet",service.getcoursedet);
+
+//http://localhost:8081/uploadcourse
+server_router.post("/uploadcourse",service.uploadcourse);
+
 //http://localhost:8081/uploadFileFB
 server_router.post("/uploadFileFB",service.uploadFileFB);
 

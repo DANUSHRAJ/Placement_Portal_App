@@ -250,6 +250,92 @@ module.exports.uploadintern = async (req,res)=>{
         console.log(err);
     }
 };
+module.exports.getws = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("workshop").find();
+        var resultfinal = [];
+        // console.log(result);
+        await result.forEach(element => {
+            resultfinal.push(element);
+            // console.log(element);
+        });
+        // console.log(resultfinal);
+        res.send(resultfinal);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.getwsdet = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("workshop").find({
+            'regno':req.body.regno
+        });
+        var resultfinal = [];
+        // console.log(result);
+        await result.forEach(element => {
+            resultfinal.push(element);
+            // console.log(element);
+        });
+        // console.log(resultfinal);
+        res.send(resultfinal);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.uploadws = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("workshop").insertOne(req.body);
+        const result1 = await client.db("Cluster0").collection("workshop").findOne(
+            {'regno':req.body.regno}
+        );
+        res.send(result1);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.getcourse = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("course").find();
+        var resultfinal = [];
+        // console.log(result);
+        await result.forEach(element => {
+            resultfinal.push(element);
+            // console.log(element);
+        });
+        // console.log(resultfinal);
+        res.send(resultfinal);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.getcoursedet = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("course").find({
+            'regno':req.body.regno
+        });
+        var resultfinal = [];
+        // console.log(result);
+        await result.forEach(element => {
+            resultfinal.push(element);
+            // console.log(element);
+        });
+        // console.log(resultfinal);
+        res.send(resultfinal);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.uploadcourse = async (req,res)=>{
+    try{
+        const result = await client.db("Cluster0").collection("course").insertOne(req.body);
+        const result1 = await client.db("Cluster0").collection("course").findOne(
+            {'regno':req.body.regno}
+        );
+        res.send(result1);
+    } catch(err){
+        console.log(err);
+    }
+};
 const adminfb = firebaseAdmin.initializeApp({
     credential: firebaseAdmin.credential.cert(serviceAccount),
 });
