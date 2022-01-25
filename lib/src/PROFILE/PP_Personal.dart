@@ -371,6 +371,33 @@ class _PpPersonalDState extends State<PpPersonalD> {
     null
   ];
 
+  List<String> helpmsg=[
+    'Eg: 84598349381 if you don\'t have give NA',
+    'Eg: 8759847459',
+    'Eg: 9823347459 \nemergency no. must\nand should not same primary number',
+    'Eg: abcde@gmail.com',
+    'Eg: pqrst@gmail.com',
+    'Eg: ASDFG7777B \nif you don\'t have now give NA\nBut for placement it\'s must',
+    'Eg: INDIAN',
+    'Eg: V9483444 if you don\'t have give NA',
+    'Eg: 123456789012',
+    'Eg: SAVIOUR BABU',
+    'Eg: DOCTOR else give NA',
+    'Eg: 1234567890 else give NA',
+    'Eg: wxyz@gmail.com else give NA',
+    'Eg: PACKIA SHEELA',
+    'Eg: TEACHER or HOMEMAKER else give NA',
+    'Eg: 1234567890 else give NA',
+    'Eg: wxyz@gmail.com else give NA',
+    'Eg: 3/10 SIVAN KOVIL STREET, NEELANKARAI, CHENNAI 600115',
+    'Eg: 3/10 SIVAN KOVIL STREET',
+    'Eg: NEELANKARAI',
+    'Eg: CHENNAI',
+    'Eg: TAMIL NADU',
+    'Eg: 600115'
+
+  ];
+
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -430,7 +457,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
     );
   }
 
-  Widget _entryFieldalphabets(String title, String hint, int i,
+  Widget _entryFieldalphabets(String title,String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -438,13 +465,27 @@ class _PpPersonalDState extends State<PpPersonalD> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
+          Row(
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.portLligatSans(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.limeAccent,
+                ),
+              ),
+              Tooltip(
+                message: hintmsg,
+                preferBelow: false,
+                verticalOffset: 25,
+                showDuration: Duration(seconds: 1),
+                child: Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.white,
+                ),
+              )
+            ],
           ),
           SizedBox(
             height: 10,
@@ -468,7 +509,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
     );
   }
 
-  Widget _entryFieldnumbers(String title, String hint, int i,
+  Widget _entryFieldnumbers(String title,String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -476,13 +517,27 @@ class _PpPersonalDState extends State<PpPersonalD> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
+          Row(
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.portLligatSans(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.limeAccent,
+                ),
+              ),
+              Tooltip(
+                message: hintmsg,
+                preferBelow: false,
+                verticalOffset: 25,
+                showDuration: Duration(seconds: 1),
+                child: Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.white,
+                ),
+              )
+            ],
           ),
           SizedBox(
             height: 10,
@@ -598,38 +653,38 @@ class _PpPersonalDState extends State<PpPersonalD> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(height: height * .2),
-                          _entryFieldnumbers('LAND LINE NUMBER', pp[0], 0),
-                          _entryFieldnumbers('PRIMARY MOBILE NO', pp[1], 1),
-                          _entryFieldnumbers('EMERGENCY CONTACT NO', pp[2], 2),
+                          _entryFieldnumbers('LAND LINE NUMBER',helpmsg[0], pp[0], 0),
+                          _entryFieldnumbers('PRIMARY MOBILE NO',helpmsg[1], pp[1], 1),
+                          _entryFieldnumbers('EMERGENCY CONTACT NO',helpmsg[2], pp[2], 2),
                           _entryFieldalphabetsdisplay(
                               'PRIMARY EMAIL ID', pp[3], 3),
-                          _entryFieldalphabets('ALTERNATE EMAIL ID', pp[4], 4),
-                          _entryFieldalphabets('PAN CARD NUMBER', pp[5], 5),
-                          _entryFieldalphabets('NATIONALITY', pp[6], 6),
+                          _entryFieldalphabets('ALTERNATE EMAIL ID',helpmsg[4], pp[4], 4),
+                          _entryFieldalphabets('PAN CARD NUMBER',helpmsg[5], pp[5], 5),
+                          _entryFieldalphabets('NATIONALITY',helpmsg[6], pp[6], 6),
                           _entryFieldalphabets(
-                              'INDIAN PASSPORT NUMBER', pp[7], 7),
-                          _entryFieldnumbers('AADHAAR NUMBER', pp[8], 8),
-                          _entryFieldalphabets('FATHER NAME', pp[9], 9),
+                              'INDIAN PASSPORT NUMBER',helpmsg[7], pp[7], 7),
+                          _entryFieldnumbers('AADHAAR NUMBER',helpmsg[8], pp[8], 8),
+                          _entryFieldalphabets('FATHER NAME',helpmsg[9], pp[9], 9),
                           _entryFieldalphabets(
-                              'Father DESIGNATION & ORGANISATION', pp[10], 10),
+                              'Father DESIGNATION\n& ORGANISATION',helpmsg[10], pp[10], 10),
                           _entryFieldnumbers(
-                              'FATHER MOBILE NUMBER', pp[11], 11),
-                          _entryFieldalphabets('FATHER EMAIL ID', pp[12], 12),
-                          _entryFieldalphabets('MOTHER NAME', pp[13], 13),
+                              'FATHER MOBILE NUMBER',helpmsg[11], pp[11], 11),
+                          _entryFieldalphabets('FATHER EMAIL ID',helpmsg[12], pp[12], 12),
+                          _entryFieldalphabets('MOTHER NAME',helpmsg[13], pp[13], 13),
                           _entryFieldalphabets(
-                              'Mother DESIGNATION & ORGANISATION', pp[14], 14),
+                              'Mother DESIGNATION\n& ORGANISATION',helpmsg[14], pp[14], 14),
                           _entryFieldnumbers(
-                              'MOTHER MOBILE NUMBER', pp[15], 15),
-                          _entryFieldalphabets('MOTHER EMAIL ID', pp[16], 16),
+                              'MOTHER MOBILE NUMBER',helpmsg[15], pp[15], 15),
+                          _entryFieldalphabets('MOTHER EMAIL ID',helpmsg[16], pp[16], 16),
                           _entryFieldalphabets(
-                              'PERMANENT ADDRESS WITH PIN CODE', pp[17], 17),
+                              'PERMANENT ADDRESS\nWITH PIN CODE',helpmsg[17], pp[17], 17),
                           _entryFieldalphabets(
-                              'PERMANENT ADDRESS LINE 1', pp[18], 18),
+                              'PERMANENT ADDRESS LINE 1',helpmsg[18], pp[18], 18),
                           _entryFieldalphabets(
-                              'PERMANENT ADDRESS LINE 2', pp[19], 19),
-                          _entryFieldalphabets('PERMANENT CITY', pp[20], 20),
-                          _entryFieldalphabets('STATE', pp[21], 21),
-                          _entryFieldnumbers('POSTAL CODE', pp[22], 22),
+                              'PERMANENT ADDRESS LINE 2',helpmsg[19], pp[19], 19),
+                          _entryFieldalphabets('PERMANENT CITY',helpmsg[20], pp[20], 20),
+                          _entryFieldalphabets('STATE',helpmsg[21], pp[21], 21),
+                          _entryFieldnumbers('POSTAL CODE',helpmsg[22], pp[22], 22),
                           SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,

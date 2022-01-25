@@ -187,6 +187,12 @@ class _PpExtraDState extends State<PpExtraD> {
     yesorno.first, //1
     yesorno.first
   ];
+  List<String> helpmsg=[
+    'Eg: VANTAGE if you don\'t NA',
+    'Eg: TAMIL,ENGLISH,HINDI',
+    'Eg: 1 if you have any gap give 0',
+    'Eg: JAVA,WEB DEVELOPMENT,FLUTTER'
+  ];
 
   Widget _backButton() {
     return InkWell(
@@ -208,7 +214,7 @@ class _PpExtraDState extends State<PpExtraD> {
     );
   }
 
-  Widget _entryFieldalphabets(String title, String hint, int i,
+  Widget _entryFieldalphabets(String title,String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -216,13 +222,27 @@ class _PpExtraDState extends State<PpExtraD> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
+          Row(
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.portLligatSans(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.limeAccent,
+                ),
+              ),
+              Tooltip(
+                message: hintmsg,
+                preferBelow: false,
+                verticalOffset: 25,
+                showDuration: Duration(seconds: 1),
+                child: Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.white,
+                ),
+              )
+            ],
           ),
           SizedBox(
             height: 10,
@@ -305,7 +325,7 @@ class _PpExtraDState extends State<PpExtraD> {
     );
   }
 
-  Widget _entryFieldnumbers(String title, String hint, int i,
+  Widget _entryFieldnumbers(String title,String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -313,13 +333,27 @@ class _PpExtraDState extends State<PpExtraD> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
+          Row(
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.portLligatSans(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.limeAccent,
+                ),
+              ),
+              Tooltip(
+                message: hintmsg,
+                preferBelow: false,
+                verticalOffset: 25,
+                showDuration: Duration(seconds: 1),
+                child: Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.white,
+                ),
+              )
+            ],
           ),
           SizedBox(
             height: 10,
@@ -403,15 +437,15 @@ class _PpExtraDState extends State<PpExtraD> {
                           SizedBox(height: height * .2),
                           _DropBox("SPORTS QUOTA", yesorno, 0),
                           _DropBox("BEC EXAM STATUS", yesorno, 1),
-                          _entryFieldalphabets('BEC EXAM GRADE', pa[3], 3),
+                          _entryFieldalphabets('BEC EXAM GRADE',helpmsg[0], pa[3], 3),
 //                          _DropBox("BEC EXAM GRADE", becgrade, 2),
-                          _entryFieldalphabets('LANGUAGES KNOWN', pa[0], 0),
+                          _entryFieldalphabets('LANGUAGES KNOWN',helpmsg[1], pa[0], 0),
                           _entryFieldnumbers(
-                              'GAP IN EDUCATION (in Years) - If Any', pa[1], 1),
-                          _DropBox("ARE YOU PLANNING FOR HIGHER STUDIES? [Y/N]",
+                              'GAP IN EDUCATION (in Years)',helpmsg[2], pa[1], 1),
+                          _DropBox("ARE YOU PLANNING FOR\nHIGHER STUDIES? [Y/N]",
                               yesorno, 2),
                           _entryFieldalphabets(
-                              'IF ANY SKILL CERTIFICATIONS OBTAINED NAME THE SKILL',
+                              'IF ANY SKILL CERTIFICATIONS\nOBTAINED NAME THE SKILL',helpmsg[3],
                               pa[2],
                               2),
                           SizedBox(height: height * .02),

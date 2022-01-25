@@ -297,6 +297,38 @@ class _PpEducationDState extends State<PpEducationD> {
     null
   ];
 
+  List<String> helptip = [
+    //10th
+    'Eg: 92',
+    'Eg: STATE BOARD',
+    'Eg: ENGLISH',
+    'Eg: 2017',
+    'Eg: ST.MARY\'S MATRICULATION SCHOOL',
+    'Eg: TAMIL NADU',
+    //12th
+    'Eg: 80',
+    'Eg: STATE BOARD',
+    'Eg: ENGLISH',
+    'Eg: 2019',
+    'Eg: NELLAI NADAR MATRIC HR SEC SCHOOL',
+    'Eg: TAMIL NADU',
+    //DIPLOMA
+    'Eg: COMPUTER SCIENCE if you haven\'t done any diploma courses give NA',
+    'Eg: 89 if you haven\'t done any diploma courses give -',
+    'Eg: 2020 if you haven\'t done any diploma courses give -',
+    'Eg: Institute if you haven\'t done any diploma courses give NA',
+    'Eg: TAMIL NADU if you haven\'t done any diploma courses give NA',
+    //UG
+    'Eg: B.TECH if you haven\'t done any UG courses give NA',
+    'Eg: COMPUTER SCIENCE if you haven\'t done any UG courses give NA',
+    'Eg: 89 if you haven\'t done any UG courses give -',
+    'Eg: 8.9 if you haven\'t done any UG courses give -',
+    'Eg: 2020 if you haven\'t done any UG courses give -',
+    'Eg: ST.JOSEPH\'S INSTITUTE OF TECHNOLOGY if you haven\'t done any UG courses give NA',
+    'Eg: ANNA UNIVERSITY if you haven\'t done any UG courses give NA',
+    'Eg: TAMIL NADU if you haven\'t done any UG courses give NA',
+  ];
+
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -317,7 +349,7 @@ class _PpEducationDState extends State<PpEducationD> {
     );
   }
 
-  Widget _entryFieldalphabets(String title, String hint, int i,
+  Widget _entryFieldalphabets(String title, String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -325,13 +357,27 @@ class _PpEducationDState extends State<PpEducationD> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
+          Row(
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.portLligatSans(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.limeAccent,
+                ),
+              ),
+              Tooltip(
+                message: hintmsg,
+                preferBelow: false,
+                verticalOffset: 25,
+                showDuration: Duration(seconds: 1),
+                child: Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.white,
+                ),
+              )
+            ],
           ),
           SizedBox(
             height: 10,
@@ -355,7 +401,7 @@ class _PpEducationDState extends State<PpEducationD> {
     );
   }
 
-  Widget _entryFieldnumbers(String title, String hint, int i,
+  Widget _entryFieldnumbers(String title, String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -363,13 +409,27 @@ class _PpEducationDState extends State<PpEducationD> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            title,
-            style: GoogleFonts.portLligatSans(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.limeAccent,
-            ),
+          Row(
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.portLligatSans(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.limeAccent,
+                ),
+              ),
+              Tooltip(
+                message: hintmsg,
+                preferBelow: false,
+                verticalOffset: 25,
+                showDuration: Duration(seconds: 1),
+                child: Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.white,
+                ),
+              )
+            ],
           ),
           SizedBox(
             height: 10,
@@ -487,46 +547,65 @@ class _PpEducationDState extends State<PpEducationD> {
                           // SizedBox(height: height * .05),
                           // Align(alignment: Alignment.center, child: _title()),
                           SizedBox(height: height * .2),
-                          _entryFieldnumbers('10th Percentage', pe[0], 0),
-                          _entryFieldalphabets('10TH BOARD OF STUDY', pe[1], 1),
-                          _entryFieldalphabets(
-                              '10TH MEDIUM OF STUDY', pe[2], 2),
-                          _entryFieldnumbers('10th YEAR OF PASSING', pe[3], 3),
-                          _entryFieldalphabets('NAME OF SCHOOL', pe[4], 4),
-                          _entryFieldalphabets('GRADUATING STATE', pe[5], 5),
-                          _entryFieldnumbers('12th Percentage', pe[6], 6),
-                          _entryFieldalphabets('12th BOARD OF STUDY', pe[7], 7),
-                          _entryFieldalphabets(
-                              '12th MEDIUM OF STUDY', pe[8], 8),
-                          _entryFieldnumbers('12th YEAR OF PASSING', pe[9], 9),
-                          _entryFieldalphabets('NAME OF SCHOOL', pe[10], 10),
-                          _entryFieldalphabets('GRADUATING STATE', pe[11], 11),
-                          _entryFieldalphabets(
-                              'DIPLOMA - SPECIALIZATION/BRANCH', pe[12], 12),
-                          _entryFieldnumbers('DIPLOMA Percentage', pe[13], 13),
                           _entryFieldnumbers(
-                              'DIPLOMA YEAR OF PASSING', pe[14], 14),
-                          _entryFieldalphabets('NAME OF INSTITUTE', pe[15], 15),
-                          _entryFieldalphabets('GRADUATING STATE', pe[16], 16),
+                              '10th Percentage', helptip[0], pe[0], 0),
                           _entryFieldalphabets(
-                              'UG DEGREE (FOR PG STUDENTS) ', pe[17], 17),
+                              '10TH BOARD OF STUDY', helptip[1], pe[1], 1),
                           _entryFieldalphabets(
-                              'UG BRANCH (FOR PG STUDENTS) ', pe[18], 18),
+                              '10TH MEDIUM OF STUDY', helptip[2], pe[2], 2),
                           _entryFieldnumbers(
-                              'UG PERCENTAGE (FOR PG STUDENTS)', pe[19], 19),
+                              '10th YEAR OF PASSING', helptip[3], pe[3], 3),
+                          _entryFieldalphabets(
+                              'NAME OF SCHOOL', helptip[4], pe[4], 4),
+                          _entryFieldalphabets(
+                              'GRADUATING STATE', helptip[5], pe[5], 5),
                           _entryFieldnumbers(
-                              'UG CGPA (FOR PG STUDENTS)', pe[20], 20),
+                              '12th Percentage', helptip[6], pe[6], 6),
+                          _entryFieldalphabets(
+                              '12th BOARD OF STUDY', helptip[7], pe[7], 7),
+                          _entryFieldalphabets(
+                              '12th MEDIUM OF STUDY', helptip[8], pe[8], 8),
                           _entryFieldnumbers(
-                              'UG YEAR OF PASSING (FOR PG STUDENTS)',
+                              '12th YEAR OF PASSING', helptip[9], pe[9], 9),
+                          _entryFieldalphabets(
+                              'NAME OF SCHOOL', helptip[10], pe[10], 10),
+                          _entryFieldalphabets(
+                              'GRADUATING STATE', helptip[11], pe[11], 11),
+                          _entryFieldalphabets(
+                              'DIPLOMA\nSPECIALIZATION/BRANCH',
+                              helptip[12],
+                              pe[12],
+                              12),
+                          _entryFieldnumbers(
+                              'DIPLOMA Percentage', helptip[13], pe[13], 13),
+                          _entryFieldnumbers('DIPLOMA YEAR OF PASSING',
+                              helptip[14], pe[14], 14),
+                          _entryFieldalphabets(
+                              'NAME OF INSTITUTE', helptip[15], pe[15], 15),
+                          _entryFieldalphabets(
+                              'GRADUATING STATE', helptip[16], pe[16], 16),
+                          _entryFieldalphabets('UG DEGREE\n(FOR PG STUDENTS) ',
+                              helptip[17], pe[17], 17),
+                          _entryFieldalphabets('UG BRANCH\n(FOR PG STUDENTS) ',
+                              helptip[18], pe[18], 18),
+                          _entryFieldnumbers('UG PERCENTAGE\n(FOR PG STUDENTS)',
+                              helptip[19], pe[19], 19),
+                          _entryFieldnumbers('UG CGPA\n(FOR PG STUDENTS)',
+                              helptip[20], pe[20], 20),
+                          _entryFieldnumbers(
+                              'UG YEAR OF PASSING\n(FOR PG STUDENTS)',
+                              helptip[21],
                               pe[21],
                               21),
                           _entryFieldalphabets(
-                              'UG - COLLEGE OF STUDIES (FOR PG STUDENTS)) ',
+                              'UG - COLLEGE OF STUDIES\n(FOR PG STUDENTS)) ',
+                              helptip[22],
                               pe[22],
                               22),
+                          _entryFieldalphabets('UG - GRADUATING UNIVERSITY ',
+                              helptip[23], pe[23], 23),
                           _entryFieldalphabets(
-                              'UG - GRADUATING UNIVERSITY ', pe[23], 23),
-                          _entryFieldalphabets('GRADUATING STATE', pe[24], 24),
+                              'GRADUATING STATE', helptip[24], pe[24], 24),
                           SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,
