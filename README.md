@@ -22,3 +22,7 @@ https://github.com/JohannesMilke/firebase_upload_example
 
 File encoding reference
 https://stackoverflow.com/questions/51161862/how-to-send-an-image-to-an-api-in-dart-flutter
+
+OneSignal reference
+https://sanjay144.medium.com/how-to-send-notification-from-device-to-device-in-flutter-7a47c911d66
+https://stackoverflow.com/questions/68080593/cannot-find-type-ospermissionsubscriptionstate-in-scope-error-when-using-ones
