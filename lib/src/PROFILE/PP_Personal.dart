@@ -379,19 +379,19 @@ class _PpPersonalDState extends State<PpPersonalD> {
     'Eg: pqrst@gmail.com',
     'Eg: ASDFG7777B \nif you don\'t have now give NA\nBut for placement it\'s must',
     'Eg: INDIAN',
-    'Eg: V9483444 if you don\'t have give NA',
+    'Eg: V9485644 if you don\'t have give NA',
     'Eg: 123456789012',
-    'Eg: SAVIOUR BABU',
+    'Eg: Robert Daniel',
     'Eg: DOCTOR else give NA',
     'Eg: 1234567890 else give NA',
     'Eg: wxyz@gmail.com else give NA',
-    'Eg: PACKIA SHEELA',
+    'Eg: Emily Catherine',
     'Eg: TEACHER or HOMEMAKER else give NA',
     'Eg: 1234567890 else give NA',
     'Eg: wxyz@gmail.com else give NA',
-    'Eg: 3/10 SIVAN KOVIL STREET, NEELANKARAI, CHENNAI 600115',
-    'Eg: 3/10 SIVAN KOVIL STREET',
-    'Eg: NEELANKARAI',
+    'Eg: 2/10 6TH CROSS STREET, PALAVAKKAM, CHENNAI 600115',
+    'Eg: 2/10 6TH CROSS STREET',
+    'Eg: PALAVAKKAM',
     'Eg: CHENNAI',
     'Eg: TAMIL NADU',
     'Eg: 600115'
@@ -566,36 +566,6 @@ class _PpPersonalDState extends State<PpPersonalD> {
     );
   }
 
-  Widget _title() {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: _backButton(),
-        ),
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-              text: 'PERSONAL',
-              style: GoogleFonts.portLligatSans(
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-              children: [
-                TextSpan(
-                  text: '  DATA',
-                  style: GoogleFonts.adventPro(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.limeAccent,
-                  ),
-                ),
-              ]),
-        ),
-      ],
-    );
-  }
 
   Widget generateBluredImage() {
     return new Container(

@@ -450,36 +450,6 @@ class _PpCurrentDState extends State<PpCurrentD> {
     );
   }
 
-  Widget _title() {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: _backButton(),
-        ),
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-              text: 'CURRENT EDUCATION',
-              style: GoogleFonts.portLligatSans(
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-              children: [
-                TextSpan(
-                  text: '  DATA',
-                  style: GoogleFonts.adventPro(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.limeAccent,
-                  ),
-                ),
-              ]),
-        ),
-      ],
-    );
-  }
 
   Widget generateBluredImage() {
     return new Container(

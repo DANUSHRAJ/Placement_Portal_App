@@ -324,7 +324,7 @@ class _PpEducationDState extends State<PpEducationD> {
     'Eg: 89 if not give -',
     'Eg: 8.9 if not give -',
     'Eg: 2020 if not give -',
-    'Eg: ST.JOSEPH\'S INSTITUTE OF TECHNOLOGY if not give NA',
+    'Eg: XYZ COLLEGE OF ENGINEERING if not give NA',
     'Eg: ANNA UNIVERSITY if you haven\'t done any UG courses give NA',
     'Eg: TAMIL NADU if you haven\'t done any UG courses give NA',
   ];

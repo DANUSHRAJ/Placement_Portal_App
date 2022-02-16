@@ -178,130 +178,132 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               height: SizeConfig.blockSizeVertical * 100,
               width: SizeConfig.blockSizeHorizontal * 150,
               padding: EdgeInsets.all(20.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: FadeAnimation(
-                      0,
-                      Lottie.asset("assets/images/orange.json",
-                          height: height * .35),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Align(
+                      alignment: Alignment.center,
+                      child: FadeAnimation(
+                        0,
+                        Lottie.asset("assets/images/orange.json",
+                            height: height * .35),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: height * .07),
-                  Align(
-                    alignment: Alignment.center,
-                    child: FadeAnimation(
-                        2,
-                        Text(
-                          "WELCOME",
-                          style: GoogleFonts.aclonica(
-                              color: Colors.white, fontSize: 40),
-                        )),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: FadeAnimation(
-                        3,
-                        Text(
-                          "TO",
-                          style: GoogleFonts.aclonica(
-                              color: Colors.white, height: 1.4, fontSize: 40),
-                        )),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: FadeAnimation(
-                        4,
-                        Text(
-                          "SJIT",
-                          style: GoogleFonts.aclonica(
-                              color: Colors.white, height: 1.4, fontSize: 40),
-                        )),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: FadeAnimation(
-                        5,
-                        Text(
-                          "PLACEMENT",
-                          style: GoogleFonts.aclonica(
-                              color: Colors.white, height: 1.4, fontSize: 40),
-                        )),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: FadeAnimation(
-                        6,
-                        Text(
-                          "PORTAL",
-                          style: GoogleFonts.aclonica(
-                              color: Colors.white, height: 1.4, fontSize: 40),
-                        )),
-                  ),
-                  FadeAnimation(
-                      7,
-                      AnimatedBuilder(
-                        animation: _scaleController,
-                        builder: (context, child) => Transform.scale(
-                            scale: _scaleAnimation.value,
-                            child: Center(
-                              child: AnimatedBuilder(
-                                animation: _widthController,
-                                builder: (context, child) => Container(
-                                  width: _widthAnimation.value,
-                                  height: 80,
-                                  padding: EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: Colors.orangeAccent),
-                                  child: InkWell(
-                                    onTap: () {
-                                      _scaleController.forward();
-                                    },
-                                    child: Stack(children: <Widget>[
-                                      AnimatedBuilder(
-                                        animation: _positionController,
-                                        builder: (context, child) => Positioned(
-                                          left: _positionAnimation.value,
-                                          child: AnimatedBuilder(
-                                            animation: _scale2Controller,
-                                            builder: (context, child) =>
-                                                Transform.scale(
-                                                    scale:
-                                                        _scale2Animation.value,
-                                                    child: Container(
-                                                      width: 60,
-                                                      height: 60,
-                                                      decoration: BoxDecoration(
-                                                        shape:
-                                                            BoxShape.rectangle,
-                                                        color: Colors.black87,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(50),
-                                                      ),
-                                                      child: hideIcon == false
-                                                          ? Icon(
-                                                              Icons
-                                                                  .arrow_forward,
-                                                              color:
-                                                                  Colors.white,
-                                                            )
-                                                          : Container(),
-                                                    )),
+                    SizedBox(height: height * .07),
+                    Align(
+                      alignment: Alignment.center,
+                      child: FadeAnimation(
+                          2,
+                          Text(
+                            "WELCOME",
+                            style: GoogleFonts.aclonica(
+                                color: Colors.white, fontSize: 40),
+                          )),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: FadeAnimation(
+                          3,
+                          Text(
+                            "TO",
+                            style: GoogleFonts.aclonica(
+                                color: Colors.white, height: 1.4, fontSize: 40),
+                          )),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: FadeAnimation(
+                          4,
+                          Text(
+                            "SJIT",
+                            style: GoogleFonts.aclonica(
+                                color: Colors.white, height: 1.4, fontSize: 40),
+                          )),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: FadeAnimation(
+                          5,
+                          Text(
+                            "PLACEMENT",
+                            style: GoogleFonts.aclonica(
+                                color: Colors.white, height: 1.4, fontSize: 40),
+                          )),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: FadeAnimation(
+                          6,
+                          Text(
+                            "PORTAL",
+                            style: GoogleFonts.aclonica(
+                                color: Colors.white, height: 1.4, fontSize: 40),
+                          )),
+                    ),
+                    FadeAnimation(
+                        7,
+                        AnimatedBuilder(
+                          animation: _scaleController,
+                          builder: (context, child) => Transform.scale(
+                              scale: _scaleAnimation.value,
+                              child: Center(
+                                child: AnimatedBuilder(
+                                  animation: _widthController,
+                                  builder: (context, child) => Container(
+                                    width: _widthAnimation.value,
+                                    height: 80,
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: Colors.orangeAccent),
+                                    child: InkWell(
+                                      onTap: () {
+                                        _scaleController.forward();
+                                      },
+                                      child: Stack(children: <Widget>[
+                                        AnimatedBuilder(
+                                          animation: _positionController,
+                                          builder: (context, child) => Positioned(
+                                            left: _positionAnimation.value,
+                                            child: AnimatedBuilder(
+                                              animation: _scale2Controller,
+                                              builder: (context, child) =>
+                                                  Transform.scale(
+                                                      scale:
+                                                          _scale2Animation.value,
+                                                      child: Container(
+                                                        width: 60,
+                                                        height: 60,
+                                                        decoration: BoxDecoration(
+                                                          shape:
+                                                              BoxShape.rectangle,
+                                                          color: Colors.black87,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(50),
+                                                        ),
+                                                        child: hideIcon == false
+                                                            ? Icon(
+                                                                Icons
+                                                                    .arrow_forward,
+                                                                color:
+                                                                    Colors.white,
+                                                              )
+                                                            : Container(),
+                                                      )),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ]),
+                                      ]),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )),
-                      )),
-                ],
+                              )),
+                        )),
+                  ],
+                ),
               ),
             ))
           ],
