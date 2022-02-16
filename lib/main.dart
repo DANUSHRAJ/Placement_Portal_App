@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
 }
 
 String finalRegno;
+String finalUname;
 
 class HomePage extends StatefulWidget {
   @override
@@ -122,7 +123,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             MaterialPageRoute(
                                 builder: (context) => HomeScreen(
                                       regnovar: finalRegno,
-                                      usernamevar: finalRegno,
+                                      usernamevar: finalUname,
                                     )))));
               });
             }
@@ -152,10 +153,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     var obtainedRegno = sharedPreferences.getString("RegNo");
+    var obtainedUname = sharedPreferences.getString("Uname");
     setState(() {
       finalRegno = obtainedRegno;
+      finalUname = obtainedUname;
     });
-    print(finalRegno);
   }
 
   @override

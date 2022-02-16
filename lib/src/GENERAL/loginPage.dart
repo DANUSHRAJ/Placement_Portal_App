@@ -110,6 +110,7 @@ class _LoginPageState extends State<LoginPage>
         final SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
         sharedPreferences.setString("RegNo", result.regno);
+        sharedPreferences.setString("Uname", result.name);
         Navigator.push(
             context,
             MaterialPageRoute(
