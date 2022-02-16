@@ -3,6 +3,9 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui' as ui;
 import 'dart:ui';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'menatwork.dart';
 import 'signup.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -104,6 +107,9 @@ class _LoginPageState extends State<LoginPage>
 //        Navigator.push(
 //            context, MaterialPageRoute(builder: (context) => SignUpPage()));
       } else if (result.regno == regnovar && result.password == passvar) {
+        final SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
+        sharedPreferences.setString("RegNo", result.regno);
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -111,6 +117,17 @@ class _LoginPageState extends State<LoginPage>
                       regnovar: result.regno,
                       usernamevar: result.name,
                     )));
+        // Get.to(HomeScreen(
+        //   regnovar: result.regno,
+        //   usernamevar: result.name,
+        // ));
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => HomeScreen(
+        //               regnovar: result.regno,
+        //               usernamevar: result.name,
+        //             )));
         EasyLoading.showSuccess('Great Success!');
         EasyLoading.dismiss();
       } else {

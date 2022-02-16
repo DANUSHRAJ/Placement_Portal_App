@@ -1,5 +1,9 @@
+import 'dart:async';
 import 'dart:ui';
 import 'package:SJIT_PLACEMENT_PORTAL/src/GENERAL/Size_congfig.dart';
+import 'package:SJIT_PLACEMENT_PORTAL/src/GENERAL/home_screen.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'src/GENERAL/loginPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -29,6 +33,8 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+String finalRegno;
 
 class HomePage extends StatefulWidget {
   @override
@@ -98,10 +104,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         Tween<double>(begin: 1.0, end: 32.0).animate(_scale2Controller)
           ..addStatusListener((status) {
             if (status == AnimationStatus.completed) {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.fade, child: LoginPage()));
+              // Navigator.push(
+              //     context,
+              //     PageTransition(
+              //         type: PageTransitionType.fade, child: LoginPage()));
+              getValidationData().whenComplete(() async {
+                Timer(
+                    Duration(seconds: 2),
+                    () => Get.to(finalRegno == null
+                        ? Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                child: LoginPage()))
+                        : Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen(
+                                      regnovar: finalRegno,
+                                      usernamevar: finalRegno,
+                                    )))));
+              });
             }
           });
   }
@@ -123,6 +146,16 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  Future getValidationData() async {
+    final SharedPreferences sharedPreferences =
+        await SharedPreferences.getInstance();
+    var obtainedRegno = sharedPreferences.getString("RegNo");
+    setState(() {
+      finalRegno = obtainedRegno;
+    });
+    print(finalRegno);
   }
 
   @override

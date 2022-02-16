@@ -303,14 +303,14 @@ class _PpEducationDState extends State<PpEducationD> {
     'Eg: STATE BOARD',
     'Eg: ENGLISH',
     'Eg: 2017',
-    'Eg: ST.MARY\'S MATRICULATION SCHOOL',
+    'Eg: XYZ MATRICULATION SCHOOL',
     'Eg: TAMIL NADU',
     //12th
     'Eg: 80',
     'Eg: STATE BOARD',
     'Eg: ENGLISH',
     'Eg: 2019',
-    'Eg: NELLAI NADAR MATRIC HR SEC SCHOOL',
+    'Eg: XYZ MATRICULATION HR SEC SCHOOL',
     'Eg: TAMIL NADU',
     //DIPLOMA
     'Eg: COMPUTER SCIENCE if you haven\'t done any diploma courses give NA',
@@ -319,12 +319,12 @@ class _PpEducationDState extends State<PpEducationD> {
     'Eg: Institute if you haven\'t done any diploma courses give NA',
     'Eg: TAMIL NADU if you haven\'t done any diploma courses give NA',
     //UG
-    'Eg: B.TECH if you haven\'t done any UG courses give NA',
-    'Eg: COMPUTER SCIENCE if you haven\'t done any UG courses give NA',
-    'Eg: 89 if you haven\'t done any UG courses give -',
-    'Eg: 8.9 if you haven\'t done any UG courses give -',
-    'Eg: 2020 if you haven\'t done any UG courses give -',
-    'Eg: ST.JOSEPH\'S INSTITUTE OF TECHNOLOGY if you haven\'t done any UG courses give NA',
+    'Eg: B.TECH if not give NA',
+    'Eg: COMPUTER SCIENCE if not give NA',
+    'Eg: 89 if not give -',
+    'Eg: 8.9 if not give -',
+    'Eg: 2020 if not give -',
+    'Eg: ST.JOSEPH\'S INSTITUTE OF TECHNOLOGY if not give NA',
     'Eg: ANNA UNIVERSITY if you haven\'t done any UG courses give NA',
     'Eg: TAMIL NADU if you haven\'t done any UG courses give NA',
   ];
@@ -458,37 +458,6 @@ class _PpEducationDState extends State<PpEducationD> {
     );
   }
 
-  Widget _title() {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: _backButton(),
-        ),
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-              text: 'EDUCATION',
-              style: GoogleFonts.portLligatSans(
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-              children: [
-                TextSpan(
-                  text: '  DATA',
-                  style: GoogleFonts.adventPro(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.limeAccent,
-                  ),
-                ),
-              ]),
-        ),
-      ],
-    );
-  }
-
   Widget generateBluredImage() {
     return new Container(
       decoration: new BoxDecoration(
@@ -571,11 +540,8 @@ class _PpEducationDState extends State<PpEducationD> {
                               'NAME OF SCHOOL', helptip[10], pe[10], 10),
                           _entryFieldalphabets(
                               'GRADUATING STATE', helptip[11], pe[11], 11),
-                          _entryFieldalphabets(
-                              'DIPLOMA\nSPECIALIZATION/BRANCH',
-                              helptip[12],
-                              pe[12],
-                              12),
+                          _entryFieldalphabets('DIPLOMA\nSPECIALIZATION/BRANCH',
+                              helptip[12], pe[12], 12),
                           _entryFieldnumbers(
                               'DIPLOMA Percentage', helptip[13], pe[13], 13),
                           _entryFieldnumbers('DIPLOMA YEAR OF PASSING',

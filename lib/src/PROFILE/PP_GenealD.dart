@@ -395,12 +395,12 @@ class _PpGenealDState extends State<PpGenealD> {
     hord.first, //5
   ];
 
-  List<String> helptip=[
-    'Eg: 19IT1242',
-    'Eg: JOSHUA SAVIOUR BABU',
-    'Eg: JOSHUA',
-    'Eg: SAVIOUR BABU',
-    'Eg: 2018'
+  List<String> helptip = [
+    'Eg: YYDEPTNO',
+    'Eg: Stephen Harvey Broderick',
+    'Eg: Stephen Harvey',
+    'Eg: Broderick',
+    'Eg: 2010'
   ];
 
   Widget _backButton() {
@@ -463,7 +463,7 @@ class _PpGenealDState extends State<PpGenealD> {
     );
   }
 
-  Widget _entryFieldalphabets(String title,String helpmsg, String hint, int i,
+  Widget _entryFieldalphabets(String title, String helpmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -474,7 +474,7 @@ class _PpGenealDState extends State<PpGenealD> {
           Row(
             children: [
               Text(
-                title+"  ",
+                title + "  ",
                 style: GoogleFonts.portLligatSans(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -482,11 +482,14 @@ class _PpGenealDState extends State<PpGenealD> {
                 ),
               ),
               Tooltip(
-                message:helpmsg,
+                message: helpmsg,
                 preferBelow: false,
                 verticalOffset: 25,
                 showDuration: Duration(seconds: 1),
-                child: Icon(Icons.info_outline_rounded, color: Colors.white,),
+                child: Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.white,
+                ),
               )
             ],
           ),
@@ -612,7 +615,7 @@ class _PpGenealDState extends State<PpGenealD> {
     );
   }
 
-  Widget _entryFieldnumbers(String title,String helpmsg, String hint, int i,
+  Widget _entryFieldnumbers(String title, String helpmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -623,7 +626,7 @@ class _PpGenealDState extends State<PpGenealD> {
           Row(
             children: [
               Text(
-                title+"  ",
+                title + "  ",
                 style: GoogleFonts.portLligatSans(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -631,11 +634,14 @@ class _PpGenealDState extends State<PpGenealD> {
                 ),
               ),
               Tooltip(
-                message:helpmsg,
+                message: helpmsg,
                 preferBelow: false,
                 verticalOffset: 25,
                 showDuration: Duration(seconds: 1),
-                child: Icon(Icons.info_outline_rounded, color: Colors.white,),
+                child: Icon(
+                  Icons.info_outline_rounded,
+                  color: Colors.white,
+                ),
               )
             ],
           ),
@@ -663,37 +669,6 @@ class _PpGenealDState extends State<PpGenealD> {
           )
         ],
       ),
-    );
-  }
-
-  Widget _title() {
-    return Column(
-      children: [
-        Align(
-          alignment: Alignment.topLeft,
-          child: _backButton(),
-        ),
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-              text: 'GENERAL',
-              style: GoogleFonts.portLligatSans(
-                fontSize: 30,
-                fontWeight: FontWeight.w700,
-                color: Colors.white,
-              ),
-              children: [
-                TextSpan(
-                  text: '  DATA',
-                  style: GoogleFonts.adventPro(
-                    fontSize: 30,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.limeAccent,
-                  ),
-                ),
-              ]),
-        ),
-      ],
     );
   }
 
@@ -760,12 +735,15 @@ class _PpGenealDState extends State<PpGenealD> {
                               // SizedBox(height: height * .1),
                               _entryFieldalphabetsdisplay(
                                   'UNIVERSITY REG NO.', pg[0], 0),
-                              _entryFieldalphabets('ROLL NO',helptip[0] ,pg[1], 1),
-                              _DropBox("TITLE", title, 0),
                               _entryFieldalphabets(
-                                  'NAME OF THE CANDIDATE',helptip[1] , pg[2], 2),
-                              _entryFieldalphabets('FIRST NAME',helptip[2], pg[3], 3),
-                              _entryFieldalphabets('LAST NAME',helptip[3], pg[4], 4),
+                                  'ROLL NO', helptip[0], pg[1], 1),
+                              _DropBox("TITLE", title, 0),
+                              _entryFieldalphabets('NAME OF THE CANDIDATE',
+                                  helptip[1], pg[2], 2),
+                              _entryFieldalphabets(
+                                  'FIRST NAME', helptip[2], pg[3], 3),
+                              _entryFieldalphabets(
+                                  'LAST NAME', helptip[3], pg[4], 4),
                               _DropBox("GENDER", gender, 1),
                               _entryFieldDob("D.O.B  (DD-MM-YYYY)", pg[5], 5),
                               _entryFieldDob("D.O.B  (MM-DD-YYYY)", pg[6], 6),
@@ -773,7 +751,8 @@ class _PpGenealDState extends State<PpGenealD> {
                               _DropBox("COLLEGE", college, 2),
                               _DropBox("DEPARTMENT", department, 3),
                               _DropBox("SECTION", section, 4),
-                              _entryFieldnumbers('YEAR OF ADMISSION',helptip[4], pg[8], 8),
+                              _entryFieldnumbers(
+                                  'YEAR OF ADMISSION', helptip[4], pg[8], 8),
                               _DropBox("HOSTEL / DAY SCHOLAR", hord, 5),
                               SizedBox(height: height * .02),
                               Align(

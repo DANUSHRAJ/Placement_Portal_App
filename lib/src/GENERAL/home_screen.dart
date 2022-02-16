@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../IWC/Courses.dart';
 import '../IWC/Interships.dart';
 import '../PROFILE/PP_GenealD.dart';
@@ -42,7 +44,10 @@ class HomeScreen extends StatelessWidget {
                           fontWeight: FontWeight.bold),
                     )),
                 new RaisedButton(
-                    onPressed: () {
+                    onPressed: () async {
+                      final SharedPreferences sharedPreferences =
+                          await SharedPreferences.getInstance();
+                      var obtainedRegno = sharedPreferences.remove("RegNo");
                       if (Platform.isAndroid) {
                         Future.delayed(const Duration(milliseconds: 1000), () {
                           SystemChannels.platform
