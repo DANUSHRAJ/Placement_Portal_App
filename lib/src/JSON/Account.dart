@@ -5,8 +5,9 @@ class Account {
   final String username;
   final String password;
   final String batch;
+  final String tokenId;
 
-  const Account._(this.id, this.name, this.regno, this.username, this.password, this.batch);
+  const Account._(this.id, this.name, this.regno, this.username, this.password, this.batch, this.tokenId);
 
   factory Account.fromJson(Map json) {
     final id = json['_id'].replaceAll('ObjectId(\"', '').replaceAll('\")', '');
@@ -15,6 +16,7 @@ class Account {
     final username = json['username'];
     final password = json['password'];
     final batch = json['batch'];
-    return Account._(id, name, regno, username, password, batch);
+    final tokenId = json['tokenId'];
+    return Account._(id, name, regno, username, password, batch, tokenId);
   }
 }

@@ -7,7 +7,7 @@ import '../JSON/Account.dart';
 
 class AccountsApi {
 //  static String apiUrl = 'https://6081-27-57-63-29.ngrok.io'  'http://127.0.0.1:8081'  'https://sppdemo.herokuapp.com';
-
+//  https://sjit-placement-portal.herokuapp.com
   static String apiUrl = 'https://sjit-placement-portal.herokuapp.com';
 
   final _dio = Dio(BaseOptions(baseUrl: apiUrl));
@@ -31,13 +31,32 @@ class AccountsApi {
   }
 
   Future<Account> createAccount(String name, String regno, String username,
-      String password, String batch) async {
+      String password, String batch, String tokenId) async {
     final response = await _dio.post('/createaccount', data: {
       'name': name,
       'regno': regno,
       'username': username,
       'password': password,
-      'batch': batch
+      'batch': batch,
+      'tokenId': tokenId
+    });
+//    log('$name-$regno-$username-$password');
+    return Account.fromJson(response.data);
+  }
+
+  Future<Account> addTokenId(String regno, String password, String tokenId) async {
+    final response = await _dio.post('/addtokenid', data: {
+      'regno': regno,
+      'password': password,
+      'tokenId': tokenId
+    });
+//    log('$name-$regno-$username-$password');
+    return Account.fromJson(response.data);
+  }
+
+  Future<Account> removeTokenId(String regno) async {
+    final response = await _dio.post('/addtokenid', data: {
+      'regno': regno
     });
 //    log('$name-$regno-$username-$password');
     return Account.fromJson(response.data);

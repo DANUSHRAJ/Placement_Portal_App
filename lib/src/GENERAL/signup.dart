@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:http/http.dart';
 import '../IWC/Interships.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +20,10 @@ import '../GENERAL/Size_congfig.dart';
 import '../api/api.dart';
 import 'home_screen.dart';
 import 'dart:ui' as ui;
+
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+
+String tokenId;
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key, this.title}) : super(key: key);
@@ -57,6 +63,40 @@ class _SignUpPageState extends State<SignUpPage> {
         _timer?.cancel();
       }
     });
+    configOneSignel();
+  }
+  void configOneSignel()
+  {
+    OneSignal.shared.setAppId('777c9b28-93c5-4aa4-bd2a-25c4e5515460');
+  }
+
+  Future<Response> sendNotification(List<String> tokenIdList, String heading, String contents) async{
+
+    return await post(
+      Uri.parse('https://onesignal.com/api/v1/notifications'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>
+      {
+        "app_id": '777c9b28-93c5-4aa4-bd2a-25c4e5515460',
+          
+        "include_player_ids": tokenIdList,
+          
+          // android_accent_color reprsent the color of the heading text in the notifiction
+        "android_accent_color":"FF9976D2",
+          
+        // "small_icon":"ic_stat_onesignal_default",
+        
+        "large_icon":"https://pub.dev/static/img/pub-dev-logo-2x.png?hash=umitaheu8hl7gd3mineshk2koqfngugi",
+          
+        "headings": {"en": heading},
+          
+        "contents": {"en": contents},
+          
+        
+      }),
+    );
   }
 
   void _addAccount(String name, String regno, String un, String pwd) async {
@@ -88,9 +128,13 @@ class _SignUpPageState extends State<SignUpPage> {
         var batch = int.parse(regno.substring(4, 6));
         batch += 2004;
         var batchstr = batch.toString();
+        OSDeviceState status = await OneSignal.shared.getDeviceState();
+        // print(status.userId);
+        tokenId = status.userId;
         final createdAccount =
-            await widget.api.createAccount(name, regno, un, pwd, batchstr);
+            await widget.api.createAccount(name, regno, un, pwd, batchstr, tokenId);
         check = 1;
+        await sendNotification([tokenId],"Alert!","SignUp Successfull!");
         setState(() {
           EasyLoading.showSuccess('Signup Success!');
           Navigator.push(

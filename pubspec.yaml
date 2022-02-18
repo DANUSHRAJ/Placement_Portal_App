@@ -43,6 +43,7 @@ dependencies:
   timeline_tile: ^2.0.0
   shared_preferences: ^2.0.13
   get: ^4.6.1
+  onesignal_flutter: ^3.2.8
   
   
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 
+import 'package:SJIT_PLACEMENT_PORTAL/src/api/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../IWC/Courses.dart';
@@ -20,6 +21,8 @@ import '../GENERAL/Size_congfig.dart';
 class HomeScreen extends StatelessWidget {
   final String regnovar;
   final String usernamevar;
+
+  AccountsApi api = new AccountsApi();
 
   HomeScreen({
     Key key,
@@ -48,6 +51,7 @@ class HomeScreen extends StatelessWidget {
                       final SharedPreferences sharedPreferences =
                           await SharedPreferences.getInstance();
                       var obtainedRegno = sharedPreferences.remove("RegNo");
+                      await api.removeTokenId(regnovar);
                       if (Platform.isAndroid) {
                         Future.delayed(const Duration(milliseconds: 1000), () {
                           SystemChannels.platform

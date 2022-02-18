@@ -38,9 +38,14 @@ server_router.get("/getaccounts",service.getaccounts);
 //http://localhost:8081/getoneaccount
 server_router.post("/getoneaccount",service.getoneaccount);
 
-
 //http://localhost:8081/createaccount
 server_router.post("/createaccount",service.createaccount);
+
+//http://localhost:8081/addtokenid
+server_router.post("/addtokenid",service.addtokenid);
+
+//http://localhost:8081/removetokenid
+server_router.post("/removetokenid",service.removetokenid);
 
 //http://localhost:8081/getintern
 server_router.post("/getintern",service.getintern);

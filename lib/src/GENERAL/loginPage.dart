@@ -4,6 +4,8 @@ import 'dart:developer';
 import 'dart:ui' as ui;
 import 'dart:ui';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'menatwork.dart';
@@ -22,6 +24,8 @@ import '../../main.dart';
 import '../GENERAL/Size_congfig.dart';
 import '../api/api.dart';
 import 'home_screen.dart';
+
+String tokenId;
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key, this.title}) : super(key: key);
@@ -75,8 +79,42 @@ class _LoginPageState extends State<LoginPage>
         _timer?.cancel();
       }
     });
-
+    configOneSignal();
     // EasyLoading.removeCallbacks();
+  }
+
+  void configOneSignal()
+  {
+    OneSignal.shared.setAppId('777c9b28-93c5-4aa4-bd2a-25c4e5515460');
+  }
+
+  Future<void> sendNotification(List<String> tokenIdList, String heading, String contents) async{
+
+    await post(
+      Uri.parse('https://onesignal.com/api/v1/notifications'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, dynamic>
+      {
+        "app_id": '777c9b28-93c5-4aa4-bd2a-25c4e5515460',
+          
+        "include_player_ids": tokenIdList,
+          
+          // android_accent_color reprsent the color of the heading text in the notifiction
+        "android_accent_color":"FF9976D2",
+          
+        // "small_icon":"ic_stat_onesignal_default",
+        
+        "large_icon":"https://pub.dev/static/img/pub-dev-logo-2x.png?hash=umitaheu8hl7gd3mineshk2koqfngugi",
+          
+        "headings": {"en": heading},
+          
+        "contents": {"en": contents},
+          
+        
+      }),
+    );
   }
 
   bool loading = false;
@@ -111,6 +149,11 @@ class _LoginPageState extends State<LoginPage>
             await SharedPreferences.getInstance();
         sharedPreferences.setString("RegNo", result.regno);
         sharedPreferences.setString("Uname", result.name);
+        OSDeviceState status = await OneSignal.shared.getDeviceState();
+        // print(status.userId);
+        tokenId = status.userId;
+        await widget.api.addTokenId(regnovar, passvar, tokenId);
+        await sendNotification([tokenId],"Alert!","Login Successfull!");
         Navigator.push(
             context,
             MaterialPageRoute(

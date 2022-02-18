@@ -207,6 +207,46 @@ module.exports.createaccount = async (req,res)=>{
         console.log(err);
     }
 };
+module.exports.addtokenid = async (req,res)=>{
+    try{
+        const result1 = await client.db("Cluster0").collection("accounts").updateOne(
+                {regno: req.body.regno},
+                 {$set: {tokenId: req.body.tokenId}},
+                 (err1,result1)=>{
+                     if(err1)
+                         console.log(err1);
+                 }
+             );
+        const result2 = await client.db("Cluster0").collection("accounts").findOne(
+            {'regno':req.body.regno}
+        );
+        // console.log("Success");
+        // console.log(result);
+        res.send(result2);
+    } catch(err){
+        console.log(err);
+    }
+};
+module.exports.removetokenid = async (req,res)=>{
+    try{
+        const result1 = await client.db("Cluster0").collection("accounts").updateOne(
+                {regno: req.body.regno},
+                 {$set: {tokenId: ""}},
+                 (err1,result1)=>{
+                     if(err1)
+                         console.log(err1);
+                 }
+             );
+        const result2 = await client.db("Cluster0").collection("accounts").findOne(
+            {'regno':req.body.regno}
+        );
+        // console.log("Success");
+        // console.log(result);
+        res.send(result2);
+    } catch(err){
+        console.log(err);
+    }
+};
 module.exports.getintern = async (req,res)=>{
     try{
         const result = await client.db("Cluster0").collection("interns").find();
