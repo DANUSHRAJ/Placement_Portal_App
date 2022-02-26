@@ -26,6 +26,7 @@ class GenealDJSON {
   final String dob2;
   final String dob3;
   final String yoa;
+  final String batch;
   final String title;
   final String gender;
   final String college;
@@ -33,7 +34,7 @@ class GenealDJSON {
   final String sec;
   final String hd;
 
-  const GenealDJSON._(this.id, this.uregno, this.rollno, this.name, this.fname, this.lname, this.dob1, this.dob2, this.dob3, this.yoa, this.title, this.gender, this.college, this.dept, this.sec, this.hd,
+  const GenealDJSON._(this.id, this.uregno, this.rollno, this.name, this.fname, this.lname, this.dob1, this.dob2, this.dob3, this.yoa, this.batch, this.title, this.gender, this.college, this.dept, this.sec, this.hd,
       );
 
   factory GenealDJSON.fromJson(Map json) {
@@ -47,12 +48,13 @@ class GenealDJSON {
     final String dob2 = json['DATE OF BIRTH (MM/DD/YY)'];
     final String dob3 = json['DATE OF BIRTH (YYYY-MM-DD)'];
     final String yoa = json['YEAR OF ADMISSION'];
+    final String batch = json['BATCH'];
     final String title = json['TITLE'];
     final String gender = json['GENDER'];
     final String college = json['COLLEGE'];
     final String dept = json['DEPARTMENT'];
     final String sec = json['SECTION'];
     final String hd = json['HD'];
-    return GenealDJSON._(id, regno, rollno, name, fname, lname, dob1, dob2, dob3, yoa, title, gender, college, dept, sec, hd);
+    return GenealDJSON._(id, regno, rollno, name, fname, lname, dob1, dob2, dob3, yoa, batch, title, gender, college, dept, sec, hd);
   }
 }

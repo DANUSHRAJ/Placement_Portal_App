@@ -29,6 +29,7 @@ class InternsApi {
   Future<IWCDetails> uploadIntern(
       String regno,
       String username,
+      String batch,
       String title,
       String name,
       String sd,
@@ -39,6 +40,7 @@ class InternsApi {
     final response = await _dio.post('/uploadintern', data: {
       'regno': regno,
       'username': username,
+      'batch': batch,
       'title': title,
       'name': name,
       'sd': sd,

@@ -306,6 +306,7 @@ class _PpGenealDState extends State<PpGenealD> {
     final String dob2 = pg[6];
     final String dob3 = pg[7];
     final String yoa = pg[8];
+    final String batch = (int.parse(pg[8])+4).toString();
     final String title = dropbox[0].title;
     final String gender = dropbox[1].title;
     final String college = dropbox[2].title;
@@ -314,7 +315,7 @@ class _PpGenealDState extends State<PpGenealD> {
     final String hd = dropbox[5].title;
 
     await widget.papi.uploadgenealD(uregno, rollno, name, fname, lname, dob1,
-        dob2, dob3, yoa, title, gender, college, dept, sec, hd);
+        dob2, dob3, yoa, batch, title, gender, college, dept, sec, hd);
 
     setState(() {
       loading = false;

@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:ui';
+import 'package:SJIT_PLACEMENT_PORTAL/src/IWC/CoursesListing.dart';
 import 'package:SJIT_PLACEMENT_PORTAL/src/api/courseapi.dart';
 import 'package:lottie/lottie.dart';
 import 'Courses_upload.dart';
@@ -177,8 +178,8 @@ class _CoursesState extends State<Courses> with TickerProviderStateMixin {
               generateBluredImage(),
               Align(
                 alignment: Alignment.centerLeft,
-                child: InternListing(
-                  internDet: CoursesDet,
+                child: CoursesListing(
+                  CoursesDet: CoursesDet,
                 ),
               ),
               //SizedBox(height: height * 1),
