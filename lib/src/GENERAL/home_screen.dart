@@ -180,59 +180,55 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.all(10.0),
               child: Column(
                 children: <Widget>[
-                  Container(
-                    // height: SizeConfig.blockSizeVertical * 35,
-                    // width: SizeConfig.blockSizeHorizontal * 100,
-                    // //height: 90,
-                    //margin: EdgeInsets.only(bottom: 20),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              margin: EdgeInsets.all(5),
-                              width: width * 0.9,
-                              child: buildBlurryWidget(
-                                  Text(
-                                    "\nHi,",
-                                    textAlign: TextAlign.start,
-                                    style: GoogleFonts.adventPro(
-                                        fontSize: 30,
-                                        color: Colors.limeAccent,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    "$usernamevar".split(" ")[0],
-                                    textAlign: TextAlign.justify,
-                                    style: GoogleFonts.adventPro(
-                                        fontSize: 35,
-                                        color: Colors.limeAccent,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    "$regnovar",
-                                    textAlign: TextAlign.justify,
-                                    style: GoogleFonts.adventPro(
-                                        fontSize: 25,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Text(
-                                    "Have A Great Day\n",
-                                    textAlign: TextAlign.justify,
-                                    style: GoogleFonts.adventPro(
-                                        fontSize: 25,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                            ),
-                          ],
-                        )
-                      ],
+                  SingleChildScrollView(
+                    child: Container(
+                      // height: SizeConfig.blockSizeVertical * 35,
+                      // width: SizeConfig.blockSizeHorizontal * 100,
+                      // //height: 90,
+                      //margin: EdgeInsets.only(bottom: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.all(5),
+                            width: width * 0.9,
+                            child: buildBlurryWidget(
+                                Text(
+                                  "\nHi,",
+                                  textAlign: TextAlign.start,
+                                  style: GoogleFonts.adventPro(
+                                      fontSize: 30,
+                                      color: Colors.limeAccent,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "$usernamevar".split(" ")[0],
+                                  textAlign: TextAlign.justify,
+                                  style: GoogleFonts.adventPro(
+                                      fontSize: 35,
+                                      color: Colors.limeAccent,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "$regnovar",
+                                  textAlign: TextAlign.justify,
+                                  style: GoogleFonts.adventPro(
+                                      fontSize: 25,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  "Have A Great Day\n",
+                                  textAlign: TextAlign.justify,
+                                  style: GoogleFonts.adventPro(
+                                      fontSize: 25,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                )),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -339,15 +335,6 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           onTap: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => Menatwork()
-                            // PpGenealD(
-                            //       regnovar: regnovar,
-                            //       usernamevar: usernamevar,
-                            //     ))
-
                             Navigator.push(
                                 context,
                                 PageTransition(
