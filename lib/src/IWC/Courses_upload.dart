@@ -87,7 +87,8 @@ class _CoursesUploadState extends State<CoursesUpload> {
 //      log('Wrong Date');
     }
     if (check == 1) {
-      final upload_Courses = await widget.api.uploadcourse(regnovar, usernamevar,
+      String batch = (int.parse(regnovar.substring(4, 6))+2004).toString();
+      final upload_Courses = await widget.api.uploadcourse(regnovar, usernamevar,batch,
           if_title, if_name, if_sd, if_ed, if_clink, if_plink, if_flink);
       int check = 1;
       setState(() {

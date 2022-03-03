@@ -29,6 +29,7 @@ class CoursesApi {
   Future<IWCDetails> uploadcourse(
       String regno,
       String username,
+      String batch,
       String title,
       String name,
       String sd,
@@ -39,6 +40,7 @@ class CoursesApi {
     final response = await _dio.post('/uploadcourse', data: {
       'regno': regno,
       'username': username,
+      'batch':batch,
       'title': title,
       'name': name,
       'sd': sd,

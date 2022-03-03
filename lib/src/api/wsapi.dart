@@ -29,6 +29,7 @@ class WSApi {
   Future<IWCDetails> uploadws(
       String regno,
       String username,
+      String batch,
       String title,
       String name,
       String sd,
@@ -39,6 +40,7 @@ class WSApi {
     final response = await _dio.post('/uploadws', data: {
       'regno': regno,
       'username': username,
+      'batch': batch,
       'title': title,
       'name': name,
       'sd': sd,

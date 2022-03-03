@@ -47,7 +47,7 @@ class WorkshopListing extends StatelessWidget {
                   elevation: 150,
                   child: buildBlurryWidget(
                     Text(
-                      '\n 🥳\n    NAME OF THE INTERN: ' +
+                      '\n 🥳\n    NAME OF THE WORKSHOP: ' +
                           intern.title.toUpperCase() +
                           '\n\n    ORGANIZATION NAME: ' +
                           intern.name.toUpperCase() +
