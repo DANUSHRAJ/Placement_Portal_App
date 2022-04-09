@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:SJIT_PLACEMENT_PORTAL/src/api/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../IWC/Courses.dart';
 import '../IWC/Interships.dart';
 import '../PROFILE/PP_GenealD.dart';
@@ -166,7 +165,9 @@ class HomeScreen extends StatelessWidget {
           IconButton(
               icon: Icon(Icons.notifications_rounded),
               onPressed: () {
-                _showtoast("No Notifications found");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Notification()));
+                //  _showtoast("No Notifications found");
               }),
         ],
         backgroundColor: Colors.transparent,
@@ -460,4 +461,74 @@ class HomeScreen extends StatelessWidget {
   }
 
   welcomePage() {}
+}
+
+class Notification extends StatefulWidget {
+  const Notification({Key key}) : super(key: key);
+
+  @override
+  _NotificationState createState() => _NotificationState();
+}
+
+class _NotificationState extends State<Notification> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: Text(
+            "NOTIFICATIONS",
+            textAlign: TextAlign.justify,
+            style: GoogleFonts.adventPro(
+                fontSize: 25,
+                color: Colors.orangeAccent,
+                fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+
+          //shadowColor: Colors.orangeAccent,
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_new),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
+          actions: [
+            //IconButton(icon: Icon(Icons.search_rounded), onPressed: () {}),
+
+            IconButton(
+                icon: Icon(Icons.notifications_rounded),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                  //  _showtoast("No Notifications found");
+                }),
+          ],
+          backgroundColor: Colors.transparent,
+          elevation: 30,
+        ),
+        body: Stack(
+          children: <Widget>[
+            generateBluredImage(),
+          ],
+        ));
+  }
+
+  Widget generateBluredImage() {
+    return new Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/images/rots.gif'),
+          fit: BoxFit.cover,
+        ),
+      ),
+      //I blured the parent container to blur background image, you can get rid of this part
+      child: new BackdropFilter(
+        filter: new ImageFilter.blur(sigmaX: 3.0, sigmaY: 3.0),
+        child: new Container(
+          //you can change opacity with color here(I used black) for background.
+          decoration: new BoxDecoration(color: Colors.black.withOpacity(0.2)),
+        ),
+      ),
+    );
+  }
 }

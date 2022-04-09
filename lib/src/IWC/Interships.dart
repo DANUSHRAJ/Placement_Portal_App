@@ -53,7 +53,7 @@ class _IntershipsState extends State<Interships> with TickerProviderStateMixin {
     await widget.api.getinternsDet(regnovar).then((value) {
       setState(() {
         internDet = value;
-//        print(value);
+        print(value.runtimeType);
         loading = false;
       });
     });
