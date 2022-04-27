@@ -53,8 +53,8 @@ int Validation(BuildContext context, List<String> pa, List<NewObject> dropbox) {
     return -1;
   }
 
-  for(int i=0;i<pa.length;i++){
-    pa[i]=pa[i].toUpperCase();
+  for (int i = 0; i < pa.length; i++) {
+    pa[i] = pa[i].toUpperCase();
   }
 
   if (pa[0] == null || pa[0].isEmpty) {
@@ -181,13 +181,12 @@ class _PpExtraDState extends State<PpExtraD> {
     NewObject('NO', Icons.arrow_back_ios),
   ];
 
-
   static final List<NewObject> dropbox = <NewObject>[
     yesorno.first, //0
     yesorno.first, //1
     yesorno.first
   ];
-  List<String> helpmsg=[
+  List<String> helpmsg = [
     'Eg: VANTAGE if you don\'t NA',
     'Eg: TAMIL,ENGLISH,HINDI',
     'Eg: 1 if you have any gap give 0',
@@ -214,7 +213,7 @@ class _PpExtraDState extends State<PpExtraD> {
     );
   }
 
-  Widget _entryFieldalphabets(String title,String hintmsg, String hint, int i,
+  Widget _entryFieldalphabets(String title, String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -325,7 +324,7 @@ class _PpExtraDState extends State<PpExtraD> {
     );
   }
 
-  Widget _entryFieldnumbers(String title,String hintmsg, String hint, int i,
+  Widget _entryFieldnumbers(String title, String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -437,15 +436,20 @@ class _PpExtraDState extends State<PpExtraD> {
                           SizedBox(height: height * .2),
                           _DropBox("SPORTS QUOTA", yesorno, 0),
                           _DropBox("BEC EXAM STATUS", yesorno, 1),
-                          _entryFieldalphabets('BEC EXAM GRADE',helpmsg[0], pa[3], 3),
-//                          _DropBox("BEC EXAM GRADE", becgrade, 2),
-                          _entryFieldalphabets('LANGUAGES KNOWN',helpmsg[1], pa[0], 0),
-                          _entryFieldnumbers(
-                              'GAP IN EDUCATION (in Years)',helpmsg[2], pa[1], 1),
-                          _DropBox("ARE YOU PLANNING FOR\nHIGHER STUDIES? [Y/N]",
-                              yesorno, 2),
                           _entryFieldalphabets(
-                              'IF ANY SKILL CERTIFICATIONS\nOBTAINED NAME THE SKILL',helpmsg[3],
+                              'BEC EXAM GRADE', helpmsg[0], pa[3], 3),
+//                          _DropBox("BEC EXAM GRADE", becgrade, 2),
+                          _entryFieldalphabets(
+                              'LANGUAGES KNOWN', helpmsg[1], pa[0], 0),
+                          _entryFieldnumbers('GAP IN EDUCATION (in Years)',
+                              helpmsg[2], pa[1], 1),
+                          _DropBox(
+                              "ARE YOU PLANNING FOR\nHIGHER STUDIES? [Y/N]",
+                              yesorno,
+                              2),
+                          _entryFieldalphabets(
+                              'IF ANY SKILL CERTIFICATIONS\nOBTAINED NAME THE SKILL',
+                              helpmsg[3],
                               pa[2],
                               2),
                           SizedBox(height: height * .02),

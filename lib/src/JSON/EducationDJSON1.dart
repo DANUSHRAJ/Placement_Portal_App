@@ -28,12 +28,12 @@
 class EducationDJSON {
   final String id;
   final String uregno;
-  final String tp;//Tenth Percentage
-  final String tbs;//Tenth Board of Study
-  final String tms;//Tenth Medium of Study
-  final String tyop;//Tenth Year of Passing
-  final String tsn;//Tenth School Name
-  final String tgs;//Tenth graduating State
+  final String tp; //Tenth Percentage
+  final String tbs; //Tenth Board of Study
+  final String tms; //Tenth Medium of Study
+  final String tyop; //Tenth Year of Passing
+  final String tsn; //Tenth School Name
+  final String tgs; //Tenth graduating State
   final String twp;
   final String twbs;
   final String twms;
@@ -54,7 +54,34 @@ class EducationDJSON {
   final String ugguniv;
   final String ugs;
 
-  const EducationDJSON._(this.id, this.uregno, this.tp, this.tbs, this.tms, this.tyop, this.tsn, this.tgs, this.twp, this.twbs, this.twms, this.twyop, this.twsn, this.twgs, this.dspec, this.dp, this.dyop, this.dsn, this.dgs, this.ugdeg, this.ugbranch, this.ugp, this.ugcgpa, this.ugyop, this.ugclg, this.ugguniv, this.ugs);
+  const EducationDJSON._(
+      this.id,
+      this.uregno,
+      this.tp,
+      this.tbs,
+      this.tms,
+      this.tyop,
+      this.tsn,
+      this.tgs,
+      this.twp,
+      this.twbs,
+      this.twms,
+      this.twyop,
+      this.twsn,
+      this.twgs,
+      this.dspec,
+      this.dp,
+      this.dyop,
+      this.dsn,
+      this.dgs,
+      this.ugdeg,
+      this.ugbranch,
+      this.ugp,
+      this.ugcgpa,
+      this.ugyop,
+      this.ugclg,
+      this.ugguniv,
+      this.ugs);
 
   factory EducationDJSON.fromJson(Map json) {
     final id = json['_id'].replaceAll('ObjectId(\"', '').replaceAll('\")', '');
@@ -84,7 +111,33 @@ class EducationDJSON {
     final var23 = json['UG - COLLEGE OF STUDIES (FOR PG STUDENTS)'];
     final var24 = json['UG - GRADUATING UNIVERSITY'];
     final var25 = json['UG - GRADUATING STATE'];
-    return EducationDJSON._(id, regno, var1, var2, var3, var4, var5, var6, var7, var8, var9, var10, var11, var12, var13, var14
-        , var15, var16, var17, var18, var19, var20, var21, var22, var23, var24, var25);
+    return EducationDJSON._(
+        id,
+        regno,
+        var1,
+        var2,
+        var3,
+        var4,
+        var5,
+        var6,
+        var7,
+        var8,
+        var9,
+        var10,
+        var11,
+        var12,
+        var13,
+        var14,
+        var15,
+        var16,
+        var17,
+        var18,
+        var19,
+        var20,
+        var21,
+        var22,
+        var23,
+        var24,
+        var25);
   }
 }

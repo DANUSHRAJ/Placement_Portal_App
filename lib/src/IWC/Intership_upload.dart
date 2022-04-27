@@ -85,9 +85,9 @@ class _IntershipUploadState extends State<IntershipUpload> {
 //      log('Wrong Date');
     }
     if (check == 1) {
-      String batch = (int.parse(regnovar.substring(4, 6))+2004).toString();
-      final upload_intern = await widget.api.uploadIntern(regnovar, usernamevar,batch,
-          if_title, if_name, if_sd, if_ed, if_clink, if_plink, if_flink);
+      String batch = (int.parse(regnovar.substring(4, 6)) + 2004).toString();
+      final upload_intern = await widget.api.uploadIntern(regnovar, usernamevar,
+          batch, if_title, if_name, if_sd, if_ed, if_clink, if_plink, if_flink);
       int check = 1;
       setState(() {
         Navigator.push(

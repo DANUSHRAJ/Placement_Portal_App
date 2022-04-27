@@ -40,7 +40,7 @@ class CoursesApi {
     final response = await _dio.post('/uploadcourse', data: {
       'regno': regno,
       'username': username,
-      'batch':batch,
+      'batch': batch,
       'title': title,
       'name': name,
       'sd': sd,

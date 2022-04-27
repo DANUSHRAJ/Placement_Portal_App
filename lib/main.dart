@@ -265,20 +265,22 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                       child: Stack(children: <Widget>[
                                         AnimatedBuilder(
                                           animation: _positionController,
-                                          builder: (context, child) => Positioned(
+                                          builder: (context, child) =>
+                                              Positioned(
                                             left: _positionAnimation.value,
                                             child: AnimatedBuilder(
                                               animation: _scale2Controller,
                                               builder: (context, child) =>
                                                   Transform.scale(
-                                                      scale:
-                                                          _scale2Animation.value,
+                                                      scale: _scale2Animation
+                                                          .value,
                                                       child: Container(
                                                         width: 60,
                                                         height: 60,
-                                                        decoration: BoxDecoration(
-                                                          shape:
-                                                              BoxShape.rectangle,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape: BoxShape
+                                                              .rectangle,
                                                           color: Colors.black87,
                                                           borderRadius:
                                                               BorderRadius
@@ -288,8 +290,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                             ? Icon(
                                                                 Icons
                                                                     .arrow_forward,
-                                                                color:
-                                                                    Colors.white,
+                                                                color: Colors
+                                                                    .white,
                                                               )
                                                             : Container(),
                                                       )),

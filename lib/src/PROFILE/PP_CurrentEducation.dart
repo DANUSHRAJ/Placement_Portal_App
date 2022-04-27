@@ -280,7 +280,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
     null
   ];
 
-  List<String> helpmsg=[
+  List<String> helpmsg = [
     "Eg: 7.12 if you didn't attend the semester give 0",
     "Eg: 7.12 if you didn't attend the semester give 0",
     "Eg: 7.12 if you didn't attend the semester give 0",
@@ -392,7 +392,7 @@ class _PpCurrentDState extends State<PpCurrentD> {
     );
   }
 
-  Widget _entryFieldnumbers(String title,String hintmsg, String hint, int i,
+  Widget _entryFieldnumbers(String title, String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -450,7 +450,6 @@ class _PpCurrentDState extends State<PpCurrentD> {
     );
   }
 
-
   Widget generateBluredImage() {
     return new Container(
       decoration: new BoxDecoration(
@@ -506,35 +505,38 @@ class _PpCurrentDState extends State<PpCurrentD> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(height: height * .2),
-                          _entryFieldnumbers('SEM1 GPA',helpmsg[0], pce[0], 0),
-                          _entryFieldnumbers('SEM2 GPA',helpmsg[1], pce[1], 1),
-                          _entryFieldnumbers('SEM3 GPA',helpmsg[2], pce[2], 2),
-                          _entryFieldnumbers('SEM4 GPA',helpmsg[3], pce[3], 3),
-                          _entryFieldnumbers('SEM5 GPA',helpmsg[4], pce[4], 4),
-                          _entryFieldnumbers('SEM6 GPA',helpmsg[5], pce[5], 5),
-                          _entryFieldnumbers('SEM7 GPA',helpmsg[6], pce[6], 6),
-                          _entryFieldnumbers('SEM8 GPA',helpmsg[7], pce[7], 7),
-                          _entryFieldnumbers('OVERALL CGPA',helpmsg[8], pce[8], 8),
-                          _entryFieldnumbers('NO OF ARREARS SEM 1',helpmsg[9], pce[9], 9),
+                          _entryFieldnumbers('SEM1 GPA', helpmsg[0], pce[0], 0),
+                          _entryFieldnumbers('SEM2 GPA', helpmsg[1], pce[1], 1),
+                          _entryFieldnumbers('SEM3 GPA', helpmsg[2], pce[2], 2),
+                          _entryFieldnumbers('SEM4 GPA', helpmsg[3], pce[3], 3),
+                          _entryFieldnumbers('SEM5 GPA', helpmsg[4], pce[4], 4),
+                          _entryFieldnumbers('SEM6 GPA', helpmsg[5], pce[5], 5),
+                          _entryFieldnumbers('SEM7 GPA', helpmsg[6], pce[6], 6),
+                          _entryFieldnumbers('SEM8 GPA', helpmsg[7], pce[7], 7),
                           _entryFieldnumbers(
-                              'NO OF ARREARS SEM 2',helpmsg[10], pce[10], 10),
+                              'OVERALL CGPA', helpmsg[8], pce[8], 8),
                           _entryFieldnumbers(
-                              'NO OF ARREARS SEM 3',helpmsg[11], pce[11], 11),
+                              'NO OF ARREARS SEM 1', helpmsg[9], pce[9], 9),
                           _entryFieldnumbers(
-                              'NO OF ARREARS SEM 4',helpmsg[12], pce[12], 12),
+                              'NO OF ARREARS SEM 2', helpmsg[10], pce[10], 10),
                           _entryFieldnumbers(
-                              'NO OF ARREARS SEM 5',helpmsg[13], pce[13], 13),
+                              'NO OF ARREARS SEM 3', helpmsg[11], pce[11], 11),
                           _entryFieldnumbers(
-                              'NO OF ARREARS SEM 6',helpmsg[14], pce[14], 14),
+                              'NO OF ARREARS SEM 4', helpmsg[12], pce[12], 12),
                           _entryFieldnumbers(
-                              'NO OF ARREARS SEM 7',helpmsg[15], pce[15], 15),
+                              'NO OF ARREARS SEM 5', helpmsg[13], pce[13], 13),
                           _entryFieldnumbers(
-                              'NO OF ARREARS SEM 8',helpmsg[16], pce[16], 16),
+                              'NO OF ARREARS SEM 6', helpmsg[14], pce[14], 14),
                           _entryFieldnumbers(
-                              'TOTAL NO OF STANDING\nARREARS',helpmsg[17], pce[17], 17),
+                              'NO OF ARREARS SEM 7', helpmsg[15], pce[15], 15),
+                          _entryFieldnumbers(
+                              'NO OF ARREARS SEM 8', helpmsg[16], pce[16], 16),
+                          _entryFieldnumbers('TOTAL NO OF STANDING\nARREARS',
+                              helpmsg[17], pce[17], 17),
                           _DropBox("HISTORY OF ARREARS [Y/N]", yesorno),
                           _entryFieldnumbers(
-                              'HOW MANY ARREARS?\nIF YES ELSE give 0',helpmsg[18],
+                              'HOW MANY ARREARS?\nIF YES ELSE give 0',
+                              helpmsg[18],
                               pce[18],
                               18),
                           SizedBox(height: height * .02),

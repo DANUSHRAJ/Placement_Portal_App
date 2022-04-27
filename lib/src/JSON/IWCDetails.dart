@@ -11,7 +11,8 @@ class IWCDetails {
   final String plink;
   final String flink;
 
-  const IWCDetails._(this.id, this.regno, this.username, this.batch, this.title, this.name, this.sd, this.ed, this.clink, this.plink, this.flink);
+  const IWCDetails._(this.id, this.regno, this.username, this.batch, this.title,
+      this.name, this.sd, this.ed, this.clink, this.plink, this.flink);
 
   factory IWCDetails.fromJson(Map json) {
     final _id = json['_id'].replaceAll('ObjectId(\"', '').replaceAll('\")', '');
@@ -25,6 +26,7 @@ class IWCDetails {
     final _clink = json['clink'];
     final _plink = json['plink'];
     final _flink = json['flinl'];
-    return IWCDetails._(_id, _regno, _username, _batch, _title,_name,_sd,_ed,_clink,_plink,_flink);
+    return IWCDetails._(_id, _regno, _username, _batch, _title, _name, _sd, _ed,
+        _clink, _plink, _flink);
   }
 }

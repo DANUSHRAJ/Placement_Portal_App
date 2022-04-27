@@ -44,20 +44,16 @@ class AccountsApi {
     return Account.fromJson(response.data);
   }
 
-  Future<Account> addTokenId(String regno, String password, String tokenId) async {
-    final response = await _dio.post('/addtokenid', data: {
-      'regno': regno,
-      'password': password,
-      'tokenId': tokenId
-    });
+  Future<Account> addTokenId(
+      String regno, String password, String tokenId) async {
+    final response = await _dio.post('/addtokenid',
+        data: {'regno': regno, 'password': password, 'tokenId': tokenId});
 //    log('$name-$regno-$username-$password');
     return Account.fromJson(response.data);
   }
 
   Future<Account> removeTokenId(String regno) async {
-    final response = await _dio.post('/addtokenid', data: {
-      'regno': regno
-    });
+    final response = await _dio.post('/addtokenid', data: {'regno': regno});
 //    log('$name-$regno-$username-$password');
     return Account.fromJson(response.data);
   }

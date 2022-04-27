@@ -371,7 +371,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
     null
   ];
 
-  List<String> helpmsg=[
+  List<String> helpmsg = [
     'Eg: 84598349381 if you don\'t have give NA',
     'Eg: 8759847459',
     'Eg: 9823347459 \nemergency no. must\nand should not same primary number',
@@ -395,7 +395,6 @@ class _PpPersonalDState extends State<PpPersonalD> {
     'Eg: CHENNAI',
     'Eg: TAMIL NADU',
     'Eg: 600115'
-
   ];
 
   Widget _backButton() {
@@ -457,7 +456,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
     );
   }
 
-  Widget _entryFieldalphabets(String title,String hintmsg, String hint, int i,
+  Widget _entryFieldalphabets(String title, String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -509,7 +508,7 @@ class _PpPersonalDState extends State<PpPersonalD> {
     );
   }
 
-  Widget _entryFieldnumbers(String title,String hintmsg, String hint, int i,
+  Widget _entryFieldnumbers(String title, String hintmsg, String hint, int i,
       {bool isPassword = false}) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -565,7 +564,6 @@ class _PpPersonalDState extends State<PpPersonalD> {
       ),
     );
   }
-
 
   Widget generateBluredImage() {
     return new Container(
@@ -623,38 +621,61 @@ class _PpPersonalDState extends State<PpPersonalD> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           SizedBox(height: height * .2),
-                          _entryFieldnumbers('LAND LINE NUMBER',helpmsg[0], pp[0], 0),
-                          _entryFieldnumbers('PRIMARY MOBILE NO',helpmsg[1], pp[1], 1),
-                          _entryFieldnumbers('EMERGENCY CONTACT NO',helpmsg[2], pp[2], 2),
+                          _entryFieldnumbers(
+                              'LAND LINE NUMBER', helpmsg[0], pp[0], 0),
+                          _entryFieldnumbers(
+                              'PRIMARY MOBILE NO', helpmsg[1], pp[1], 1),
+                          _entryFieldnumbers(
+                              'EMERGENCY CONTACT NO', helpmsg[2], pp[2], 2),
                           _entryFieldalphabetsdisplay(
                               'PRIMARY EMAIL ID', pp[3], 3),
-                          _entryFieldalphabets('ALTERNATE EMAIL ID',helpmsg[4], pp[4], 4),
-                          _entryFieldalphabets('PAN CARD NUMBER',helpmsg[5], pp[5], 5),
-                          _entryFieldalphabets('NATIONALITY',helpmsg[6], pp[6], 6),
                           _entryFieldalphabets(
-                              'INDIAN PASSPORT NUMBER',helpmsg[7], pp[7], 7),
-                          _entryFieldnumbers('AADHAAR NUMBER',helpmsg[8], pp[8], 8),
-                          _entryFieldalphabets('FATHER NAME',helpmsg[9], pp[9], 9),
+                              'ALTERNATE EMAIL ID', helpmsg[4], pp[4], 4),
                           _entryFieldalphabets(
-                              'Father DESIGNATION\n& ORGANISATION',helpmsg[10], pp[10], 10),
+                              'PAN CARD NUMBER', helpmsg[5], pp[5], 5),
+                          _entryFieldalphabets(
+                              'NATIONALITY', helpmsg[6], pp[6], 6),
+                          _entryFieldalphabets(
+                              'INDIAN PASSPORT NUMBER', helpmsg[7], pp[7], 7),
                           _entryFieldnumbers(
-                              'FATHER MOBILE NUMBER',helpmsg[11], pp[11], 11),
-                          _entryFieldalphabets('FATHER EMAIL ID',helpmsg[12], pp[12], 12),
-                          _entryFieldalphabets('MOTHER NAME',helpmsg[13], pp[13], 13),
+                              'AADHAAR NUMBER', helpmsg[8], pp[8], 8),
                           _entryFieldalphabets(
-                              'Mother DESIGNATION\n& ORGANISATION',helpmsg[14], pp[14], 14),
+                              'FATHER NAME', helpmsg[9], pp[9], 9),
+                          _entryFieldalphabets(
+                              'Father DESIGNATION\n& ORGANISATION',
+                              helpmsg[10],
+                              pp[10],
+                              10),
                           _entryFieldnumbers(
-                              'MOTHER MOBILE NUMBER',helpmsg[15], pp[15], 15),
-                          _entryFieldalphabets('MOTHER EMAIL ID',helpmsg[16], pp[16], 16),
+                              'FATHER MOBILE NUMBER', helpmsg[11], pp[11], 11),
                           _entryFieldalphabets(
-                              'PERMANENT ADDRESS\nWITH PIN CODE',helpmsg[17], pp[17], 17),
+                              'FATHER EMAIL ID', helpmsg[12], pp[12], 12),
                           _entryFieldalphabets(
-                              'PERMANENT ADDRESS LINE 1',helpmsg[18], pp[18], 18),
+                              'MOTHER NAME', helpmsg[13], pp[13], 13),
                           _entryFieldalphabets(
-                              'PERMANENT ADDRESS LINE 2',helpmsg[19], pp[19], 19),
-                          _entryFieldalphabets('PERMANENT CITY',helpmsg[20], pp[20], 20),
-                          _entryFieldalphabets('STATE',helpmsg[21], pp[21], 21),
-                          _entryFieldnumbers('POSTAL CODE',helpmsg[22], pp[22], 22),
+                              'Mother DESIGNATION\n& ORGANISATION',
+                              helpmsg[14],
+                              pp[14],
+                              14),
+                          _entryFieldnumbers(
+                              'MOTHER MOBILE NUMBER', helpmsg[15], pp[15], 15),
+                          _entryFieldalphabets(
+                              'MOTHER EMAIL ID', helpmsg[16], pp[16], 16),
+                          _entryFieldalphabets(
+                              'PERMANENT ADDRESS\nWITH PIN CODE',
+                              helpmsg[17],
+                              pp[17],
+                              17),
+                          _entryFieldalphabets('PERMANENT ADDRESS LINE 1',
+                              helpmsg[18], pp[18], 18),
+                          _entryFieldalphabets('PERMANENT ADDRESS LINE 2',
+                              helpmsg[19], pp[19], 19),
+                          _entryFieldalphabets(
+                              'PERMANENT CITY', helpmsg[20], pp[20], 20),
+                          _entryFieldalphabets(
+                              'STATE', helpmsg[21], pp[21], 21),
+                          _entryFieldnumbers(
+                              'POSTAL CODE', helpmsg[22], pp[22], 22),
                           SizedBox(height: height * .02),
                           Align(
                             alignment: Alignment.bottomRight,

@@ -35,39 +35,37 @@ class CoursesListing extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(children: [
       SizedBox(height: 80),
-      ...CoursesDet
-          .map<Widget>(
-            (intern) => Align(
-              alignment: Alignment.center,
-              child: InkWell(
-                child: Card(
-                  color: Colors.transparent,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(40)),
-                  elevation: 150,
-                  child: buildBlurryWidget(
-                    Text(
-                      '\n 🥳\n    NAME OF THE COURSE: ' +
-                          intern.title.toUpperCase() +
-                          '\n\n    ORGANIZATION NAME: ' +
-                          intern.name.toUpperCase() +
-                          '\n\n    START DATE : ' +
-                          intern.sd +
-                          '\n\n    END DATE : ' +
-                          intern.ed +
-                          '\n',
-                      style: GoogleFonts.adventPro(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.justify,
-                    ),
-                  ),
+      ...CoursesDet.map<Widget>(
+        (intern) => Align(
+          alignment: Alignment.center,
+          child: InkWell(
+            child: Card(
+              color: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              elevation: 150,
+              child: buildBlurryWidget(
+                Text(
+                  '\n 🥳\n    NAME OF THE COURSE: ' +
+                      intern.title.toUpperCase() +
+                      '\n\n    ORGANIZATION NAME: ' +
+                      intern.name.toUpperCase() +
+                      '\n\n    START DATE : ' +
+                      intern.sd +
+                      '\n\n    END DATE : ' +
+                      intern.ed +
+                      '\n',
+                  style: GoogleFonts.adventPro(
+                      fontSize: 18,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.justify,
                 ),
               ),
             ),
-          )
-          .toList(),
+          ),
+        ),
+      ).toList(),
       //
       SizedBox(height: 100),
     ]);

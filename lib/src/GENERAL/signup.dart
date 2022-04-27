@@ -65,36 +65,34 @@ class _SignUpPageState extends State<SignUpPage> {
     });
     configOneSignel();
   }
-  void configOneSignel()
-  {
+
+  void configOneSignel() {
     OneSignal.shared.setAppId('777c9b28-93c5-4aa4-bd2a-25c4e5515460');
   }
 
-  Future<Response> sendNotification(List<String> tokenIdList, String heading, String contents) async{
-
+  Future<Response> sendNotification(
+      List<String> tokenIdList, String heading, String contents) async {
     return await post(
       Uri.parse('https://onesignal.com/api/v1/notifications'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
-      body: jsonEncode(<String, dynamic>
-      {
+      body: jsonEncode(<String, dynamic>{
         "app_id": '777c9b28-93c5-4aa4-bd2a-25c4e5515460',
-          
+
         "include_player_ids": tokenIdList,
-          
-          // android_accent_color reprsent the color of the heading text in the notifiction
-        "android_accent_color":"FF9976D2",
-          
+
+        // android_accent_color reprsent the color of the heading text in the notifiction
+        "android_accent_color": "FF9976D2",
+
         // "small_icon":"ic_stat_onesignal_default",
-        
-        "large_icon":"https://pub.dev/static/img/pub-dev-logo-2x.png?hash=umitaheu8hl7gd3mineshk2koqfngugi",
-          
+
+        "large_icon":
+            "https://pub.dev/static/img/pub-dev-logo-2x.png?hash=umitaheu8hl7gd3mineshk2koqfngugi",
+
         "headings": {"en": heading},
-          
+
         "contents": {"en": contents},
-          
-        
       }),
     );
   }
@@ -131,10 +129,10 @@ class _SignUpPageState extends State<SignUpPage> {
         OSDeviceState status = await OneSignal.shared.getDeviceState();
         // print(status.userId);
         tokenId = status.userId;
-        final createdAccount =
-            await widget.api.createAccount(name, regno, un, pwd, batchstr, tokenId);
+        final createdAccount = await widget.api
+            .createAccount(name, regno, un, pwd, batchstr, tokenId);
         check = 1;
-        await sendNotification([tokenId],"Alert!","SignUp Successfull!");
+        await sendNotification([tokenId], "Alert!", "SignUp Successfull!");
         setState(() {
           EasyLoading.showSuccess('Signup Success!');
           Navigator.push(
