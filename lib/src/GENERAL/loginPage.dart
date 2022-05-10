@@ -24,6 +24,7 @@ import '../../main.dart';
 import '../GENERAL/Size_congfig.dart';
 import '../api/api.dart';
 import 'home_screen.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 String tokenId;
 
@@ -79,7 +80,9 @@ class _LoginPageState extends State<LoginPage>
         _timer?.cancel();
       }
     });
-    configOneSignal();
+    if (!kIsWeb) {
+      configOneSignal();
+    }
     // EasyLoading.removeCallbacks();
   }
 
@@ -142,15 +145,17 @@ class _LoginPageState extends State<LoginPage>
 //        Navigator.push(
 //            context, MaterialPageRoute(builder: (context) => SignUpPage()));
       } else if (result.regno == regnovar && result.password == passvar) {
-        final SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
-        sharedPreferences.setString("RegNo", result.regno);
-        sharedPreferences.setString("Uname", result.name);
-        OSDeviceState status = await OneSignal.shared.getDeviceState();
-        // print(status.userId);
-        tokenId = status.userId;
-        await widget.api.addTokenId(regnovar, passvar, tokenId);
-        await sendNotification([tokenId], "Alert!", "Login Successfull!");
+        if (!kIsWeb) {
+          final SharedPreferences sharedPreferences =
+              await SharedPreferences.getInstance();
+          sharedPreferences.setString("RegNo", result.regno);
+          sharedPreferences.setString("Uname", result.name);
+          OSDeviceState status = await OneSignal.shared.getDeviceState();
+          // print(status.userId);
+          tokenId = status.userId;
+          await widget.api.addTokenId(regnovar, passvar, tokenId);
+          await sendNotification([tokenId], "Alert!", "Login Successfull!");
+        }
         Navigator.push(
             context,
             MaterialPageRoute(

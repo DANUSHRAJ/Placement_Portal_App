@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:ui';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import '../IWC/Interships.dart';
 import 'package:flutter/material.dart';
@@ -63,7 +64,9 @@ class _SignUpPageState extends State<SignUpPage> {
         _timer?.cancel();
       }
     });
-    configOneSignel();
+    if (!kIsWeb) {
+      configOneSignel();
+    }
   }
 
   void configOneSignel() {
@@ -126,13 +129,17 @@ class _SignUpPageState extends State<SignUpPage> {
         var batch = int.parse(regno.substring(4, 6));
         batch += 2004;
         var batchstr = batch.toString();
-        OSDeviceState status = await OneSignal.shared.getDeviceState();
-        // print(status.userId);
-        tokenId = status.userId;
+        if (!kIsWeb) {
+          OSDeviceState status = await OneSignal.shared.getDeviceState();
+          // print(status.userId);
+          tokenId = status.userId;
+        }
         final createdAccount = await widget.api
             .createAccount(name, regno, un, pwd, batchstr, tokenId);
         check = 1;
-        await sendNotification([tokenId], "Alert!", "SignUp Successfull!");
+        if (!kIsWeb) {
+          await sendNotification([tokenId], "Alert!", "SignUp Successfull!");
+        }
         setState(() {
           EasyLoading.showSuccess('Signup Success!');
           Navigator.push(
