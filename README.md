@@ -2,7 +2,7 @@
 https://dashboard.emailjs.com/sign-in
 API... For Forgot Password
 
-Username: sjitplacementportal@gmail.com
+Username: sjitplacemantportal@gmail.com
 Password: SJIT#portal
 
 https://www.youtube.com/watch?v=9HW3MZ_tsdo
