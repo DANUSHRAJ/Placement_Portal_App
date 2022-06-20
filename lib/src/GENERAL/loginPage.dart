@@ -356,17 +356,17 @@ class _LoginPageState extends State<LoginPage>
                 fontSize: 20.0,
                 fontFamily: 'Horizon',
                 fontWeight: FontWeight.bold),
-            child: AnimatedTextKit(
-              animatedTexts: [
-                ColorizeAnimatedText(
-                  title,
-                  textStyle: colorizeTextStyle,
-                  colors: colorizeColors,
-                )
-              ],
-              isRepeatingAnimation: true,
-              totalRepeatCount: 10000,
-            ),
+            // child: AnimatedTextKit(
+            //   animatedTexts: [
+            //     ColorizeAnimatedText(
+            //       title,
+            //       textStyle: colorizeTextStyle,
+            //       colors: colorizeColors,
+            //     )
+            //   ],
+            //   isRepeatingAnimation: true,
+            //   totalRepeatCount: 10000,
+            // ),
           ),
           SizedBox(
             height: 10,

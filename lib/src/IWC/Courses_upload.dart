@@ -101,13 +101,22 @@ class _CoursesUploadState extends State<CoursesUpload> {
           if_flink);
       int check = 1;
       setState(() {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => CoursesUpload(
-                      regnovar: regnovar,
-                      usernamevar: usernamevar,
-                    )));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => HomeScreen(
+                    regnovar: regnovar,
+                    usernamevar: usernamevar,
+                  )),
+          (route) => false,
+        );
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => CoursesUpload(
+        //               regnovar: regnovar,
+        //               usernamevar: usernamevar,
+        //             )));
         check = 0;
       });
       EasyLoading.showSuccess('Great Success!');

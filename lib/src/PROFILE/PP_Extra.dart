@@ -462,14 +462,17 @@ class _PpExtraDState extends State<PpExtraD> {
                                 if (Validation(context, pa, dropbox) == 1) {
                                   _uploadtoDB(context, pa, dropbox);
 
-                                  Navigator.push(
-                                      context,
-                                      PageTransition(
-                                          type: PageTransitionType.bottomToTop,
-                                          child: HomeScreen(
-                                            regnovar: regnovar,
-                                            usernamevar: usernamevar,
-                                          )));
+                                  Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            HomeScreen(
+                                              regnovar: regnovar,
+                                              usernamevar: usernamevar,
+                                            )),
+                                    (route) => false,
+                                  );
+
                                   showdialog(context,
                                       "Your Profile Data has been Submitted Successfully!");
                                 }

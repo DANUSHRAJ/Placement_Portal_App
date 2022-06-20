@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
           children: <Widget>[
             Container(
               padding: EdgeInsets.only(left: 10, top: 10, bottom: 10),
-              child: Icon(Icons.home_outlined, color: Colors.white),
+              child: Icon(Icons.logout_rounded, color: Colors.white),
             ),
           ],
         ),
@@ -155,6 +155,7 @@ class HomeScreen extends StatelessWidget {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Colors.black,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         centerTitle: true,

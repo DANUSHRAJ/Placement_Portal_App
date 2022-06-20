@@ -124,13 +124,15 @@ class _IntershipsState extends State<Interships> with TickerProviderStateMixin {
   Widget _backButton() {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => HomeScreen(
-                      regnovar: regnovar,
-                      usernamevar: usernamevar,
-                    )));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => HomeScreen(
+                    regnovar: regnovar,
+                    usernamevar: usernamevar,
+                  )),
+          (route) => false,
+        );
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),

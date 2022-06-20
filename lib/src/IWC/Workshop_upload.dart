@@ -92,13 +92,23 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
           batch, if_title, if_name, if_sd, if_ed, if_clink, if_plink, if_flink);
       int check = 1;
       setState(() {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => WorkshopUpload(
-                      regnovar: regnovar,
-                      usernamevar: usernamevar,
-                    )));
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => HomeScreen(
+                    regnovar: regnovar,
+                    usernamevar: usernamevar,
+                  )),
+          (route) => false,
+        );
+
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => WorkshopUpload(
+        //               regnovar: regnovar,
+        //               usernamevar: usernamevar,
+        //             )));
         check = 0;
       });
       EasyLoading.showSuccess('Great Success!');
