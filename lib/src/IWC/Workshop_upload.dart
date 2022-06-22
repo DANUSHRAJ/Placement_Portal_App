@@ -74,6 +74,22 @@ class _WorkshopUploadState extends State<WorkshopUpload> {
         'Incorrect Details',
       );
     }
+    if (!RegExp(r'^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$')
+        .hasMatch(if_sd)) {
+      check = 0;
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Incorrect Starting Date Format',
+      );
+    }
+    if (!RegExp(r'^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$')
+        .hasMatch(if_ed)) {
+      check = 0;
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Incorrect Ending Date Format',
+      );
+    }
     DateTime startDate = DateTime.parse(if_sd);
     DateTime endDate = DateTime.parse(if_ed);
     if (startDate.isBefore(endDate)) {

@@ -351,6 +351,7 @@ class _LoginPageState extends State<LoginPage>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           DefaultTextStyle(
+            child:Text(title),
             style: const TextStyle(
                 color: Colors.black,
                 fontSize: 20.0,

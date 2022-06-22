@@ -55,6 +55,29 @@ class _CoursesUploadState extends State<CoursesUpload> {
   final i_plink = new TextEditingController();
   final i_flink = new TextEditingController();
 
+  // bool validation(String if_title, String if_name, String if_sd, String if_ed,
+  //     String if_clink, String if_plink, String if_flink) {
+  //   print("start");
+  //   if (if_title.isEmpty || if_name.isEmpty || if_sd.isEmpty || if_ed.isEmpty) {
+  //     return false;
+  //   }
+  //   if (!RegExp(r'^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$')
+  //       .hasMatch(if_sd)) {
+  //     return false;
+  //   }
+  //   if (!RegExp(r'^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$')
+  //       .hasMatch(if_ed)) {
+  //     return false;
+  //   }
+  //   print('success');
+  //   DateTime startDate = DateTime.parse(if_sd);
+  //   DateTime endDate = DateTime.parse(if_ed);
+  //   if (!(startDate.isBefore(endDate))) {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
   void _addCoursesDetails(String if_title, String if_name, String if_sd,
       String if_ed, String if_clink, String if_plink, String if_flink) async {
     await EasyLoading.show(
@@ -72,6 +95,22 @@ class _CoursesUploadState extends State<CoursesUpload> {
       EasyLoading.dismiss();
       EasyLoading.showError(
         'Incorrect Details',
+      );
+    }
+    if (!RegExp(r'^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$')
+        .hasMatch(if_sd)) {
+      check = 0;
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Incorrect Starting Date Format',
+      );
+    }
+    if (!RegExp(r'^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$')
+        .hasMatch(if_ed)) {
+      check = 0;
+      EasyLoading.dismiss();
+      EasyLoading.showError(
+        'Incorrect Ending Date Format',
       );
     }
     DateTime startDate = DateTime.parse(if_sd);
@@ -576,15 +615,23 @@ class _CoursesUploadState extends State<CoursesUpload> {
                         ),
                       ),
                       onTap: () {
-                        _addCoursesDetails(
-                            i_title.text,
-                            i_name.text,
-                            i_sd.text,
-                            i_ed.text,
-                            i_clink.text,
-                            i_plink.text,
-                            i_flink.text);
-
+                        //---> if (validation(
+                        //     i_title.text,
+                        //     i_name.text,
+                        //     i_sd.text,
+                        //     i_ed.text,
+                        //     i_clink.text,
+                        //     i_plink.text,
+                        //     i_flink.text)) {
+                          _addCoursesDetails(
+                              i_title.text,
+                              i_name.text,
+                              i_sd.text,
+                              i_ed.text,
+                              i_clink.text,
+                              i_plink.text,
+                              i_flink.text);
+                        }
                         // Navigator.push(
                         //     context,
                         //     MaterialPageRoute(
@@ -592,7 +639,7 @@ class _CoursesUploadState extends State<CoursesUpload> {
                         //               regnovar: regnovar,
                         //               usernamevar: usernamevar,
                         //             )));
-                      },
+                      //---->},
                     ),
                     SizedBox(height: height * .1),
                   ],
