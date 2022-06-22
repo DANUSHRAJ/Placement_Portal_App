@@ -697,3 +697,18 @@ module.exports.uploadppdataex = async (req, res) => {
         console.log(err);
     }
 };
+
+module.exports.displayNotification = async (req, res) => {
+    try {
+        const result = await client.db("Cluster0").collection("notification").find({
+            'batch': req.body.batch
+        });
+        var resultfinal = [];
+        await result.forEach(element => {
+            resultfinal.push(element);
+        });
+        res.send(resultfinal);
+    } catch (err) {
+        console.log(err);
+    }
+};

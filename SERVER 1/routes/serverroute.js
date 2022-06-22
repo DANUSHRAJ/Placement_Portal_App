@@ -137,4 +137,7 @@ server_router.post("/updateExtraD", service.updateExtraD);
 //http://localhost:8081/uploadppdataex
 server_router.post("/uploadppdataex", service.uploadppdataex);
 
+//http://localhost:8081/displayNotification
+server_router.post("/displayNotification", service.displayNotification);
+
 module.exports = server_router;
